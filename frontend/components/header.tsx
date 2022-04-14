@@ -1,32 +1,73 @@
 import * as React from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
 import {
-  BadgeCheckIcon,
-  CollectionIcon,
-  HomeIcon,
+  SunIcon,
   LightningBoltIcon,
   SearchIcon,
-  UserIcon,
+  BookOpenIcon,
+  TagIcon,
 } from '@heroicons/react/outline'
-import HeaderItem from './header-item'
+
+function SearchButton() {
+  return <SearchIcon className="h-8 cursor-pointer hover:animate-pulse" />
+}
+
+function DarkModeToggle() {
+  // const [mode, setMode] = useTheme()
+  return <SunIcon className="h-8 cursor-pointer hover:animate-pulse" />
+}
+
+function Mobi(params: type) {}
+
+function MobileMenu() {
+  return (
+    <ul className="flex flex-grow justify-evenly sm:hidden">
+      <Link href="/">BLOG</Link>
+      <Link href="/">PRODUCTS</Link>
+      <Link href="/">TAG</Link>
+    </ul>
+  )
+}
+
+type NavMidItemProps = {
+  title: React.ReactNode
+  Icon: any
+}
+function NavMidItem({title, Icon}: NavMidItemProps) {
+  return (
+    <div className="sm:w-26 group flex h-10 cursor-pointer items-center space-x-2 hover:text-white sm:space-x-0">
+      <Icon className="mr-1 hidden h-5 stroke-gray-400 group-hover:animate-pulse group-hover:stroke-gray-100 sm:inline-block" />
+      <p className="text-xl tracking-widest text-gray-400 group-hover:animate-pulse group-hover:text-gray-100">
+        {title}
+      </p>
+    </div>
+  )
+}
 
 export default function Header() {
   return (
-    <header className="flex flex-col sm:flex-row transition-transform h-auto m-5 justify-between items-center">
-      <div className="flex flex-grow justify-evenly max-w-2xl">
-        <HeaderItem title="HOME" Icon={HomeIcon} />
-        <HeaderItem title="HOME" Icon={LightningBoltIcon} />
-        <HeaderItem title="VERIFIED" Icon={BadgeCheckIcon} />
-        <HeaderItem title="COLLECTIONS" Icon={CollectionIcon} />
-        <HeaderItem title="SEARCH" Icon={SearchIcon} />
+    <header className="flex flex-row items-center justify-between bg-gray-800 p-3 font-heading sm:p-4">
+      <Link href="/" passHref={true}>
+        <div className="cursor-pointer object-contain transition hover:z-50 sm:hover:scale-125">
+          <Image
+            className="object-contain"
+            src="/images/avatar-icon.svg"
+            alt="logo"
+            width={40}
+            height={40}
+          />
+        </div>
+      </Link>
+      <div className="flex max-w-2xl flex-grow justify-evenly">
+        <NavMidItem title="BLOG" Icon={BookOpenIcon} />
+        <NavMidItem title="PRODUCTS" Icon={LightningBoltIcon} />
+        <NavMidItem title="TAG" Icon={TagIcon} />
       </div>
-      <Image
-        className="object-contain"
-        src="/images/hulu-white.webp"
-        alt="hulu logo"
-        width={200}
-        height={100}
-      />
+      <div className="flex max-w-[8rem] flex-grow justify-evenly">
+        <SearchButton />
+        <DarkModeToggle />
+      </div>
     </header>
   )
 }

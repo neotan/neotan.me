@@ -4,6 +4,9 @@
 
 @layer base {
   body {
-    @apply bg-[#06202A] text-gray-300;
+    @apply bg-[#12181b] text-gray-300;
+  }
+  .bg-gray-main {
+    @apply bg-[#2a2e35]
   }
 }

@@ -13,7 +13,6 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <Nav />
       <Results results={props.results} />
     </div>
   )
