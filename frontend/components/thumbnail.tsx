@@ -31,7 +31,7 @@ const Thumbnail = forwardRef<HTMLInputElement, MovieListObject>(
       <figure
         ref={forwardedRef}
         title={title}
-        className="p-2 group cursor-pointer transition transform sm:hover:scale-105 hover:z-50"
+        className="group transform cursor-pointer p-2 transition hover:z-50 sm:hover:scale-105"
       >
         <Image
           layout="responsive"
@@ -41,14 +41,14 @@ const Thumbnail = forwardRef<HTMLInputElement, MovieListObject>(
           width={1920}
         />
         <footer className="p-2">
-          <figcaption className="truncate max-w-md">{overview}</figcaption>
-          <h2 className="mt-1 text-2xl text-white transition-all duration-50 ease-in-out group-hover:font-bold">
+          <figcaption className="max-w-md truncate">{overview}</figcaption>
+          <h2 className="duration-50 mt-1 text-2xl text-white transition-all ease-in-out group-hover:font-bold">
             {title || original_title}
           </h2>
           <div className="flex items-center opacity-0 group-hover:opacity-100">
             <time>{release_date}</time>
             <i className="mx-2">•</i>
-            <ThumbUpIcon className="h-5 mr-1" />
+            <ThumbUpIcon className="mr-1 h-5" />
             {vote_count}
           </div>
         </footer>

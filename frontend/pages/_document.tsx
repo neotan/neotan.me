@@ -3,7 +3,7 @@ import Document, {Html, Head, Main, NextScript} from 'next/document'
 export default class CustomDocument extends Document {
   render() {
     return (
-      <Html>
+      <Html className="dark">
         <Head>
           <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/cubano" />
           <link
@@ -21,7 +21,7 @@ export default class CustomDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body>
+        <body className="bg-primary">
           <Main />
           <NextScript />
         </body>

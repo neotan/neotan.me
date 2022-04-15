@@ -10,15 +10,17 @@ import {
 } from '@heroicons/react/outline'
 
 function SearchButton() {
-  return <SearchIcon className="h-8 cursor-pointer hover:animate-pulse" />
+  return (
+    <SearchIcon className="h-8 cursor-pointer stroke-gray-400 hover:stroke-gray-50" />
+  )
 }
 
 function DarkModeToggle() {
   // const [mode, setMode] = useTheme()
-  return <SunIcon className="h-8 cursor-pointer hover:animate-pulse" />
+  return (
+    <SunIcon className="h-8 cursor-pointer stroke-gray-400 hover:stroke-gray-50" />
+  )
 }
-
-function Mobi(params: type) {}
 
 function MobileMenu() {
   return (
@@ -37,15 +39,15 @@ type NavMidItemProps = {
 function NavMidItem({title, Icon}: NavMidItemProps) {
   return (
     <div className="sm:w-26 group flex h-10 cursor-pointer items-center space-x-2 hover:text-white sm:space-x-0">
-      <Icon className="mr-1 hidden h-5 stroke-gray-400 group-hover:animate-pulse group-hover:stroke-gray-100 sm:inline-block" />
-      <p className="text-xl tracking-widest text-gray-400 group-hover:animate-pulse group-hover:text-gray-100">
+      <Icon className="mr-1 hidden h-5 stroke-gray-400 group-hover:stroke-gray-50 sm:inline-block" />
+      <p className="text-xl tracking-widest text-gray-400 group-hover:text-gray-50">
         {title}
       </p>
     </div>
   )
 }
 
-export default function Header() {
+export default function TopNav() {
   return (
     <header className="flex flex-row items-center justify-between bg-gray-800 p-3 font-heading sm:p-4">
       <Link href="/" passHref={true}>

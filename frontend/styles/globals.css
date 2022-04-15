@@ -4,9 +4,43 @@
 
 @layer base {
   body {
-    @apply bg-[#12181b] text-gray-300;
+    @apply bg-primary text-primary;
   }
-  .bg-gray-main {
-    @apply bg-[#2a2e35]
+  h1,h2,h3,h4,h5,h6{
+    @apply font-heading tracking-wider
+  }
+}
+
+@layer utilities{
+  .focus-scale {
+    @apply p-2 group cursor-pointer transition sm:hover:scale-105 hover:z-50;
+  }
+
+  .bg-primary {
+    @apply bg-[#dbe1e8] dark:bg-[#12181b];
+  }
+
+  .bg-secondary {
+    @apply bg-white dark:bg-[#2a2e35];
+  }
+
+  .border-primary {
+    @apply border-gray-900 dark:border-gray-100;
+  }
+
+  .border-secondary {
+    @apply border-gray-200 dark:border-gray-600;
+  }
+
+  .text-primary {
+    @apply text-[#12181b] dark:text-white;
+  }
+
+  .text-secondary {
+    @apply text-[#454e56] dark:text-[#b2becd];
+  }
+
+  .text-inverse {
+    @apply text-white dark:text-black;
   }
 }
