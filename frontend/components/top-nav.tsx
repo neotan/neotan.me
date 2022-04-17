@@ -3,22 +3,28 @@ import Link from 'next/link'
 import Image from 'next/image'
 import {
   SunIcon,
+  MoonIcon,
   LightningBoltIcon,
   SearchIcon,
   BookOpenIcon,
   TagIcon,
 } from '@heroicons/react/outline'
+import {useTheme} from 'next-themes'
 
 function SearchButton() {
-  return (
-    <SearchIcon className="h-8 cursor-pointer stroke-gray-400 hover:stroke-gray-50" />
-  )
+  return <SearchIcon className="h-8 cursor-pointer " />
 }
 
 function DarkModeToggle() {
-  // const [mode, setMode] = useTheme()
+  const {theme, setTheme} = useTheme()
+  function toggle() {
+    setTheme(theme === 'light' ? 'dark' : 'light')
+  }
+  const Icon = theme === 'dark' ? MoonIcon : SunIcon
   return (
-    <SunIcon className="h-8 cursor-pointer stroke-gray-400 hover:stroke-gray-50" />
+    <button onClick={() => toggle()}>
+      <Icon className="h-8 cursor-pointer" />
+    </button>
   )
 }
 
@@ -33,24 +39,25 @@ function MobileMenu() {
 }
 
 type NavMidItemProps = {
-  title: React.ReactNode
-  Icon: any
+  title?: React.ReactNode
+  href?: string
+  icon?: any
 }
-function NavMidItem({title, Icon}: NavMidItemProps) {
+function NavMidItem({title, href = '/', icon: Icon}: NavMidItemProps) {
   return (
-    <div className="sm:w-26 group flex h-10 cursor-pointer items-center space-x-2 hover:text-white sm:space-x-0">
-      <Icon className="mr-1 hidden h-5 stroke-gray-400 group-hover:stroke-gray-50 sm:inline-block" />
-      <p className="text-xl tracking-widest text-gray-400 group-hover:text-gray-50">
-        {title}
-      </p>
-    </div>
+    <Link href={href} passHref>
+      <div className="sm:w-26 group flex h-10 cursor-pointer items-center space-x-2 transition sm:space-x-0 sm:hover:scale-110 ">
+        <Icon className="mr-1 hidden h-5 sm:inline-block" />
+        <p className="text-xl">{title}</p>
+      </div>
+    </Link>
   )
 }
 
 export default function TopNav() {
   return (
-    <header className="flex flex-row items-center justify-between bg-gray-800 p-3 font-heading sm:p-4">
-      <Link href="/" passHref={true}>
+    <nav className="shadow-primary bg-secondary fixed top-0 z-50 flex w-full flex-row items-center justify-between p-3 font-heading sm:p-4">
+      <Link href="/" passHref>
         <div className="cursor-pointer object-contain transition hover:z-50 sm:hover:scale-125">
           <Image
             className="object-contain"
@@ -62,14 +69,18 @@ export default function TopNav() {
         </div>
       </Link>
       <div className="flex max-w-2xl flex-grow justify-evenly">
-        <NavMidItem title="BLOG" Icon={BookOpenIcon} />
-        <NavMidItem title="PRODUCTS" Icon={LightningBoltIcon} />
-        <NavMidItem title="TAG" Icon={TagIcon} />
+        <NavMidItem title="BLOGS" icon={BookOpenIcon} href={'/blogs'} />
+        <NavMidItem
+          title="PRODUCTS"
+          icon={LightningBoltIcon}
+          href={'/products'}
+        />
+        <NavMidItem title="TAGS" icon={TagIcon} href={'/tags'} />
       </div>
       <div className="flex max-w-[8rem] flex-grow justify-evenly">
         <SearchButton />
         <DarkModeToggle />
       </div>
-    </header>
+    </nav>
   )
 }

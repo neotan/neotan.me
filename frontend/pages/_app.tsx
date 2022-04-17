@@ -1,13 +1,19 @@
 import '../styles/globals.css'
-import Script from 'next/script'
+import Head from 'next/head'
+import {ThemeProvider} from 'next-themes'
 
-function MyApp({Component, pageProps}) {
+function CustomApp({Component, pageProps}) {
   return (
     <>
-      <Script strategy="beforeInteractive" src="/dark-mode.js" />
-      <Component {...pageProps} />
+      <Head>
+        <title>NEOTAN.ME</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <ThemeProvider attribute="class" storageKey="neotan.me-theme">
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   )
 }
 
-export default MyApp
+export default CustomApp

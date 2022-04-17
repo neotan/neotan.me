@@ -1,18 +1,14 @@
-import Head from 'next/head'
 import TopNav from '../components/top-nav'
+import Layout from './../components/layout'
 import Results from '../components/results'
 import requests from './../shared/request'
+import {CardsForDev} from './../components/article-card'
 
-export default function Home(props) {
+export default function Home() {
   return (
-    <div>
-      <Head>
-        <title>Hulu 2.0</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <TopNav />
-      {/* <Results results={props.results} /> */}
-    </div>
+    <Layout>
+      <CardsForDev />
+    </Layout>
   )
 }
 
