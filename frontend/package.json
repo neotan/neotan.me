@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "prebuild": "node ./scripts/compile-mdx.js ./mdx-posts",
+    "prebuild": "node ./scripts/compile-mdx.js ./content",
     "start": "next start",
     "lint": "next lint --fix"
   },

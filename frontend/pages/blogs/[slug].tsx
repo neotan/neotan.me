@@ -3,7 +3,7 @@ import {getMDXComponent} from 'mdx-bundler/client'
 import {getAllMdxs, getMdx} from 'utils/storage'
 import Layout from './../../components/layout'
 
-function Blogs(props) {
+function Blog(props) {
   console.log(22222, props)
   const {
     mdx: {slug, filePath, frontmatter, code},
@@ -23,6 +23,16 @@ function Blogs(props) {
   )
 }
 
+export async function getStaticPaths() {
+  const mdxs = await getAllMdxs()
+  const paths = Object.keys(mdxs).map((slug) => ({params: {slug}}))
+
+  return {
+    paths,
+    fallback: false,
+  }
+}
+
 export async function getStaticProps({params: {slug}}) {
   const mdx = await getMdx(slug)
   return {
@@ -32,14 +42,4 @@ export async function getStaticProps({params: {slug}}) {
   }
 }
 
-export async function getStaticPaths() {
-  const mdxs = await getAllMdxs()
-  const paths = Object.values(mdxs).map(({slug}) => ({params: {slug}}))
-
-  return {
-    paths,
-    fallback: false,
-  }
-}
-
-export default Blogs
+export default Blog
