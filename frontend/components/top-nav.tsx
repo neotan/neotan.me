@@ -48,7 +48,7 @@ function NavMidItem({title, href = '/', icon: Icon}: NavMidItemProps) {
     <Link href={href} passHref>
       <div className="sm:w-26 group flex h-10 cursor-pointer items-center space-x-2 transition sm:space-x-0 sm:hover:scale-110 ">
         <Icon className="mr-1 hidden h-5 sm:inline-block" />
-        <p className="text-xl">{title}</p>
+        <h2 className="text-xl">{title}</h2>
       </div>
     </Link>
   )
@@ -56,7 +56,7 @@ function NavMidItem({title, href = '/', icon: Icon}: NavMidItemProps) {
 
 export default function TopNav() {
   return (
-    <nav className="shadow-primary bg-secondary fixed top-0 z-50 flex w-full flex-row items-center justify-between p-3 font-heading sm:p-4">
+    <nav className="shadow-primary bg-secondary fixed top-0 z-50 flex w-full flex-row items-center justify-between p-3 sm:p-4">
       <Link href="/" passHref>
         <div className="cursor-pointer object-contain transition hover:z-50 sm:hover:scale-125">
           <Image

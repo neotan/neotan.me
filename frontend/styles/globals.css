@@ -45,11 +45,11 @@
   }
 
   .shadow-primary {
-    @apply shadow-md shadow-gray-400 dark:shadow-black;
+    @apply shadow-sm shadow-gray-400 dark:shadow-black;
   }
 
-  .shadow-primary-lg {
-    @apply shadow-lg shadow-gray-400 dark:shadow-black;
+  .shadow-secondary {
+    @apply shadow-md shadow-gray-400 dark:shadow-black;
   }
 
   .stroke-primary {
