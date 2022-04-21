@@ -1,32 +1,36 @@
 import {useMemo} from 'react'
 import {getMDXComponent} from 'mdx-bundler/client'
-import {getAllMdxs, getMdx} from 'utils/storage'
-import Layout from './../../components/layout'
+import {deserialize, serialize} from 'superjson'
+import formatDate from 'date-fns/format'
+import {getAllMdxs, getMdx} from '~/utils/storage'
+import Layout from '~/components/layout'
+import {MdxPage} from '~/types/index'
 
-function Blog(props) {
-  console.log(22222, props)
+function Blog({mdx}) {
   const {
-    mdx: {slug, filePath, frontmatter, code},
-  } = props
+    code,
+    readTime,
+    frontmatter: {title, date, tags},
+  } = deserialize(mdx) as MdxPage
   const Component = useMemo(() => getMDXComponent(code), [code])
   return (
     <Layout>
-      <div className="grid flex-wrap justify-center gap-8 p-5 md:grid-cols-2 xl:grid-cols-3 3xl:flex">
-        <article className="prose prose-slate">
+      <article className="prose prose-gray mx-auto dark:prose-invert lg:prose-xl">
+        <h1>{title}</h1>
+        <time>{formatDate(date, 'yyyy-MM-ii')}</time>
+        <time>{readTime.text}</time>
+        <p>
           <Component />
-        </article>
-        <pre>
-          <code>{JSON.stringify(frontmatter, null, 2)}</code>
-        </pre>
-      </div>
+        </p>
+      </article>
     </Layout>
   )
 }
 
 export async function getStaticPaths() {
+  // TODO: a simple & small DB may be required for better performance while processing massive MDX fils
   const mdxs = await getAllMdxs()
-  const paths = Object.keys(mdxs).map((slug) => ({params: {slug}}))
-
+  const paths = Object.keys(mdxs).map(slug => ({params: {slug}}))
   return {
     paths,
     fallback: false,
@@ -37,7 +41,7 @@ export async function getStaticProps({params: {slug}}) {
   const mdx = await getMdx(slug)
   return {
     props: {
-      mdx,
+      mdx: serialize(mdx),
     },
   }
 }

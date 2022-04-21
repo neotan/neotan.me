@@ -1,28 +1,23 @@
 import calcReadingTime, {ReadTimeResults} from 'reading-time'
 
-type MdxPage = {
+export type MdxPage = {
   code: string
   slug: string
   editLink?: string
   readTime?: ReturnType<typeof calcReadingTime>
   frontmatter: {
-    archived?: boolean
+    published?: boolean
     draft?: boolean
     title?: string
     description?: string
-    meta?: {
-      keywords?: Array<string>
-      [key as string]: unknown
-    }
-    categories: Array<string>
-    tags: Array<string>
-    createdAt: string
-    updatedAt: string
+    tags?: Array<string>
+    date?: Date
+    mainImgUrl?: string
   }
 }
 
-type MdxListItem = Omit<MdxPage, 'code'>
+export type MdxListItem = Omit<MdxPage, 'code'>
 
-type GitHubFile = {path: string; content: string}
+export type GitHubFile = {path: string; content: string}
 
 export {MdxPage, MdxListItem, GitHubFile}

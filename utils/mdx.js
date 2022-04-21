@@ -1,7 +1,7 @@
+const path = require('path')
 const readfiles = require('node-readfiles')
 const calcReadTime = require('reading-time')
 const {bundleMDX} = require('mdx-bundler')
-const path = require('path')
 
 function isMdxFile(filename) {
   const mdxRegexp = /.mdx?$/

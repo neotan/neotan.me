@@ -1,17 +1,21 @@
-import {keys, map, pipe, prop, sortBy, values} from 'ramda'
+import {map, omit, path, pipe, sortBy, values} from 'ramda'
 import formatDate from 'date-fns/format'
-import {getAllMdxs, getMdx} from 'utils/storage'
-import ArticleCard from '@/components/article-card'
-import Layout from '@/components/layout'
+import {deserialize, serialize} from 'superjson'
+import {getAllMdxs} from '~/utils/storage'
+import ArticleCard from '~/components/article-card'
+import Layout from '~/components/layout'
+import {MdxListItem, MdxPage} from '../../types'
 
 export default function Blogs({mdxs}) {
-  const posts = pipe(values, sortBy(prop('date')))(mdxs)
-  console.log({posts})
+  const posts = pipe(
+    deserialize,
+    sortBy(path(['frontmatter', 'date'])),
+  )(mdxs) as MdxListItem[]
+
   return (
     <Layout>
       <div className="bg-primary grid grid-cols-1 flex-wrap gap-8 p-4 sm:grid-cols-2 xl:mx-20 xl:grid-cols-3 2xl:mx-40">
-        {posts.map(({title, slug, date, readTime, frontmatter}) => {
-          console.log({title, slug, date, readTime})
+        {posts.map(({slug, readTime, frontmatter}) => {
           return (
             <ArticleCard
               key={slug}
@@ -33,11 +37,10 @@ export default function Blogs({mdxs}) {
 }
 
 export async function getStaticProps() {
-  const mdxs = await getAllMdxs()
-
+  const mdxs = (await getAllMdxs()) as Record<string, MdxPage>
   return {
     props: {
-      mdxs,
+      mdxs: pipe(values, map(omit(['code'])), serialize)(mdxs),
     },
   }
 }
