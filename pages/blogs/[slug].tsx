@@ -2,26 +2,41 @@ import {useMemo} from 'react'
 import {getMDXComponent} from 'mdx-bundler/client'
 import {deserialize, serialize} from 'superjson'
 import formatDate from 'date-fns/format'
+import {Image, Transformation, Video} from 'cloudinary-react'
 import {getAllMdxs, getMdx} from '~/utils/storage'
 import Layout from '~/components/layout'
 import {MdxPage} from '~/types/index'
-
 function Blog({mdx}) {
   const {
     code,
     readTime,
-    frontmatter: {title, date, tags},
+    frontmatter: {title, date, tags, mainImgUrl},
   } = deserialize(mdx) as MdxPage
   const Component = useMemo(() => getMDXComponent(code), [code])
   return (
     <Layout>
-      <article className="prose prose-gray mx-auto dark:prose-invert lg:prose-xl">
-        <h1>{title}</h1>
-        <time>{formatDate(date, 'yyyy-MM-ii')}</time>
-        <time>{readTime.text}</time>
-        <p>
-          <Component />
-        </p>
+      <article className="prose prose-gray mx-auto pt-10 dark:prose-invert lg:prose-xl">
+        <header>
+          <h1>{title}</h1>
+          <div className="text-secondary flex items-center opacity-80">
+            <time>{formatDate(date, 'yyyy-MM-ii')}</time>
+            <i className="mx-2">•</i>
+            <time>{readTime.text}</time>
+          </div>
+          <Image
+            className="rounded"
+            alt={title}
+            cloudName="ntme"
+            publicId="v1650489952/blog/71483_2x1_c7611j"
+            dpr="auto"
+            responsive
+            width="auto"
+            crop="scale"
+            responsiveUseBreakpoints="true"
+            fetchFormat="auto"
+          />
+        </header>
+        <Component />
       </article>
     </Layout>
   )

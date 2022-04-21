@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import {Image} from 'cloudinary-react'
 import Link from 'next/link'
 import formatDate from 'date-fns/format'
 import {PhotographIcon} from '@heroicons/react/outline'
@@ -30,11 +30,16 @@ function ArticleCard({
       >
         {mainImgUrl ? (
           <Image
-            layout="responsive"
+            className="rounded"
             alt={title}
-            src={mainImgUrl}
-            height={1080}
-            width={1920}
+            cloudName="ntme"
+            publicId="v1650489952/blog/71483_2x1_c7611j"
+            dpr="auto"
+            responsive
+            width="auto"
+            crop="scale"
+            responsiveUseBreakpoints="true"
+            fetchFormat="auto"
           />
         ) : (
           <PhotographIcon />

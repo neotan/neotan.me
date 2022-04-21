@@ -5,10 +5,10 @@ date: 2015-04-29
 ---
 
 
-# 1. 概覽
+## 1. 概覽
 在構建網絡應用，特別是暴露在 internet 中的應用時，通常都會使用 SSL/TLS 協議增強數據傳輸的安全性，其結構如下：
 [![TLS協議結構](/EXT/images/SSL-TLS-Structure.png "握手過程")](/EXT/images/SSL-TLS-Structure.png)
-# 2. 握手協議 Shakehand
+## 2. 握手協議 Shakehand
 其中最重要，最複雜（未必是被理解最清楚的）的是握手協議  Shakehand。本來想找一張清晰易懂的 Shakehand 流程圖，看到 wikipedia 的[這張圖](http://upload.wikimedia.org/wikipedia/commons/a/ae/SSL_handshake_with_two_way_authentication_with_certificates.svg "SSL/TLS Shakehand")很好，有人持續更新它，但就是字體太小，眼睛都瞪瞎了*_*，索性操起超超超強大的 [DRAW.io](https://www.draw.io/)（需先科學上網，Why?），從新做輪子，期間參考了[《圖解密碼技術》](http://www.amazon.cn/%E5%9B%BE%E4%B9%A6/dp/B00Q535R6I)的相關章節，加入了便于理解的對話。希望這圖對大家有幫助。
 
 另外，大家可以留意一下 Client 和 Server 證書（cert.）的交換時機（Phase 2 和 3），這就是我們平時在客戶端和服務器端所安裝的證書的使用時刻，這裏是典型的雙向證書驗證，通常在搭建SSL/TLS應用的時候都這麽做，目的是確保雙方都是可信的（因為雙方都安裝了某 [CA](http://en.wikipedia.org/wiki/Certificate_authority) 的 root cert，且雙方的 cert 都由這個 CA所 trust，所 issue）。
@@ -22,8 +22,8 @@ date: 2015-04-29
   3. Client 和 Server 生成了消息認證碼(MAC：Message Authentication Code)中使用的共享密鑰。
   4. Client 和 Server 生成了加密通信中使用的共享密鑰（上圖的 MS）。
 
-# 3. 解答幾個網上常見的問題：
-## 1. SSL 和 TLS 的區別
+## 3. 解答幾個網上常見的問題：
+### 1. SSL 和 TLS 的區別
 TLS 是 SSL 的繼承者，SSL3.0，之後的 TLS1.0 相當于 “SSL3.1”。
 
 |Version  |  公布日期|Remark|
@@ -37,14 +37,14 @@ TLS 是 SSL 的繼承者，SSL3.0，之後的 TLS1.0 相當于 “SSL3.1”。
 |TLS 1.3   |  TBD，至Apr 2015 還是草案狀態||
 
 
-## 2. TLS (Transport Layer Security) 是傳輸層協議嗎？
+### 2. TLS (Transport Layer Security) 是傳輸層協議嗎？
 
 不是。它是一套應用層協議：
 
 >**[TLS](http://en.wikipedia.org/wiki/c):** In the Internet Protocol Suite, TLS and SSL encrypt the data of network connections in the [application layer](http://en.wikipedia.org/wiki/Application_layer). In OSI model equivalences, TLS/SSL is initialized at layer 5 ([session layer](http://en.wikipedia.org/wiki/Session_layer)) and works at layer 6 (the [presentation layer](http://en.wikipedia.org/wiki/Presentation_layer)).[citation needed] 
 
 它在會話層被初始化，然後工作在表示層。另外，不僅是HTTP，其他應用層協議（例如：FTP, SMTP 等）都可以使用 TLS，而常見的 UDP 使用的是 [DTLS](http://en.wikipedia.org/wiki/Datagram_Transport_Layer_Security)。
-## 3. SSL 和 TLS，應該選用哪個作為服務器端的安全策略的一部分？
+### 3. SSL 和 TLS，應該選用哪個作為服務器端的安全策略的一部分？
 
 盡量用最新的 TLS 1.2，它修複了之前版本的許多漏洞。當前大部分 WS（Web Server）産品都已經支持，如從[Nginx](http://nginx.org/en/docs/http/configuring_https_servers.html)，[Tomcat 6.0.43](http://tomcat.apache.org/tomcat-6.0-doc/ssl-howto.html)和[IIS 7.5](http://en.wikipedia.org/wiki/Internet_Information_Services#History)開始。即使你當前用的WS不支持 TLS 1.2，也盡可能使用支持 TLS 1.0的WS版本，並且**禁用 Client 和 Server 端的 SSL 3.0**，因為去年底爆出的 [POODLE安全缺陷](http://en.wikipedia.org/wiki/POODLE)說明僅僅升級到 TLS 1.x是不夠的。
 
@@ -56,7 +56,7 @@ TLS 是 SSL 的繼承者，SSL3.0，之後的 TLS1.0 相當于 “SSL3.1”。
 有鑒于此，在 POODLE 缺陷被證實後，主流浏覽器大廠已經在自家産品中強制使用 TLS 並禁用了 SSL 3.0，杜絕 rollback 回 SSL 3.0。如果你的浏覽器已經禁用 SSL 3.0 的話，浏覽只支持 SSL 3.0 的網站會看到類似的警告：
 ![Firefox禁用了SSL3.0](/EXT/images/SSL3-unsupported-warning.png)
         
-## 4. 怎麽知道我用的浏覽器和某網站支持什麽版本的 SSL/TLS 協議？
+### 4. 怎麽知道我用的浏覽器和某網站支持什麽版本的 SSL/TLS 協議？
 *   **簡單的**
    * [服務端 SSL 支持檢測](https://www.ssllabs.com/ssltest/index.html)
    * [本地 SSLv3 支持檢測](https://www.ssllabs.com/ssltest/viewMyClient.html)
@@ -106,7 +106,7 @@ Nmap done: 1 IP address (1 host up) scanned in 3.82 seconds
 ```
          
 
-## 5. 為什麽連 alipay.com 這樣的網站還保留 SSL 3.0？不是說 SSL3.0 不安全了嗎？
+### 5. 為什麽連 alipay.com 這樣的網站還保留 SSL 3.0？不是說 SSL3.0 不安全了嗎？
 問得好！它不但保留了 SSL 3.0，還保留了已經不安全的 RC4 加密算法（速度極快的算法，8bit 的機器都能很快算出僞隨機數(圖上的 RNc)）。
 
 這不是阿裏的疏忽，而是[像許多網站那樣](https://blog.cloudflare.com/the-web-is-world-wide-or-who-still-needs-rc4/)想兼容那些舊版浏覽器（雖然的數量已經很少很少），比如像我 XP 裏那萬年不升級的 IE6 和老舊的[功能手機 Candy bar phone](http://www.techopedia.com/definition/24225/candy-bar-phone)的內置浏覽器。
