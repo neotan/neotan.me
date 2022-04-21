@@ -1,4 +1,4 @@
-import * as React from 'react'
+import {ReactNode, useEffect} from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import {
@@ -20,7 +20,8 @@ function DarkModeToggle() {
   function toggle() {
     setTheme(theme === 'light' ? 'dark' : 'light')
   }
-  const Icon = theme === 'dark' ? MoonIcon : SunIcon
+  const Icon = theme === 'light' ? MoonIcon : SunIcon
+
   return (
     <button onClick={() => toggle()}>
       <Icon className="h-8 cursor-pointer" />
@@ -39,7 +40,7 @@ function MobileMenu() {
 }
 
 type NavMidItemProps = {
-  title?: React.ReactNode
+  title?: ReactNode
   href?: string
   icon?: any
 }

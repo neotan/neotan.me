@@ -9,7 +9,11 @@ function CustomApp({Component, pageProps}) {
         <title>NEOTAN.ME</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ThemeProvider attribute="class" storageKey="neotan.me-theme">
+      <ThemeProvider
+        attribute="class"
+        storageKey="neotan.me-theme"
+        defaultTheme="dark"
+      >
         <Component {...pageProps} />
       </ThemeProvider>
     </>
