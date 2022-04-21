@@ -9,8 +9,12 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Sofia Pro"', ...defaultTheme.fontFamily.sans],
-        heading: ['Cubano', ...defaultTheme.fontFamily.sans],
+        sans: [
+          '"Noto Sans"',
+          '"Noto Sans TC"',
+          ...defaultTheme.fontFamily.sans,
+        ],
+        heading: ['Mitr', '"Noto Sans TC"', ...defaultTheme.fontFamily.sans],
         code: ['"JetBrains Mono"', ...defaultTheme.fontFamily.mono],
       },
       screens: {
@@ -20,7 +24,7 @@ module.exports = {
         lg: '1024px',
         xl: '1280px',
         '2xl': '1536px',
-        '3xl': '1680px',
+        '3xl': '1920px',
       },
     },
   },
