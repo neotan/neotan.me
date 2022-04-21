@@ -47,7 +47,7 @@ type NavMidItemProps = {
 function NavMidItem({title, href = '/', icon: Icon}: NavMidItemProps) {
   return (
     <Link href={href} passHref>
-      <div className="sm:w-26 group flex h-10 cursor-pointer items-center space-x-2 rounded-md p-3 transition hover:bg-gray-700 sm:space-x-0  sm:hover:scale-110">
+      <div className="sm:w-26 bg-link group flex h-10 cursor-pointer items-center space-x-2 rounded-md p-3 transition  sm:space-x-0 sm:hover:scale-110">
         <Icon className="mr-1 hidden h-5 sm:inline-block" />
         <h2 className="text-xl font-bold">{title}</h2>
       </div>
