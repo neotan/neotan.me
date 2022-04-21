@@ -18,7 +18,7 @@ export default function Blogs({mdxs}) {
               title={frontmatter.title}
               mainImgUrl={
                 frontmatter.mainImgUrl ||
-                'https://res.cloudinary.com/dwksx9ps3/image/upload/v1650489952/71483_2x1_c7611j.jpg' ||
+                'https://res.cloudinary.com/ntme/image/upload/v1650489952/neotan-me/71483_2x1_c7611j.jpg' ||
                 '/images/avatar-icon.svg'
               }
               readTime={readTime.text}
