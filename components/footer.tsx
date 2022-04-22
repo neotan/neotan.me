@@ -3,24 +3,21 @@ import GithubIcon from 'icons/github-icon'
 import LinkedinIcon from 'icons/linkedin-icon'
 import TopNav from './top-nav'
 
+const iconClassName =
+  'fill-primary cursor-pointer  hover:fill-gray-900 dark:hover:fill-gray-400'
+
 export default function Footer() {
   return (
     <footer className="mt-20 flex items-center justify-between space-x-6 p-5 sm:flex-col">
       <div className="flex space-x-4">
         <Link passHref href="https://github.com/neotan">
           <a>
-            <GithubIcon
-              className="cursor-pointer  fill-gray-400 hover:fill-gray-200"
-              size={32}
-            />
+            <GithubIcon className={iconClassName} size={32} />
           </a>
         </Link>
         <Link passHref href="https://www.linkedin.com/in/neotan/">
           <a>
-            <LinkedinIcon
-              className="cursor-pointer fill-gray-400  hover:fill-gray-200"
-              size={32}
-            />
+            <LinkedinIcon className={iconClassName} size={32} />
           </a>
         </Link>
       </div>
