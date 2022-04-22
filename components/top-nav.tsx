@@ -1,4 +1,4 @@
-import {ReactNode, useEffect} from 'react'
+import {ReactNode} from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import {
@@ -32,9 +32,15 @@ function DarkModeToggle() {
 function MobileMenu() {
   return (
     <ul className="flex flex-grow justify-evenly sm:hidden">
-      <Link href="/">BLOG</Link>
-      <Link href="/">PRODUCTS</Link>
-      <Link href="/">TAG</Link>
+      <Link href="/">
+        <a>BLOG</a>
+      </Link>
+      <Link href="/">
+        <a>PRODUCTS</a>
+      </Link>
+      <Link href="/">
+        <a>TAG</a>
+      </Link>
     </ul>
   )
 }
@@ -47,10 +53,10 @@ type NavMidItemProps = {
 function NavMidItem({title, href = '/', icon: Icon}: NavMidItemProps) {
   return (
     <Link href={href} passHref>
-      <div className="sm:w-26 bg-link group flex h-10 cursor-pointer items-center space-x-2 rounded-md p-3 transition  sm:space-x-0 sm:hover:scale-110">
+      <a className="sm:w-26 bg-link group flex h-10 cursor-pointer items-center space-x-2 rounded-md p-3 transition  sm:space-x-0 sm:hover:scale-110">
         <Icon className="mr-1 hidden h-5 sm:inline-block" />
         <h2 className="text-xl font-bold">{title}</h2>
-      </div>
+      </a>
     </Link>
   )
 }
@@ -59,7 +65,7 @@ export default function TopNav() {
   return (
     <nav className="shadow-primary bg-secondary fixed top-0 z-50 flex w-full flex-row items-center justify-between p-3 sm:p-4">
       <Link href="/" passHref>
-        <div className="cursor-pointer object-contain transition hover:z-50 sm:hover:scale-125">
+        <a className="cursor-pointer object-contain transition hover:z-50 sm:hover:scale-125">
           <Image
             className="object-contain"
             src="/images/avatar-icon.svg"
@@ -67,7 +73,7 @@ export default function TopNav() {
             width={40}
             height={40}
           />
-        </div>
+        </a>
       </Link>
       <div className="flex max-w-2xl flex-grow justify-evenly">
         <NavMidItem title="BLOGS" icon={BookOpenIcon} href={'/blogs'} />

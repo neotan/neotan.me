@@ -1,13 +1,13 @@
-import {Image} from 'cloudinary-react'
 import Link from 'next/link'
 import formatDate from 'date-fns/format'
 import {PhotographIcon} from '@heroicons/react/outline'
+import {FlexImage} from './image'
 
 type ArticleProps = {
   title: string
   description?: string
   readTime?: string
-  mainImgUrl?: string
+  cloudinaryImgPubId?: string
   slug?: string
   createdAt?: string
   updatedAt?: string
@@ -17,7 +17,7 @@ function ArticleCard({
   title,
   description,
   readTime,
-  mainImgUrl,
+  cloudinaryImgPubId = 'v1650489952/blog/71483_2x1_c7611j',
   slug = '/',
   updatedAt,
   createdAt,
@@ -28,19 +28,8 @@ function ArticleCard({
         title={title}
         className="bg-secondary shadow-primary hover:shadow-secondary group cursor-pointer rounded-md p-5 transition hover:z-10 sm:hover:scale-105"
       >
-        {mainImgUrl ? (
-          <Image
-            className="rounded"
-            alt={title}
-            cloudName="ntme"
-            publicId="v1650489952/blog/71483_2x1_c7611j"
-            dpr="auto"
-            responsive
-            width="auto"
-            crop="scale"
-            responsiveUseBreakpoints="true"
-            fetchFormat="auto"
-          />
+        {cloudinaryImgPubId ? (
+          <FlexImage cloudinaryImgPubId={cloudinaryImgPubId} />
         ) : (
           <PhotographIcon />
         )}
@@ -71,7 +60,7 @@ export function CardsForDev() {
         const post = {
           title: 'Untitled Post',
           description: 'No overview '.repeat(6),
-          mainImgUrl: '/images/avatar-icon.svg',
+          cloudinaryImgPubId: '/images/avatar-icon.svg',
           slug: '/blogs',
           updatedAt: formatDate(new Date(), 'yyyy-MM-ii'),
           createdAt: formatDate(new Date(), 'yyyy-MM-ii'),

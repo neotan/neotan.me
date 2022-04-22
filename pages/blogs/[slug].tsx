@@ -2,15 +2,16 @@ import {useMemo} from 'react'
 import {getMDXComponent} from 'mdx-bundler/client'
 import {deserialize, serialize} from 'superjson'
 import formatDate from 'date-fns/format'
-import {Image, Transformation, Video} from 'cloudinary-react'
+import {FlexImage} from '~/components/image'
 import {getAllMdxs, getMdx} from '~/utils/storage'
 import Layout from '~/components/layout'
 import {MdxPage} from '~/types/index'
+
 function Blog({mdx}) {
   const {
     code,
     readTime,
-    frontmatter: {title, date, tags, mainImgUrl},
+    frontmatter: {title, date, tags, cloudinaryImgPubId},
   } = deserialize(mdx) as MdxPage
   const Component = useMemo(() => getMDXComponent(code), [code])
   return (
@@ -23,18 +24,7 @@ function Blog({mdx}) {
             <i className="mx-2">•</i>
             <time>{readTime.text}</time>
           </div>
-          <Image
-            className="rounded"
-            alt={title}
-            cloudName="ntme"
-            publicId="v1650489952/blog/71483_2x1_c7611j"
-            dpr="auto"
-            responsive
-            width="auto"
-            crop="scale"
-            responsiveUseBreakpoints="true"
-            fetchFormat="auto"
-          />
+          <FlexImage cloudinaryImgPubId={cloudinaryImgPubId} />
         </header>
         <Component />
       </article>

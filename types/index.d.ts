@@ -12,7 +12,7 @@ export type MdxPage = {
     description?: string
     tags?: Array<string>
     date?: Date
-    mainImgUrl?: string
+    cloudinaryImgPubId?: string
   }
 }
 

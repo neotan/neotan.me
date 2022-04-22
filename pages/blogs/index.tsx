@@ -15,22 +15,24 @@ export default function Blogs({mdxs}) {
   return (
     <Layout>
       <div className="bg-primary grid grid-cols-1 flex-wrap gap-8 p-4 sm:grid-cols-2 xl:mx-20 xl:grid-cols-3 2xl:mx-40">
-        {posts.map(({slug, readTime, frontmatter}) => {
-          return (
-            <ArticleCard
-              key={slug}
-              title={frontmatter.title}
-              mainImgUrl={
-                frontmatter.mainImgUrl ||
-                'https://res.cloudinary.com/ntme/image/upload/v1650489952/neotan-me/71483_2x1_c7611j.jpg' ||
-                '/images/avatar-icon.svg'
-              }
-              readTime={readTime.text}
-              slug={`blogs/${slug}`}
-              createdAt={formatDate(frontmatter.date, 'yyyy-MM-ii')}
-            />
-          )
-        })}
+        {posts.map(
+          ({
+            slug,
+            readTime,
+            frontmatter: {date, cloudinaryImgPubId, title},
+          }) => {
+            return (
+              <ArticleCard
+                key={slug}
+                title={title}
+                cloudinaryImgPubId={cloudinaryImgPubId}
+                readTime={readTime.text}
+                slug={`blogs/${slug}`}
+                createdAt={formatDate(date, 'yyyy-MM-ii')}
+              />
+            )
+          },
+        )}
       </div>
     </Layout>
   )
