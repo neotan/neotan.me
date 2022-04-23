@@ -49,26 +49,4 @@ function ArticleCard({
   )
 }
 
-// For development purpose
-export function CardsForDev() {
-  if (process.env.NODE_ENV !== 'development') {
-    throw new Error('<CardsForDev/> should only be used during development!')
-  }
-  return (
-    <>
-      {Array.from({length: 12}).map((_, i) => {
-        const post = {
-          title: 'Untitled Post',
-          description: 'No overview '.repeat(6),
-          cloudinaryImgPubId: '/images/avatar-icon.svg',
-          slug: '/blogs',
-          updatedAt: formatDate(new Date(), 'yyyy-MM-ii'),
-          createdAt: formatDate(new Date(), 'yyyy-MM-ii'),
-        }
-        return <ArticleCard key={i} {...post} />
-      })}
-    </>
-  )
-}
-
 export default ArticleCard
