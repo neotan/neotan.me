@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "prebuild": "node ./scripts/compile-mdx.js ./content",
+    "mdx:watch": "chokidar ./content/**/*.mdx -c \"yarn prebuild\"",
     "start": "next start",
     "lint": "next lint --fix"
   },
@@ -38,6 +39,7 @@
     "@types/ramda": "^0.28.1",
     "@types/react": "^17.0.41",
     "autoprefixer": "^10.4.4",
+    "chokidar-cli": "^3.0.0",
     "eslint": "^8.13.0",
     "eslint-config-next": "^12.1.4",
     "eslint-config-prettier": "^8.5.0",
