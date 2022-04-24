@@ -26,6 +26,24 @@ module.exports = {
         '2xl': '1536px',
         '3xl': '1920px',
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            a: {
+              color: 'inherit',
+              'text-decoration-line': 'none',
+              '&:hover': {
+                color: '#3182ce',
+              },
+              '&::after': {
+                content: '"🔗"',
+                opacity: '0.14',
+                'font-size': '1.25rem',
+              },
+            },
+          },
+        },
+      },
     },
   },
   plugins: [

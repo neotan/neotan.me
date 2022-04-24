@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "prebuild": "node ./scripts/compile-mdx.js ./content",
-    "mdx:watch": "chokidar ./content/**/*.mdx -c \"yarn prebuild\"",
+    "mdx:watch": "chokidar ./tailwind.config.js ./content/**/*.mdx ./utils/mdx.js -c \"yarn prebuild\"",
     "start": "next start",
     "lint": "next lint --fix"
   },
