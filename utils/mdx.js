@@ -22,11 +22,20 @@ const remarkPlugins = []
 const rehypePlugins = []
 
 async function compileMdx(mdxSource) {
+  const {default: gfm} = await import('remark-gfm')
+  const {default: remarkAutolinkHeadings} = await import(
+    'remark-autolink-headings'
+  )
+  const {default: remarkSlug} = await import('remark-slug')
+
   const {code, frontmatter} = await bundleMDX({
     source: mdxSource,
     mdxOptions(options, frontmatter) {
       options.remarkPlugins = [
         ...(options.remarkPlugins ?? []),
+        remarkSlug,
+        [remarkAutolinkHeadings, {behavior: 'wrap'}],
+        gfm,
         ...remarkPlugins,
       ]
       options.rehypePlugins = [
@@ -45,7 +54,7 @@ async function compileMdx(mdxSource) {
 }
 
 async function getAllMdxs(mdxRootPath) {
-  if (path.is) throw new Error('MDX root folder is required.')
+  if (!mdxRootPath) throw new Error('MDX root folder is required.')
 
   try {
     const rawMdxs = []
