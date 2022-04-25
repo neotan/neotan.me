@@ -1,7 +1,7 @@
 import {useMemo} from 'react'
 import {getMDXComponent} from 'mdx-bundler/client'
-import {deserialize, serialize} from 'superjson'
 import formatDate from 'date-fns/format'
+import parseISO from 'date-fns/parseISO'
 import {FlexImage} from '~/components/image'
 import {getAllMdxs, getMdx} from '~/utils/storage'
 import Layout from '~/components/layout'
@@ -12,7 +12,7 @@ function Blog({mdx}) {
     code,
     readTime,
     frontmatter: {title, date, tags, cloudinaryImgPubId},
-  } = deserialize(mdx) as MdxPage
+  } = mdx as MdxPage
   const Component = useMemo(() => getMDXComponent(code), [code])
   return (
     <Layout>
@@ -20,7 +20,7 @@ function Blog({mdx}) {
         <header>
           <h1>{title}</h1>
           <div className="text-secondary flex items-center opacity-80">
-            <time>{formatDate(date, 'yyyy-MM-ii')}</time>
+            <time>{formatDate(parseISO(date), 'yyyy-MM-ii')}</time>
             <i className="mx-2">•</i>
             <time>{readTime.text}</time>
           </div>
@@ -46,7 +46,7 @@ export async function getStaticProps({params: {slug}}) {
   const mdx = await getMdx(slug)
   return {
     props: {
-      mdx: serialize(mdx),
+      mdx,
     },
   }
 }

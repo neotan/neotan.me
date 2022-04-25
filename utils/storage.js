@@ -1,6 +1,7 @@
 const path = require('path')
 const fsx = require('fs-extra')
-const {parse, stringify} = require('superjson').default
+const stringify = require('json-stringify-safe')
+const parse = JSON.parse
 
 function getDbPath() {
   return path.join(process.cwd(), '.temp', 'mdxs.temp-db.json')
