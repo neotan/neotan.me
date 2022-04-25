@@ -7,9 +7,9 @@ cloudinaryImgPubId: v1650768901/blog/npm
 
 引自我在知乎上的回答[Homebrew有比較快的源（mirror）嗎？ - 知乎](https://www.zhihu.com/question/31360766/answer/132082951)
 
-## 1. Homebrew
+## 1. Homebrew 
 
-#### A. 中科大的源（推薦）
+### A. 中科大的源（推薦）
 
 (1). [替換 homebrew-core源](https://lug.ustc.edu.cn/wiki/mirrors/help/homebrew-core.git)
 
@@ -31,7 +31,7 @@ brew update
 
 
 
-#### B. 清華的源
+### B. 清華的源
 
 (1). [替換 formula 索引的鏡像（即 brew update 時所更新內容）](https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/)
 
@@ -71,7 +71,7 @@ error: fetch failed.
 來自[Packagist / Composer 中國全量鏡像](http://pkg.phpcomposer.com/)
 也有兩種方式：
 
-#### A. 修改 composer 的全局配置文件（推薦方式）
+### A. 修改 composer 的全局配置文件（推薦方式）
 
 打開命令行窗口（windows用戶）或控制台（Linux、Mac 用戶）並執行如下命令：
 
@@ -79,7 +79,7 @@ error: fetch failed.
 composer config -g repo.packagist composer https://packagist.phpcomposer.com
 ```
 
-#### B. 修改當前項目的 composer.json 配置文件：
+### B. 修改當前項目的 composer.json 配置文件：
 
 打開命令行窗口（windows用戶）或控制台（Linux、Mac 用戶），進入你的項目的根目錄（也就是 composer.json 文件所在目錄），執行如下命令：
 
@@ -102,7 +102,7 @@ composer config repo.packagist composer https://packagist.phpcomposer.com
 ## 3. npm
 有永久和臨時兩種形式：
 
-#### A. 通過 config 命令作全局永久替換
+### A. 通過 config 命令作全局永久替換
 
 運行：
 ```bash
@@ -122,7 +122,7 @@ directories: {},
 publish_time: 1427988774520 }
 ```
 
-#### B. 通過命令行臨時替換
+### B. 通過命令行臨時替換
 
 運行：
 ```bash

@@ -27,12 +27,14 @@ async function compileMdx(mdxSource) {
     'remark-autolink-headings'
   )
   const {default: remarkSlug} = await import('remark-slug')
+  const {default: remarkPrism} = await import('remark-prism')
 
   const {code, frontmatter} = await bundleMDX({
     source: mdxSource,
     mdxOptions(options, frontmatter) {
       options.remarkPlugins = [
         ...(options.remarkPlugins ?? []),
+        [remarkPrism, {transformInlineCode: true}], // TODO: add line-numbers
         remarkSlug,
         [remarkAutolinkHeadings, {behavior: 'wrap'}],
         gfm,
