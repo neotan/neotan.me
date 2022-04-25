@@ -28,6 +28,7 @@ async function compileMdx(mdxSource) {
   )
   const {default: remarkSlug} = await import('remark-slug')
   const {default: remarkPrism} = await import('remark-prism')
+  const {default: remarkImages} = await import('remark-images')
 
   const {code, frontmatter} = await bundleMDX({
     source: mdxSource,
@@ -36,6 +37,7 @@ async function compileMdx(mdxSource) {
         ...(options.remarkPlugins ?? []),
         [remarkPrism, {transformInlineCode: true}], // TODO: add line-numbers
         remarkSlug,
+        remarkImages,
         [remarkAutolinkHeadings, {behavior: 'wrap'}],
         gfm,
         ...remarkPlugins,
