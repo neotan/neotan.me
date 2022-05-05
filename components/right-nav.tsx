@@ -6,14 +6,14 @@ function SearchButton() {
 }
 
 function DarkModeToggle() {
-  const {theme, setTheme} = useTheme()
   function toggle() {
     setTheme(theme === 'light' ? 'dark' : 'light')
   }
-  const Icon = theme === 'light' ? MoonIcon : SunIcon
+  const {theme, setTheme} = useTheme()
+  const Icon = theme === 'light' ? SunIcon : MoonIcon
 
   return (
-    <button onClick={() => toggle()}>
+    <button onClick={toggle}>
       <Icon className="h-8 cursor-pointer" />
     </button>
   )
