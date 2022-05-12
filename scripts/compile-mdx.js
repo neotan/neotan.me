@@ -9,7 +9,7 @@ const mdxRootPath = process.argv[2]
     throw new Error(`${mdxRootPath} is invalid.`)
   }
   try {
-    const mdxs = await getAllMdxs(process.argv[2])
+    const mdxs = await getAllMdxs(mdxRootPath)
     await saveMdxs(mdxs)
     const result = mdxs?.map(({slug, filePath}) => ({slug, filePath}))
     console.log(result, `\n${result.length} MDX files were compiled.`)

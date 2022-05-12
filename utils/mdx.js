@@ -23,22 +23,26 @@ const rehypePlugins = []
 
 async function compileMdx(mdxSource) {
   const {default: gfm} = await import('remark-gfm')
-  const {default: remarkAutolinkHeadings} = await import(
-    'remark-autolink-headings'
-  )
+  const {default: autolinkHeadings} = await import('remark-autolink-headings')
   const {default: remarkSlug} = await import('remark-slug')
   const {default: remarkPrism} = await import('remark-prism')
   const {default: remarkImages} = await import('remark-images')
+  const {default: mdxSearchable} = await import('remark-mdx-searchable')
 
-  const {code, frontmatter} = await bundleMDX({
+  const {
+    code,
+    frontmatter,
+    matter: {content},
+  } = await bundleMDX({
     source: mdxSource,
     mdxOptions(options, frontmatter) {
       options.remarkPlugins = [
         ...(options.remarkPlugins ?? []),
+        // mdxSearchable,
         [remarkPrism, {transformInlineCode: true}], // TODO: add line-numbers
         remarkSlug,
         remarkImages,
-        [remarkAutolinkHeadings, {behavior: 'wrap'}],
+        [autolinkHeadings, {behavior: 'wrap'}],
         gfm,
         ...remarkPlugins,
       ]
@@ -50,10 +54,10 @@ async function compileMdx(mdxSource) {
       return options
     },
   })
-
   return {
     frontmatter,
     code,
+    content,
   }
 }
 
