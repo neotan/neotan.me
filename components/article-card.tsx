@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import formatDate from 'date-fns/format'
 import {PhotographIcon} from '@heroicons/react/outline'
 import {FlexImage} from './image'
 
@@ -25,9 +24,9 @@ function ArticleCard({
   return (
     <figure
       title={title}
-      className="bg-secondary shadow-primary hover:shadow-secondary group cursor-pointer rounded-md p-3 transition hover:z-10 sm:hover:scale-105"
+      className="bg-secondary shadow-primary group cursor-pointer rounded-md p-3 transition hover:z-10 hover:shadow-2xl sm:hover:scale-105"
     >
-      <Link passHref href={slug}>
+      <Link href={slug}>
         <a>
           {cloudinaryImgPubId ? (
             <FlexImage cloudinaryImgPubId={cloudinaryImgPubId} />
