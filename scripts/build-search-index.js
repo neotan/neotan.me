@@ -1,14 +1,18 @@
 const dotenv = require('dotenv')
 const algoliasearch = require('algoliasearch/lite')
 const {pluck, pipe, sort} = require('ramda')
+const formatDate = require('date-fns/format')
 const {getAllMdxs} = require('../utils/mdx')
 
 function transformMdx({slug, code, content, frontmatter}) {
-  const {title, date} = frontmatter
+  const {title, date, catalog, cloudinaryImgPubId} = frontmatter
+  console.log({frontmatter})
   return {
     objectID: slug,
     title,
-    date,
+    catalog,
+    cloudinaryImgPubId,
+    date: formatDate(new Date(date), 'yyyy-MM-dd'),
     content,
   }
 }
@@ -22,23 +26,18 @@ function transformMdx({slug, code, content, frontmatter}) {
   try {
     const mdxs = await getAllMdxs(process.argv[2])
     const transformed = mdxs.map(transformMdx)
-   
+
     const client = algoliasearch(
       process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
       process.env.ALGOLIA_SEARCH_ADMIN_KEY,
     )
+
+    const algoliaRes = await client
+      .initIndex('prod_neotan.me')
+      .saveObjects(transformed)
+
     console.log(
-      pipe(
-        pluck('objectID'),
-        sort(function (a, b) {
-          return a - b
-        }),
-      )(transformed),
-    )
-    const index = client.initIndex('prod_neotan.me')
-    const algoliaRes = await index.saveObjects(transformed)
-    console.log(
-      `🎉🎉🎉 Sucessfully added ${
+      `\n🎉🎉🎉 Sucessfully added ${
         algoliaRes.objectIDs.length
       } records to Algolia search. Object IDs:\n${algoliaRes.objectIDs.join(
         '\n',
