@@ -26,8 +26,8 @@ export default function Blogs({mdxs}) {
                   title={title}
                   cloudinaryImgPubId={cloudinaryImgPubId}
                   readTime={readTime.text}
-                  slug={`blogs/${slug}`}
-                  createdAt={formatDate(parseISO(date), 'yyyy-MM-ii')}
+                  slug={`/blogs/${slug}`}
+                  createdAt={formatDate(parseISO(date), 'yyyy-MM-dd')}
                 />
               )
             },
