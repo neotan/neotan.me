@@ -33,7 +33,7 @@ function transformMdx({slug, code, content, frontmatter}) {
     )
 
     const algoliaRes = await client
-      .initIndex('prod_neotan.me')
+      .initIndex(process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME)
       .saveObjects(transformed)
 
     console.log(
