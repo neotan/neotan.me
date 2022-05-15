@@ -58,7 +58,7 @@ function CustomHit({hit}) {
 const ALGOLIA_INDEX_NAME = process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME
 
 function SearchButton() {
-  const toggleModal = () => setVisable(!visable)
+  const toggleModal = () => setVisable(prev => !prev)
   const [visable, setVisable] = useState(false)
 
   // TODO: auto focus on search input '.ais-SearchBox-input'
@@ -79,8 +79,8 @@ function SearchButton() {
             indexName={ALGOLIA_INDEX_NAME}
           >
             <SearchBox
-              className="bg-secondary flex items-center space-x-3 rounded-t-xl p-4"
-              placeholder="Type to search, [Esc] to clear, [Esc] [Esc] to close"
+              className="bg-secondary flex items-center space-x-3 rounded-t-xl p-4 "
+              placeholder="Type to search, [Esc] to clear, [Alt]+[Q] to close/open"
               classNames={{
                 reset: 'hidden',
                 submit: 'hidden',

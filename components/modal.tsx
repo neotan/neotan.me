@@ -7,6 +7,7 @@ import {
   disableBodyScroll,
   enableBodyScroll,
 } from 'body-scroll-lock'
+import {useHotkeys} from 'react-hotkeys-hook'
 import {isBrowser} from '~/utils/utils'
 
 type ModalHeaderProps = HTMLAttributes<HTMLDivElement>
@@ -104,6 +105,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
     },
     forwardedRef,
   ) => {
+    useHotkeys('alt+q', onClickBackdrop)
     useEffect(() => {
       if (isBrowser()) {
         toggleBodyScroll(open, id)
@@ -122,14 +124,13 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
           backdropClass,
           clsx({
             'pointer-events-auto visible opacity-100': open,
-            'modal-bottom sm:modal-middle': responsive,
+            'items-end sm:items-center': responsive,
           }),
         )}
         onClick={e => {
           e.stopPropagation()
           if (e.target === e.currentTarget) {
             // ignored events emitted by other elements
-            e.stopPropagation()
             onClickBackdrop?.()
           }
         }}
