@@ -9,7 +9,6 @@ export default function LinkedinIcon({
   title?: string
   className?: string
 }) {
-  console.log('LinkedIn', size)
   return (
     <svg width={size} height={size} viewBox="0 0 34 34" className={className}>
       <title>{title}</title>
