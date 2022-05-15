@@ -1,6 +1,7 @@
 import {Cloudinary} from '@cloudinary/url-gen'
 import {AdvancedImage, lazyload, responsive} from '@cloudinary/react'
 import {crop, fill, pad} from '@cloudinary/url-gen/actions/resize'
+import {twMerge} from 'tailwind-merge'
 
 export function FlexImage(props) {
   const {className, cloudName, cloudinaryImgPubId, ...restProps} = props
@@ -16,7 +17,10 @@ export function FlexImage(props) {
 
   return (
     <AdvancedImage
-      className={`flex w-full justify-center rounded object-contain ${className}`}
+      className={twMerge(
+        'flex w-full justify-center rounded object-contain',
+        className,
+      )}
       cldImg={image}
       plugins={[responsive(), lazyload()]}
       {...restProps}
