@@ -1,6 +1,6 @@
 import {Cloudinary} from '@cloudinary/url-gen'
 import {AdvancedImage, lazyload, responsive} from '@cloudinary/react'
-import {crop, fill, pad} from '@cloudinary/url-gen/actions/resize'
+import {crop, fill, pad} from '@cloudinary/url-gen/actions/resize' // keep for reference as official docs didn't documented
 import {twMerge} from 'tailwind-merge'
 
 export function FlexImage(props) {
