@@ -13,13 +13,25 @@ To be completed...
 - [x] add posts listing
 - [x] add MDX files compilation with mdx-bundler
 - [x] integrate cloudinary image service
-  - [ ] migrate all images to cloudinary
-- [ ] add site-wide full-text search
+  - [x] migrate all images to cloudinary
+- [x] add site-wide full-text search
 - [ ] add site-wide animation with framer-motion
   - [ ] Home page
-  - [ ] products page(?)
-- [ ] add code highlight
+  - [ ] Apps page(?)
+- [x] add code highlight
+- [ ] SEO, sitemap.xml
 
+## Trade-offs
+
+As you may have seen, there is a few "Anti-patterns" code in the application, but believe me, they are reasonable in the context of such scale, like:
+  1. **Put related components in a single .tsx file**. Which is following the practices:
+
+      1. [💡Colocation](https://kentcdodds.com/blog/colocation) by [Kent C. Dodds](https://kentcdodds.com/about) and 
+      1. [Knuth](https://en.wikipedia.org/wiki/Donald_Knuth) 's [💡Optimization Principle](https://www.laws-of-software.com/laws/knuth/)
+          >Premature optimization is the root of all evil.
+          >-- Donald Knuth, 1974
+
+  1. **Put classNames inline**. Because I'm leveraging the fantastic [🧙‍♂️TailwindCSS 3](https://tailwindcss.com/) to style the site, and [🔌Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) for VS Code's AutoComplete, they only work with **inline** classNames perfectly so far.
 
 
 ## Getting Started
