@@ -27,8 +27,8 @@
     @apply bg-white dark:bg-[#2a2e35];
   }
 
-  .bg-third {
-    @apply bg-[#ced3da] dark:bg-[#202329];
+  .bg-tertiary {
+    @apply bg-gray-100 dark:bg-gray-600
   }
 
   .bg-link:hover {
@@ -36,7 +36,7 @@
   }
 
   .border-primary {
-    @apply border-gray-300 dark:border-gray-100;
+    @apply border-gray-300 dark:border-gray-800;
   }
 
   .border-secondary {
@@ -48,7 +48,7 @@
   }
 
   .text-secondary {
-    @apply text-[#454e56] dark:text-[#b2becd];
+    @apply text-gray-400 dark:text-gray-400;
   }
 
   .text-inverse {
@@ -60,7 +60,7 @@
   }
 
   .shadow-secondary {
-    @apply shadow-md shadow-gray-400 dark:shadow-black;
+    @apply shadow-md shadow-gray-400 dark:shadow-red-300;
   }
 
   .fill-primary {
@@ -73,5 +73,9 @@
 
   .stroke-secondary {
     @apply text-secondary;
+  }
+
+  .divide-primary {
+    @apply divide-opacity-40 dark:divide-gray-700 divide-gray-400
   }
 }

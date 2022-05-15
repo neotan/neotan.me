@@ -10,6 +10,7 @@ export type MdxPage = {
     draft?: boolean
     title?: string
     description?: string
+    catalog?: string
     tags?: Array<string>
     date?: string
     cloudinaryImgPubId?: string
@@ -19,5 +20,11 @@ export type MdxPage = {
 export type MdxListItem = Omit<MdxPage, 'code'>
 
 export type GitHubFile = {path: string; content: string}
+
+export type SvgIconProps = {
+  size?: number
+  title?: string
+  className?: string
+}
 
 export {MdxPage, MdxListItem, GitHubFile}
