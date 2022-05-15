@@ -1,9 +1,8 @@
 import {useMemo} from 'react'
 import {getMDXComponent} from 'mdx-bundler/client'
-import formatDate from 'date-fns/format'
-import parseISO from 'date-fns/parseISO'
 import {FlexImage} from '~/components/image'
 import {getAllMdxs, getMdx} from '~/utils/storage'
+import {formatDate} from '~/utils/utils'
 import Layout from '~/components/layout'
 import {MdxPage} from '~/types/index'
 
@@ -20,7 +19,7 @@ function Blog({mdx}) {
         <header>
           <h1>{title}</h1>
           <div className="text-secondary flex items-center opacity-80">
-            <time>{formatDate(parseISO(date), 'yyyy-MM-ii')}</time>
+            <time>{formatDate(date)}</time>
             <i className="mx-2">•</i>
             <time>{readTime.text}</time>
           </div>
