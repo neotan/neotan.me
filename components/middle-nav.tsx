@@ -13,14 +13,14 @@ type NavMidItemProps = {
 
 function NavItem({title, href = '/', icon: Icon}: NavMidItemProps) {
   const {pathname} = useRouter()
-  const isActive = href === pathname
+  const isActive = pathname.startsWith(href)
   return (
     <Link href={href}>
       <a
         className={twMerge(
-          'sm:w-26 bg-link flex h-10 cursor-pointer items-center space-x-2 rounded-md border-b-8 border-b-transparent p-4 pt-5 transition sm:space-x-0',
+          'sm:w-26 bg-link flex h-10 cursor-pointer items-center space-x-2 rounded-md p-4 opacity-50 transition hover:opacity-100 sm:space-x-0',
           clsx({
-            'rounded-b-none border-b-red-600': isActive,
+            'opacity-100': isActive,
           }),
         )}
       >

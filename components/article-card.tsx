@@ -24,14 +24,14 @@ function ArticleCard({
   return (
     <figure
       title={title}
-      className="bg-secondary shadow-primary group cursor-pointer rounded-md p-3 transition hover:z-10 hover:shadow-2xl sm:hover:scale-105"
+      className="bg-secondary shadow-primary group cursor-pointer rounded-md p-3 transition hover:z-10 sm:hover:scale-105"
     >
       <Link href={slug}>
         <a>
           {cloudinaryImgPubId ? (
             <FlexImage cloudinaryImgPubId={cloudinaryImgPubId} />
           ) : (
-            <PhotographIcon />
+            <PhotographIcon className="stroke-secondary" />
           )}
           <footer className="p-2">
             <h3 className="mt-1 text-2xl">{title}</h3>

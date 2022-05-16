@@ -12,11 +12,6 @@ export default class CustomDocument extends Document {
             crossOrigin="true"
           />
           <link
-            rel="preconnect"
-            href={`https://${process.env.NEXT_PUBLIC_ALGOLIA_APP_ID}-dsn.algolia.net`}
-            crossOrigin="true"
-          />
-          <link
             href="https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap"
             rel="stylesheet"
           />
@@ -33,7 +28,7 @@ export default class CustomDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body className="bg-primary">
+        <body>
           <Main />
           <NextScript />
         </body>

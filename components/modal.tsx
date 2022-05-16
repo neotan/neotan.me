@@ -120,7 +120,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
         aria-hidden={!open}
         aria-modal={open}
         className={twMerge(
-          'pointer-events-none fixed top-0 right-0 left-0 bottom-0 z-[999] flex items-center justify-center overflow-hidden bg-gray-700  bg-opacity-80 opacity-0 backdrop-blur-md transition-opacity',
+          'pointer-events-none fixed top-0 right-0 left-0 bottom-0 z-[999] flex items-center justify-center overflow-hidden bg-gray-500  bg-opacity-30 opacity-0 backdrop-blur-md transition-opacity',
           backdropClass,
           clsx({
             'pointer-events-auto visible opacity-100': open,

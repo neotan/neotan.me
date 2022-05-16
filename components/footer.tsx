@@ -7,7 +7,7 @@ const iconClassName =
 
 export default function Footer() {
   return (
-    <footer className="border-primary mt-40 flex items-center justify-between space-x-6 border-t-2 border-dashed p-5 sm:flex-col">
+    <footer className="border-primary mt-40 flex items-center justify-between space-x-6 p-5 sm:flex-col">
       <div className="flex space-x-4">
         <Link href="https://github.com/neotan">
           <a>
