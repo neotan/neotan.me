@@ -17,7 +17,7 @@ function Blog({mdx}) {
     <Layout>
       <article className="prose prose-slate mx-auto pt-10 dark:prose-invert lg:prose-xl">
         <header>
-          <h1>{title}</h1>
+          <h1 className="break-all">{title}</h1>
           <div className="text-secondary flex items-center opacity-80">
             <time>{formatDate(date)}</time>
             <i className="mx-2">•</i>

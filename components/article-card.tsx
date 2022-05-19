@@ -34,7 +34,7 @@ function ArticleCard({
             <PhotographIcon className="stroke-secondary" />
           )}
           <footer className="p-2">
-            <h3 className="mt-1 text-2xl">{title}</h3>
+            <h3 className="mt-1 break-all text-2xl">{title}</h3>
             <figcaption className="text-secondary max-w-md truncate">
               {description}
             </figcaption>

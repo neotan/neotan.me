@@ -68,7 +68,7 @@ function SearchButton() {
       <SearchIcon className="h-8 cursor-pointer" onClick={toggleModal} />
       <Modal
         id="modal-search"
-        className="bg-primary shadow-primary border-primary max-h-[80vh] w-[60rem] max-w-[60rem] shadow-lg"
+        className="bg-primary shadow-primary border-primary max-h-[80vh] w-[60rem] max-w-[60rem]"
         backdropClass="items-start pt-10 bg-opacity-60 "
         open={visable}
         onClickBackdrop={toggleModal}

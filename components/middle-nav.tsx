@@ -18,7 +18,7 @@ function NavItem({title, href = '/', icon: Icon}: NavMidItemProps) {
     <Link href={href}>
       <a
         className={twMerge(
-          'sm:w-26 bg-link flex h-10 cursor-pointer items-center space-x-2 rounded-md p-4 opacity-50 transition hover:opacity-100 sm:space-x-0',
+          'sm:w-26 flex h-10 cursor-pointer items-center space-x-2 rounded-md p-4 opacity-50 transition hover:opacity-100 sm:space-x-0',
           clsx({
             'opacity-100': isActive,
           }),

@@ -20,11 +20,11 @@
   }
 
   .bg-primary {
-    @apply bg-gray-100 dark:bg-[#1a1a1a];
+    @apply bg-gray-100 dark:bg-[#222222];
   }
 
   .bg-secondary {
-    @apply bg-white dark:bg-[#2d2d2d];
+    @apply bg-white dark:bg-[#393939];
   }
 
   .bg-tertiary {
@@ -60,11 +60,11 @@
   }
 
   .fill-primary {
-    @apply fill-gray-700 dark:fill-gray-600;
+    @apply fill-gray-700 dark:fill-gray-500;
   }
 
   .stroke-primary {
-    @apply stroke-[#12181b] dark:text-gray-100;
+    @apply stroke-gray-700 dark:stroke-gray-500;
   }
 
   .stroke-secondary {

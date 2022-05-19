@@ -1,6 +1,7 @@
 import {map, omit, path, pipe, sortBy, values} from 'ramda'
 import formatDate from 'date-fns/format'
 import parseISO from 'date-fns/parseISO'
+import {motion as mo} from 'framer-motion'
 import {getAllMdxs} from '~/utils/storage'
 import ArticleCard from '~/components/article-card'
 import Layout from '~/components/layout'
@@ -11,7 +12,13 @@ export default function Blogs({mdxs}) {
 
   return (
     <Layout>
-      <div className="bg-primary grid grid-cols-1 flex-wrap gap-8 p-4 sm:grid-cols-2 xl:mx-20 xl:grid-cols-3 2xl:mx-40">
+      <mo.div
+        className="grid grid-cols-1 flex-wrap gap-12 p-4 sm:grid-cols-2 lg:grid-cols-3 xl:mx-20 2xl:mx-40"
+        animate={{opacity: 1, y: 0}}
+        initial={{opacity: 0, y: 20}}
+        exit={{opacity: 0, y: -20}}
+        transition={{duration: 0.5}}
+      >
         {posts
           .reverse()
           .map(
@@ -32,7 +39,7 @@ export default function Blogs({mdxs}) {
               )
             },
           )}
-      </div>
+      </mo.div>
     </Layout>
   )
 }
