@@ -3,7 +3,11 @@ import Link from 'next/link'
 import {useRouter} from 'next/router'
 import {twMerge} from 'tailwind-merge'
 import clsx from 'clsx'
-import {BookOpenIcon, LightningBoltIcon} from '@heroicons/react/outline'
+import {
+  BookOpenIcon,
+  HomeIcon,
+  LightningBoltIcon,
+} from '@heroicons/react/outline'
 
 type NavMidItemProps = {
   title?: ReactNode
@@ -12,8 +16,9 @@ type NavMidItemProps = {
 }
 
 function NavItem({title, href = '/', icon: Icon}: NavMidItemProps) {
-  const {pathname} = useRouter()
-  const isActive = pathname.startsWith(href)
+  const {pathname, asPath} = useRouter()
+  const isActive = asPath === href || asPath.startsWith(href + '/')
+  console.log({pathname, asPath, href})
   return (
     <Link href={href}>
       <a
@@ -34,6 +39,7 @@ function NavItem({title, href = '/', icon: Icon}: NavMidItemProps) {
 export default function MiddleNav() {
   return (
     <div className="flex max-w-2xl flex-grow justify-evenly">
+      <NavItem title="HOME" icon={HomeIcon} href="/" />
       <NavItem title="BLOGS" icon={BookOpenIcon} href="/blogs" />
       <NavItem title="APPS" icon={LightningBoltIcon} href="/apps" />
     </div>
