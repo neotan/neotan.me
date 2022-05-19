@@ -5,7 +5,6 @@ export default class CustomDocument extends Document {
     return (
       <Html className="dark" lang="en">
         <Head>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"
             href="https://fonts.gstatic.com"

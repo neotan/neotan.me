@@ -16,9 +16,8 @@ type NavMidItemProps = {
 }
 
 function NavItem({title, href = '/', icon: Icon}: NavMidItemProps) {
-  const {pathname, asPath} = useRouter()
+  const {asPath} = useRouter()
   const isActive = asPath === href || asPath.startsWith(href + '/')
-  console.log({pathname, asPath, href})
   return (
     <Link href={href}>
       <a

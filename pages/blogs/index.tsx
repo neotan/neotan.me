@@ -2,7 +2,7 @@ import {map, omit, path, pipe, sortBy, values} from 'ramda'
 import formatDate from 'date-fns/format'
 import parseISO from 'date-fns/parseISO'
 import {motion as mo} from 'framer-motion'
-import {getAllMdxs} from '~/utils/storage'
+import {getAllLiteMdxs} from '~/utils/storage'
 import ArticleCard from '~/components/article-card'
 import Layout from '~/components/layout'
 import {MdxListItem, MdxPage} from '~/types/index'
@@ -45,10 +45,11 @@ export default function Blogs({mdxs}) {
 }
 
 export async function getStaticProps() {
-  const mdxs = (await getAllMdxs()) as Record<string, MdxPage>
+  const mdxs = (await getAllLiteMdxs()) as MdxPage[]
+  console.log(mdxs)
   return {
     props: {
-      mdxs: pipe(values, map(omit(['code'])))(mdxs),
+      mdxs,
     },
   }
 }

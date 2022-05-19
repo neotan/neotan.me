@@ -1,6 +1,7 @@
 const path = require('path')
 const fsx = require('fs-extra')
 const stringify = require('json-stringify-safe')
+const {map, omit, pipe, sortBy, values} = require('ramda')
 const parse = JSON.parse
 
 function getDbPath() {
@@ -20,6 +21,12 @@ async function getAllMdxs() {
   return parse(data)
 }
 
+async function getAllLiteMdxs() {
+  const data = await fsx.readFile(getDbPath())
+
+  return pipe(parse, values, map(omit(['code', 'content', 'filePath'])))(data)
+}
+
 async function getMdx(slug) {
   const data = await fsx.readFile(getDbPath())
 
@@ -33,6 +40,7 @@ function saveMdxs(mdxs, dbPath = getDbPath()) {
 
 module.exports = {
   getAllMdxs,
+  getAllLiteMdxs,
   getMdx,
   saveMdxs,
 }
