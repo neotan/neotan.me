@@ -1,4 +1,4 @@
-import {map, omit, path, pipe, sortBy, values} from 'ramda'
+import {path, sortBy} from 'ramda'
 import formatDate from 'date-fns/format'
 import parseISO from 'date-fns/parseISO'
 import {motion as mo} from 'framer-motion'
@@ -46,7 +46,6 @@ export default function Blogs({mdxs}) {
 
 export async function getStaticProps() {
   const mdxs = (await getAllLiteMdxs()) as MdxPage[]
-  console.log(mdxs)
   return {
     props: {
       mdxs,
