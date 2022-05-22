@@ -5,7 +5,7 @@ function Layout({children}) {
   return (
     <div className="flex h-screen flex-col">
       <TopNav />
-      <main className="mt-20 mb-auto">{children}</main>
+      <main className="mt-[72px] mb-auto">{children}</main>
       <Footer />
     </div>
   )

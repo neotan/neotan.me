@@ -75,3 +75,8 @@
     @apply divide-opacity-40 dark:divide-gray-700 divide-gray-400
   }
 }
+
+.height-screen {
+  height: calc(100vh - 72px - 116px);
+}
+

@@ -37,7 +37,7 @@ function NavItem({title, href = '/', icon: Icon}: NavMidItemProps) {
 
 export default function MiddleNav() {
   return (
-    <div className="flex max-w-2xl flex-grow justify-evenly">
+    <div className="flex max-w-2xl flex-grow justify-start space-x-5">
       <NavItem title="HOME" icon={HomeIcon} href="/" />
       <NavItem title="BLOGS" icon={BookOpenIcon} href="/blogs" />
       <NavItem title="APPS" icon={LightningBoltIcon} href="/apps" />
