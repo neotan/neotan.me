@@ -16,7 +16,7 @@ function ArticleCard({
   title,
   description,
   readTime,
-  cloudinaryImgPubId = 'v1650489952/blog/71483_2x1_c7611j',
+  cloudinaryImgPubId,
   slug = '/',
   updatedAt,
   createdAt,

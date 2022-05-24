@@ -1,5 +1,10 @@
 import {Cloudinary} from '@cloudinary/url-gen'
-import {AdvancedImage, lazyload, responsive} from '@cloudinary/react'
+import {
+  AdvancedImage,
+  lazyload,
+  placeholder,
+  responsive,
+} from '@cloudinary/react'
 import {crop, fill, pad} from '@cloudinary/url-gen/actions/resize' // keep for reference as official docs didn't documented
 import {twMerge} from 'tailwind-merge'
 
@@ -22,7 +27,11 @@ export function FlexImage(props) {
         className,
       )}
       cldImg={image}
-      plugins={[responsive(), lazyload()]}
+      plugins={[
+        lazyload(),
+        responsive({steps: [800, 1000, 1400]}),
+        placeholder({mode: 'predominant'}),
+      ]}
       {...restProps}
     />
   )

@@ -9,6 +9,7 @@ import {
   SearchBox,
 } from 'react-instantsearch-hooks-web'
 import {MoonIcon, SearchIcon, SunIcon} from '@heroicons/react/outline'
+import {AnimatePresence, motion as mo} from 'framer-motion'
 import AlgoliaIcon from '~/icons/algolia-icon'
 import {FlexImage} from './image'
 import Modal from './modal'
@@ -115,9 +116,19 @@ function DarkModeToggle() {
   const Icon = theme === 'light' ? SunIcon : MoonIcon
 
   return (
-    <button onClick={toggle}>
-      <Icon className="h-8 cursor-pointer" />
-    </button>
+    <AnimatePresence exitBeforeEnter initial={false}>
+      <mo.button
+        className="text-2xl"
+        key={theme}
+        onClick={toggle}
+        initial={{y: -20, opacity: 0}}
+        animate={{y: 0, opacity: 1}}
+        exit={{y: 20, opacity: 0}}
+        transition={{duration: 0.2}}
+      >
+        <Icon className="h-8 cursor-pointer" />
+      </mo.button>
+    </AnimatePresence>
   )
 }
 

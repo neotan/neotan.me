@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import Head from 'next/head'
 import {DefaultSeo} from 'next-seo'
 import {ThemeProvider} from 'next-themes'
+import {AnimatePresence} from 'framer-motion'
 
 function CustomApp({Component, pageProps}) {
   return (
@@ -30,13 +31,19 @@ function CustomApp({Component, pageProps}) {
         }}
         canonical="neotan.me"
       />
-      <ThemeProvider
-        attribute="class"
-        storageKey="neotan.me-theme"
-        defaultTheme="dark"
+      <AnimatePresence
+        exitBeforeEnter
+        initial={false}
+        onExitComplete={() => window.scrollTo(0, 0)}
       >
-        <Component {...pageProps} />
-      </ThemeProvider>
+        <ThemeProvider
+          attribute="class"
+          storageKey="neotan.me-theme"
+          defaultTheme="dark"
+        >
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </AnimatePresence>
     </>
   )
 }
