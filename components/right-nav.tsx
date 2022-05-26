@@ -11,7 +11,7 @@ import {
 import {MoonIcon, SearchIcon, SunIcon} from '@heroicons/react/outline'
 import {AnimatePresence, motion as mo} from 'framer-motion'
 import AlgoliaIcon from '~/icons/algolia-icon'
-import {FlexImage} from './image'
+import {FlexImage} from './flex-image'
 import Modal from './modal'
 
 const ALGOLIA_APP_ID = process.env.NEXT_PUBLIC_ALGOLIA_APP_ID

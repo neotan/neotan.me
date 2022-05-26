@@ -1,8 +1,8 @@
 import {useMemo} from 'react'
 import {getMDXComponent} from 'mdx-bundler/client'
-import {FlexImage} from '~/components/image'
+import {FlexImage} from '~/components/flex-image'
 import {getAllMdxs, getMdx} from '~/utils/storage'
-import {formatDate} from '~/utils/utils'
+import {formatDate} from '~/utils/helpers'
 import Layout from '~/components/layout'
 import {MdxPage} from '~/types/index'
 

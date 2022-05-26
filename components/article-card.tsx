@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import {PhotographIcon} from '@heroicons/react/outline'
-import {FlexImage} from './image'
+import {FlexImage} from './flex-image'
 
 type ArticleProps = {
   title: string

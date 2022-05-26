@@ -8,7 +8,7 @@ import {
   enableBodyScroll,
 } from 'body-scroll-lock'
 import {useHotkeys} from 'react-hotkeys-hook'
-import {isBrowser} from '~/utils/utils'
+import {isBrowser} from '~/utils/helpers'
 
 type ModalHeaderProps = HTMLAttributes<HTMLDivElement>
 
