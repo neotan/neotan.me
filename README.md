@@ -15,8 +15,9 @@ To be completed...
 - [x] integrate cloudinary image service
   - [x] migrate all images to cloudinary
 - [x] add site-wide full-text search
-- [ ] add site-wide animation with framer-motion
-  - [ ] Home page
+- [x] add site-wide animation with framer-motion
+  - [x] Home page
+  - [x] Dark mode toggle button
   - [ ] Apps page(?)
 - [x] add code highlight
 - [ ] SEO, sitemap.xml
