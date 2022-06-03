@@ -7,6 +7,7 @@ import {
   Hits,
   InstantSearch,
   SearchBox,
+  Snippet,
 } from 'react-instantsearch-hooks-web'
 import {MoonIcon, SearchIcon, SunIcon} from '@heroicons/react/outline'
 import {AnimatePresence, motion as mo} from 'framer-motion'
@@ -22,6 +23,8 @@ const searchClient = {
   ...algoliaClient,
   search(requests) {
     if (requests.every(({params}) => !params.query)) {
+      // To prevent the search when the query is "".
+      // https://www.algolia.com/doc/guides/building-search-ui/going-further/conditional-requests/js/#detecting-empty-search-requests
       return Promise.resolve({
         results: requests.map(() => ({
           hits: [],
@@ -41,15 +44,27 @@ function CustomHit({hit}) {
   return (
     <Link href={`blogs/${hit.objectID}`}>
       <a>
-        <article className="hover:bg-secondary flex justify-between space-x-2 py-3 px-6 transition ">
+        <article className="hover:bg-secondary flex  justify-between space-x-2 py-3 px-6 transition ">
           <FlexImage
             className="hidden w-20 md:inline-block"
             cloudinaryImgPubId={hit.cloudinaryImgPubId}
           />
-          <h1 className="flex-1 break-all px-2 text-xl md:text-2xl">
-            {hit.title}
-          </h1>
-          <Highlight attribute={['title', 'content']} hit={hit} />
+          <div className="flex w-full flex-col">
+            <Highlight
+              attribute={['title']}
+              hit={hit}
+              classNames={{
+                root: 'flex-1 break-all px-2 font-heading text-lg font-semibold md:text-xl block',
+              }}
+            />
+            <Snippet
+              attribute={['content']}
+              hit={hit}
+              classNames={{
+                root: 'p-2',
+              }}
+            />
+          </div>
         </article>
       </a>
     </Link>
@@ -100,8 +115,8 @@ function SearchButton() {
           </InstantSearch>
         </Modal.Body>
         <Modal.Footer className="bg-secondary space-x-2 rounded-b-xl">
-          <div>Search by</div>
-          <AlgoliaIcon />
+          <div className=" opacity-60">Powered by</div>
+          <AlgoliaIcon className=" opacity-60" />
         </Modal.Footer>
       </Modal>
     </>

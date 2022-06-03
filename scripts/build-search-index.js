@@ -6,14 +6,13 @@ const {getAllMdxs} = require('../utils/mdx')
 
 function transformMdx({slug, code, content, frontmatter}) {
   const {title, date, catalog, cloudinaryImgPubId} = frontmatter
-  console.log({frontmatter})
+
   return {
     objectID: slug,
     title,
-    catalog,
+    content,
     cloudinaryImgPubId,
     date: formatDate(new Date(date), 'yyyy-MM-dd'),
-    content,
   }
 }
 

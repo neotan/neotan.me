@@ -87,6 +87,7 @@ async function getAllMdxs(mdxRootPath) {
         slug: extractSlug(filePath),
         filePath,
         readTime: calcReadTime(mdxSource),
+        mdxSource,
         ...compiled,
       })
     }
