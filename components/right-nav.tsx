@@ -42,7 +42,7 @@ const searchClient = {
 
 function CustomHit({hit}) {
   return (
-    <Link href={`blogs/${hit.objectID}`}>
+    <Link href={hit.url}>
       <a>
         <article className="hover:bg-secondary flex  justify-between space-x-2 py-3 px-6 transition ">
           <FlexImage
@@ -107,6 +107,7 @@ function SearchButton() {
             />
             <Hits
               hitComponent={CustomHit}
+              onClick={toggleModal}
               classNames={{
                 root: 'overflow-y-auto overflow-x-hidden max-h-[calc(70vh_-_3rem)] brightness-125',
                 list: 'divide-y divide-primary divide-dashed',
