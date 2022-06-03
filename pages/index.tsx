@@ -1,9 +1,9 @@
 import {motion as mo} from 'framer-motion'
-import Layout from '~/components/layout'
+import {DefaultLayout} from '~/components/layouts'
 
 export default function Home() {
   return (
-    <Layout>
+    <DefaultLayout>
       <section className="height-screen mx-10 flex flex-col items-start justify-center space-y-8 leading-none md:mx-auto md:w-[50rem]">
         <mo.h1
           className="text-[8vw] text-gray-600 dark:text-gray-400 md:text-5xl"
@@ -34,7 +34,7 @@ export default function Home() {
           )}
         </h1>
       </section>
-    </Layout>
+    </DefaultLayout>
   )
 }
 

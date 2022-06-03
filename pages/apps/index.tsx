@@ -1,9 +1,9 @@
-import Layout from '~/components/layout'
+import {DefaultLayout} from '~/components/layouts'
 
 export default function Apps() {
   return (
-    <Layout>
+    <DefaultLayout>
       <h1 className="text-center text-[10rem]">Apps</h1>
-    </Layout>
+    </DefaultLayout>
   )
 }

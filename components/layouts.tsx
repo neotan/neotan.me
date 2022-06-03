@@ -8,7 +8,7 @@ const variants = {
   exit: {opacity: 0, x: 0, y: -100},
 }
 
-function Layout({children}) {
+export function DefaultLayout({children}) {
   return (
     <div className="flex h-screen flex-col">
       <TopNav />
@@ -26,5 +26,3 @@ function Layout({children}) {
     </div>
   )
 }
-
-export default Layout

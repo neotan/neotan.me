@@ -3,7 +3,7 @@ import {getMDXComponent} from 'mdx-bundler/client'
 import {FlexImage} from '~/components/flex-image'
 import {getAllMdxs, getMdx} from '~/utils/storage'
 import {formatDate} from '~/utils/helpers'
-import Layout from '~/components/layout'
+import {DefaultLayout} from '~/components/layouts'
 import {MdxPage} from '~/types/index'
 
 function Blog({mdx}) {
@@ -14,7 +14,7 @@ function Blog({mdx}) {
   } = mdx as MdxPage
   const Component = useMemo(() => getMDXComponent(code), [code])
   return (
-    <Layout>
+    <DefaultLayout>
       <article className="prose prose-slate mx-auto mb-40 pt-10 dark:prose-invert lg:prose-xl">
         <header>
           <h1 className="break-all">{title}</h1>
@@ -27,7 +27,7 @@ function Blog({mdx}) {
         </header>
         <Component />
       </article>
-    </Layout>
+    </DefaultLayout>
   )
 }
 
