@@ -11,6 +11,7 @@ function transformMdx({slug, code, content, frontmatter}) {
     objectID: slug,
     title,
     content,
+    url: `/blogs/${slug}`,
     cloudinaryImgPubId,
     date: formatDate(new Date(date), 'yyyy-MM-dd'),
   }
