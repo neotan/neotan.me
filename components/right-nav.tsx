@@ -84,7 +84,7 @@ function SearchButton() {
       <SearchIcon className="h-8 cursor-pointer" onClick={toggleModal} />
       <Modal
         id="modal-search"
-        className="bg-primary shadow-primary border-primary max-h-[80vh] w-[60rem] max-w-[60rem]"
+        className="bg-primary shadow-primary border-primary max-h-[80vh] w-[60vw] max-w-[60vw]"
         backdropClass="items-start pt-10 bg-opacity-60 "
         open={visable}
         onClickBackdrop={toggleModal}
@@ -150,7 +150,7 @@ function DarkModeToggle() {
 
 export default function RightNav() {
   return (
-    <div className="flex max-w-[8rem] flex-grow justify-evenly">
+    <div className="flex max-w-[8vw] flex-grow justify-evenly">
       <SearchButton />
       <DarkModeToggle />
     </div>

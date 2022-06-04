@@ -15,6 +15,10 @@
 }
 
 @layer utilities{
+  .home-page * {
+    @apply text-white
+  }
+
   .focus-scale {
     @apply p-2 group cursor-pointer transition sm:hover:scale-105 hover:z-50;
   }
@@ -79,4 +83,6 @@
 .height-screen {
   height: calc(100vh - 72px - 116px);
 }
+
+
 

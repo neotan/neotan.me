@@ -15,7 +15,7 @@ function Blog({mdx}) {
   const Component = useMemo(() => getMDXComponent(code), [code])
   return (
     <DefaultLayout>
-      <article className="prose prose-slate mx-auto mb-40 pt-10 dark:prose-invert lg:prose-xl">
+      <article className="article-page prose prose-slate mx-auto mb-40 pt-10 dark:prose-invert lg:prose-xl">
         <header>
           <h1 className="break-all">{title}</h1>
           <div className="text-secondary flex items-center opacity-80">

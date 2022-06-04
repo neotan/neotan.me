@@ -3,15 +3,15 @@ import formatDate from 'date-fns/format'
 import parseISO from 'date-fns/parseISO'
 import {getAllLiteMdxs} from '~/utils/storage'
 import ArticleCard from '~/components/article-card'
-import {DefaultLayout} from '~/components/layouts'
+import {SlideUpLayout} from '~/components/layouts'
 import {MdxListItem, MdxPage} from '~/types/index'
 
 export default function Blogs({mdxs}) {
   const posts = sortBy(path(['frontmatter', 'date']))(mdxs) as MdxListItem[]
 
   return (
-    <DefaultLayout>
-      <div className="grid grid-cols-1 flex-wrap gap-12 p-4 sm:grid-cols-2 lg:grid-cols-3 xl:mx-20 2xl:mx-40">
+    <SlideUpLayout>
+      <main className="blogs-page grid grid-cols-1 flex-wrap gap-12 p-4 sm:grid-cols-2 lg:grid-cols-3 xl:mx-20 2xl:mx-40">
         {posts
           .reverse()
           .map(
@@ -32,8 +32,8 @@ export default function Blogs({mdxs}) {
               )
             },
           )}
-      </div>
-    </DefaultLayout>
+      </main>
+    </SlideUpLayout>
   )
 }
 
