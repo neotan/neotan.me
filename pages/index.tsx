@@ -4,27 +4,27 @@ import {DefaultLayout} from '~/components/layouts'
 export default function Home() {
   return (
     <DefaultLayout>
-      <section className="home-page height-screen mx-3 flex flex-col items-start justify-center space-y-8 leading-none sm:mx-10 md:mx-auto md:max-w-[60vw]">
+      <section className="home-page height-screen flex items-center justify-center">
         <BgImage />
-        <div className="rounded bg-gray-900 bg-opacity-60 p-3 sm:p-20">
+        <div className="w-[min(65rem,100vw)] rounded bg-gray-900 bg-opacity-60 p-3 sm:p-20">
           <mo.h1
             className="text-[8vw] md:text-5xl"
-            initial={{opacity: 0, y: 100}}
-            animate={{opacity: 1, y: 0}}
+            initial={{opacity: 0, y: 20}}
+            whileInView={{opacity: 1, y: 0}}
           >
-            Hi there!👋 I&apos;m
+            Hi there!{wave('👋')} I&apos;m
           </mo.h1>
           <h1 className="mt-6 flex space-x-8 text-[19vw] font-semibold md:text-9xl">
             <mo.div
-              initial={{opacity: 0, x: -200}}
-              animate={{opacity: 1, x: 0}}
+              initial={{opacity: 0, x: -20}}
+              whileInView={{opacity: 1, x: 0}}
               transition={{delay: 1}}
             >
               Neo
             </mo.div>
             <mo.div
-              initial={{opacity: 0, x: 200}}
-              animate={{opacity: 1, x: 0}}
+              initial={{opacity: 0, x: 20}}
+              whileInView={{opacity: 1, x: 0}}
               transition={{delay: 1}}
             >
               Tan
@@ -47,13 +47,25 @@ function typing(str: string) {
       <mo.span
         key={i}
         initial={{opacity: 0}}
-        animate={{opacity: 1}}
+        whileInView={{opacity: 1}}
         transition={{delay: 2 + i / 100, type: 'inertia', velocity: 100}}
       >
         {c}
       </mo.span>
     )
   })
+}
+
+function wave(str: string) {
+  return (
+    <mo.span
+      className="inline-block text-center"
+      animate={{rotate: [0, 20]}}
+      transition={{duration: 0.5, flip: 8}}
+    >
+      {str}
+    </mo.span>
+  )
 }
 
 function BgImage() {
