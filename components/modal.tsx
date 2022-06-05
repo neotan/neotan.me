@@ -138,7 +138,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
         <div
           {...props}
           className={twMerge(
-            'flex max-h-[60vh] max-w-[40rem] flex-col items-center justify-center rounded-xl',
+            'flex max-h-[60vh] w-[40rem] flex-col items-center justify-center rounded-xl',
             className,
           )}
           ref={forwardedRef}

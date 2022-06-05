@@ -22,7 +22,7 @@ function NavItem({title, href = '/', icon: Icon}: NavMidItemProps) {
     <Link href={href}>
       <a
         className={twMerge(
-          'sm:w-26 flex h-10 cursor-pointer items-center space-x-2 rounded-md p-4 opacity-50 transition hover:opacity-100 sm:space-x-0',
+          'sm:w-26 flex h-10 cursor-pointer items-center space-x-2 rounded-md p-2 opacity-50 transition hover:opacity-100 sm:space-x-0 sm:p-4',
           clsx({
             'opacity-100': isActive,
           }),
@@ -37,7 +37,7 @@ function NavItem({title, href = '/', icon: Icon}: NavMidItemProps) {
 
 export default function MiddleNav() {
   return (
-    <div className="flex max-w-2xl flex-grow justify-start space-x-5">
+    <div className="flex max-w-2xl flex-grow justify-start sm:space-x-5">
       <NavItem title="HOME" icon={HomeIcon} href="/" />
       <NavItem title="BLOGS" icon={BookOpenIcon} href="/blogs" />
       <NavItem title="APPS" icon={LightningBoltIcon} href="/apps" />

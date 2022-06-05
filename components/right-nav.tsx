@@ -44,7 +44,7 @@ function CustomHit({hit}) {
   return (
     <Link href={hit.url}>
       <a>
-        <article className="hover:bg-secondary flex  justify-between space-x-2 py-3 px-6 transition ">
+        <article className="hover:bg-secondary flex  justify-between space-x-2 p-3 transition sm:px-6 ">
           <FlexImage
             className="hidden w-20 md:inline-block"
             cloudinaryImgPubId={hit.cloudinaryImgPubId}
@@ -84,7 +84,7 @@ function SearchButton() {
       <SearchIcon className="h-8 cursor-pointer" onClick={toggleModal} />
       <Modal
         id="modal-search"
-        className="bg-primary shadow-primary border-primary max-h-[80vh] w-[60vw] max-w-[60vw]"
+        className="bg-primary shadow-primary border-primary max-h-[80vh] w-[90vw] sm:w-[50vw]"
         backdropClass="items-start pt-10 bg-opacity-60 "
         open={visable}
         onClickBackdrop={toggleModal}
@@ -150,7 +150,7 @@ function DarkModeToggle() {
 
 export default function RightNav() {
   return (
-    <div className="flex max-w-[8vw] flex-grow justify-evenly">
+    <div className="flex min-w-[5rem] max-w-[8vw] flex-grow justify-evenly">
       <SearchButton />
       <DarkModeToggle />
     </div>

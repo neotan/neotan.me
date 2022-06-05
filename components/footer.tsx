@@ -7,7 +7,7 @@ const iconClassName =
 
 export default function Footer() {
   return (
-    <footer className="border-primary flex max-h-[116px] items-center justify-between space-x-6 p-5 sm:flex-col">
+    <footer className="border-primary flex items-center justify-between space-x-6 p-3 sm:flex-col">
       <div className="flex space-x-4">
         <Link href="https://github.com/neotan">
           <a>
@@ -20,7 +20,7 @@ export default function Footer() {
           </a>
         </Link>
       </div>
-      <div className="justify-center space-x-2 font-heading text-lg text-gray-500 sm:mt-4 sm:flex sm:w-full">
+      <div className="justify-center space-x-2 font-heading text-lg text-gray-500 sm:mt-2 sm:flex">
         <span>All rights reserved</span>{' '}
         <span className="block sm:inline">{`© Neo Tan ${new Date().getFullYear()}`}</span>
       </div>

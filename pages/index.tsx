@@ -8,7 +8,7 @@ export default function Home() {
         <BgImage />
         <div className="rounded bg-gray-900 bg-opacity-60 p-3 sm:p-20">
           <mo.h1
-            className="text-[8vw] shadow-lg md:text-5xl"
+            className="text-[8vw] md:text-5xl"
             initial={{opacity: 0, y: 100}}
             animate={{opacity: 1, y: 0}}
           >
@@ -59,7 +59,7 @@ function typing(str: string) {
 function BgImage() {
   return (
     <div
-      className="center absolute top-0 left-0 bottom-[116px] right-0 -z-10 bg-cover bg-center bg-no-repeat dark:grayscale"
+      className="center absolute top-0 left-0 bottom-0 right-0 -z-10 bg-cover bg-center bg-no-repeat dark:grayscale"
       style={{
         backgroundImage:
           'url("https://res.cloudinary.com/ntme/image/upload/v1653179674/blog/HK_JWMarriott_cmxjbo.jpg")',
