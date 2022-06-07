@@ -59,6 +59,7 @@ function typing(str: string) {
 function wave(str: string) {
   return (
     <mo.span
+      style={{originX: 1, originY: 1}}
       className="inline-block text-center"
       animate={{rotate: [0, 20]}}
       transition={{duration: 0.5, flip: 8}}
