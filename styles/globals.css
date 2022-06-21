@@ -20,7 +20,7 @@
   }
 
   .focus-scale {
-    @apply p-2 group cursor-pointer transition sm:hover:scale-105 hover:z-50;
+    @apply p-2 cursor-pointer transition sm:hover:scale-105 hover:z-50;
   }
 
   .bg-primary {
