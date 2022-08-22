@@ -1,23 +1,23 @@
 const dotenv = require('dotenv')
 const algoliasearch = require('algoliasearch/lite')
-const {pluck, pipe, sort} = require('ramda')
+const { pluck, pipe, sort } = require('ramda')
 const formatDate = require('date-fns/format')
-const {getAllMdxs} = require('../utils/mdx')
+const { getAllMdxs } = require('../utils/mdx')
 
-function transformMdx({slug, code, content, frontmatter}) {
-  const {title, date, catalog, cloudinaryImgPubId} = frontmatter
+function transformMdx({ slug, code, content, frontmatter }) {
+  const { title, date, catalog, cloudinaryImgPubId } = frontmatter
 
   return {
     objectID: slug,
     title,
     content,
-    url: `/blogs/${slug}`,
+    url: `/blog/${slug}`,
     cloudinaryImgPubId,
     date: formatDate(new Date(date), 'yyyy-MM-dd'),
   }
 }
 
-;(async function () {
+; (async function () {
   if (process.env.NODE_ENV === 'development') {
     dotenv.config({
       path: '.env.local',
@@ -37,8 +37,7 @@ function transformMdx({slug, code, content, frontmatter}) {
       .saveObjects(transformed)
 
     console.log(
-      `\n🎉🎉🎉 Sucessfully added ${
-        algoliaRes.objectIDs.length
+      `\n🎉🎉🎉 Sucessfully added ${algoliaRes.objectIDs.length
       } records to Algolia search. Object IDs:\n${algoliaRes.objectIDs.join(
         '\n',
       )}`,

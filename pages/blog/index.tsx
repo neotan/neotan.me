@@ -6,12 +6,12 @@ import ArticleCard from '~/components/article-card'
 import {SlideUpLayout} from '~/components/layouts'
 import {MdxListItem, MdxPage} from '~/types/index'
 
-export default function Blogs({mdxs}) {
+export default function Blog({mdxs}) {
   const posts = sortBy(path(['frontmatter', 'date']))(mdxs) as MdxListItem[]
 
   return (
     <SlideUpLayout>
-      <main className="blogs-page grid grid-cols-1 flex-wrap gap-12 p-4 sm:grid-cols-2 lg:grid-cols-3 xl:mx-20 2xl:mx-40">
+      <main className="blog-page grid grid-cols-1 flex-wrap gap-12 p-4 sm:grid-cols-2 lg:grid-cols-3 xl:mx-20 2xl:mx-40">
         {posts
           .reverse()
           .map(
@@ -26,7 +26,7 @@ export default function Blogs({mdxs}) {
                   title={title}
                   cloudinaryImgPubId={cloudinaryImgPubId}
                   readTime={readTime.text}
-                  slug={`/blogs/${slug}`}
+                  slug={`/blog/${slug}`}
                   createdAt={formatDate(parseISO(date), 'yyyy-MM-dd')}
                 />
               )

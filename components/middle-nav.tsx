@@ -39,7 +39,7 @@ export default function MiddleNav() {
   return (
     <div className="flex max-w-2xl flex-grow justify-start sm:space-x-5">
       <NavItem title="HOME" icon={HomeIcon} href="/" />
-      <NavItem title="BLOGS" icon={BookOpenIcon} href="/blogs" />
+      <NavItem title="BLOG" icon={BookOpenIcon} href="/blog" />
       <NavItem title="APPS" icon={LightningBoltIcon} href="/apps" />
     </div>
   )
