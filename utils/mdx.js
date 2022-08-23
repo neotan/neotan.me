@@ -11,7 +11,7 @@ function isMdxFile(filename) {
 function extractSlug(filePath) {
   try {
     // TODO: format slug w/ -
-    return path.basename(filePath.replace(/index.mdx?$/, ''))
+    return path.basename(filePath.replace(/(index)?.mdx?$/, ''))
   } catch (error) {
     console.error(`Extracting slug from ${filePath}`)
     throw error
