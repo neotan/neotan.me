@@ -1,7 +1,7 @@
 const path = require('path')
 const readfiles = require('node-readfiles')
 const calcReadTime = require('reading-time')
-const {bundleMDX} = require('mdx-bundler')
+const { bundleMDX } = require('mdx-bundler')
 
 function isMdxFile(filename) {
   const mdxRegexp = /.mdx?$/
@@ -22,25 +22,25 @@ const remarkPlugins = []
 const rehypePlugins = []
 
 async function compileMdx(mdxSource) {
-  const {default: gfm} = await import('remark-gfm')
-  const {default: autolinkHeadings} = await import('remark-autolink-headings')
-  const {default: remarkSlug} = await import('remark-slug')
-  const {default: remarkPrism} = await import('remark-prism')
-  const {default: remarkImages} = await import('remark-images')
+  const { default: gfm } = await import('remark-gfm')
+  const { default: autolinkHeadings } = await import('remark-autolink-headings')
+  const { default: remarkSlug } = await import('remark-slug')
+  const { default: remarkPrism } = await import('remark-prism')
+  const { default: remarkImages } = await import('remark-images')
 
   const {
     code,
     frontmatter,
-    matter: {content},
+    matter: { content },
   } = await bundleMDX({
     source: mdxSource,
     mdxOptions(options, frontmatter) {
       options.remarkPlugins = [
         ...(options.remarkPlugins ?? []),
-        [remarkPrism, {transformInlineCode: true}], // TODO: add line-numbers
+        [remarkPrism, { transformInlineCode: true }], // TODO: add line-numbers
         remarkSlug,
         remarkImages,
-        [autolinkHeadings, {behavior: 'wrap'}],
+        [autolinkHeadings, { behavior: 'wrap' }],
         gfm,
         ...remarkPlugins,
       ]
@@ -66,7 +66,7 @@ async function getAllMdxs(mdxRootPath) {
     const rawMdxs = []
     await readfiles(
       mdxRootPath,
-      {filenameFormat: readfiles.FULL_PATH},
+      { filenameFormat: readfiles.FULL_PATH },
       (err, filePath, mdxSource) => {
         if (err) throw err
 
@@ -81,7 +81,7 @@ async function getAllMdxs(mdxRootPath) {
 
     const result = []
     for (const rawMdx of rawMdxs) {
-      const {filePath, mdxSource} = rawMdx
+      const { filePath, mdxSource } = rawMdx
       const compiled = await compileMdx(mdxSource)
       result.push({
         slug: extractSlug(filePath),
@@ -98,4 +98,4 @@ async function getAllMdxs(mdxRootPath) {
   }
 }
 
-module.exports = {getAllMdxs}
+module.exports = { getAllMdxs }

@@ -94,7 +94,7 @@
 .prose callout-warning.aside *,
 .prose callout-danger.aside *,
 .prose callout-success.aside * {
-  font-size: 0.875rem;
+  font-size: 1.25rem;
 }
 
 .prose callout-muted.important,

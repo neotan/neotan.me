@@ -17,13 +17,15 @@ function Blog({mdx}) {
     <DefaultLayout>
       <article className="article-page prose prose-slate mx-auto mb-40 pt-10 dark:prose-invert lg:prose-xl">
         <header>
-          <h1 className="break-all">{title}</h1>
+          <h1 className="break-all">{title || 'Untitled'}</h1>
           <div className="text-secondary flex items-center opacity-80">
-            <time>{formatDate(date)}</time>
-            <i className="mx-2">•</i>
-            <time>{readTime.text}</time>
+            {date && <time>{formatDate(date)}</time>}
+            {date && <i className="mx-2">•</i>}
+            {readTime.text && <time>{readTime.text}</time>}
           </div>
-          <FlexImage cloudinaryImgPubId={cloudinaryImgPubId} />
+          {cloudinaryImgPubId && (
+            <FlexImage cloudinaryImgPubId={cloudinaryImgPubId} />
+          )}
         </header>
         <Component />
       </article>

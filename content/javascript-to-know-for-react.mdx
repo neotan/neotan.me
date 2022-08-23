@@ -1,0 +1,650 @@
+---
+title: 學習 React 必須知道的 JavaScript 基礎
+date: 2020-07-15
+description:
+  What JavaScript features you should be familiar with when learning and using
+  React
+categories:
+  - javascript
+meta:
+  keywords:
+    - react
+    - javascript
+
+cloudinaryImgPubId: v1661226653/blog/translate-image_dplyag.png
+---
+
+> This is a translation of the original post
+> [JavaScript to Know for React](https://kentcdodds.com/blog/javascript-to-know-for-react) by
+> [Kent C. Dodds](https://kentcdodds.com/).
+
+與其他框架相比，我最喜歡 React 的點就是當你使用它時，你很大程度上是在使用 JavaScript。沒有模板 DSL（JSX 會編譯成清晰易懂的 JavaScript），組件 API 因 [React Hooks](https://reactjs.org/hooks) 的加入而變得更簡單，並且該框架在解決核心 UI 問題的同時，作了很少抽象。
+
+因此，學習 JavaScript 特性對於你能否高效使用 React 構建應用程序非常重要。所以這裡有一些 JavaScript 特性，我建議你花一些時間學習，這樣你就可以盡可能高效地使用 React了。
+
+在我們學習語法之前，另一個對 React 非常有用的理解是函數“閉包”的概念。這裡有一個很好的關於這個概念的文章：[mdn.io/closure](https://mdn.io/closure)。
+
+好的，讓我們來看看一些 React 開發有關的 JS 特性。
+
+## 模板字符串 （Template Literals）
+
+模板字符串像是有超能力的普通字符串：
+
+```tsx [10]
+const greeting = 'Hello'
+const subject = 'World'
+console.log(`${greeting} ${subject}!`) // Hello World!
+
+// 與此相同:
+console.log(greeting + ' ' + subject + '!')
+
+// 在 React 裡:
+function Box({className, ...props}) {
+  return <div className={`box ${className}`} {...props} />
+}
+```
+
+[MDN: Template Literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)
+
+## 快捷屬性名（Shorthand property names）
+
+這非常普遍和有用，我現在會不假思索地這樣做。
+
+```tsx [11]
+const a = 'hello'
+const b = 42
+const c = {d: [true, false]}
+console.log({a, b, c})
+
+// 與此相同:
+console.log({a: a, b: b, c: c})
+
+// 在 React 裡:
+function Counter({initialCount, step}) {
+  const [count, setCount] = useCounter({initialCount, step})
+  return <button onClick={setCount}>{count}</button>
+}
+```
+
+[MDN: Object initializer _New notations in ECMAScript 2015_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#New_notations_in_ECMAScript_2015)
+
+## 箭頭函數
+
+箭頭函數是在 JavaScript 中編寫函數的另一種方式，和傳統的函數相比存在一些語義差異。幸運的是如果我們在 React 項目中使用 hooks （而不是 classes）的話，就不用再擔心 `this` 了。箭頭函數允許使用更簡潔的匿名函數和隱式 return，你會看到並使用大量的箭頭函數功能。
+
+```tsx [20-24]
+const getFive = () => 5
+const addFive = a => a + 5
+const divide = (a, b) => a / b
+
+// 與此相同:
+function getFive() {
+  return 5
+}
+function addFive(a) {
+  return a + 5
+}
+function divide(a, b) {
+  return a / b
+}
+
+// 在 React 裡:
+function TeddyBearList({teddyBears}) {
+  return (
+    <ul>
+      {teddyBears.map(teddyBear => (
+        <li key={teddyBear.id}>
+          <span>{teddyBear.name}</span>
+        </li>
+      ))}
+    </ul>
+  )
+}
+```
+
+<callout-info class="aside">
+  上面的例子需要注意的一點是左括號`(`和右括號`)`。這是在使用 JSX 時利用箭頭函數的隱式 return 的常用方法。
+</callout-info>
+
+[MDN: Arrow Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+
+## 解構（Destructuring）
+
+解構可能是我最喜歡的 JavaScript 特性，經常用來解構對象和數組（如果你正在使用 `useState` 的話，你可能也[像這樣用](https://kentcdodds.com/blog/react-hooks-array-destructuring-fundamentals)）。我很喜歡它的聲明性。
+```tsx [23]
+// const obj = {x: 3.6, y: 7.8}
+// makeCalculation(obj)
+
+function makeCalculation({x, y: d, z = 4}) {
+  return Math.floor((x + d + z) / 3)
+}
+
+// 與此相同
+function makeCalculation(obj) {
+  const {x, y: d, z = 4} = obj
+  return Math.floor((x + d + z) / 3)
+}
+
+// 與此相同
+function makeCalculation(obj) {
+  const x = obj.x
+  const d = obj.y
+  const z = obj.z === undefined ? 4 : obj.z
+  return Math.floor((x + d + z) / 3)
+}
+
+// 在 React 裡:
+function UserGitHubImg({username = 'ghost', ...props}) {
+  return <img src={`https://github.com/${username}.png`} {...props} />
+}
+```
+
+[MDN: Destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
+<callout-info>
+  一定要閱讀 MDN 的文章，你肯定會學到一些新東西。讀完後嘗試使用單行解構重構它：
+</callout-info>
+
+```js
+function nestedArrayAndObject() {
+  // 用一行解構代碼替換以下代碼
+  const info = {
+    title: 'Once Upon a Time',
+    protagonist: {
+      name: 'Emma Swan',
+      enemies: [
+        {name: 'Regina Mills', title: 'Evil Queen'},
+        {name: 'Cora Mills', title: 'Queen of Hearts'},
+        {name: 'Peter Pan', title: `The boy who wouldn't grow up`},
+        {name: 'Zelena', title: 'The Wicked Witch'},
+      ],
+    },
+  }
+  // const {} = info // <-- 用這種解構代碼形式替換下方的 `const` 開頭的代碼
+  const title = info.title
+  const protagonistName = info.protagonist.name
+  const enemy = info.protagonist.enemies[3]
+  const enemyTitle = enemy.title
+  const enemyName = enemy.name
+  return `${enemyName} (${enemyTitle}) is an enemy to ${protagonistName} in "${title}"`
+}
+```
+
+## 參數默認值（Parameter defaults）
+
+這是另一個我常用的特性，以一種非常強大的聲明方式來表達函數的默認值。
+```tsx [20-21]
+// add(1)
+// add(1, 2)
+function add(a, b = 0) {
+  return a + b
+}
+
+// 與此相同
+const add = (a, b = 0) => a + b
+
+// 與此相同
+function add(a, b) {
+  b = b === undefined ? 0 : b
+  return a + b
+}
+
+// 在 React 裡:
+function useLocalStorageState({
+  key,
+  initialValue,
+  serialize = v => v,
+  deserialize = v => v,
+}) {
+  const [state, setState] = React.useState(
+    () => deserialize(window.localStorage.getItem(key)) || initialValue,
+  )
+
+  const serializedState = serialize(state)
+  React.useEffect(() => {
+    window.localStorage.setItem(key, serializedState)
+  }, [key, serializedState])
+
+  return [state, setState]
+}
+```
+
+[MDN: Default parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters)
+
+## 取餘值/展開（Rest/Spread）
+
+該 `...` 語法是一種“集合（collection）”語法，它對集合值進行操作。我常用它，並強烈建議你也學習並了解如何及何時使用它。實際上在不同的上下文中具它有不同的含義，因此學習其中的細微差別將對你有所幫助。
+```tsx [43]
+const arr = [5, 6, 8, 4, 9]
+Math.max(...arr)
+// 與此相同
+Math.max.apply(null, arr)
+
+const obj1 = {
+  a: 'a from obj1',
+  b: 'b from obj1',
+  c: 'c from obj1',
+  d: {
+    e: 'e from obj1',
+    f: 'f from obj1',
+  },
+}
+const obj2 = {
+  b: 'b from obj2',
+  c: 'c from obj2',
+  d: {
+    g: 'g from obj2',
+    h: 'g from obj2',
+  },
+}
+console.log({...obj1, ...obj2})
+// 與此相同
+console.log(Object.assign({}, obj1, obj2))
+
+function add(first, ...rest) {
+  return rest.reduce((sum, next) => sum + next, first)
+}
+// 與此相同
+function add() {
+  const first = arguments[0]
+  const rest = Array.from(arguments).slice(1)
+  return rest.reduce((sum, next) => sum + next, first)
+}
+
+// 在 React 裡:
+function Box({className, ...restOfTheProps}) {
+  const defaultProps = {
+    className: `box ${className}`,
+    children: 'Empty box',
+  }
+  return <div {...defaultProps} {...restOfTheProps} />
+}
+```
+
+[MDN: Spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
+[MDN: Rest parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters)
+
+## ESM 模塊（ESModules）
+
+如果你正在使用現代工具構建應用程序，那麼它很可能支持模塊（Modules），因此最好了解語法的工作原理，因為即便規模很小的應用程序都可能需要使用模塊來進行代碼重用和組織。
+
+```js [30]
+export default function add(a, b) {
+  return a + b
+}
+
+/*
+ * import add from './add'
+ * console.assert(add(3, 2) === 5)
+ */
+
+export const foo = 'bar'
+
+/*
+ * import {foo} from './foo'
+ * console.assert(foo === 'bar')
+ */
+
+export function subtract(a, b) {
+  return a - b
+}
+
+export const now = new Date()
+
+/*
+ * import {subtract, now} from './stuff'
+ * console.assert(subtract(4, 2) === 2)
+ * console.assert(now instanceof Date)
+ */
+
+// 動態導入
+import('./some-module').then(
+  allModuleExports => {
+    // 這個 allModuleExports 和通過 import * as allModuleExports from './some-module' 導入的一樣
+    // 唯一區別是這裡是異步導入的，在某些場景下有性能優勢
+  },
+  error => {
+    // 處理錯誤
+    // 如果加載或者運行模塊出錯，就會運行這裡的代碼
+  },
+)
+
+// 在 React 裡:
+import React, {Suspense, Fragment} from 'react'
+
+// 動態導入 React 組件
+const BigComponent = React.lazy(() => import('./big-component'))
+// big-component.js 需要這樣 "export default BigComponent" 導出才行
+```
+
+[MDN: import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
+[MDN: export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
+<callout-info class="aside">
+  作為輔助資料，我有一個演講是關於這種語法的，你可以[點擊觀看](https://www.youtube.com/watch?v=kTlcu16rSLc&list=PLV5CVI1eNcJgNqzNwcs4UKrlJdhfDjshf)
+</callout-info>
+
+## 條件運算符（Ternaries）
+
+我喜歡條件運算符，它們具有優雅的聲明性，特別是在 JSX 中。
+
+```tsx [17-27]
+const message = bottle.fullOfSoda
+  ? 'The bottle has soda!'
+  : 'The bottle may not have soda :-('
+
+// 與此相同
+let message
+if (bottle.fullOfSoda) {
+  message = 'The bottle has soda!'
+} else {
+  message = 'The bottle may not have soda :-('
+}
+
+// 在 React 裡:
+function TeddyBearList({teddyBears}) {
+  return (
+    <React.Fragment>
+      {teddyBears.length ? (
+        <ul>
+          {teddyBears.map(teddyBear => (
+            <li key={teddyBear.id}>
+              <span>{teddyBear.name}</span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div>There are no teddy bears. The sadness.</div>
+      )}
+    </React.Fragment>
+  )
+}
+```
+
+<callout-info class="aside">
+我意識到在 [Prettier](https://prettier.io) 出現之前，一些人不得不忍受理解條件運算符而引起的厭惡反應。如果你還沒有使用 Prettier，我強烈建議你試一試，它將使您的條件運算符更易於閱讀。
+</callout-info>
+
+[MDN: Conditional (ternary) operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator)
+
+## 數組方法（Array Methods）
+
+數組很棒，我一直使用數組內置方法！最常用以下方法：
+- find
+- some
+- every
+- includes
+- map
+- filter
+- reduce
+
+這裡有些例子：
+
+```tsx [64-68]
+const dogs = [
+  {
+    id: 'dog-1',
+    name: 'Poodle',
+    temperament: [
+      'Intelligent',
+      'Active',
+      'Alert',
+      'Faithful',
+      'Trainable',
+      'Instinctual',
+    ],
+  },
+  {
+    id: 'dog-2',
+    name: 'Bernese Mountain Dog',
+    temperament: ['Affectionate', 'Intelligent', 'Loyal', 'Faithful'],
+  },
+  {
+    id: 'dog-3',
+    name: 'Labrador Retriever',
+    temperament: [
+      'Intelligent',
+      'Even Tempered',
+      'Kind',
+      'Agile',
+      'Outgoing',
+      'Trusting',
+      'Gentle',
+    ],
+  },
+]
+
+dogs.find(dog => dog.name === 'Bernese Mountain Dog')
+// {id: 'dog-2', name: 'Bernese Mountain Dog', ...etc}
+
+dogs.some(dog => dog.temperament.includes('Aggressive'))
+// false
+
+dogs.some(dog => dog.temperament.includes('Trusting'))
+// true
+
+dogs.every(dog => dog.temperament.includes('Trusting'))
+// false
+
+dogs.every(dog => dog.temperament.includes('Intelligent'))
+// true
+
+dogs.map(dog => dog.name)
+// ['Poodle', 'Bernese Mountain Dog', 'Labrador Retriever']
+
+dogs.filter(dog => dog.temperament.includes('Faithful'))
+// [{id: 'dog-1', ..etc}, {id: 'dog-2', ...etc}]
+
+dogs.reduce((allTemperaments, dog) => {
+  return [...allTemperaments, ...dog.temperament]
+}, [])
+// [ 'Intelligent', 'Active', 'Alert', ...etc ]
+
+// 在 React 裡:
+function RepositoryList({repositories, owner}) {
+  return (
+    <ul>
+      {repositories
+        .filter(repo => repo.owner === owner)
+        .map(repo => (
+          <li key={repo.id}>{repo.name}</li>
+        ))}
+    </ul>
+  )
+}
+```
+
+[MDN: Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+
+## 空值合併運算符（Nullish coalescing operator）
+
+如果值為`null`或 `undefined`時，你可能希望回退到某個默認值：
+
+```js
+// 我們經常這樣寫:
+x = x || 'some default'
+
+// 但對於數字 0 或者布爾值 false 這些正常值來說，就會出問題
+
+// 所以，如果想支持這樣的代碼
+add(null, 3)
+
+// 那麼我們要做的是在計算之前:
+function add(a, b) {
+  a = a == null ? 0 : a
+  b = b == null ? 0 : b
+  return a + b
+}
+
+// 而現在我們可以這樣寫
+function add(a, b) {
+  a = a ?? 0
+  b = b ?? 0
+  return a + b
+}
+
+// 在 React 裡:
+function DisplayContactName({contact}) {
+  return <div>{contact.name ?? 'Unknown'}</div>
+}
+```
+
+[MDN: Nullish coalescing operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator)
+
+## 可選鏈操作符（Optional chaining）
+
+也稱為“Elvis Operator”，它允許你安全地訪問屬性，並調用可能存在或不存在的函數。在可選鏈接之前，我們使用了一種依賴於真/假值的變通方法。
+
+```js
+// 在可選鏈操作符發明之前，我們是這麼寫的:
+const streetName = user && user.address && user.address.street.name
+
+// 現在我們可以:
+const streetName = user?.address?.street?.name
+
+// 這裡即使 options 是 undefined （這裡 onSuccess 也將是 undefined）
+// 但是，如果 options 從未被聲明，則以下調用還是會失敗報錯
+// 可選鏈操作符無法在不存在的根 object 上調用
+// 可選鏈操作符無法代替 if (typeof options == "undefined") 這樣的類型檢查
+const onSuccess = options?.onSuccess
+
+// 即使 onSuccess 是 undefined，這裡跑起來也不會出錯，因為沒有函數會被調用
+onSuccess?.({data: 'yay'})
+
+// 我們也可以把以上這些代碼合併成一行：
+options?.onSuccess?.({data: 'yay'})
+
+// 還有，如果你 100% 確定 options 是存在的，而且 onSuccess 是一個函數
+// 那麼在調用前，你就不需要這個額外的 ?. 
+// 只在左邊的值有可能不存在的情況下才用 ?.
+options?.onSuccess({data: 'yay'})
+
+// 在 React 裡:
+function UserProfile({user}) {
+  return (
+    <div>
+      <h1>{user.name}</h1>
+      <strong>{user.bio?.short ?? 'No bio provided'}</strong>
+    </div>
+  )
+}
+```
+
+要注意的是，如果你發現自己在代碼中過多使用了`?.`，你可能需要考慮這些值的來源，並確保它們始終如一地返回應有的值。
+[MDN: Optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining)
+
+## Promises 和 async/await
+
+這是一個很大的主題，可能需要一些時間去練習和使用才能真正掌握他們。 Promise 在 JavaScript 生態系統中無處不在，並且由於 React 也植根於該生態系統中，因此 Promise 在 React 中也無處不在（事實上，React 在內部使用了 Promise）。
+
+Promise 可幫助你管理異步代碼，並從許多 DOM API 以及第三方庫獲取返回值。 Async/await 是處理 Promise 的特殊語法，兩者相輔相成。
+
+```tsx [71-81]
+function promises() {
+  const successfulPromise = timeout(100).then(result => `success: ${result}`)
+
+  const failingPromise = timeout(200, true).then(null, error =>
+    Promise.reject(`failure: ${error}`),
+  )
+
+  const recoveredPromise = timeout(300, true).then(null, error =>
+    Promise.resolve(`failed and recovered: ${error}`),
+  )
+
+  successfulPromise.then(log, logError)
+  failingPromise.then(log, logError)
+  recoveredPromise.then(log, logError)
+}
+
+function asyncAwaits() {
+  async function successfulAsyncAwait() {
+    const result = await timeout(100)
+    return `success: ${result}`
+  }
+
+  async function failedAsyncAwait() {
+    const result = await timeout(200, true)
+    return `failed: ${result}` // 這裡不會運行
+  }
+
+  async function recoveredAsyncAwait() {
+    try {
+      const result = await timeout(300, true)
+      return `failed: ${result}` // 這裡不會運行
+    } catch (error) {
+      return `failed and recovered: ${error}`
+    }
+  }
+
+  successfulAsyncAwait().then(log, logError)
+  failedAsyncAwait().then(log, logError)
+  recoveredAsyncAwait().then(log, logError)
+}
+
+function log(...args) {
+  console.log(...args)
+}
+
+function logError(...args) {
+  console.error(...args)
+}
+
+// 這是異步代碼運行的核心
+function timeout(duration = 0, shouldReject = false) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (shouldReject) {
+        reject(`rejected after ${duration}ms`)
+      } else {
+        resolve(`resolved after ${duration}ms`)
+      }
+    }, duration)
+  })
+}
+
+// 在 React 裡:
+function GetGreetingForSubject({subject}) {
+  const [isLoading, setIsLoading] = React.useState(false)
+  const [error, setError] = React.useState(null)
+  const [greeting, setGreeting] = React.useState(null)
+
+  React.useEffect(() => {
+    async function fetchGreeting() {
+      try {
+        const response = await window.fetch('https://example.com/api/greeting')
+        const data = await response.json()
+        setGreeting(data.greeting)
+      } catch (error) {
+        setError(error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    setIsLoading(true)
+    fetchGreeting()
+  }, [])
+
+  return isLoading ? (
+    'loading...'
+  ) : error ? (
+    'ERROR!'
+  ) : greeting ? (
+    <div>
+      {greeting} {subject}
+    </div>
+  ) : null
+}
+```
+
+[MDN: Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+
+[MDN: async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
+
+[MDN: await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+
+
+## 結論
+
+當然，還有很多語言特性在構建 React 應用程序時很有用，但以上這些是我最喜歡且常用的特性，希望對你有幫助。
+
+如果你想深入研究其中的任何一個，我確有一個 JavaScript 研討會是我在 PayPal 工作時記錄下的，可能會對你有所幫助： [ES6 and Beyond Workshop at PayPal](https://www.youtube.com/playlist?list=PLV5CVI1eNcJgUA2ziIML3-7sMbS7utie5)
+
+祝你好運！

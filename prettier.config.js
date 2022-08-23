@@ -2,7 +2,7 @@ process.env.RUNNING_PRETTIER = 'true'
 module.exports = {
   plugins: [require('prettier-plugin-tailwindcss')],
   arrowParens: 'avoid',
-  bracketSpacing: false,
+  bracketSpacing: true,
   embeddedLanguageFormatting: 'auto',
   endOfLine: 'lf',
   htmlWhitespaceSensitivity: 'css',

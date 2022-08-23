@@ -14,6 +14,7 @@ export type MdxPage = {
     tags?: Array<string>
     date?: string
     cloudinaryImgPubId?: string
+    bannerImgUrl?: string
   }
 }
 
