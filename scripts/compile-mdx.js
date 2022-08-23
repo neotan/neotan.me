@@ -1,6 +1,6 @@
 const fsx = require('fs-extra')
-const {getAllMdxs} = require('../utils/mdx')
-const {saveMdxs} = require('../utils/storage')
+const { getAllMdxs } = require('../utils/mdx')
+const { saveMdxs } = require('../utils/storage')
 
 const mdxRootPath = process.argv[2]
 
@@ -11,7 +11,7 @@ const mdxRootPath = process.argv[2]
   try {
     const mdxs = await getAllMdxs(mdxRootPath)
     await saveMdxs(mdxs)
-    const result = mdxs?.map(({slug, filePath}) => ({slug, filePath}))
+    const result = mdxs?.map(({ slug, filePath }) => ({ slug, filePath }))
     console.log(result, `\n${result.length} MDX files were compiled.`)
   } catch (error) {
     throw error

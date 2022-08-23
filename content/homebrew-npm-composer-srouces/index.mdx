@@ -1,26 +1,31 @@
 ---
-title: 用國內的源（Source）替換官方源，提高下載速度（包括Homebrew, npm 和 Composer 等）
+title:
+  用國內的源（Source）替換官方源，提高下載速度（包括Homebrew, npm 和 Composer
+  等）
 date: 2016-12-13
 cloudinaryImgPubId: v1650768901/blog/npm
 catalog: blog
 ---
 
-引自我在知乎上的回答[Homebrew有比較快的源（mirror）嗎？ - 知乎](https://www.zhihu.com/question/31360766/answer/132082951)
+引自我在知乎上的回
+答[Homebrew 有比較快的源（mirror）嗎？ - 知乎](https://www.zhihu.com/question/31360766/answer/132082951)
 
-## 1. Homebrew 
+## 1. Homebrew
 
 ### A. 中科大的源（推薦）
 
-(1). [替換 homebrew-core源](https://lug.ustc.edu.cn/wiki/mirrors/help/homebrew-core.git)
+(1).
+[替換 homebrew-core 源](https://lug.ustc.edu.cn/wiki/mirrors/help/homebrew-core.git)
 
 運行：
+
 ```bash
 cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
 git remote set-url origin git://mirrors.ustc.edu.cn/homebrew-core.git
 ```
 
-
-(2). [替換 Homebrew Bottles源](https://lug.ustc.edu.cn/wiki/mirrors/help/homebrew-bottles)
+(2).
+[替換 Homebrew Bottles 源](https://lug.ustc.edu.cn/wiki/mirrors/help/homebrew-bottles)
 
 ```bash
 echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles' >> ~/.bash_profile
@@ -29,13 +34,13 @@ source ~/.bash_profile
 brew update
 ```
 
-
-
 ### B. 清華的源
 
-(1). [替換 formula 索引的鏡像（即 brew update 時所更新內容）](https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/)
+(1).
+[替換 formula 索引的鏡像（即 brew update 時所更新內容）](https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/)
 
 運行：
+
 ```bash
 cd "$(brew --repo)"
 git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
@@ -46,17 +51,20 @@ git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/home
 brew update
 ```
 
-(2). [替換 Homebrew 二進制預編譯包的鏡像](https://mirrors.tuna.tsinghua.edu.cn/help/homebrew-bottles/)
+(2).
+[替換 Homebrew 二進制預編譯包的鏡像](https://mirrors.tuna.tsinghua.edu.cn/help/homebrew-bottles/)
 
 運行：
+
 ```bash
 echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles' >> ~/.bash_profile
 source ~/.bash_profile
 ```
 
-**PS: 如果運行brew update的時候報了這段error，請使用中科大的源**
+**PS: 如果運行 brew update 的時候報了這段 error，請使用中科大的源**
 
 運行：
+
 ```bash
 brew update
 error: Packfile index for .git/objects/pack/pack-b2cf6673962afb44029dea036d48174efb361bc9.pack SHA1 mismatch
@@ -65,15 +73,16 @@ Cannot obtain needed object a4d50c465d7398710f04022fafea080c7da83347
 error: fetch failed.
 ```
 
--------------------------------------
+---
 
 ## 2. Composer
-來自[Packagist / Composer 中國全量鏡像](http://pkg.phpcomposer.com/)
-也有兩種方式：
+
+來自[Packagist / Composer 中國全量鏡像](http://pkg.phpcomposer.com/) 也有兩種方
+式：
 
 ### A. 修改 composer 的全局配置文件（推薦方式）
 
-打開命令行窗口（windows用戶）或控制台（Linux、Mac 用戶）並執行如下命令：
+打開命令行窗口（windows 用戶）或控制台（Linux、Mac 用戶）並執行如下命令：
 
 ```bash
 composer config -g repo.packagist composer https://packagist.phpcomposer.com
@@ -81,13 +90,15 @@ composer config -g repo.packagist composer https://packagist.phpcomposer.com
 
 ### B. 修改當前項目的 composer.json 配置文件：
 
-打開命令行窗口（windows用戶）或控制台（Linux、Mac 用戶），進入你的項目的根目錄（也就是 composer.json 文件所在目錄），執行如下命令：
+打開命令行窗口（windows 用戶）或控制台（Linux、Mac 用戶），進入你的項目的根目錄
+（也就是 composer.json 文件所在目錄），執行如下命令：
 
 ```bash
 composer config repo.packagist composer https://packagist.phpcomposer.com
 ```
 
-上述命令將會在當前項目中的 composer.json 文件的末尾自動添加鏡像的配置信息（你也可以自己手工添加）：
+上述命令將會在當前項目中的 composer.json 文件的末尾自動添加鏡像的配置信息（你也
+可以自己手工添加）：
 
 ```json
 "repositories": {
@@ -97,20 +108,24 @@ composer config repo.packagist composer https://packagist.phpcomposer.com
     }
 }
 ```
-----------------------------------------
+
+---
 
 ## 3. npm
+
 有永久和臨時兩種形式：
 
 ### A. 通過 config 命令作全局永久替換
 
 運行：
+
 ```bash
-npm config set registry https://registry.npm.taobao.org 
-npm info underscore 
+npm config set registry https://registry.npm.taobao.org
+npm info underscore
 ```
 
 如果上面配置正確，這個 npm info 命令會有字符串顯示，如:
+
 ```bash
 ...
 dist:
@@ -125,20 +140,25 @@ publish_time: 1427988774520 }
 ### B. 通過命令行臨時替換
 
 運行：
+
 ```bash
-npm --registry https://registry.npm.taobao.org info underscore 
+npm --registry https://registry.npm.taobao.org info underscore
 ```
 
 ### C. 另一種臨時方法
+
 運行：
+
 ```bash
 SASS_BINARY_SITE=https://npm.taobao.org/mirrors/node-sass/ npm install -g node-sass
 ```
-----------------------------------------
+
+---
 
 ## 4. apm (Atom editor)
 
-[Atom 官方說apm是基于npm的](https://github.com/atom/apm#relation-to-npm))，所以可以使用上面淘寶的npm源。
+[Atom 官方說 apm 是基于 npm 的](https://github.com/atom/apm#relation-to-npm))，
+所以可以使用上面淘寶的 npm 源。
 
 編輯或新建文件`~/.atom/.apmrc`，加上這段：
 
@@ -147,12 +167,13 @@ registry=https://registry.npm.taobao.org/
 strict-ssl=false
 ```
 
-> 可選項，給apm加上代理：`apm config set proxy http://127.0.0.1:1080`
+> 可選項，給 apm 加上代理：`apm config set proxy http://127.0.0.1:1080`
 
+另外，Windows 版的 Atom 會使用自帶的 node.exe，而忽略你自行安裝的是哪個版本，為
+了統一 node 版本，可以將 Atom 自帶的 node 和 npm 都替換掉：
 
-另外，Windows版的Atom會使用自帶的node.exe，而忽略你自行安裝的是哪個版本，為了統一node版本，可以將Atom自帶的node和npm都替換掉：
+用 Administrator 模式啓動 CMD，然後：
 
-用Administrator模式啓動CMD，然後：
 ```bash
 d:
 cd "D:\Program Files\ATOM\resources\app\apm\bin"
@@ -172,7 +193,8 @@ npm -v
 apm i sync-settings
 ```
 
-另外，如果你用的是Windows Git Bash，裝好Atom後運行apm，python等命令是會提示`bash: apm: command not found`的，解決辦法很簡單，在Git Bash裏運行：
+另外，如果你用的是 Windows Git Bash，裝好 Atom 後運行 apm，python 等命令是會提
+示`bash: apm: command not found`的，解決辦法很簡單，在 Git Bash 裏運行：
 
 ```bash
 cd ~
@@ -180,7 +202,3 @@ echo "alias apm='winpty apm.cmd'" >> .bashrc
 echo "alias python='winpty python.exe'" >> .bashrc
 source .bashrc
 ```
-
-
-
-

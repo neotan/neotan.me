@@ -5,41 +5,70 @@ cloudinaryImgPubId: v1650758696/blog/hackintosh-2
 catalog: blog
 ---
 
+開發 Android 可以用任何主流 OS (Windows, Linux 或者 OSX (發音：OS ten))，這些 OS
+上都有相應的 IDE 和 Compilation Env.，但是做 iOS 開發“只能”在 Apple 獨有的 OSX
+上做，由于 OSX 以及 Mac 電腦的的封閉性和獨特性，並不像裝 Windows 那樣隨意買幾坨
+硬件攢台 PC 就能跑得起來，因為這些硬件在 OSX 上大多都沒有相應的驅動（硬件廠家沒
+為 OSX 開發驅動）。
 
-開發Android可以用任何主流OS (Windows, Linux 或者 OSX (發音：OS ten))，這些OS上都有相應的 IDE 和 Compilation Env.，但是做 iOS 開發“只能”在 Apple 獨有的 OSX 上做，由于 OSX 以及 Mac 電腦的的封閉性和獨特性，並不像裝 Windows 那樣隨意買幾坨硬件攢台PC就能跑得起來，因為這些硬件在 OSX 上大多都沒有相應的驅動（硬件廠家沒為 OSX 開發驅動）。
+但是，
+從[OSX 10.6 Snow Leopard](http://www.cocoachina.com/apple/20130119/5572.html)開
+始，OSX 的所有代碼已經完全撇除對 IBM Power 系列 CPU 的支持，轉向了 Intel，這就為
+黑蘋果（Hackintosh）的誕生提供了可能性。
 
-但是，從[OSX 10.6 Snow Leopard](http://www.cocoachina.com/apple/20130119/5572.html)開始，OSX的所有代碼已經完全撇除對 IBM Power 系列 CPU 的支持，轉向了 Intel，這就為黑蘋果（Hackintosh）的誕生提供了可能性。
-
-要攢黑蘋果，選購硬件的原則只有一個：**`盡量與市面上已發售的Mac機器配備的硬件（芯片）型號相同（品牌不一定相同，比如下面列出的昂達顯卡）`。**
+要攢黑蘋果，選購硬件的原則只有一個
+：**`盡量與市面上已發售的Mac機器配備的硬件（芯片）型號相同（品牌不一定相同，比如下面列出的昂達顯卡）`。**
 
 ## 1. 組裝黑蘋果最關鍵的幾大件是：
+
 1. CPU：必須 Intel CPU，農企的 U 會讓你很受傷
 2. 主板：技嘉 Intel 芯片組的主板的安裝成功率最高
-3. 顯卡：基于1.的選擇，如果 CPU 集成了顯卡，通常都可以直接完美驅動；或者幹脆買N記的顯卡。
+3. 顯卡：基于 1.的選擇，如果 CPU 集成了顯卡，通常都可以直接完美驅動；或者幹脆買
+   N 記的顯卡。
 4. 無線網卡/藍牙模塊： 參照下表
 
 ### 附上我的配置：
 
->* Intel 英特爾 Core酷睿 i3-3220 盒裝CPU 雙核四線程/3.3GHz/3MB三級緩存/LGA1155 該CPU集成的HD2500顯卡無法直驅，建議選擇其他型號，這便省下了顯卡的錢，專心學習，少玩遊戲 XD
->* GIGABYTE 技嘉 GA-B75N 主板 Intel B75/LGA1155 
->* 昂達(ONDA)GTX650典範1GD5 1058/5000MHz 1G/128bit DDR5顯卡
->* 博通 BCM94352Z 無線網卡（帶藍牙4.0，對藍牙設備很重要！！！） ，我的主板是坑爹的mini PCI-E口，所以要搭配[NGFF轉mini pci-e轉接卡](https://item.taobao.com/item.htm?id=43414511551&_u=lc741n7a38)和[ipex4代轉ipex1代底座轉接線](https://item.taobao.com/item.htm?id=528150772581&_u=lc741na3f4)才能對接得上。`並且一定記得買一對`[Wifunni天線](http://item.taobao.com/item.htm?id=15968550189)，不然接受不到信號。
->* 鼠標鍵盤 如無必要，盡可能用有線鼠標鍵盤，直接插機箱後面的USB口）
->* SilverStone 銀欣 SST-ST45SF 台式機電源
->* 海盜船(CORSAIR)追擊者 DDR3 1600 8GB * 2 台式機內存
->* 希捷（Seagate）1TB ST1000DM003 7200轉64M SATA 6Gb/秒 分區後作Windows安裝盤和主要數據儲存盤用
->* 閃迪(SanDisk) 至尊高速版-II代 240G 固態硬盤 `用來裝OSX，最多買128G的就夠，因為SSD是耗材遲早要報銷的，一旦買太大了到時壞了心疼`
+> - Intel 英特爾 Core 酷睿 i3-3220 盒裝 CPU 雙核四線程/3.3GHz/3MB 三級緩存
+>   /LGA1155 該 CPU 集成的 HD2500 顯卡無法直驅，建議選擇其他型號，這便省下了顯卡
+>   的錢，專心學習，少玩遊戲 XD
+> - GIGABYTE 技嘉 GA-B75N 主板 Intel B75/LGA1155
+> - 昂達(ONDA)GTX650 典範 1GD5 1058/5000MHz 1G/128bit DDR5 顯卡
+> - 博通 BCM94352Z 無線網卡（帶藍牙 4.0，對藍牙設備很重要！！！） ，我的主板是坑
+>   爹的 mini PCI-E 口，所以要搭
+>   配[NGFF 轉 mini pci-e 轉接卡](https://item.taobao.com/item.htm?id=43414511551&_u=lc741n7a38)和[ipex4 代轉 ipex1 代底座轉接線](https://item.taobao.com/item.htm?id=528150772581&_u=lc741na3f4)才
+>   能對接得上
+>   。`並且一定記得買一對`[Wifunni 天線](http://item.taobao.com/item.htm?id=15968550189)，
+>   不然接受不到信號。
+> - 鼠標鍵盤 如無必要，盡可能用有線鼠標鍵盤，直接插機箱後面的 USB 口）
+> - SilverStone 銀欣 SST-ST45SF 台式機電源
+> - 海盜船(CORSAIR)追擊者 DDR3 1600 8GB \* 2 台式機內存
+> - 希捷（Seagate）1TB ST1000DM003 7200 轉 64M SATA 6Gb/秒 分區後作 Windows 安裝
+>   盤和主要數據儲存盤用
+> - 閃迪(SanDisk) 至尊高速版-II 代 240G 固態硬盤
+>   `用來裝OSX，最多買128G的就夠，因為SSD是耗材遲早要報銷的，一旦買太大了到時壞了心疼`
 
 ## 2. 開始安裝 OS X 和 Windows 雙系統
-具體的安裝步驟我就不做搬運工了，請跟著pcbeta的[這個教程](http://bbs.pcbeta.com/viewthread-1542110-1-1.html)做，期間會遇到一些問題，我嘗試給出以下幫助。
 
-1. 遇到問題就[爬論壇](http://bbs.pcbeta.com/viewthread-1494831-1-1.html)找答案，99%的問題在pcbeta都可以找到答案，當然你有梯子更好。
-2. OS X Yosemite 10.10.3 鏡像解壓後裏面那個5G多的.dmg就是真身，TransMac 要用的就是這個。
-3. 坊間公認 Clover 引導比變色龍引導要穩定，也最接近真正的Mac。
-4. Mac 下怎麽顯示隱藏的 EFI 分區，並圖形化設置 Clover 參數呢？用 Clover Configurator。
+具體的安裝步驟我就不做搬運工了，請跟著 pcbeta
+的[這個教程](http://bbs.pcbeta.com/viewthread-1542110-1-1.html)做，期間會遇到一
+些問題，我嘗試給出以下幫助。
 
-暫時寫這麽多吧，有問題請留言，我看看有沒有遇到過能幫你的忙，不過實際上找pcbeta比找我更快。DIY黑蘋果只適合不折騰會死星人，過程中充滿了一次又一次巨大的挫敗感。但成功後，強大的配置和可擴展性又是正品Mac所無法比擬的。
+1. 遇到問題就[爬論壇](http://bbs.pcbeta.com/viewthread-1494831-1-1.html)找答案
+   ，99%的問題在 pcbeta 都可以找到答案，當然你有梯子更好。
+2. OS X Yosemite 10.10.3 鏡像解壓後裏面那個 5G 多的.dmg 就是真身，TransMac 要用
+   的就是這個。
+3. 坊間公認 Clover 引導比變色龍引導要穩定，也最接近真正的 Mac。
+4. Mac 下怎麽顯示隱藏的 EFI 分區，並圖形化設置 Clover 參數呢？用 Clover
+   Configurator。
 
-當然，壕要麽直接 Mac Pro，要麽[淘寶一個黑蘋果](http://s.taobao.com/search?q=%E9%BB%91%E8%8B%B9%E6%9E%9C&commend=all&ssid=s5-e&search_type=mall&sourceId=tb.index&spm=a1z02.1.6856637.d4910789)也未嘗不可。
+暫時寫這麽多吧，有問題請留言，我看看有沒有遇到過能幫你的忙，不過實際上找 pcbeta
+比找我更快。DIY 黑蘋果只適合不折騰會死星人，過程中充滿了一次又一次巨大的挫敗感。
+但成功後，強大的配置和可擴展性又是正品 Mac 所無法比擬的。
 
-聲明：文中提到的所有軟件版權歸軟件所有者所有，本文僅供學習試驗參考，請在24小時內刪除未經授權之軟件，建議購買經授權的正版軟件。
+當然，壕要麽直接 Mac Pro，要
+麽[淘寶一個黑蘋果](http://s.taobao.com/search?q=%E9%BB%91%E8%8B%B9%E6%9E%9C&commend=all&ssid=s5-e&search_type=mall&sourceId=tb.index&spm=a1z02.1.6856637.d4910789)也
+未嘗不可。
+
+聲明：文中提到的所有軟件版權歸軟件所有者所有，本文僅供學習試驗參考，請在 24 小時
+內刪除未經授權之軟件，建議購買經授權的正版軟件。

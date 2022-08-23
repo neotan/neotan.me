@@ -1,4 +1,5 @@
-My a bit over-engineering website to share my thoughts, translations and products for fun.
+My a bit over-engineering website to share my thoughts, translations and
+products for fun.
 
 ## Features
 
@@ -7,7 +8,7 @@ To be completed...
 ## Todo
 
 - [x] setup overall theme
-    - [x] dark/light mode theming toggle
+  - [x] dark/light mode theming toggle
 - [x] add footer
 - [x] add single post displaying
 - [x] add posts listing
@@ -24,16 +25,23 @@ To be completed...
 
 ## Trade-offs
 
-As you may have seen, there is a few "Anti-patterns" code in the application, but believe me, they are reasonable in the context of such scale, like:
-  1. **Put related components in a single .tsx file**. Which is following the practices:
+As you may have seen, there is a few "Anti-patterns" code in the application,
+but believe me, they are reasonable in the context of such scale, like:
 
-      1. [💡Colocation](https://kentcdodds.com/blog/colocation) by [Kent C. Dodds](https://kentcdodds.com/about) and 
-      1. [Knuth](https://en.wikipedia.org/wiki/Donald_Knuth) 's [💡Optimization Principle](https://www.laws-of-software.com/laws/knuth/)
-          >Premature optimization is the root of all evil.
-          >-- Donald Knuth, 1974
+1. **Put related components in a single .tsx file**. Which is following the
+   practices:
 
-  1. **Put classNames inline**. Because I'm leveraging the fantastic [🧙‍♂️TailwindCSS 3](https://tailwindcss.com/) to style the site, and [🔌Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) for VS Code's AutoComplete, they only work with **inline** classNames perfectly so far.
+   1. [💡Colocation](https://kentcdodds.com/blog/colocation) by
+      [Kent C. Dodds](https://kentcdodds.com/about) and
+   1. [Knuth](https://en.wikipedia.org/wiki/Donald_Knuth) 's
+      [💡Optimization Principle](https://www.laws-of-software.com/laws/knuth/)
+      > Premature optimization is the root of all evil. -- Donald Knuth, 1974
 
+1. **Put classNames inline**. Because I'm leveraging the fantastic
+   [🧙‍♂️TailwindCSS 3](https://tailwindcss.com/) to style the site, and
+   [🔌Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+   for VS Code's AutoComplete, they only work with **inline** classNames
+   perfectly so far.
 
 ## Getting Started
 

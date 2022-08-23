@@ -1,11 +1,11 @@
-import {SvgIconProps} from '~/types/index'
+import { SvgIconProps } from '~/types/index'
 export default function AlgoliaIcon({
   size,
   width = 77,
   height = 19,
   title = 'Algolia',
   className,
-}: SvgIconProps & {width?: number; height?: number}) {
+}: SvgIconProps & { width?: number; height?: number }) {
   return (
     <svg width={width || size} height={height || size} className={className}>
       <title>{title}</title>

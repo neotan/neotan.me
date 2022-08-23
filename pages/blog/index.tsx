@@ -1,12 +1,12 @@
-import {path, sortBy} from 'ramda'
+import { path, sortBy } from 'ramda'
 import formatDate from 'date-fns/format'
 import parseISO from 'date-fns/parseISO'
-import {getAllLiteMdxs} from '~/utils/storage'
+import { getAllLiteMdxs } from '~/utils/storage'
 import ArticleCard from '~/components/article-card'
-import {SlideUpLayout} from '~/components/layouts'
-import {MdxListItem, MdxPage} from '~/types/index'
+import { SlideUpLayout } from '~/components/layouts'
+import { MdxListItem, MdxPage } from '~/types/index'
 
-export default function Blog({mdxs}) {
+export default function Blog({ mdxs }) {
   const posts = sortBy(path(['frontmatter', 'date']))(mdxs) as MdxListItem[]
 
   return (
@@ -18,7 +18,7 @@ export default function Blog({mdxs}) {
             ({
               slug,
               readTime,
-              frontmatter: {date, cloudinaryImgPubId, title},
+              frontmatter: { date, cloudinaryImgPubId, title },
             }) => {
               return (
                 <ArticleCard

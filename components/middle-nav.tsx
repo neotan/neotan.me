@@ -1,7 +1,7 @@
-import {ReactNode} from 'react'
+import { ReactNode } from 'react'
 import Link from 'next/link'
-import {useRouter} from 'next/router'
-import {twMerge} from 'tailwind-merge'
+import { useRouter } from 'next/router'
+import { twMerge } from 'tailwind-merge'
 import clsx from 'clsx'
 import {
   BookOpenIcon,
@@ -15,8 +15,8 @@ type NavMidItemProps = {
   icon?: any
 }
 
-function NavItem({title, href = '/', icon: Icon}: NavMidItemProps) {
-  const {asPath} = useRouter()
+function NavItem({ title, href = '/', icon: Icon }: NavMidItemProps) {
+  const { asPath } = useRouter()
   const isActive = asPath === href || asPath.startsWith(href + '/')
   return (
     <Link href={href}>

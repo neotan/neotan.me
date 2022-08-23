@@ -6,9 +6,9 @@ cloudinaryImgPubId: v1650765655/blog/js-loop
 catalog: blog
 ---
 
-## Benchmark 
-[https://jsben.ch/EAlKw](https://jsben.ch/EAlKw)
+## Benchmark
 
+[https://jsben.ch/EAlKw](https://jsben.ch/EAlKw)
 
 ## Result
 
@@ -21,25 +21,26 @@ https://res.cloudinary.com/ntme/image/upload/v1650853800/blog/js-loops-firefox.p
 ## Codes
 
 ### Execute before every test
+
 ```js
-var arr = Array(1000000).fill(null);
-var dosmth;
+var arr = Array(1000000).fill(null)
+var dosmth
 ```
 
 ### `for` - Uncached length
 
 ```js
 for (let i = 0; i < arr.length; i++) {
-    dosmth = arr[i];
+  dosmth = arr[i]
 }
 ```
 
 ### `for` - Cached length
 
 ```js
-let len = arr.length;
+let len = arr.length
 for (let i = 0; i < len; i++) {
-    dosmth = arr[i];
+  dosmth = arr[i]
 }
 ```
 
@@ -47,42 +48,41 @@ for (let i = 0; i < len; i++) {
 
 ```js
 for (let val of arr) {
-    dosmth = val;
+  dosmth = val
 }
 ```
 
 ### `while` - Uncached length
 
 ```js
-let i = 0;
+let i = 0
 
-while(i < arr.length){
-	dosmth = arr[i];
-	++i;
+while (i < arr.length) {
+  dosmth = arr[i]
+  ++i
 }
 ```
 
 ### `while` - Cached length
 
 ```js
-let i = 0;
-const len = arr.length;
+let i = 0
+const len = arr.length
 
-while(i < len){
-	dosmth = arr[i];
-	++i;
+while (i < len) {
+  dosmth = arr[i]
+  ++i
 }
 ```
-
 
 ### `forEach`
 
 ```js
-arr.forEach(el=>(dosmth = el));
+arr.forEach(el => (dosmth = el))
 ```
 
 ### `map`
 
 ```js
-arr.map(el=>(dosmth = el));
+arr.map(el => (dosmth = el))
 ```

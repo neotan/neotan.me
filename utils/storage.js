@@ -1,7 +1,7 @@
 const path = require('path')
 const fsx = require('fs-extra')
 const stringify = require('json-stringify-safe')
-const {map, omit, pipe, sortBy, values} = require('ramda')
+const { map, omit, pipe, sortBy, values } = require('ramda')
 const parse = JSON.parse
 
 function getDbPath() {

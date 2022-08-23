@@ -1,4 +1,3 @@
-
 .prose h1 a,
 .prose h2 a,
 .prose h3 a,
@@ -23,11 +22,11 @@
   text-decoration-line: none;
 }
 .prose a:hover {
-  text-decoration-line: underline
+  text-decoration-line: underline;
 }
 
-.prose :where(code):not(:where([class~="not-prose"] *))::before, 
-.prose :where(code):not(:where([class~="not-prose"] *))::after {
+.prose :where(code):not(:where([class~='not-prose'] *))::before,
+.prose :where(code):not(:where([class~='not-prose'] *))::after {
   content: none !important;
   padding-left: 3px !important;
   padding-right: 3px !important;

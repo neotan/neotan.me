@@ -17,7 +17,7 @@ function transformMdx({ slug, code, content, frontmatter }) {
   }
 }
 
-; (async function () {
+;(async function () {
   if (process.env.NODE_ENV === 'development') {
     dotenv.config({
       path: '.env.local',
@@ -37,7 +37,8 @@ function transformMdx({ slug, code, content, frontmatter }) {
       .saveObjects(transformed)
 
     console.log(
-      `\n🎉🎉🎉 Sucessfully added ${algoliaRes.objectIDs.length
+      `\n🎉🎉🎉 Sucessfully added ${
+        algoliaRes.objectIDs.length
       } records to Algolia search. Object IDs:\n${algoliaRes.objectIDs.join(
         '\n',
       )}`,

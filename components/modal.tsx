@@ -1,19 +1,19 @@
-import {useEffect} from 'react'
-import {forwardRef, HTMLAttributes} from 'react'
-import {twMerge} from 'tailwind-merge'
+import { useEffect } from 'react'
+import { forwardRef, HTMLAttributes } from 'react'
+import { twMerge } from 'tailwind-merge'
 import clsx from 'clsx'
 import {
   clearAllBodyScrollLocks,
   disableBodyScroll,
   enableBodyScroll,
 } from 'body-scroll-lock'
-import {useHotkeys} from 'react-hotkeys-hook'
-import {isBrowser} from '~/utils/helpers'
+import { useHotkeys } from 'react-hotkeys-hook'
+import { isBrowser } from '~/utils/helpers'
 
 type ModalHeaderProps = HTMLAttributes<HTMLDivElement>
 
 const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(
-  ({children, className, ...props}, forwardedRef) => {
+  ({ children, className, ...props }, forwardedRef) => {
     return (
       <div
         {...props}
@@ -32,7 +32,7 @@ ModalHeader.displayName = 'ModalHeader'
 type ModalBodyProps = HTMLAttributes<HTMLDivElement>
 
 const ModalBody = forwardRef<HTMLDivElement, ModalBodyProps>(
-  ({children, className, ...props}, forwardedRef) => {
+  ({ children, className, ...props }, forwardedRef) => {
     return (
       <div
         {...props}
@@ -54,7 +54,7 @@ ModalBody.displayName = 'ModalBody'
 type ModalFooterProps = HTMLAttributes<HTMLDivElement>
 
 const ModalFooter = forwardRef<HTMLDivElement, ModalFooterProps>(
-  ({children, className, ...props}, forwardedRef) => {
+  ({ children, className, ...props }, forwardedRef) => {
     return (
       <div
         {...props}

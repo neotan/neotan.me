@@ -1,16 +1,16 @@
-import {useMemo} from 'react'
-import {getMDXComponent} from 'mdx-bundler/client'
-import {FlexImage} from '~/components/flex-image'
-import {getAllMdxs, getMdx} from '~/utils/storage'
-import {formatDate} from '~/utils/helpers'
-import {DefaultLayout} from '~/components/layouts'
-import {MdxPage} from '~/types/index'
+import { useMemo } from 'react'
+import { getMDXComponent } from 'mdx-bundler/client'
+import { FlexImage } from '~/components/flex-image'
+import { getAllMdxs, getMdx } from '~/utils/storage'
+import { formatDate } from '~/utils/helpers'
+import { DefaultLayout } from '~/components/layouts'
+import { MdxPage } from '~/types/index'
 
-function Blog({mdx}) {
+function Blog({ mdx }) {
   const {
     code,
     readTime,
-    frontmatter: {title, date, tags, cloudinaryImgPubId},
+    frontmatter: { title, date, tags, cloudinaryImgPubId },
   } = mdx as MdxPage
   const Component = useMemo(() => getMDXComponent(code), [code])
   return (
@@ -36,14 +36,14 @@ function Blog({mdx}) {
 export async function getStaticPaths() {
   // TODO: a simple & small DB may be required for better performance while processing massive MDX fils
   const mdxs = await getAllMdxs()
-  const paths = Object.keys(mdxs).map(slug => ({params: {slug}}))
+  const paths = Object.keys(mdxs).map(slug => ({ params: { slug } }))
   return {
     paths,
     fallback: false,
   }
 }
 
-export async function getStaticProps({params: {slug}}) {
+export async function getStaticProps({ params: { slug } }) {
   const mdx = await getMdx(slug)
   return {
     props: {

@@ -1,9 +1,9 @@
-import {SvgIconProps} from '~/types/index'
+import { SvgIconProps } from '~/types/index'
 export default function AvatarIcon({
   size,
   title = 'Avatar',
   className,
-}: SvgIconProps & {width?: number; height?: number}) {
+}: SvgIconProps & { width?: number; height?: number }) {
   return (
     <svg className={className}>
       <title>{title}</title>

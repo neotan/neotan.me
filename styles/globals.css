@@ -1,4 +1,4 @@
-@import "prose.css";
+@import 'prose.css';
 @import url('https://cdn.jsdelivr.net/npm/prismjs@1.28.0/themes/prism-tomorrow.min.css');
 
 @tailwind base;
@@ -9,18 +9,23 @@
   body {
     @apply bg-primary text-primary;
   }
-  h1,h2,h3,h4,h5,h6{
-    @apply font-heading font-medium text-primary
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-primary font-heading font-medium;
   }
 }
 
-@layer utilities{
+@layer utilities {
   .home-page * {
-    @apply text-white
+    @apply text-white;
   }
 
   .focus-scale {
-    @apply p-2 cursor-pointer transition sm:hover:scale-105 hover:z-50;
+    @apply cursor-pointer p-2 transition hover:z-50 sm:hover:scale-105;
   }
 
   .bg-primary {
@@ -32,11 +37,11 @@
   }
 
   .bg-tertiary {
-    @apply bg-gray-100 dark:bg-gray-600
+    @apply bg-gray-100 dark:bg-gray-600;
   }
 
   .bg-link:hover {
-    @apply bg-primary
+    @apply bg-primary;
   }
 
   .border-primary {
@@ -56,11 +61,11 @@
   }
 
   .shadow-primary {
-    @apply shadow-2xl dark:shadow-black
+    @apply shadow-2xl dark:shadow-black;
   }
 
   .shadow-secondary {
-    @apply shadow-md dark:shadow-black
+    @apply shadow-md dark:shadow-black;
   }
 
   .fill-primary {
@@ -76,13 +81,10 @@
   }
 
   .divide-primary {
-    @apply divide-opacity-40 dark:divide-gray-700 divide-gray-400
+    @apply divide-gray-400 divide-opacity-40 dark:divide-gray-700;
   }
 }
 
 .height-screen {
   height: calc(100vh - 72px);
 }
-
-
-

@@ -1,4 +1,4 @@
-import {motion as mo} from 'framer-motion'
+import { motion as mo } from 'framer-motion'
 import Link from 'next/link'
 import GithubIcon from 'icons/github-icon'
 import LinkedinIcon from 'icons/linkedin-icon'
@@ -7,8 +7,8 @@ const iconClassName =
   'fill-primary cursor-pointer  hover:fill-gray-900 dark:hover:fill-gray-400'
 
 const variants = {
-  visible: {opacity: 1, y: 0},
-  hidden: {opacity: 0, y: -20},
+  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: -20 },
 }
 
 export default function Footer() {

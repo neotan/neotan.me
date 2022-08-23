@@ -1,8 +1,8 @@
-import {motion as mo} from 'framer-motion'
+import { motion as mo } from 'framer-motion'
 import TopNav from './top-nav'
 import Footer from './footer'
 
-export function DefaultLayout({children}) {
+export function DefaultLayout({ children }) {
   return (
     <div className="flex h-screen flex-col">
       <TopNav />
@@ -13,12 +13,12 @@ export function DefaultLayout({children}) {
 }
 
 const variants = {
-  hidden: {opacity: 0, x: 0, y: 50},
-  enter: {opacity: 1, x: 0, y: 0},
-  exit: {opacity: 0, x: 0, y: -100},
+  hidden: { opacity: 0, x: 0, y: 50 },
+  enter: { opacity: 1, x: 0, y: 0 },
+  exit: { opacity: 0, x: 0, y: -100 },
 }
 
-export function SlideUpLayout({children}) {
+export function SlideUpLayout({ children }) {
   return (
     <div className="flex h-screen flex-col">
       <TopNav />
@@ -28,7 +28,7 @@ export function SlideUpLayout({children}) {
         animate="enter"
         exit="exit"
         variants={variants}
-        transition={{type: 'linear'}}
+        transition={{ type: 'linear' }}
       >
         {children}
       </mo.main>

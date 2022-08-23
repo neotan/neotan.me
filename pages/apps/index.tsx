@@ -1,4 +1,4 @@
-import {SlideUpLayout} from '~/components/layouts'
+import { SlideUpLayout } from '~/components/layouts'
 
 export default function Apps() {
   return (

@@ -7,21 +7,29 @@ cloudinaryImgPubId: v1650687527/blog/ChromeDevtoolsArtboard-1-8_z7voit
 catalog: blog
 ---
 
-Chrome offered a excellent feature: Snippets [Chrome DevTools Snippets](https://developers.google.com/web/tools/chrome-devtools/snippets)
+Chrome offered a excellent feature: Snippets
+[Chrome DevTools Snippets](https://developers.google.com/web/tools/chrome-devtools/snippets)
 
 People made lots for useful snippets:
-* [DevTools Snippets by Brian Grinstead](https://bgrins.github.io/devtools-snippets/)
 
-But Chrome doesn't provide a sync/export/import function to backup and sync those snippets, fortunately, people hacked it up: 
+- [DevTools Snippets by Brian Grinstead](https://bgrins.github.io/devtools-snippets/)
+
+But Chrome doesn't provide a sync/export/import function to backup and sync
+those snippets, fortunately, people hacked it up:
+
 1. [devtools-snippets/import-export/chrome at master · bgrins/devtools-snippets](https://github.com/bgrins/devtools-snippets/tree/master/import-export/chrome)
 2. [Export/Import chrome devtools snippets](https://gist.github.com/DJTB/9c177156340e3d4be8580574ecf31c06)
 
 I prefer the 2nd option as it's simpler, let me show you how to play with it.
 
-## Step 1. Open a DevTools of the DevTools 
+## Step 1. Open a DevTools of the DevTools
+
 1. Press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>i</kbd> to open a DevTools pane.
-2. Open the menu on the upper-right of the pane, then click **Dock side:** `undock into separate window`
-3. On the opened DevTools pane, press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>i</kbd> again, now will open a DevTools of the DevTools.
+2. Open the menu on the upper-right of the pane, then click **Dock side:**
+   `undock into separate window`
+3. On the opened DevTools pane, press
+   <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>i</kbd> again, now will open a DevTools
+   of the DevTools.
 
 ## Step 2. Export (backup existing snippets)
 
@@ -29,10 +37,13 @@ Paste and run this code in `Console`
 
 ```js
 let exportSnippets
-InspectorFrontendHost.getPreferences(_ => { exportSnippets = JSON.parse(_.scriptSnippets) })
+InspectorFrontendHost.getPreferences(_ => {
+  exportSnippets = JSON.parse(_.scriptSnippets)
+})
 ```
 
-Now you can run this code in Console, it will copy ALL the snippets into OS' clip board in JSON format.
+Now you can run this code in Console, it will copy ALL the snippets into OS'
+clip board in JSON format.
 
 ```js
 copy(exportSnippets)
@@ -41,10 +52,16 @@ copy(exportSnippets)
 ## Step 3. Import (from a JSON format code)
 
 ```js
-let importSnippets = [ /* paste snippets here */ ];
-InspectorFrontendHost.setPreference("scriptSnippets", JSON.stringify(importSnippets));
+let importSnippets = [
+  /* paste snippets here */
+]
+InspectorFrontendHost.setPreference(
+  'scriptSnippets',
+  JSON.stringify(importSnippets),
+)
 ```
-Here is mine, pls feel free take it if you need. 
+
+Here is mine, pls feel free take it if you need.
 
 Now you have a bunch of powerful snippets. Happy coding!
 
@@ -128,4 +145,3 @@ let importSnippets = [
 ]
 InspectorFrontendHost.setPreference("scriptSnippets", JSON.stringify(importSnippets));
 ```
-

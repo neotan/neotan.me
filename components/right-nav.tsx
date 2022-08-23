@@ -1,5 +1,5 @@
-import {useState} from 'react'
-import {useTheme} from 'next-themes'
+import { useState } from 'react'
+import { useTheme } from 'next-themes'
 import Link from 'next/link'
 import algoliasearch from 'algoliasearch/lite'
 import {
@@ -9,10 +9,10 @@ import {
   SearchBox,
   Snippet,
 } from 'react-instantsearch-hooks-web'
-import {MoonIcon, SearchIcon, SunIcon} from '@heroicons/react/outline'
-import {AnimatePresence, motion as mo} from 'framer-motion'
+import { MoonIcon, SearchIcon, SunIcon } from '@heroicons/react/outline'
+import { AnimatePresence, motion as mo } from 'framer-motion'
 import AlgoliaIcon from '~/icons/algolia-icon'
-import {FlexImage} from './flex-image'
+import { FlexImage } from './flex-image'
 import Modal from './modal'
 
 const ALGOLIA_APP_ID = process.env.NEXT_PUBLIC_ALGOLIA_APP_ID
@@ -22,7 +22,7 @@ const algoliaClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_APP_KEY)
 const searchClient = {
   ...algoliaClient,
   search(requests) {
-    if (requests.every(({params}) => !params.query)) {
+    if (requests.every(({ params }) => !params.query)) {
       // To prevent the search when the query is "".
       // https://www.algolia.com/doc/guides/building-search-ui/going-further/conditional-requests/js/#detecting-empty-search-requests
       return Promise.resolve({
@@ -40,7 +40,7 @@ const searchClient = {
   },
 }
 
-function CustomHit({hit}) {
+function CustomHit({ hit }) {
   return (
     <Link href={hit.url}>
       <a>
@@ -128,7 +128,7 @@ function DarkModeToggle() {
   function toggle() {
     setTheme(theme === 'light' ? 'dark' : 'light')
   }
-  const {theme, setTheme} = useTheme()
+  const { theme, setTheme } = useTheme()
   const Icon = theme === 'light' ? SunIcon : MoonIcon
 
   return (
@@ -137,10 +137,10 @@ function DarkModeToggle() {
         className="text-2xl"
         key={theme}
         onClick={toggle}
-        initial={{y: -20, opacity: 0}}
-        animate={{y: 0, opacity: 1}}
-        exit={{y: 20, opacity: 0}}
-        transition={{duration: 0.2}}
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 20, opacity: 0 }}
+        transition={{ duration: 0.2 }}
       >
         <Icon className="h-8 cursor-pointer" />
       </mo.button>

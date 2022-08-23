@@ -1,4 +1,4 @@
-import calcReadingTime, {ReadTimeResults} from 'reading-time'
+import calcReadingTime, { ReadTimeResults } from 'reading-time'
 
 export type MdxPage = {
   code: string
@@ -20,7 +20,7 @@ export type MdxPage = {
 
 export type MdxListItem = Omit<MdxPage, 'code'>
 
-export type GitHubFile = {path: string; content: string}
+export type GitHubFile = { path: string; content: string }
 
 export type SvgIconProps = {
   size?: number
@@ -28,4 +28,4 @@ export type SvgIconProps = {
   className?: string
 }
 
-export {MdxPage, MdxListItem, GitHubFile}
+export { MdxPage, MdxListItem, GitHubFile }

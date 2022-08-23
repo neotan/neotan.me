@@ -15,14 +15,20 @@ cloudinaryImgPubId: v1661226653/blog/translate-image_dplyag.png
 ---
 
 > This is a translation of the original post
-> [JavaScript to Know for React](https://kentcdodds.com/blog/javascript-to-know-for-react) by
-> [Kent C. Dodds](https://kentcdodds.com/).
+> [JavaScript to Know for React](https://kentcdodds.com/blog/javascript-to-know-for-react)
+> by [Kent C. Dodds](https://kentcdodds.com/).
 
-與其他框架相比，我最喜歡 React 的點就是當你使用它時，你很大程度上是在使用 JavaScript。沒有模板 DSL（JSX 會編譯成清晰易懂的 JavaScript），組件 API 因 [React Hooks](https://reactjs.org/hooks) 的加入而變得更簡單，並且該框架在解決核心 UI 問題的同時，作了很少抽象。
+與其他框架相比，我最喜歡 React 的點就是當你使用它時，你很大程度上是在使用
+JavaScript。沒有模板 DSL（JSX 會編譯成清晰易懂的 JavaScript），組件 API 因
+[React Hooks](https://reactjs.org/hooks) 的加入而變得更簡單，並且該框架在解決核
+心 UI 問題的同時，作了很少抽象。
 
-因此，學習 JavaScript 特性對於你能否高效使用 React 構建應用程序非常重要。所以這裡有一些 JavaScript 特性，我建議你花一些時間學習，這樣你就可以盡可能高效地使用 React了。
+因此，學習 JavaScript 特性對於你能否高效使用 React 構建應用程序非常重要。所以這
+裡有一些 JavaScript 特性，我建議你花一些時間學習，這樣你就可以盡可能高效地使用
+React 了。
 
-在我們學習語法之前，另一個對 React 非常有用的理解是函數“閉包”的概念。這裡有一個很好的關於這個概念的文章：[mdn.io/closure](https://mdn.io/closure)。
+在我們學習語法之前，另一個對 React 非常有用的理解是函數“閉包”的概念。這裡有一個
+很好的關於這個概念的文章：[mdn.io/closure](https://mdn.io/closure)。
 
 好的，讓我們來看看一些 React 開發有關的 JS 特性。
 
@@ -39,7 +45,7 @@ console.log(`${greeting} ${subject}!`) // Hello World!
 console.log(greeting + ' ' + subject + '!')
 
 // 在 React 裡:
-function Box({className, ...props}) {
+function Box({ className, ...props }) {
   return <div className={`box ${className}`} {...props} />
 }
 ```
@@ -53,15 +59,15 @@ function Box({className, ...props}) {
 ```tsx [11]
 const a = 'hello'
 const b = 42
-const c = {d: [true, false]}
-console.log({a, b, c})
+const c = { d: [true, false] }
+console.log({ a, b, c })
 
 // 與此相同:
-console.log({a: a, b: b, c: c})
+console.log({ a: a, b: b, c: c })
 
 // 在 React 裡:
-function Counter({initialCount, step}) {
-  const [count, setCount] = useCounter({initialCount, step})
+function Counter({ initialCount, step }) {
+  const [count, setCount] = useCounter({ initialCount, step })
   return <button onClick={setCount}>{count}</button>
 }
 ```
@@ -70,7 +76,10 @@ function Counter({initialCount, step}) {
 
 ## 箭頭函數
 
-箭頭函數是在 JavaScript 中編寫函數的另一種方式，和傳統的函數相比存在一些語義差異。幸運的是如果我們在 React 項目中使用 hooks （而不是 classes）的話，就不用再擔心 `this` 了。箭頭函數允許使用更簡潔的匿名函數和隱式 return，你會看到並使用大量的箭頭函數功能。
+箭頭函數是在 JavaScript 中編寫函數的另一種方式，和傳統的函數相比存在一些語義差異
+。幸運的是如果我們在 React 項目中使用 hooks （而不是 classes）的話，就不用再擔心
+`this` 了。箭頭函數允許使用更簡潔的匿名函數和隱式 return，你會看到並使用大量的箭
+頭函數功能。
 
 ```tsx [20-24]
 const getFive = () => 5
@@ -89,7 +98,7 @@ function divide(a, b) {
 }
 
 // 在 React 裡:
-function TeddyBearList({teddyBears}) {
+function TeddyBearList({ teddyBears }) {
   return (
     <ul>
       {teddyBears.map(teddyBear => (
@@ -103,25 +112,30 @@ function TeddyBearList({teddyBears}) {
 ```
 
 <callout-info class="aside">
-  上面的例子需要注意的一點是左括號`(`和右括號`)`。這是在使用 JSX 時利用箭頭函數的隱式 return 的常用方法。
+  上面的例子需要注意的一點是左括號`(`和右括號`)`。這是在使用 JSX
+  時利用箭頭函數的隱式 return 的常用方法。
 </callout-info>
 
 [MDN: Arrow Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 
 ## 解構（Destructuring）
 
-解構可能是我最喜歡的 JavaScript 特性，經常用來解構對象和數組（如果你正在使用 `useState` 的話，你可能也[像這樣用](https://kentcdodds.com/blog/react-hooks-array-destructuring-fundamentals)）。我很喜歡它的聲明性。
+解構可能是我最喜歡的 JavaScript 特性，經常用來解構對象和數組（如果你正在使用
+`useState` 的話，你可能
+也[像這樣用](https://kentcdodds.com/blog/react-hooks-array-destructuring-fundamentals)）
+。我很喜歡它的聲明性。
+
 ```tsx [23]
 // const obj = {x: 3.6, y: 7.8}
 // makeCalculation(obj)
 
-function makeCalculation({x, y: d, z = 4}) {
+function makeCalculation({ x, y: d, z = 4 }) {
   return Math.floor((x + d + z) / 3)
 }
 
 // 與此相同
 function makeCalculation(obj) {
-  const {x, y: d, z = 4} = obj
+  const { x, y: d, z = 4 } = obj
   return Math.floor((x + d + z) / 3)
 }
 
@@ -134,15 +148,14 @@ function makeCalculation(obj) {
 }
 
 // 在 React 裡:
-function UserGitHubImg({username = 'ghost', ...props}) {
+function UserGitHubImg({ username = 'ghost', ...props }) {
   return <img src={`https://github.com/${username}.png`} {...props} />
 }
 ```
 
 [MDN: Destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
-<callout-info>
-  一定要閱讀 MDN 的文章，你肯定會學到一些新東西。讀完後嘗試使用單行解構重構它：
-</callout-info>
+<callout-info> 一定要閱讀 MDN 的文章，你肯定會學到一些新東西。讀完後嘗試使用單行
+解構重構它： </callout-info>
 
 ```js
 function nestedArrayAndObject() {
@@ -152,10 +165,10 @@ function nestedArrayAndObject() {
     protagonist: {
       name: 'Emma Swan',
       enemies: [
-        {name: 'Regina Mills', title: 'Evil Queen'},
-        {name: 'Cora Mills', title: 'Queen of Hearts'},
-        {name: 'Peter Pan', title: `The boy who wouldn't grow up`},
-        {name: 'Zelena', title: 'The Wicked Witch'},
+        { name: 'Regina Mills', title: 'Evil Queen' },
+        { name: 'Cora Mills', title: 'Queen of Hearts' },
+        { name: 'Peter Pan', title: `The boy who wouldn't grow up` },
+        { name: 'Zelena', title: 'The Wicked Witch' },
       ],
     },
   }
@@ -172,6 +185,7 @@ function nestedArrayAndObject() {
 ## 參數默認值（Parameter defaults）
 
 這是另一個我常用的特性，以一種非常強大的聲明方式來表達函數的默認值。
+
 ```tsx [20-21]
 // add(1)
 // add(1, 2)
@@ -212,7 +226,10 @@ function useLocalStorageState({
 
 ## 取餘值/展開（Rest/Spread）
 
-該 `...` 語法是一種“集合（collection）”語法，它對集合值進行操作。我常用它，並強烈建議你也學習並了解如何及何時使用它。實際上在不同的上下文中具它有不同的含義，因此學習其中的細微差別將對你有所幫助。
+該 `...` 語法是一種“集合（collection）”語法，它對集合值進行操作。我常用它，並強
+烈建議你也學習並了解如何及何時使用它。實際上在不同的上下文中具它有不同的含義，因
+此學習其中的細微差別將對你有所幫助。
+
 ```tsx [43]
 const arr = [5, 6, 8, 4, 9]
 Math.max(...arr)
@@ -236,7 +253,7 @@ const obj2 = {
     h: 'g from obj2',
   },
 }
-console.log({...obj1, ...obj2})
+console.log({ ...obj1, ...obj2 })
 // 與此相同
 console.log(Object.assign({}, obj1, obj2))
 
@@ -251,7 +268,7 @@ function add() {
 }
 
 // 在 React 裡:
-function Box({className, ...restOfTheProps}) {
+function Box({ className, ...restOfTheProps }) {
   const defaultProps = {
     className: `box ${className}`,
     children: 'Empty box',
@@ -265,7 +282,9 @@ function Box({className, ...restOfTheProps}) {
 
 ## ESM 模塊（ESModules）
 
-如果你正在使用現代工具構建應用程序，那麼它很可能支持模塊（Modules），因此最好了解語法的工作原理，因為即便規模很小的應用程序都可能需要使用模塊來進行代碼重用和組織。
+如果你正在使用現代工具構建應用程序，那麼它很可能支持模塊（Modules），因此最好了
+解語法的工作原理，因為即便規模很小的應用程序都可能需要使用模塊來進行代碼重用和組
+織。
 
 ```js [30]
 export default function add(a, b) {
@@ -309,7 +328,7 @@ import('./some-module').then(
 )
 
 // 在 React 裡:
-import React, {Suspense, Fragment} from 'react'
+import React, { Suspense, Fragment } from 'react'
 
 // 動態導入 React 組件
 const BigComponent = React.lazy(() => import('./big-component'))
@@ -318,8 +337,8 @@ const BigComponent = React.lazy(() => import('./big-component'))
 
 [MDN: import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
 [MDN: export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
-<callout-info class="aside">
-  作為輔助資料，我有一個演講是關於這種語法的，你可以[點擊觀看](https://www.youtube.com/watch?v=kTlcu16rSLc&list=PLV5CVI1eNcJgNqzNwcs4UKrlJdhfDjshf)
+<callout-info class="aside"> 作為輔助資料，我有一個演講是關於這種語法的，你可
+以[點擊觀看](https://www.youtube.com/watch?v=kTlcu16rSLc&list=PLV5CVI1eNcJgNqzNwcs4UKrlJdhfDjshf)
 </callout-info>
 
 ## 條件運算符（Ternaries）
@@ -340,7 +359,7 @@ if (bottle.fullOfSoda) {
 }
 
 // 在 React 裡:
-function TeddyBearList({teddyBears}) {
+function TeddyBearList({ teddyBears }) {
   return (
     <React.Fragment>
       {teddyBears.length ? (
@@ -360,7 +379,9 @@ function TeddyBearList({teddyBears}) {
 ```
 
 <callout-info class="aside">
-我意識到在 [Prettier](https://prettier.io) 出現之前，一些人不得不忍受理解條件運算符而引起的厭惡反應。如果你還沒有使用 Prettier，我強烈建議你試一試，它將使您的條件運算符更易於閱讀。
+  我意識到在 [Prettier](https://prettier.io)
+  出現之前，一些人不得不忍受理解條件運算符而引起的厭惡反應。如果你還沒有使用
+  Prettier，我強烈建議你試一試，它將使您的條件運算符更易於閱讀。
 </callout-info>
 
 [MDN: Conditional (ternary) operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator)
@@ -368,6 +389,7 @@ function TeddyBearList({teddyBears}) {
 ## 數組方法（Array Methods）
 
 數組很棒，我一直使用數組內置方法！最常用以下方法：
+
 - find
 - some
 - every
@@ -439,7 +461,7 @@ dogs.reduce((allTemperaments, dog) => {
 // [ 'Intelligent', 'Active', 'Alert', ...etc ]
 
 // 在 React 裡:
-function RepositoryList({repositories, owner}) {
+function RepositoryList({ repositories, owner }) {
   return (
     <ul>
       {repositories
@@ -482,7 +504,7 @@ function add(a, b) {
 }
 
 // 在 React 裡:
-function DisplayContactName({contact}) {
+function DisplayContactName({ contact }) {
   return <div>{contact.name ?? 'Unknown'}</div>
 }
 ```
@@ -491,7 +513,8 @@ function DisplayContactName({contact}) {
 
 ## 可選鏈操作符（Optional chaining）
 
-也稱為“Elvis Operator”，它允許你安全地訪問屬性，並調用可能存在或不存在的函數。在可選鏈接之前，我們使用了一種依賴於真/假值的變通方法。
+也稱為“Elvis Operator”，它允許你安全地訪問屬性，並調用可能存在或不存在的函數。在
+可選鏈接之前，我們使用了一種依賴於真/假值的變通方法。
 
 ```js
 // 在可選鏈操作符發明之前，我們是這麼寫的:
@@ -507,18 +530,18 @@ const streetName = user?.address?.street?.name
 const onSuccess = options?.onSuccess
 
 // 即使 onSuccess 是 undefined，這裡跑起來也不會出錯，因為沒有函數會被調用
-onSuccess?.({data: 'yay'})
+onSuccess?.({ data: 'yay' })
 
 // 我們也可以把以上這些代碼合併成一行：
-options?.onSuccess?.({data: 'yay'})
+options?.onSuccess?.({ data: 'yay' })
 
 // 還有，如果你 100% 確定 options 是存在的，而且 onSuccess 是一個函數
-// 那麼在調用前，你就不需要這個額外的 ?. 
+// 那麼在調用前，你就不需要這個額外的 ?.
 // 只在左邊的值有可能不存在的情況下才用 ?.
-options?.onSuccess({data: 'yay'})
+options?.onSuccess({ data: 'yay' })
 
 // 在 React 裡:
-function UserProfile({user}) {
+function UserProfile({ user }) {
   return (
     <div>
       <h1>{user.name}</h1>
@@ -528,14 +551,18 @@ function UserProfile({user}) {
 }
 ```
 
-要注意的是，如果你發現自己在代碼中過多使用了`?.`，你可能需要考慮這些值的來源，並確保它們始終如一地返回應有的值。
+要注意的是，如果你發現自己在代碼中過多使用了`?.`，你可能需要考慮這些值的來源，並
+確保它們始終如一地返回應有的值。
 [MDN: Optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining)
 
 ## Promises 和 async/await
 
-這是一個很大的主題，可能需要一些時間去練習和使用才能真正掌握他們。 Promise 在 JavaScript 生態系統中無處不在，並且由於 React 也植根於該生態系統中，因此 Promise 在 React 中也無處不在（事實上，React 在內部使用了 Promise）。
+這是一個很大的主題，可能需要一些時間去練習和使用才能真正掌握他們。 Promise 在
+JavaScript 生態系統中無處不在，並且由於 React 也植根於該生態系統中，因此 Promise
+在 React 中也無處不在（事實上，React 在內部使用了 Promise）。
 
-Promise 可幫助你管理異步代碼，並從許多 DOM API 以及第三方庫獲取返回值。 Async/await 是處理 Promise 的特殊語法，兩者相輔相成。
+Promise 可幫助你管理異步代碼，並從許多 DOM API 以及第三方庫獲取返回值。
+Async/await 是處理 Promise 的特殊語法，兩者相輔相成。
 
 ```tsx [71-81]
 function promises() {
@@ -601,7 +628,7 @@ function timeout(duration = 0, shouldReject = false) {
 }
 
 // 在 React 裡:
-function GetGreetingForSubject({subject}) {
+function GetGreetingForSubject({ subject }) {
   const [isLoading, setIsLoading] = React.useState(false)
   const [error, setError] = React.useState(null)
   const [greeting, setGreeting] = React.useState(null)
@@ -640,11 +667,13 @@ function GetGreetingForSubject({subject}) {
 
 [MDN: await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 
-
 ## 結論
 
-當然，還有很多語言特性在構建 React 應用程序時很有用，但以上這些是我最喜歡且常用的特性，希望對你有幫助。
+當然，還有很多語言特性在構建 React 應用程序時很有用，但以上這些是我最喜歡且常用
+的特性，希望對你有幫助。
 
-如果你想深入研究其中的任何一個，我確有一個 JavaScript 研討會是我在 PayPal 工作時記錄下的，可能會對你有所幫助： [ES6 and Beyond Workshop at PayPal](https://www.youtube.com/playlist?list=PLV5CVI1eNcJgUA2ziIML3-7sMbS7utie5)
+如果你想深入研究其中的任何一個，我確有一個 JavaScript 研討會是我在 PayPal 工作時
+記錄下的，可能會對你有所幫助：
+[ES6 and Beyond Workshop at PayPal](https://www.youtube.com/playlist?list=PLV5CVI1eNcJgUA2ziIML3-7sMbS7utie5)
 
 祝你好運！
