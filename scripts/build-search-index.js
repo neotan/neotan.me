@@ -34,7 +34,7 @@ function transformMdx({ slug, code, content, frontmatter }) {
 
     const algoliaRes = await client
       .initIndex(process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME)
-      .saveObjects(transformed)
+      .replaceAllObjects(transformed)
 
     console.log(
       `\n🎉🎉🎉 Sucessfully added ${
