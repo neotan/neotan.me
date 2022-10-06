@@ -1,5 +1,9 @@
 import { motion as mo } from 'framer-motion'
-import TopNav from './top-nav'
+import MiddleNav from './middle-nav'
+import SearchButton from './search-button'
+import ClientRenderOnly from './client-render-only'
+import DarkModeSwitch from './dark-mode-switch'
+
 import Footer from './footer'
 
 export function DefaultLayout({ children }) {
@@ -34,5 +38,19 @@ export function SlideUpLayout({ children }) {
       </mo.main>
       <Footer />
     </div>
+  )
+}
+
+export function TopNav() {
+  return (
+    <nav className="fixed top-0 z-50 flex max-h-[72px] w-full flex-row items-center justify-between bg-secondary py-3 shadow-secondary sm:py-4 sm:px-8">
+      <MiddleNav />
+      <div className="flex min-w-[5rem] max-w-[8vw] flex-grow justify-evenly">
+        <SearchButton />
+        <ClientRenderOnly>
+          <DarkModeSwitch />
+        </ClientRenderOnly>
+      </div>
+    </nav>
   )
 }
