@@ -7,8 +7,14 @@ import {
 } from '@cloudinary/react'
 import { crop, fill, pad } from '@cloudinary/url-gen/actions/resize' // keep for reference as official docs didn't documented
 import { twMerge } from 'tailwind-merge'
+import { BaseProps } from '../types'
 
-export function FlexImage(props) {
+type FlexImageProps = BaseProps<'img'> & {
+  cloudName?: string
+  cloudinaryImgPubId?: string
+}
+
+export function FlexImage(props: FlexImageProps) {
   const { className, cloudName, cloudinaryImgPubId, ...restProps } = props
   const cld = new Cloudinary({
     cloud: {

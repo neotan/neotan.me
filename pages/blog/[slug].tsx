@@ -15,10 +15,10 @@ function Blog({ mdx }) {
   const Component = useMemo(() => getMDXComponent(code), [code])
   return (
     <DefaultLayout>
-      <article className="article-page prose prose-slate mx-auto mb-40 pt-10 dark:prose-invert lg:prose-xl">
+      <article className="article-page prose prose-slate mx-auto mb-40 pt-10 lg:prose-xl">
         <header>
           <h1 className="break-all">{title || 'Untitled'}</h1>
-          <div className="text-secondary flex items-center opacity-80">
+          <div className="flex items-center text-secondary opacity-80">
             {date && <time>{formatDate(date)}</time>}
             {date && <i className="mx-2">•</i>}
             {readTime.text && <time>{readTime.text}</time>}

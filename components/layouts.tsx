@@ -1,56 +1,88 @@
-import { motion as mo } from 'framer-motion'
-import MiddleNav from './middle-nav'
+import { twMerge } from 'tailwind-merge'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import clsx from 'clsx'
+import { BoltIcon, BookOpenIcon, HomeIcon } from '@heroicons/react/24/outline'
+import { BaseProps } from '~/types/index'
 import SearchButton from './search-button'
 import ClientRenderOnly from './client-render-only'
 import DarkModeSwitch from './dark-mode-switch'
-
 import Footer from './footer'
 
-export function DefaultLayout({ children }) {
+export function DefaultLayout({ children, className }: BaseProps<'div'>) {
   return (
-    <div className="flex h-screen flex-col">
+    <div className={twMerge('flex h-screen flex-col', className)}>
       <TopNav />
-      <main className="mt-[72px] mb-auto">{children}</main>
+      {children}
       <Footer />
     </div>
   )
 }
 
-const variants = {
-  hidden: { opacity: 0, x: 0, y: 50 },
-  enter: { opacity: 1, x: 0, y: 0 },
-  exit: { opacity: 0, x: 0, y: -100 },
-}
-
-export function SlideUpLayout({ children }) {
+export function ListLayout({ children, className }: BaseProps<'div'>) {
   return (
-    <div className="flex h-screen flex-col">
-      <TopNav />
-      <mo.main
-        className="mt-[72px] mb-auto"
-        initial="hidden"
-        animate="enter"
-        exit="exit"
-        variants={variants}
-        transition={{ type: 'linear' }}
-      >
-        {children}
-      </mo.main>
-      <Footer />
-    </div>
+    <DefaultLayout>
+      <main>{children}</main>
+    </DefaultLayout>
   )
 }
 
-export function TopNav() {
+export function TopNav({ className }: BaseProps<'nav'>) {
+  const { asPath } = useRouter()
+
+  const h2Cls =
+    'text-xl font-bold sm:w-26 flex h-10 cursor-pointer items-center space-x-2 rounded-md p-2 opacity-80 hover:opacity-100 sm:space-x-0 text-accent'
+  const iconCls = 'mr-1 hidden h-5 sm:inline-block'
+
   return (
-    <nav className="fixed top-0 z-50 flex max-h-[72px] w-full flex-row items-center justify-between bg-secondary py-3 shadow-secondary sm:py-4 sm:px-8">
-      <MiddleNav />
-      <div className="flex min-w-[5rem] max-w-[8vw] flex-grow justify-evenly">
-        <SearchButton />
+    <nav
+      className={twMerge(
+        'flex flex-row items-center justify-between py-2 sm:py-3 sm:px-8',
+        className,
+      )}
+    >
+      <div className="flex max-w-2xl flex-grow justify-start sm:space-x-5">
+        <Link passHref href="/">
+          <h2
+            className={clsx(h2Cls, {
+              'opacity-100': isActive(asPath, '/'),
+            })}
+          >
+            <HomeIcon className={iconCls} />
+            HOME
+          </h2>
+        </Link>
+        <Link passHref href="/blog">
+          <h2
+            className={clsx(h2Cls, {
+              'opacity-100': isActive(asPath, '/blog'),
+            })}
+          >
+            <BookOpenIcon className={iconCls} />
+            BLOG
+          </h2>
+        </Link>
+        <Link passHref href="/apps">
+          <h2
+            className={clsx(h2Cls, {
+              'opacity-100': isActive(asPath, '/apps'),
+            })}
+          >
+            <BoltIcon className={iconCls} />
+            APPS
+          </h2>
+        </Link>
+      </div>
+      <div className="flex items-center space-x-4">
+        <SearchButton className="h-7 w-7 stroke-accent" />
         <ClientRenderOnly>
           <DarkModeSwitch />
         </ClientRenderOnly>
       </div>
     </nav>
   )
+}
+
+function isActive(asPath, href) {
+  return asPath === href || asPath.startsWith(href + '/')
 }

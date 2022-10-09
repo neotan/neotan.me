@@ -6,8 +6,11 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply h-full;
+  }
   body {
-    @apply bg-primary text-primary;
+    @apply h-full;
   }
   h1,
   h2,
@@ -15,12 +18,12 @@
   h4,
   h5,
   h6 {
-    @apply text-primary font-heading font-medium;
+    @apply font-heading font-medium;
   }
 }
 
 @layer utilities {
-  .home-page * {
+  /* .home-page * {
     @apply text-white;
   }
 
@@ -82,9 +85,14 @@
 
   .divide-primary {
     @apply divide-gray-400 divide-opacity-40 dark:divide-gray-700;
-  }
+  } */
 }
 
 .height-screen {
-  height: calc(100vh - 72px);
+  @apply bg-primary bg-secondary text-primary text-secondary;
+}
+
+.bg-img {
+  @apply bg-center bg-no-repeat;
+  background-image: url(https://res.cloudinary.com/ntme/image/upload/v1653179674/blog/HK_JWMarriott_cmxjbo.jpg);
 }

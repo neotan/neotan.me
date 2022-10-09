@@ -28,4 +28,10 @@ export type SvgIconProps = {
   className?: string
 }
 
+export interface BaseProps<T> {
+  children?: React.ReactNode
+  className?: string
+  rootProps?: React.ComponentPropsWithoutRef<T>
+}
+
 export { MdxPage, MdxListItem, GitHubFile }

@@ -1,5 +1,7 @@
 import { useTheme } from 'next-themes'
 import { keys } from 'ramda'
+import { twMerge } from 'tailwind-merge'
+import { BaseProps } from '~/types/index'
 import { daisyui } from '../tailwind.config'
 
 const THEMES = daisyui.themes.map((themeName, i) => {
@@ -11,12 +13,11 @@ const THEMES = daisyui.themes.map((themeName, i) => {
 
 let count = 0
 
-export default function DarkModeSwitch() {
+export default function DarkModeSwitch({ className }: BaseProps<'button'>) {
   const { theme, setTheme } = useTheme()
   return (
     <button
-      suppressHydrationWarning={true}
-      className="text-3xl"
+      className={twMerge('h-8 w-8 text-2xl', className)}
       title={theme}
       onClick={() => {
         count++

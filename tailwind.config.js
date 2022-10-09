@@ -1,7 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
-const LIGHT_THEME_NAME = 'autumn'
-const DARK_THEME_NAME = 'dracula'
+const LIGHT_THEME_NAME = 'neolight'
+const DARK_THEME_NAME = 'neodark'
 
 module.exports = {
   darkMode: 'class',
@@ -39,21 +39,28 @@ module.exports = {
   plugins: [require('@tailwindcss/typography'), require('daisyui')],
   daisyui: {
     styled: true,
-    themeIcons: ['🌞', '🌛'],
+    themeIcons: ['🌞', '🌛', '🎃'],
     themes: [
-      DARK_THEME_NAME,
-      LIGHT_THEME_NAME,
-      //   {
-      //     [DARK_THEME_NAME]: {
-      //       primary: '#d9643a',
-      //       secondary: '#d9643a',
-      //       accent: '#DF997F',
-      //       neutral: '#592918',
-      //       'base-100': '#212121',
-      //       '--bc2': '0,0%,22%,1',
-      //       '--s2': '0,0%,88%,1',
-      //     },
-      //   },
+      {
+        neolight: {
+          primary: '#141414',
+          secondary: '#efefef',
+          accent: '#101010',
+          neutral: '#5d5656',
+          'neutral-content': '#e9e7e7',
+          'base-100': '#e9e7e7',
+          'base-content': '#100f0f',
+        },
+      },
+      {
+        neodark: {
+          primary: '#141414',
+          secondary: '#393939',
+          accent: '#ffffff',
+          neutral: '#23282F',
+          'base-100': '#222222',
+        },
+      },
     ],
     base: true,
     utils: true,

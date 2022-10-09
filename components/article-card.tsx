@@ -22,31 +22,30 @@ function ArticleCard({
   createdAt,
 }: ArticleProps) {
   return (
-    <figure
-      title={title}
-      className="bg-secondary shadow-primary group cursor-pointer rounded-md p-3 transition hover:z-10 sm:hover:scale-105"
-    >
-      <Link href={slug}>
-        <a>
-          {cloudinaryImgPubId ? (
-            <FlexImage cloudinaryImgPubId={cloudinaryImgPubId} />
-          ) : (
-            <PhotographIcon className="stroke-secondary" />
-          )}
-          <footer className="p-2">
-            <h3 className="mt-1 break-all text-2xl">{title}</h3>
-            <figcaption className="text-secondary max-w-md truncate">
-              {description}
-            </figcaption>
-            <div className="text-secondary flex items-center opacity-0 transition group-hover:opacity-100">
-              <time title={`Created at ${createdAt}`}>{createdAt}</time>
-              <i className="mx-2">•</i>
-              <time>{readTime}</time>
-            </div>
-          </footer>
-        </a>
-      </Link>
-    </figure>
+    <Link passHref href={slug}>
+      <figure
+        title={title}
+        className="group transform-gpu cursor-pointer overflow-hidden rounded-md bg-secondary shadow-xl transition hover:z-10 sm:hover:scale-105"
+      >
+        {cloudinaryImgPubId ? (
+          <FlexImage
+            cloudinaryImgPubId={cloudinaryImgPubId}
+            className="rounded-none"
+          />
+        ) : (
+          <PhotographIcon className="stroke-secondary" />
+        )}
+        <footer className="p-3">
+          <h3 className="mt-1 break-all text-2xl">{title}</h3>
+          <figcaption className="max-w-md truncate">{description}</figcaption>
+          <div className="flex items-center opacity-40 transition group-hover:opacity-100">
+            <time title={`Created at ${createdAt}`}>{createdAt}</time>
+            <i className="mx-2">•</i>
+            <time>{readTime}</time>
+          </div>
+        </footer>
+      </figure>
+    </Link>
   )
 }
 

@@ -3,8 +3,13 @@ import Head from 'next/head'
 import { DefaultSeo } from 'next-seo'
 import { ThemeProvider } from 'next-themes'
 import { AnimatePresence } from 'framer-motion'
+import { keys } from 'ramda'
+import pkgJson from 'package.json'
+import { daisyui } from '../tailwind.config'
 
-function CustomApp({ Component, pageProps }) {
+const SITE_NAME = pkgJson.name
+
+export default function CustomApp({ Component, pageProps }) {
   return (
     <>
       <Head>
@@ -13,6 +18,7 @@ function CustomApp({ Component, pageProps }) {
       </Head>
       <DefaultSeo
         titleTemplate="%s - Neo Tan"
+        canonical="neotan.me"
         openGraph={{
           type: 'website',
           locale: 'en_US',
@@ -29,7 +35,6 @@ function CustomApp({ Component, pageProps }) {
             },
           ],
         }}
-        canonical="neotan.me"
       />
       <AnimatePresence
         exitBeforeEnter
@@ -37,9 +42,9 @@ function CustomApp({ Component, pageProps }) {
         onExitComplete={() => window.scrollTo(0, 0)}
       >
         <ThemeProvider
-          attribute="class"
-          storageKey="neotan.me-theme"
-          defaultTheme="dark"
+          attribute="data-theme"
+          storageKey={`${SITE_NAME}-theme"`}
+          defaultTheme={keys(daisyui.themes[0])?.[0]}
         >
           <Component {...pageProps} />
         </ThemeProvider>
@@ -47,5 +52,3 @@ function CustomApp({ Component, pageProps }) {
     </>
   )
 }
-
-export default CustomApp

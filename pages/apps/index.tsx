@@ -1,9 +1,9 @@
-import { SlideUpLayout } from '~/components/layouts'
+import { DefaultLayout } from '~/components/layouts'
 
 export default function Apps() {
   return (
-    <SlideUpLayout>
-      <h1 className="text-center text-[10rem]">Apps</h1>
-    </SlideUpLayout>
+    <DefaultLayout>
+      <h1 className="flex-grow text-center text-[10rem]">Apps</h1>
+    </DefaultLayout>
   )
 }
