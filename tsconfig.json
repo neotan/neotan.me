@@ -21,9 +21,9 @@
       "~/components/*": ["components/*"],
       "~/utils/*": ["utils/*"],
       "~/icons/*": ["icons/*"],
-      "~/types/*": ["types/*"]
+      "~/types": ["types/index"]
     }
   },
   "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "utils/helpers.ts"]
 }

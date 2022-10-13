@@ -2,8 +2,9 @@ import { twMerge } from 'tailwind-merge'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import clsx from 'clsx'
-import { BoltIcon, BookOpenIcon, HomeIcon } from '@heroicons/react/24/outline'
-import { BaseProps } from '~/types/index'
+
+import { FiBookOpen, FiHome, FiZap } from 'react-icons/fi'
+import { BaseProps } from '~/types'
 import SearchButton from './search-button'
 import ClientRenderOnly from './client-render-only'
 import DarkModeSwitch from './dark-mode-switch'
@@ -12,18 +13,10 @@ import Footer from './footer'
 export function DefaultLayout({ children, className }: BaseProps<'div'>) {
   return (
     <div className={twMerge('flex h-screen flex-col', className)}>
-      <TopNav />
+      <TopNav className="z-10" />
       {children}
       <Footer />
     </div>
-  )
-}
-
-export function ListLayout({ children, className }: BaseProps<'div'>) {
-  return (
-    <DefaultLayout>
-      <main>{children}</main>
-    </DefaultLayout>
   )
 }
 
@@ -31,52 +24,52 @@ export function TopNav({ className }: BaseProps<'nav'>) {
   const { asPath } = useRouter()
 
   const h2Cls =
-    'text-xl font-bold sm:w-26 flex h-10 cursor-pointer items-center space-x-2 rounded-md p-2 opacity-80 hover:opacity-100 sm:space-x-0 text-accent'
-  const iconCls = 'mr-1 hidden h-5 sm:inline-block'
+    'flex text-xl font-bold sm:w-26 flex cursor-pointer items-center !space-x-1 px-1 py-1 sm:space-x-0 text-accent border-gray-400 border-b-2 border-opacity-0'
+  const iconCls = 'hidden sm:inline-block'
 
   return (
     <nav
       className={twMerge(
-        'flex flex-row items-center justify-between py-2 sm:py-3 sm:px-8',
+        'flex flex-row items-center justify-between py-2 px-3 sm:py-3 sm:px-8',
         className,
       )}
     >
-      <div className="flex max-w-2xl flex-grow justify-start sm:space-x-5">
+      <div className="text-shadow flex max-w-2xl flex-grow justify-start sm:space-x-5">
         <Link passHref href="/">
           <h2
             className={clsx(h2Cls, {
-              'opacity-100': isActive(asPath, '/'),
+              'border-opacity-60': isActive(asPath, '/'),
             })}
           >
-            <HomeIcon className={iconCls} />
-            HOME
+            <FiHome className={iconCls} />
+            <div>HOME</div>
           </h2>
         </Link>
         <Link passHref href="/blog">
           <h2
             className={clsx(h2Cls, {
-              'opacity-100': isActive(asPath, '/blog'),
+              'border-opacity-60': isActive(asPath, '/blog'),
             })}
           >
-            <BookOpenIcon className={iconCls} />
-            BLOG
+            <FiBookOpen className={iconCls} />
+            <div>BLOG</div>
           </h2>
         </Link>
         <Link passHref href="/apps">
           <h2
             className={clsx(h2Cls, {
-              'opacity-100': isActive(asPath, '/apps'),
+              'border-opacity-60': isActive(asPath, '/apps'),
             })}
           >
-            <BoltIcon className={iconCls} />
-            APPS
+            <FiZap className={iconCls} />
+            <div>APPS</div>
           </h2>
         </Link>
       </div>
-      <div className="flex items-center space-x-4">
-        <SearchButton className="h-7 w-7 stroke-accent" />
+      <div className="flex items-center">
+        <SearchButton className="h-7 w-7 stroke-accent drop-shadow-lg" />
         <ClientRenderOnly>
-          <DarkModeSwitch />
+          <DarkModeSwitch className="ml-4 h-7 w-7 stroke-accent drop-shadow-lg" />
         </ClientRenderOnly>
       </div>
     </nav>

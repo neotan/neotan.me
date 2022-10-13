@@ -153,3 +153,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# temporary files
+/public/db.json

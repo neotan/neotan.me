@@ -1,6 +1,7 @@
+const path = require('path')
 const fsx = require('fs-extra')
+const stringify = require('json-stringify-safe')
 const { getAllMdxs } = require('../utils/mdx')
-const { saveMdxs } = require('../utils/storage')
 
 const mdxRootPath = process.argv[2]
 
@@ -10,10 +11,26 @@ const mdxRootPath = process.argv[2]
   }
   try {
     const mdxs = await getAllMdxs(mdxRootPath)
-    await saveMdxs(mdxs)
+    await saveFile(mdxs, 'public/db.json')
     const result = mdxs?.map(({ slug, filePath }) => ({ slug, filePath }))
     console.log(result, `\n${result.length} MDX files were compiled.`)
   } catch (error) {
     throw error
   }
 })()
+
+function saveFile(mdxs, dbPath = getDbPath()) {
+  fsx.ensureDirSync(path.dirname(dbPath))
+  return fsx.writeFile(dbPath, stringify(slugAsKey(mdxs)))
+}
+
+function getDbPath() {
+  return path.join(process.cwd(), '.temp', 'mdxs.temp-db.json')
+}
+
+function slugAsKey(mdxs) {
+  return mdxs.reduce((acc, mdx) => {
+    acc[mdx.slug] = mdx
+    return acc
+  }, {})
+}

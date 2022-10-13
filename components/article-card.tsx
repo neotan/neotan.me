@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { PhotographIcon } from '@heroicons/react/outline'
+import { FiImage } from 'react-icons/fi'
 import { FlexImage } from './flex-image'
 
 type ArticleProps = {
@@ -33,7 +33,7 @@ function ArticleCard({
             className="rounded-none"
           />
         ) : (
-          <PhotographIcon className="stroke-secondary" />
+          <FiImage className="stroke-secondary" />
         )}
         <footer className="p-3">
           <h3 className="mt-1 break-all text-2xl">{title}</h3>

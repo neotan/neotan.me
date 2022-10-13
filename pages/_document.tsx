@@ -3,7 +3,7 @@ import Document, { Head, Html, Main, NextScript } from 'next/document'
 export default class CustomDocument extends Document {
   render() {
     return (
-      <Html lang="en">
+      <Html className="duration-600 transition-colors" lang="en">
         <Head>
           <link
             rel="preconnect"

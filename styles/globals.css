@@ -23,76 +23,28 @@
 }
 
 @layer utilities {
-  /* .home-page * {
-    @apply text-white;
+  .border-1 {
+    border-width: 1px;
   }
 
-  .focus-scale {
-    @apply cursor-pointer p-2 transition hover:z-50 sm:hover:scale-105;
+  .bg-img {
+    @apply bg-center bg-no-repeat;
+    background-image: url(https://res.cloudinary.com/ntme/image/upload/v1653179674/blog/HK_JWMarriott_cmxjbo.jpg);
   }
 
-  .bg-primary {
-    @apply bg-gray-100 dark:bg-[#222222];
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
-  .bg-secondary {
-    @apply bg-white dark:bg-[#393939];
+  .text-shadow-md {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
   }
 
-  .bg-tertiary {
-    @apply bg-gray-100 dark:bg-gray-600;
+  .text-shadow-lg {
+    text-shadow: 0 15px 30px rgba(0, 0, 0, 0.11), 0 5px 15px rgba(0, 0, 0, 0.08);
   }
 
-  .bg-link:hover {
-    @apply bg-primary;
+  .text-shadow-none {
+    text-shadow: none;
   }
-
-  .border-primary {
-    @apply border-gray-300 dark:border-gray-800;
-  }
-
-  .border-secondary {
-    @apply border-gray-200 dark:border-gray-600;
-  }
-
-  .text-primary {
-    @apply text-gray-700 dark:text-gray-200;
-  }
-
-  .text-secondary {
-    @apply text-gray-400 dark:text-gray-400;
-  }
-
-  .shadow-primary {
-    @apply shadow-2xl dark:shadow-black;
-  }
-
-  .shadow-secondary {
-    @apply shadow-md dark:shadow-black;
-  }
-
-  .fill-primary {
-    @apply fill-gray-700 dark:fill-gray-500;
-  }
-
-  .stroke-primary {
-    @apply stroke-gray-700 dark:stroke-gray-500;
-  }
-
-  .stroke-secondary {
-    @apply text-secondary;
-  }
-
-  .divide-primary {
-    @apply divide-gray-400 divide-opacity-40 dark:divide-gray-700;
-  } */
-}
-
-.height-screen {
-  @apply bg-primary bg-secondary text-primary text-secondary;
-}
-
-.bg-img {
-  @apply bg-center bg-no-repeat;
-  background-image: url(https://res.cloudinary.com/ntme/image/upload/v1653179674/blog/HK_JWMarriott_cmxjbo.jpg);
 }

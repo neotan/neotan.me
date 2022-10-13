@@ -7,38 +7,38 @@ export default function Home() {
   return (
     <DefaultLayout className="bg-img bg-cover">
       <Hero className="flex-grow">
-        <ClientRenderOnly>
-          <Hero.Overlay className="flex flex-col items-center justify-center bg-gray-900  bg-opacity-40 p-10 text-gray-100 sm:h-fit sm:w-fit sm:rounded-md lg:max-w-[50vw]">
-            <mo.h2
-              className="text-3xl md:text-5xl"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+        <Hero.Overlay className="absolute top-0 flex flex-col items-center justify-center  bg-gray-900 bg-opacity-40 p-10 text-gray-100 sm:static sm:h-fit sm:w-fit sm:rounded-md lg:max-w-[50vw]">
+          <mo.h2
+            className="text-3xl md:text-5xl"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+          >
+            Hi there!{wave('👋')} I&apos;m
+          </mo.h2>
+          <h1 className="mt-6 flex space-x-8 text-7xl font-semibold md:text-9xl">
+            <mo.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1 }}
             >
-              Hi there!{wave('👋')} I&apos;m
-            </mo.h2>
-            <h1 className="mt-6 flex space-x-8 text-7xl font-semibold md:text-9xl">
-              <mo.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1 }}
-              >
-                Neo
-              </mo.div>
-              <mo.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1 }}
-              >
-                Tan
-              </mo.div>
-            </h1>
+              Neo
+            </mo.div>
+            <mo.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1 }}
+            >
+              Tan
+            </mo.div>
+          </h1>
+          <ClientRenderOnly>
             <h2 className="mt-6 text-center text-[7vw] leading-snug sm:text-3xl">
               {typing(
                 'a software engineer👨‍💻 based in Canada🍁, love creating tools🛠, apps💾 and helping people to make great web🕸.',
               )}
             </h2>
-          </Hero.Overlay>
-        </ClientRenderOnly>
+          </ClientRenderOnly>
+        </Hero.Overlay>
       </Hero>
     </DefaultLayout>
   )

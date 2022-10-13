@@ -1,4 +1,4 @@
-import { SvgIconProps } from '~/types/index'
+import { SvgIconProps } from '~/types'
 export default function AlgoliaIcon({
   size,
   width = 77,

@@ -4,7 +4,7 @@ const LIGHT_THEME_NAME = 'neolight'
 const DARK_THEME_NAME = 'neodark'
 
 module.exports = {
-  darkMode: 'class',
+  darkMode: 'data-theme="neodark"',
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
@@ -42,10 +42,10 @@ module.exports = {
     themeIcons: ['🌞', '🌛', '🎃'],
     themes: [
       {
-        neolight: {
+        [LIGHT_THEME_NAME]: {
           primary: '#141414',
           secondary: '#efefef',
-          accent: '#101010',
+          accent: '#303030',
           neutral: '#5d5656',
           'neutral-content': '#e9e7e7',
           'base-100': '#e9e7e7',
@@ -53,7 +53,7 @@ module.exports = {
         },
       },
       {
-        neodark: {
+        [DARK_THEME_NAME]: {
           primary: '#141414',
           secondary: '#393939',
           accent: '#ffffff',
