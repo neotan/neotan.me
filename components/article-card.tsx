@@ -22,10 +22,10 @@ function ArticleCard({
   createdAt,
 }: ArticleProps) {
   return (
-    <Link passHref href={slug}>
+    <Link href={slug}>
       <figure
         title={title}
-        className="group transform-gpu cursor-pointer overflow-hidden rounded-md bg-secondary shadow-xl transition hover:z-10 sm:hover:scale-105"
+        className="group h-full transform-gpu cursor-pointer overflow-hidden rounded-md bg-secondary shadow-xl transition hover:z-10 sm:hover:scale-105"
       >
         {cloudinaryImgPubId ? (
           <FlexImage

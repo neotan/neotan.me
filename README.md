@@ -1,3 +1,5 @@
+> ℹ This repo is now managed by my private Turborepo instance, but it's still being updated if any and stay public for your reference my friends 🙂. Let me know if you are interested in any part of it. Happy coding!🍻
+
 My a bit over-engineering website to share my thoughts, translations and
 products for fun.
 
@@ -51,4 +53,3 @@ Run the development server:
 npm run dev
 # or
 yarn dev
-```

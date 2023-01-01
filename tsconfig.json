@@ -1,29 +1,50 @@
 {
+  "extends": "tsconfig/nextjs.json",
   "compilerOptions": {
-    "allowJs": true,
     "baseUrl": ".",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "incremental": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "esnext",
-    "moduleResolution": "node",
-    "noEmit": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "strict": false,
-    "target": "es5",
-    "typeRoots": ["./types", "../node_modules/@types"],
-    "types": ["node"],
     "paths": {
-      "~/components/*": ["components/*"],
-      "~/utils/*": ["utils/*"],
-      "~/icons/*": ["icons/*"],
-      "~/types": ["types/index"]
-    }
+      "@/components/*": [
+        "components/*"
+      ],
+      "@/icons/*": [
+        "icons/*"
+      ],
+      "@/types": [
+        "types/index"
+      ],
+      "@/utils/*": [
+        "utils/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "utils/helpers.ts"]
+  "include": [
+    ".next/types/**/*.ts",
+    "app/_app.tsxs",
+    "app/_document.tsxs",
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "app/blog/page.tsx",
+    "app/show/page.tsx",
+    "components/**/*.ts",
+    "components/**/*.tsx",
+    "icons/**/*.ts",
+    "icons/**/*.tsx",
+    "next-env.d.ts",
+    "pages/**/*.ts",
+    "pages/**/*.tsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "types/**/*.ts",
+    "types/**/*.tsx",
+    "utils/**/*.ts",
+    "utils/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

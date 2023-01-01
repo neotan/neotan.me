@@ -1,8 +1,12 @@
-const withImage = require('next-images')
+/** @type {import('next').NextConfig} */
 
-module.exports = withImage({
+module.exports = {
   reactStrictMode: true,
+  transpilePackages: ['utils'],
+  experimental: {
+    appDir: true
+  },
   images: {
     domains: ['res.cloudinary.com'],
   },
-})
+}

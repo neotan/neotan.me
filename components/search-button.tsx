@@ -1,15 +1,17 @@
-import { createRef, useState } from 'react'
+import * as React from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { FiSearch } from 'react-icons/fi'
 import { twMerge } from 'tailwind-merge'
 import { Input, Kbd, Modal } from 'react-daisyui'
 import { map, pipe, values } from 'ramda'
 import { useKey } from 'react-use'
-import { BaseProps, BlogSearchIndex, MdxPage } from '~/types'
-import { useFuse } from '~/utils/hooks'
-import { formatDate } from '~/utils/helpers'
+import { useFuse } from 'utils/hooks'
+import { formatDate } from 'utils/helpers'
+import type { BaseProps } from 'shared-types'
 import mdxData from 'public/db.json'
 import { FlexImage } from './flex-image'
+import type { BlogSearchIndex, MdxDoc } from '../types'
 
 export const searchIndices = pipe(values, map(mdxToIndex))(mdxData)
 const fuseOptions = {
@@ -38,7 +40,7 @@ export default function SearchButton({ className }: BaseProps<'svg'>) {
       />
       <Modal
         id="modal-search"
-        className="mt-10 overflow-y-hidden bg-secondary"
+        className="mt-10 bg-secondary overflow-y-hidden"
         open={visable}
         onClickBackdrop={toggleModal}
         style={{ alignSelf: 'start' }}
@@ -72,14 +74,12 @@ export default function SearchButton({ className }: BaseProps<'svg'>) {
         <Modal.Body className="divide-y-2 divide-dashed divide-base-200">
           {result?.map(({ item }) => {
             return (
-              <Link key={item.slug} href={item.url}>
-                <a className="flex justify-between space-x-4 p-3 transition hover:bg-secondary">
-                  <FlexImage
-                    className="hidden w-20 md:inline-block"
-                    cloudinaryImgPubId={item.cloudinaryImgPubId}
-                  />
-                  <div className="flex w-full flex-col">{item.title}</div>
-                </a>
+              <Link key={item.slug} href={item.url || ''} className="flex justify-between space-x-4 p-3 transition hover:bg-secondary">
+                <FlexImage
+                  className="hidden w-20 md:inline-block"
+                  cloudinaryImgPubId={item.cloudinaryImgPubId}
+                />
+                <div className="flex w-full flex-col">{item.title}</div>
               </Link>
             )
           })}
@@ -93,7 +93,7 @@ export function mdxToIndex({
   slug,
   content,
   frontmatter,
-}: Pick<MdxPage, 'slug' | 'content' | 'frontmatter'>): BlogSearchIndex {
+}: Pick<MdxDoc, 'slug' | 'content' | 'frontmatter'>): BlogSearchIndex {
   const { title, date, catalog, cloudinaryImgPubId, tags, description } =
     frontmatter
 
@@ -104,7 +104,8 @@ export function mdxToIndex({
     url: `/blog/${slug}`,
     cloudinaryImgPubId,
     tags,
+    catalog,
     description,
-    date: formatDate(date, 'yyyy-MM-dd'),
+    date: formatDate(date || '', 'yyyy-MM-dd'),
   }
 }

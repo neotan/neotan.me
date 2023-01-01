@@ -1,72 +1,54 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+const { mergeDeepRight } = require('ramda')
+const baseConfig = require("tailwind-config-custom/tailwind.config.js");
 
-const LIGHT_THEME_NAME = 'neolight'
-const DARK_THEME_NAME = 'neodark'
+const LIGHT_THEME_NAME_1 = 'light'
+const DARK_THEME_NAME_1 = 'dark'
 
-module.exports = {
-  darkMode: 'data-theme="neodark"',
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-    './node_modules/daisyui/dist/**/*.js',
-    './node_modules/react-daisyui/dist/**/*.js',
-  ],
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: [
-          '"Noto Sans"',
-          '"Noto Sans TC"',
-          ...defaultTheme.fontFamily.sans,
-        ],
-        heading: ['Mitr', '"Noto Sans TC"', ...defaultTheme.fontFamily.sans],
-        code: ['"JetBrains Mono"', ...defaultTheme.fontFamily.mono],
-      },
-      screens: {
-        xs: '475px',
-        sm: '640px',
-        md: '768px',
-        lg: '1024px',
-        xl: '1280px',
-        '2xl': '1536px',
-        '3xl': '1920px',
-      },
-      boxShadow: {
-        '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
-      },
-    },
-  },
-  plugins: [require('@tailwindcss/typography'), require('daisyui')],
-  daisyui: {
-    styled: true,
-    themeIcons: ['🌞', '🌛', '🎃'],
-    themes: [
-      {
-        [LIGHT_THEME_NAME]: {
-          primary: '#141414',
-          secondary: '#efefef',
-          accent: '#303030',
-          neutral: '#5d5656',
-          'neutral-content': '#e9e7e7',
-          'base-100': '#e9e7e7',
-          'base-content': '#100f0f',
-        },
-      },
-      {
-        [DARK_THEME_NAME]: {
-          primary: '#141414',
-          secondary: '#393939',
-          accent: '#ffffff',
-          neutral: '#23282F',
-          'base-100': '#222222',
-        },
-      },
+const LIGHT_THEME_NAME_2 = 'wireframe'
+const DARK_THEME_NAME_2 = 'black'
+
+const LIGHT_THEME_NAME_3 = 'corporate'
+const DARK_THEME_NAME_3 = 'business'
+
+const LIGHT_THEME_NAME_4 = 'lofi'
+const DARK_THEME_NAME_4 = 'dracula'
+
+const LIGHT_THEME_NAME_5 = 'autumn'
+const DARK_THEME_NAME_5 = 'forest'
+
+const LIGHT_THEME_NAME_6 = 'pastel'
+const DARK_THEME_NAME_6 = 'luxury'
+
+module.exports = mergeDeepRight(
+  baseConfig,
+  {
+    content: [
+      'components/**/*.{js,ts,jsx,tsx}',
+      'icons/**/*.{js,ts,jsx,tsx}',
+      'pages/**/*.{js,ts,jsx,tsx}',
+      '../../packages/ui/dist/**/*.{js,ts,jsx,tsx}',
+      'node_modules/daisyui/dist/**/*.js',
+      'node_modules/react-daisyui/dist/**/*.js',
     ],
-    base: true,
-    utils: true,
-    logs: true,
-    rtl: false,
-    prefix: '',
-    darkTheme: DARK_THEME_NAME,
-  },
-}
+    plugins: [require('@tailwindcss/typography'), require('daisyui')],
+    daisyui: {
+      styled: true,
+      darkTheme: DARK_THEME_NAME_1,
+      themes: [
+        LIGHT_THEME_NAME_1,
+        DARK_THEME_NAME_1,
+        LIGHT_THEME_NAME_2,
+        DARK_THEME_NAME_2,
+        LIGHT_THEME_NAME_3,
+        DARK_THEME_NAME_3,
+        LIGHT_THEME_NAME_4,
+        DARK_THEME_NAME_4,
+        LIGHT_THEME_NAME_5,
+        DARK_THEME_NAME_5,
+        LIGHT_THEME_NAME_6,
+        DARK_THEME_NAME_6,
+      ],
+    }
+  })
+
+

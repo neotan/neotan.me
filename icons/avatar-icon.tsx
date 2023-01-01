@@ -1,4 +1,5 @@
-import { SvgIconProps } from '~/types'
+import * as React from 'react'
+import type { SvgIconProps } from 'shared-types'
 export default function AvatarIcon({
   size,
   title = 'Avatar',

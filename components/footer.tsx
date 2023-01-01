@@ -1,8 +1,8 @@
-import { Link as Anchor } from 'react-daisyui'
+import Link from 'next/link'
 import { FaGithub, FaLinkedin } from 'react-icons/fa'
 import { slice } from 'ramda'
 import { twMerge } from 'tailwind-merge'
-import { BaseProps } from '~/types'
+import type { BaseProps } from 'shared-types'
 
 export default function Footer({ className }: BaseProps<'footer'>) {
   return (
@@ -13,12 +13,12 @@ export default function Footer({ className }: BaseProps<'footer'>) {
       )}
     >
       <div className="flex space-x-4">
-        <Anchor href="https://github.com/neotan/neotan.me">
+        <Link href="https://github.com/neotan/neotan.me">
           <FaGithub className="cursor-pointer" size={24} />
-        </Anchor>
-        <Anchor href="https://www.linkedin.com/in/neotan/">
+        </Link>
+        <Link href="https://www.linkedin.com/in/neotan/">
           <FaLinkedin className="cursor-pointer" size={24} />
-        </Anchor>
+        </Link>
       </div>
       <div className="justify-center space-x-2 font-heading text-lg sm:flex">
         <span>All rights reserved</span>{' '}
@@ -30,8 +30,8 @@ export default function Footer({ className }: BaseProps<'footer'>) {
           0,
           6,
           process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA ||
-            process.env.VERCEL_GIT_COMMIT_SHA ||
-            '',
+          process.env.VERCEL_GIT_COMMIT_SHA ||
+          '',
         )}
       </div>
     </footer>

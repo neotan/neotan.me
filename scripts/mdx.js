@@ -10,11 +10,10 @@ function isMdxFile(filename) {
 
 function extractSlug(filePath) {
   try {
-    // TODO: format slug w/ -
+    // TODO: format slug with -
     return path.basename(filePath.replace(/(index)?.mdx?$/, ''))
   } catch (error) {
-    console.error(`Extracting slug from ${filePath}`)
-    throw error
+    throw Error(`Extracting slug from ${filePath}`)
   }
 }
 
@@ -84,17 +83,17 @@ async function getAllMdxs(mdxRootPath) {
       const { filePath, mdxSource } = rawMdx
       const compiled = await compileMdx(mdxSource)
       result.push({
+        ...compiled,
+        frontmatter: compiled?.frontmatter || {},
         slug: extractSlug(filePath),
         filePath,
         readTime: calcReadTime(mdxSource),
         mdxSource,
-        ...compiled,
       })
     }
     return result
   } catch (error) {
-    console.error(`Parsing MDX files in ${mdxRootPath}}`)
-    throw error
+    throw new Error(`Parsing MDX files in ${mdxRootPath}}`)
   }
 }
 
