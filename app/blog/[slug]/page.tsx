@@ -1,17 +1,16 @@
-"use client"
-
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import { getMDXComponent } from 'mdx-bundler/client'
-import { map, pipe, split } from 'ramda'
-import { Badge } from 'react-daisyui'
+import { map, pipe, split, values } from 'ramda'
 import { formatDate, isNilOrEmpty } from 'utils/helpers'
 import type { DynamicRoutePageProps } from 'shared-types'
-import mdxData from 'public/db.json'
+import mdxData from '../../../public/db.json'
 import type { MdxDoc } from '@/types'
 import { FlexImage } from '@/components/flex-image'
 
-export default function TldrSlug({ params }:
-  DynamicRoutePageProps<{ slug: keyof typeof mdxData }>) {
+export default function TldrSlug(
+  { params }:
+    DynamicRoutePageProps<{ slug: keyof typeof mdxData }>
+) {
   const {
     code,
     readTime,
@@ -28,9 +27,9 @@ export default function TldrSlug({ params }:
             {pipe(
               split(/[,\s]/),
               map(tag => (
-                <Badge size="lg" variant="outline">
+                <div className='badge-outline badge badge-lg'>
                   {tag}
-                </Badge>
+                </div>
               )),
             )(tags || '')}
           </div>
@@ -47,4 +46,10 @@ export default function TldrSlug({ params }:
       <Component />
     </article>
   )
+}
+
+export async function generateStaticParams() {
+  return values(mdxData).map((post) => ({
+    slug: post.slug,
+  }));
 }
