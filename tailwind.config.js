@@ -1,3 +1,5 @@
+/** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme')
 const { mergeDeepRight } = require('ramda')
 const baseConfig = require("tailwind-config-custom/tailwind.config.js");
 
@@ -22,10 +24,18 @@ const DARK_THEME_NAME_6 = 'luxury'
 module.exports = mergeDeepRight(
   baseConfig,
   {
+    theme: {
+      extend: {
+        fontFamily: {
+          heading: ['var(--mitr-font)', ...defaultTheme.fontFamily.sans],
+          code: ['var(--jbmono-font)', ...defaultTheme.fontFamily.serif],
+        },
+      }
+    },
     content: [
-      'components/**/*.{js,ts,jsx,tsx}',
-      'icons/**/*.{js,ts,jsx,tsx}',
-      'pages/**/*.{js,ts,jsx,tsx}',
+      "./app/**/*.{js,ts,jsx,tsx}",
+      './components/**/*.{js,ts,jsx,tsx}',
+      './icons/**/*.{js,ts,jsx,tsx}',
       '../../packages/ui/dist/**/*.{js,ts,jsx,tsx}',
       'node_modules/daisyui/dist/**/*.js',
       'node_modules/react-daisyui/dist/**/*.js',
@@ -33,7 +43,7 @@ module.exports = mergeDeepRight(
     plugins: [require('@tailwindcss/typography'), require('daisyui')],
     daisyui: {
       styled: true,
-      darkTheme: DARK_THEME_NAME_1,
+      darkTheme: DARK_THEME_NAME_2,
       themes: [
         LIGHT_THEME_NAME_1,
         DARK_THEME_NAME_1,
