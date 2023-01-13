@@ -1,3 +1,4 @@
+"use client"
 import { useState } from 'react'
 import Link from 'next/link'
 import { FiSearch } from 'react-icons/fi'
@@ -13,7 +14,7 @@ import { FlexImage } from './flex-image'
 import type { BlogSearchIndex, MdxDoc } from '@/types'
 import Portal from '@/components/portal'
 
-export const searchIndices = pipe(values, map(mdxToIndex))(mdxData)
+const searchIndices = pipe(values, map(mdxToFuseIndex))(mdxData)
 const fuseOptions = {
   keys: ['title', 'content', 'tags'],
   includeScore: true,
@@ -39,9 +40,8 @@ export default function SearchButton({ className }: BaseProps<'svg'>) {
         className={twMerge('cursor-pointer', className)}
         onClick={toggleModal}
       />
-      <Portal>
+      <Portal htmlTag='search-modal-root'>
         <Modal
-          id="modal-search"
           className="mt-10 overflow-y-hidden"
           open={visable}
           onClickBackdrop={toggleModal}
@@ -92,7 +92,7 @@ export default function SearchButton({ className }: BaseProps<'svg'>) {
   )
 }
 
-export function mdxToIndex({
+function mdxToFuseIndex({
   slug,
   content,
   frontmatter,

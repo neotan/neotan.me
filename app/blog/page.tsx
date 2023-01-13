@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { pathOr, pipe, sortBy, values } from 'ramda'
+import { pathOr, sortBy, values } from 'ramda'
 import { formatDate } from 'utils/helpers'
 import type { MdxDoc } from '../../types'
 import ArticleCard from '../../components/article-card'

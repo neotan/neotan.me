@@ -10,7 +10,7 @@
     @apply h-full;
   }
   body {
-    @apply h-full;
+    /* @apply h-full; */
   }
   h1,
   h2,
@@ -27,7 +27,7 @@
     border-width: 1px;
   }
 
-  .bg-img {
+  /* .bg-img {
     @apply bg-center bg-no-repeat;
     background-image: url(https://res.cloudinary.com/ntme/image/upload/v1653179674/blog/HK_JWMarriott_cmxjbo.jpg);
   }
@@ -46,5 +46,5 @@
 
   .text-shadow-none {
     text-shadow: none;
-  }
+  } */
 }

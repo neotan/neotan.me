@@ -1,5 +1,4 @@
 "use client"
-
 import * as React from "react";
 import { Cloudinary } from '@cloudinary/url-gen'
 import {
@@ -8,6 +7,7 @@ import {
   placeholder,
   responsive,
 } from '@cloudinary/react'
+import { BaseProps } from "shared-types";
 import { twMerge } from 'tailwind-merge'
 
 type AdvancedImageProps = React.ComponentProps<typeof AdvancedImage>
@@ -16,12 +16,13 @@ type FlexImageProps = {
   cloudName?: string
   cldImg?: AdvancedImageProps['cldImg']
   cloudinaryImgPubId?: string
-} & Omit<AdvancedImageProps, 'cldImg'>
+} & Omit<AdvancedImageProps, 'cldImg'> & BaseProps<'img'>
 
-// https://cloudinary.com/documentation/react_integration#full_example
 
 export function FlexImage(props: FlexImageProps) {
   const { className, cloudName, cloudinaryImgPubId, cldImg, ...restProps } = props
+
+  // https://cloudinary.com/documentation/react_integration#full_example
   const image = new Cloudinary({
     cloud: {
       cloudName: cloudName || process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
