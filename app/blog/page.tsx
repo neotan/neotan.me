@@ -1,9 +1,8 @@
-import * as React from 'react'
 import { pathOr, sortBy, values } from 'ramda'
 import { formatDate } from 'utils/helpers'
-import type { MdxDoc } from '../../types'
-import ArticleCard from '../../components/article-card'
-import mdxData from '../../public/db.json'
+import type { MdxDoc } from '@/types'
+import ArticleCard from '@/components/article-card'
+import mdxData from '@/public/db.json'
 
 type Slug = keyof typeof mdxData
 

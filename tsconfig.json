@@ -3,6 +3,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@/*": [
+        "*"
+      ],
+      "@/styles/*": [
+        "app/styles/*"
+      ],
       "@/components/*": [
         "components/*"
       ],
@@ -24,25 +30,17 @@
   },
   "include": [
     ".next/types/**/*.ts",
-    "app/_app.tsxs",
-    "app/_document.tsxs",
     "app/**/*.ts",
     "app/**/*.tsx",
-    "app/blog/page.tsx",
-    "app/show/page.tsx",
     "components/**/*.ts",
     "components/**/*.tsx",
     "icons/**/*.ts",
     "icons/**/*.tsx",
     "next-env.d.ts",
-    "pages/**/*.ts",
-    "pages/**/*.tsx",
-    "src/**/*.ts",
-    "src/**/*.tsx",
     "types/**/*.ts",
     "types/**/*.tsx",
     "utils/**/*.ts",
-    "utils/**/*.tsx"
+    "utils/**/*.tsx",
   ],
   "exclude": [
     "node_modules"

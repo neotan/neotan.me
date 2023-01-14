@@ -1,0 +1,29 @@
+@config "../../tailwind.config.web3.js";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply h-full;
+  }
+  body {
+    /* @apply h-full; */
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading font-medium;
+  }
+}
+
+@layer utilities {
+  .border-1 {
+    border-width: 1px;
+    border-color: red;
+  }
+}

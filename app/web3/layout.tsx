@@ -1,8 +1,8 @@
-import './styles/globals.css'
+import './styles.css'
 import { twMerge } from 'tailwind-merge'
 import { BaseProps } from 'shared-types'
 
-function RootLayout({ className, children }: BaseProps<'html'>) {
+function Web3Layout({ className, children }: BaseProps<'html'>) {
   return (
     <html lang="en">
       <head />
@@ -13,4 +13,4 @@ function RootLayout({ className, children }: BaseProps<'html'>) {
   )
 }
 
-export default RootLayout
+export default Web3Layout

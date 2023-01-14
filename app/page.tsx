@@ -1,5 +1,4 @@
 "use client"
-import * as React from 'react'
 import { ThemeProvider } from 'next-themes'
 import Link from 'next/link'
 import { Card } from 'react-daisyui'
@@ -9,6 +8,7 @@ import mdxData from '../public/db.json'
 import Navbar from '@/components/navbar'
 import { FlexImage } from '@/components/flex-image'
 import { MdxDoc } from '@/types'
+import Footer from '@/components/footer'
 
 const mitr = Mitr({
   subsets: ['latin'],
@@ -90,6 +90,7 @@ export default function HomeIndex() {
             </section>
           </main>
         </div>
+        <Footer />
       </ThemeProvider>
     </>
   )

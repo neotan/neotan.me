@@ -20,7 +20,7 @@ export default function Footer({ className }: BaseProps<'footer'>) {
           <FaLinkedin className="cursor-pointer" size={24} />
         </Link>
       </div>
-      <div className="font-heading justify-center space-x-2 text-lg sm:flex">
+      <div className="justify-center space-x-2 font-heading text-lg sm:flex">
         <span>All rights reserved</span>{' '}
         <span className="block sm:inline">© Neo Tan {new Date().getFullYear()}</span>
       </div>
