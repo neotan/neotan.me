@@ -3,11 +3,12 @@ import { BaseProps } from 'shared-types'
 import { twMerge } from "tailwind-merge"
 import clsx from 'clsx'
 
-export default function Navbar({ className, children, rootProps }: BaseProps<'section'>) {
+export type FeedbackProps = BaseProps<'section'>
+export function Feedback({ className, children, rootProps }: FeedbackProps) {
 
   return (
     <section className={twMerge("", className)} {...rootProps}>
-      Navbar
+      Feedback
       {children}
     </section>
   )

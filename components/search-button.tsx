@@ -40,7 +40,7 @@ export default function SearchButton({ className }: BaseProps<'svg'>) {
         className={twMerge('cursor-pointer', className)}
         onClick={toggleModal}
       />
-      <Portal htmlTag='search-modal-root'>
+      <Portal>
         <Modal
           className="mt-10 overflow-y-hidden"
           open={visable}

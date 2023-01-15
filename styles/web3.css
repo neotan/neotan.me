@@ -1,4 +1,4 @@
-@config "../../tailwind.config.web3.js";
+@config "../tailwind.config.web3.js";
 
 @tailwind base;
 @tailwind components;
@@ -9,7 +9,7 @@
     @apply h-full;
   }
   body {
-    /* @apply h-full; */
+    @apply h-full;
   }
   h1,
   h2,
@@ -24,6 +24,5 @@
 @layer utilities {
   .border-1 {
     border-width: 1px;
-    border-color: red;
   }
 }

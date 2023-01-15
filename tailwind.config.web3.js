@@ -24,23 +24,28 @@ const DARK_THEME_NAME_6 = 'luxury'
 module.exports = mergeDeepRight(
   baseConfig,
   {
+    content: [
+      './web3-components/**/*.{js,ts,jsx,tsx}',
+      './app/web3/**/*.{js,ts,jsx,tsx}',
+      './icons/**/*.{js,ts,jsx,tsx}',
+      './utils*/**/*.{js,ts,jsx,tsx}'
+    ],
     theme: {
       extend: {
         fontFamily: {
-          heading: ['var(--ssss-font)', ...defaultTheme.fontFamily.sans],
+          heading: ['var(--mitr-font)', ...defaultTheme.fontFamily.sans],
           code: ['var(--jbmono-font)', ...defaultTheme.fontFamily.serif],
+        },
+        colors: {
+          'primary-black': '#1A232E',
+          'secondary-white': '#c7c7c7',
+        },
+        transitionTimingFunction: {
+          'out-flex': 'cubic-bezier(0.05, 0.6, 0.4, 0.9)',
         },
       }
     },
-    content: [
-      "./app/web3/**/*.{js,ts,jsx,tsx}",
-      './components/**/*.{js,ts,jsx,tsx}',
-      './icons/**/*.{js,ts,jsx,tsx}',
-      '../../packages/ui/dist/**/*.{js,ts,jsx,tsx}',
-      'node_modules/daisyui/dist/**/*.js',
-      'node_modules/react-daisyui/dist/**/*.js',
-    ],
-    plugins: [require('@tailwindcss/typography'), require('daisyui')],
+    plugins: [],
     daisyui: {
       styled: true,
       darkTheme: DARK_THEME_NAME_2,
@@ -59,6 +64,7 @@ module.exports = mergeDeepRight(
         DARK_THEME_NAME_6,
       ],
     }
-  })
+  }
+)
 
 

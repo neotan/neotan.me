@@ -1,4 +1,4 @@
-import './styles.css'
+import '../../styles/web3.css'
 import { twMerge } from 'tailwind-merge'
 import { BaseProps } from 'shared-types'
 

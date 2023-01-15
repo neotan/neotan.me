@@ -1,4 +1,4 @@
-import './styles/globals.css'
+import '@/styles/globals.css'
 import { twMerge } from 'tailwind-merge'
 import { BaseProps } from 'shared-types'
 

@@ -3,11 +3,12 @@ import { BaseProps } from 'shared-types'
 import { twMerge } from "tailwind-merge"
 import clsx from 'clsx'
 
-export default function About({ className, children, rootProps }: BaseProps<'section'>) {
+export type WorldProps = BaseProps<'section'>
+export function World({ className, children, rootProps }: WorldProps) {
 
   return (
     <section className={twMerge("", className)} {...rootProps}>
-      About
+      World
       {children}
     </section>
   )

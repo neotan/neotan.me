@@ -7,7 +7,7 @@
         "*"
       ],
       "@/styles/*": [
-        "app/styles/*"
+        "styles/*"
       ],
       "@/components/*": [
         "components/*"
@@ -32,8 +32,8 @@
     ".next/types/**/*.ts",
     "app/**/*.ts",
     "app/**/*.tsx",
-    "components/**/*.ts",
-    "components/**/*.tsx",
+    "components*/**/*.ts",
+    "components*/**/*.tsx",
     "icons/**/*.ts",
     "icons/**/*.tsx",
     "next-env.d.ts",
@@ -41,6 +41,8 @@
     "types/**/*.tsx",
     "utils/**/*.ts",
     "utils/**/*.tsx",
+    "utils-web3/motions.ts",
+    "components-web3/about.tsx",
   ],
   "exclude": [
     "node_modules"
