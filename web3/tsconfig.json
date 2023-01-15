@@ -1,0 +1,51 @@
+{
+  "extends": "tsconfig/nextjs.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "*"
+      ],
+      "@/styles/*": [
+        "styles/*"
+      ],
+      "@/components/*": [
+        "components/*"
+      ],
+      "@/icons/*": [
+        "icons/*"
+      ],
+      "@/types": [
+        "types/index"
+      ],
+      "@/utils/*": [
+        "utils/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    ".next/types/**/*.ts",
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "components*/**/*.ts",
+    "components*/**/*.tsx",
+    "icons/**/*.ts",
+    "icons/**/*.tsx",
+    "next-env.d.ts",
+    "types/**/*.ts",
+    "types/**/*.tsx",
+    "utils/**/*.ts",
+    "utils/**/*.tsx",
+    "utils/motions.ts",
+    "components/about.tsx",
+    "types/styles.ts",
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
