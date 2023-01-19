@@ -6,7 +6,7 @@
 1. TypeScript
 1. Framer Motion
 1. Tailwind CSS
-
+1. [Figma](https://www.figma.com/file/40WytyUbP7wlNAb2K9qBD6/Modern-UI%2FUX-Framer-Motion-(Copy)?node-id=1%3A4&t=iwAXvnHwus1VhfaE-1)
 ## Trade-offs
 
 As you may have seen, there is a few "Anti-patterns" code in the application,

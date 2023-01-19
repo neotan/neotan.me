@@ -15,6 +15,9 @@
       "@/icons/*": [
         "icons/*"
       ],
+      "@/fonts/*": [
+        "fonts/*"
+      ],
       "@/types": [
         "types/index"
       ],
@@ -42,8 +45,8 @@
     "utils/**/*.ts",
     "utils/**/*.tsx",
     "utils/motions.ts",
-    "components/about.tsx",
-    "types/styles.ts",
+    "components/custom-texts.tsx",
+    "utils/styles.ts",
   ],
   "exclude": [
     "node_modules"

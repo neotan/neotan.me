@@ -16,19 +16,17 @@
   body {
     @apply h-full;
   }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-heading font-medium;
-  }
 }
 
 @layer utilities {
   .border-1 {
     border-width: 1px;
+  }
+
+
+
+  .reset-nextjs-image {
+    @apply !static
   }
 
   .gradient-01 {
@@ -42,6 +40,26 @@
       hsl(221deg 73% 70%) 74%,
       hsl(220deg 76% 51%) 100%
     );
+    
     filter: blur(125px);
+  }
+
+  .hero-gradient {
+    background: linear-gradient(
+      97.86deg,
+      #a509ff 0%,
+      #34acc7 53.65%,
+      #a134c7 100%
+    );
+  }
+
+  .gradient-02 {
+    position: absolute;
+    width: 200px;
+    height: 438px;
+    top: 0px;
+    right: 0px;
+    background: #7aebfb;
+    filter: blur(190px);
   }
 }

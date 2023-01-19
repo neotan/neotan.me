@@ -1,10 +1,6 @@
-export * from './about'
-export * from './explore'
-export * from './feedback'
-export * from './footer'
-export * from './get-started'
-export * from './hero'
-export * from './insights'
-export * from './navbar'
-export * from './whats-new'
-export * from './world'
+
+import { TitleText, TypingText } from './custom-texts';
+export {
+  TitleText,
+  TypingText,
+};

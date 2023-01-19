@@ -15,8 +15,7 @@ module.exports = mergeDeepRight(
     theme: {
       extend: {
         fontFamily: {
-          heading: ['var(--mitr-font)', ...defaultTheme.fontFamily.sans],
-          code: ['var(--jbmono-font)', ...defaultTheme.fontFamily.serif],
+          sans: ['Eudoxus Sans', ...defaultTheme.fontFamily.sans],
         },
         colors: {
           'primary-black': '#1A232E',

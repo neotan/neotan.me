@@ -10,9 +10,9 @@ import { useFuse } from 'utils/hooks'
 import { formatDate } from 'utils/helpers'
 import type { BaseProps } from 'shared-types'
 import mdxData from 'public/db.json'
-import { FlexImage } from './flex-image'
 import type { BlogSearchIndex, MdxDoc } from '@/types'
 import Portal from '@/components/portal'
+import { FlexImage } from './flex-image'
 
 const searchIndices = pipe(values, map(mdxToFuseIndex))(mdxData)
 const fuseOptions = {
