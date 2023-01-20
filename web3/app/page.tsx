@@ -1,15 +1,15 @@
 /* eslint-disable @next/next/no-img-element */ // 'next/image' requires static size of image
 'use client'
+import { useState } from 'react'
 import Link from 'next/link'
-import Image, { ImageLoader } from 'next/image'
+import { values } from 'ramda'
 import { motion } from 'framer-motion'
-import { twMerge } from 'tailwind-merge'
 import localFont from '@next/font/local'
-import styles from '../utils/styles'
+import { cn, styles } from '../utils/styles'
+import { EXPLORE_WORLDS, WorldId } from '../utils/constants'
 import { fadeIn, navVariants, slideIn, staggerContainer, textVariant } from '../utils/motions'
-import {
-  TypingText
-} from '../components/custom-texts'
+import { TitleText, TypingText } from '../components/custom-texts'
+import { ExploreCard } from '../components/explore-card'
 import SearchIcon from '@/icons/search-icon'
 import MenuIcon from '@/icons/menu-icon'
 
@@ -49,10 +49,10 @@ const eudoxusFont = localFont({
 })
 
 export default function Web3Page() {
-  const cardCls = 'w-full h-64 sm:w-1/2 lg:w-1/3 bg-base border-secondary'
+  const [activeExplorerWorldId, setActiveExplorerWorldId] = useState<WorldId>('world1')
   return (
     <>
-      <div className={twMerge(eudoxusFont.className, 'bg-primary-black divide-y divide-white/5')}>
+      <div className={cn(eudoxusFont.className, 'bg-primary-black divide-y divide-white/5')}>
         <motion.nav
           className={`${styles.px} relative py-8`}
           variants={navVariants}
@@ -60,7 +60,7 @@ export default function Web3Page() {
           whileInView='show'
         >
           <div className="gradient-01 absolute inset-0 w-1/2" />
-          <div className={twMerge(styles.innerWidth, 'mx-auto flex justify-between')}>
+          <div className={cn(styles.innerWidth, 'mx-auto flex justify-between')}>
             <SearchIcon className="h-6 w-6 stroke-white" />
             <h2 className='text-2xl font-extrabold leading-7 text-white'>METAVERSUS</h2>
             <MenuIcon className='h-6 w-6 fill-white stroke-white' />
@@ -68,9 +68,9 @@ export default function Web3Page() {
 
         </motion.nav>
 
-        <section id='hero' className={twMerge(styles.py, 'pl-6 sm:pl-16')}>
+        <section id='hero' className={cn(styles.py, 'pl-6 sm:pl-16')}>
           <motion.div
-            className={twMerge(styles.innerWidth, 'mx-auto flex flex-col')}
+            className={cn(styles.innerWidth, 'mx-auto flex flex-col')}
             initial="hidden"
             whileInView="show"
             variants={staggerContainer(1, 1)}
@@ -111,7 +111,7 @@ export default function Web3Page() {
             </motion.div>
           </motion.div>
         </section>
-        <section id='about' className={twMerge(styles.p, 'relative z-10')}>
+        <section id='about' className={cn(styles.p, 'relative z-10')}>
           <div className="gradient-02 z-0" />
           <motion.div
             variants={staggerContainer(1, 1)}
@@ -149,7 +149,31 @@ export default function Web3Page() {
             />
           </motion.div>
         </section>
-        <section id='explore' className='grid h-screen place-content-center text-3xl text-white'>Explore</section>
+        <section id="explore" className={styles.p} >
+          <motion.div
+            variants={staggerContainer(1, 1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: false, amount: 0.25 }}
+            className={`${styles.innerWidth} mx-auto flex flex-col`}
+          >
+            <TypingText title="| The World" className="text-center" />
+            <TitleText className="text-center" >
+              Choose the world you want <br className="hidden md:block" /> to explore
+            </TitleText>
+            <div className="mt-[50px] flex min-h-[70vh] flex-col gap-5 lg:flex-row">
+              {values(EXPLORE_WORLDS).map((world, index) => (
+                <ExploreCard
+                  key={world.id}
+                  {...world}
+                  index={index}
+                  activeId={activeExplorerWorldId}
+                  handleClick={setActiveExplorerWorldId}
+                />
+              ))}
+            </div>
+          </motion.div>
+        </section>
         <section id='getstarted' className='grid h-screen place-content-center text-3xl text-white'>GetStarted</section>
         <section id='insights' className='grid h-screen place-content-center text-3xl text-white'>Insights</section>
         <section id='whats' className='grid h-screen place-content-center text-3xl text-white'>Whats</section>

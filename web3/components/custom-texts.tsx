@@ -1,6 +1,7 @@
 'use client';
 import { ComponentProps } from 'react'
-import { AnimationOptions, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { cn } from '../utils/styles'
 import { textContainer, textVariant2 } from '../utils/motions';
 
 
@@ -10,7 +11,7 @@ export function TypingText({ title = '', className }: TypingTextProps) {
   return (
     <motion.p
       variants={textContainer}
-      className={`text-secondary-white text-[14px] font-normal ${className}`}
+      className={cn('text-secondary-white text-[14px] font-normal', className)}
     >
       {Array.from(title).map((letter, index) => (
         <motion.span variants={textVariant2} key={index}>
@@ -18,5 +19,21 @@ export function TypingText({ title = '', className }: TypingTextProps) {
         </motion.span>
       ))}
     </motion.p>
+  )
+}
+
+
+export type TitleTextProps = ComponentProps<typeof motion.h2>
+
+export function TitleText({ children, className }: TitleTextProps) {
+  return (
+    <motion.h2
+      className={cn('mt-[8px] text-[40px] font-bold text-white md:text-[64px]', className)}
+      variants={textVariant2}
+      initial="hidden"
+      whileInView="show"
+    >
+      {children}
+    </motion.h2>
   )
 }

@@ -1,12 +1,12 @@
 import '../styles/globals.css'
-import { twMerge } from 'tailwind-merge'
 import { BaseProps } from 'shared-types'
+import { cn } from '../utils/styles'
 
 function RootLayout({ className, children }: BaseProps<'html'>) {
   return (
     <html lang="en">
       <head />
-      <body className={twMerge('antialiased', className)}>
+      <body className={cn('antialiased', className)}>
         {children}
       </body>
     </html >

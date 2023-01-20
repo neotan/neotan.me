@@ -1,6 +1,7 @@
+import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-const styles = {
+export const styles = {
   innerWidth: 'w-full 2xl:max-w-[1280px]',
   interWidth: 'w-[100%] lg:w-[80%]',
 
@@ -20,4 +21,6 @@ const styles = {
 
 }
 
-export default styles
+export function cn(...classNames: Parameters<typeof clsx>) {
+  return twMerge(clsx(classNames))
+}
