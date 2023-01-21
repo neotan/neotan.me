@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */ // 'next/image' requires static size of image
 'use client';
-import { ComponentProps, Dispatch, SetStateAction } from "react";
+import { ComponentProps, Dispatch, MouseEventHandler, SetStateAction } from "react";
 import { motion } from 'framer-motion';
 import { cn, styles } from '../utils/styles'
 import { WorldId } from '../utils/constants'
@@ -11,10 +11,8 @@ import { fadeIn } from '../utils/motions'
 export type ExploreCardProps = ComponentProps<typeof motion.div> & {
   id: WorldId,
   imgUrl: string,
-  title: string,
   index: number,
   activeId: string,
-  handleClick: Dispatch<SetStateAction<WorldId>>
 }
 
 export function ExploreCard({
@@ -23,13 +21,13 @@ export function ExploreCard({
   title,
   index,
   activeId,
-  handleClick
+  onClick
 }: ExploreCardProps) {
   return (
     <motion.div
       className={cn('relative ease-out-flex flex h-[700px] min-w-[170px] cursor-pointer items-center justify-center transition-[flex] duration-[0.7s]', activeId === id ? 'lg:flex-[3.5] flex-[10]' : 'lg:flex-[0.5] flex-[2]')}
       variants={fadeIn('right', 'spring', index * 0.5, 0.75)}
-      onClick={() => handleClick(id)}
+      onClick={onClick}
     >
       <img
         className="absolute h-full w-full rounded-[24px] object-cover"

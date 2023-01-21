@@ -162,13 +162,13 @@ export default function Web3Page() {
               Choose the world you want <br className="hidden md:block" /> to explore
             </TitleText>
             <div className="mt-[50px] flex min-h-[70vh] flex-col gap-5 lg:flex-row">
-              {values(EXPLORE_WORLDS).map((world, index) => (
+              {EXPLORE_WORLDS.map((world, index) => (
                 <ExploreCard
                   key={world.id}
                   {...world}
                   index={index}
                   activeId={activeExplorerWorldId}
-                  handleClick={setActiveExplorerWorldId}
+                  onClick={() => setActiveExplorerWorldId(world.id)}
                 />
               ))}
             </div>
