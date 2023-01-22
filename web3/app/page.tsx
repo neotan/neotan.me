@@ -174,12 +174,12 @@ export default function Web3Page() {
             </div>
           </motion.div>
         </section>
-        <section id='getstarted' className='grid h-screen place-content-center text-3xl text-white'>GetStarted</section>
-        <section id='insights' className='grid h-screen place-content-center text-3xl text-white'>Insights</section>
-        <section id='whats' className='grid h-screen place-content-center text-3xl text-white'>Whats</section>
-        <section id='world' className='grid h-screen place-content-center text-3xl text-white'>World</section>
-        <section id='feedback' className='grid h-screen place-content-center text-3xl text-white'>Feedback</section>
-        <footer id='footer' className='grid h-screen place-content-center text-3xl text-white'>Footer</footer>
+        <section id='getstarted' className='grid h-40 place-content-center text-3xl text-white'>GetStarted</section>
+        <section id='insights' className='grid h-40 place-content-center text-3xl text-white'>Insights</section>
+        <section id='whats' className='grid h-40 place-content-center text-3xl text-white'>Whats</section>
+        <section id='world' className='grid h-40 place-content-center text-3xl text-white'>World</section>
+        <section id='feedback' className='grid h-40 place-content-center text-3xl text-white'>Feedback</section>
+        <footer id='footer' className='grid h-40 place-content-center text-3xl text-white'>Footer</footer>
       </div>
     </>
   )
