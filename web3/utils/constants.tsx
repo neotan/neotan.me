@@ -55,4 +55,19 @@ export const INSIGHTS = [
     subtitle:
       'Quam quisque id diam vel quam elementum. Viverra nam libero justo laoreet sit amet cursus sit. Mauris in aliquam sem',
   },
-];
+]
+
+export const NEW_FEATURES = [
+  {
+    imgUrl: '/images/vrpano.svg',
+    title: 'A new world',
+    subtitle:
+      'we have the latest update with new world for you to try never mind',
+  },
+  {
+    imgUrl: '/images/headset.svg',
+    title: 'More realistic',
+    subtitle:
+      'In the latest update, your eyes are narrow, making the world more realistic than ever',
+  },
+]

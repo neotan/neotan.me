@@ -6,11 +6,12 @@ import { values } from 'ramda'
 import { motion } from 'framer-motion'
 import localFont from '@next/font/local'
 import { cn, styles } from '../utils/styles'
-import { EXPLORE_WORLDS, INSIGHTS, WorldId } from '../utils/constants'
+import { EXPLORE_WORLDS, INSIGHTS, NEW_FEATURES, WorldId } from '../utils/constants'
 import { fadeIn, navVariants, planetVariants, slideIn, staggerContainer, textVariant } from '../utils/motions'
 import { TitleText, TypingText } from '../components/custom-texts'
 import { ExploreCard } from '../components/explore-card'
 import { StartSteps } from '../components/start-steps'
+import { NewFeatureCard } from '../components/new-feature-card'
 import { InsightCard } from '../components/insight-card'
 import SearchIcon from '@/icons/search-icon'
 import MenuIcon from '@/icons/menu-icon'
@@ -122,7 +123,7 @@ export default function Web3Page() {
             viewport={{ once: false, amount: 0.25 }}
             className={`${styles.innerWidth} mx-auto ${styles.flexCenter} flex-col`}
           >
-            <TypingText title="| About Metaversus" className="text-center" />
+            <TypingText text="| About Metaversus" className="text-center" />
 
             <motion.p
               variants={fadeIn('up', 'tween', 0.2, 1)}
@@ -159,7 +160,7 @@ export default function Web3Page() {
             viewport={{ once: false, amount: 0.25 }}
             className={`${styles.innerWidth} mx-auto flex flex-col`}
           >
-            <TypingText title="| The World" className="text-center" />
+            <TypingText text="| The World" className="text-center" />
             <TitleText className="text-center" >
               Choose the world you want <br className="hidden md:block" /> to explore
             </TitleText>
@@ -198,7 +199,7 @@ export default function Web3Page() {
               className="flex flex-[0.75] flex-col justify-center"
               variants={fadeIn('left', 'tween', 0.2, 1)}
             >
-              <TypingText title="| How Metaversus Works" />
+              <TypingText text="| How Metaversus Works" />
               <TitleText >
                 Get started with just a few clicks
               </TitleText>
@@ -226,7 +227,7 @@ export default function Web3Page() {
             whileInView="show"
             viewport={{ amount: 0.25 }}
           >
-            <TypingText title="| Insight" className="text-center" />
+            <TypingText text="| Insight" className="text-center" />
             <TitleText className="text-center" >Insight about metaverse</TitleText>
             <div className="mt-[50px] flex flex-col gap-[30px]">
               {INSIGHTS.map((item, index) => (
@@ -235,7 +236,41 @@ export default function Web3Page() {
             </div>
           </motion.div>
         </section>
-        <section id='whats' className='grid h-40 place-content-center text-3xl text-white'>Whats</section>
+        <section id='whatsnew' className={cn(styles.p, 'relative z-10')}>
+          <section className={cn(styles.p, 'relative z-10')}>
+            <motion.div
+              className={cn(styles.innerWidth, 'mx-auto flex flex-col gap-8 lg:flex-row')}
+              variants={staggerContainer(1, 1)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: false, amount: 0.25 }}
+            >
+              <motion.div
+                className="flex flex-[0.95] flex-col justify-center"
+                variants={fadeIn('right', 'tween', 0.2, 1)}
+              >
+                <TypingText text="| Whats new?" />
+                <TitleText >What&apos;s new about Metaversus?</TitleText>
+                <div className="mt-[48px] flex flex-wrap justify-between gap-[24px]">
+                  {NEW_FEATURES.map((feature) => (
+                    <NewFeatureCard key={feature.title} {...feature} />
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div
+                className={cn(styles.flexCenter, 'flex-1')}
+                variants={planetVariants('right')}
+              >
+                <img
+                  className="h-[90%] w-[90%] object-contain"
+                  src="/images/whats-new.png"
+                  alt="What's New"
+                />
+              </motion.div>
+            </motion.div>
+          </section>
+        </section>
         <section id='world' className='grid h-40 place-content-center text-3xl text-white'>World</section>
         <section id='feedback' className='grid h-40 place-content-center text-3xl text-white'>Feedback</section>
         <footer id='footer' className='grid h-40 place-content-center text-3xl text-white'>Footer</footer>

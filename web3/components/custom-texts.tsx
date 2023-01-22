@@ -5,15 +5,15 @@ import { cn } from '../utils/styles'
 import { textContainer, textVariant2 } from '../utils/motions';
 
 
-export type TypingTextProps = ComponentProps<typeof motion.p>
+export type TypingTextProps = ComponentProps<typeof motion.p> & { text: string }
 
-export function TypingText({ title = '', className }: TypingTextProps) {
+export function TypingText({ text = '', className }: TypingTextProps) {
   return (
     <motion.p
       variants={textContainer}
       className={cn('text-secondary-white text-[14px] font-normal', className)}
     >
-      {Array.from(title).map((letter, index) => (
+      {Array.from(text).map((letter, index) => (
         <motion.span variants={textVariant2} key={index}>
           {letter === ' ' ? '\u00A0' : letter}
         </motion.span>
