@@ -7,9 +7,10 @@ import { motion } from 'framer-motion'
 import localFont from '@next/font/local'
 import { cn, styles } from '../utils/styles'
 import { EXPLORE_WORLDS, WorldId } from '../utils/constants'
-import { fadeIn, navVariants, slideIn, staggerContainer, textVariant } from '../utils/motions'
+import { fadeIn, navVariants, planetVariants, slideIn, staggerContainer, textVariant } from '../utils/motions'
 import { TitleText, TypingText } from '../components/custom-texts'
 import { ExploreCard } from '../components/explore-card'
+import { StartSteps } from '../components/start-steps'
 import SearchIcon from '@/icons/search-icon'
 import MenuIcon from '@/icons/menu-icon'
 
@@ -174,7 +175,48 @@ export default function Web3Page() {
             </div>
           </motion.div>
         </section>
-        <section id='getstarted' className='grid h-40 place-content-center text-3xl text-white'>GetStarted</section>
+        <section id='getstarted' className={cn(styles.p, 'relative z-10')}>
+          <motion.div
+            variants={staggerContainer(1, 1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: false, amount: 0.25 }}
+            className={cn(styles.innerWidth, 'mx-auto flex flex-col gap-8 lg:flex-row')}
+          >
+            <motion.div
+              variants={planetVariants('left')}
+              className={cn(styles.flexCenter, 'flex-1')}
+            >
+              <img
+                src="/images/get-started.png"
+                alt="Get Started"
+                className="h-[90%] w-[90%] object-contain"
+              />
+            </motion.div>
+            <motion.div
+              variants={fadeIn('left', 'tween', 0.2, 1)}
+              className="flex flex-[0.75] flex-col justify-center"
+            >
+              <TypingText title="| How Metaversus Works" />
+              <TitleText >
+                Get started with just a few clicks
+              </TitleText>
+              <div className="mt-[31px] flex max-w-[370px] flex-col gap-[24px]">
+                {[
+                  'Find a world that suits you and you want to enter',
+                  'Enter the world by reading basmalah to be safe',
+                  'No need to beat around the bush, just stay on the gas and have fun',
+                ].map((feature, index) => (
+                  <StartSteps
+                    key={feature}
+                    number={String(index + 1).padStart(2, '0')}
+                    text={feature}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        </section>
         <section id='insights' className='grid h-40 place-content-center text-3xl text-white'>Insights</section>
         <section id='whats' className='grid h-40 place-content-center text-3xl text-white'>Whats</section>
         <section id='world' className='grid h-40 place-content-center text-3xl text-white'>World</section>
@@ -184,3 +226,9 @@ export default function Web3Page() {
     </>
   )
 }
+
+export const startingFeatures = [
+  'Find a world that suits you and you want to enter',
+  'Enter the world by reading basmalah to be safe',
+  'No need to beat around the bush, just stay on the gas and have fun',
+];
