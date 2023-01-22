@@ -184,18 +184,18 @@ export default function Web3Page() {
             className={cn(styles.innerWidth, 'mx-auto flex flex-col gap-8 lg:flex-row')}
           >
             <motion.div
-              variants={planetVariants('left')}
               className={cn(styles.flexCenter, 'flex-1')}
+              variants={planetVariants('left')}
             >
               <img
+                className="h-[90%] w-[90%] object-contain"
                 src="/images/get-started.png"
                 alt="Get Started"
-                className="h-[90%] w-[90%] object-contain"
               />
             </motion.div>
             <motion.div
-              variants={fadeIn('left', 'tween', 0.2, 1)}
               className="flex flex-[0.75] flex-col justify-center"
+              variants={fadeIn('left', 'tween', 0.2, 1)}
             >
               <TypingText title="| How Metaversus Works" />
               <TitleText >

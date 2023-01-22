@@ -4,10 +4,10 @@ import { styles } from "../utils/styles"
 
 export type StartStepsProps = BaseProps<'div'> & { number: string, text: string }
 
-export function StartSteps({ number, text }: StartStepsProps) {
+export function StartSteps({ className, number, text }: StartStepsProps) {
 
   return (
-    <div className={cn(styles.flexCenter, 'flex-row')}>
+    <div className={cn(styles.flexCenter, 'flex-row', className)}>
       <div className={cn(styles.flexCenter, 'h-[70px] w-[70px] rounded-[24px] bg-[#323F5D]')} >
         <p className="text-[20px] font-bold text-white">
           {number}
