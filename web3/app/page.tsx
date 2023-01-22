@@ -243,7 +243,7 @@ export default function Web3Page() {
               variants={staggerContainer(1, 1)}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: false, amount: 0.25 }}
+              viewport={{ amount: 0.25 }}
             >
               <motion.div
                 className="flex flex-[0.95] flex-col justify-center"
@@ -271,7 +271,35 @@ export default function Web3Page() {
             </motion.div>
           </section>
         </section>
-        <section id='world' className='grid h-40 place-content-center text-3xl text-white'>World</section>
+        <section id='world' className={cn(styles.p, 'relative z-10')}>
+          <motion.div
+            className={cn(styles.innerWidth, 'mx-auto flex flex-col')}
+            variants={staggerContainer(1, 1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ amount: 0.25 }}
+          >
+            <TypingText text="| People on the World" className="text-center" />
+            <TitleText className="text-center"
+            >Track friends around you and invite them to play together in the same
+              world</TitleText>
+            <motion.div
+              className="relative mt-[68px] flex h-[550px] w-full"
+              variants={fadeIn('up', 'tween', 0.3, 1)}
+            >
+              <img src="/images/map.png" alt="Map" className="h-full w-full object-cover" />
+              <div className="absolute bottom-20 right-20 h-[70px] w-[70px] rounded-full bg-[#5D6680] p-[6px]">
+                <img src="/images/people-01.png" alt="People" className="h-full w-full" />
+              </div>
+              <div className="absolute top-10 left-20 h-[70px] w-[70px] rounded-full bg-[#5D6680] p-[6px]">
+                <img src="/images/people-02.png" alt="People" className="h-full w-full" />
+              </div>
+              <div className="absolute top-1/2 left-[45%] h-[70px] w-[70px] rounded-full bg-[#5D6680] p-[6px]">
+                <img src="/images/people-03.png" alt="people" className="h-full w-full" />
+              </div>
+            </motion.div>
+          </motion.div>
+        </section>
         <section id='feedback' className='grid h-40 place-content-center text-3xl text-white'>Feedback</section>
         <footer id='footer' className='grid h-40 place-content-center text-3xl text-white'>Footer</footer>
       </div>
