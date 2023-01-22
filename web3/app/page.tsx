@@ -6,11 +6,12 @@ import { values } from 'ramda'
 import { motion } from 'framer-motion'
 import localFont from '@next/font/local'
 import { cn, styles } from '../utils/styles'
-import { EXPLORE_WORLDS, WorldId } from '../utils/constants'
+import { EXPLORE_WORLDS, INSIGHTS, WorldId } from '../utils/constants'
 import { fadeIn, navVariants, planetVariants, slideIn, staggerContainer, textVariant } from '../utils/motions'
 import { TitleText, TypingText } from '../components/custom-texts'
 import { ExploreCard } from '../components/explore-card'
 import { StartSteps } from '../components/start-steps'
+import { InsightCard } from '../components/insight-card'
 import SearchIcon from '@/icons/search-icon'
 import MenuIcon from '@/icons/menu-icon'
 
@@ -217,7 +218,23 @@ export default function Web3Page() {
             </motion.div>
           </motion.div>
         </section>
-        <section id='insights' className='grid h-40 place-content-center text-3xl text-white'>Insights</section>
+        <section id='insights' className={cn(styles.p, 'relative z-10')}>
+          <motion.div
+            className={cn(styles.innerWidth, 'mx-auto flex flex-col')}
+            variants={staggerContainer(1, 1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ amount: 0.25 }}
+          >
+            <TypingText title="| Insight" className="text-center" />
+            <TitleText className="text-center" >Insight about metaverse</TitleText>
+            <div className="mt-[50px] flex flex-col gap-[30px]">
+              {INSIGHTS.map((item, index) => (
+                <InsightCard key={`insight-${index}`} {...item} index={index + 1} />
+              ))}
+            </div>
+          </motion.div>
+        </section>
         <section id='whats' className='grid h-40 place-content-center text-3xl text-white'>Whats</section>
         <section id='world' className='grid h-40 place-content-center text-3xl text-white'>World</section>
         <section id='feedback' className='grid h-40 place-content-center text-3xl text-white'>Feedback</section>
