@@ -6,8 +6,8 @@ import { values } from 'ramda'
 import { motion } from 'framer-motion'
 import localFont from '@next/font/local'
 import { cn, styles } from '../utils/styles'
-import { EXPLORE_WORLDS, INSIGHTS, NEW_FEATURES, WorldId } from '../utils/constants'
-import { fadeIn, navVariants, planetVariants, slideIn, staggerContainer, textVariant, zoomIn } from '../utils/motions'
+import { EXPLORE_WORLDS, INSIGHTS, NEW_FEATURES, SOCIALS, WorldId } from '../utils/constants'
+import { fadeIn, footerVariants, navVariants, planetVariants, slideIn, staggerContainer, textVariant, zoomIn } from '../utils/motions'
 import { TitleText, TypingText } from '../components/custom-texts'
 import { ExploreCard } from '../components/explore-card'
 import { StartSteps } from '../components/start-steps'
@@ -57,7 +57,7 @@ export default function Web3Page() {
     <>
       <div className={cn(eudoxusFont.className, 'bg-primary-black divide-y divide-white/5')}>
         <motion.nav
-          className={`${styles.px} relative py-8`}
+          className={cn(styles.px, 'relative py-8')}
           variants={navVariants}
           initial='hidden'
           whileInView='show'
@@ -117,17 +117,17 @@ export default function Web3Page() {
         <section id='about' className={cn(styles.p, 'relative z-10')}>
           <div className="gradient-02 z-0" />
           <motion.div
+            className={cn(styles.innerWidth, styles.flexCenter, 'mx-auto flex-col')}
             variants={staggerContainer(1, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.25 }}
-            className={`${styles.innerWidth} mx-auto ${styles.flexCenter} flex-col`}
           >
             <TypingText text="| About Metaversus" className="text-center" />
 
             <motion.p
-              variants={fadeIn('up', 'tween', 0.2, 1)}
               className="text-secondary-white mt-[8px] text-center text-[20px] font-normal sm:text-[32px]"
+              variants={fadeIn('up', 'tween', 0.2, 1)}
             >
               <span className="font-extrabold text-white">Metaverse</span> is a new
               thing in the future, where you can enjoy the virtual world by feeling
@@ -145,20 +145,20 @@ export default function Web3Page() {
             </motion.p>
 
             <motion.img
+              className="mt-[28px] h-[28px] w-[18px] object-contain"
               variants={fadeIn('up', 'tween', 0.3, 1)}
               src="/images/arrow-down.svg"
               alt="Arrow down"
-              className="mt-[28px] h-[28px] w-[18px] object-contain"
             />
           </motion.div>
         </section>
         <section id="explore" className={styles.p} >
           <motion.div
+            className={cn(styles.innerWidth, 'mx-auto flex flex-col')}
             variants={staggerContainer(1, 1)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: false, amount: 0.25 }}
-            className={`${styles.innerWidth} mx-auto flex flex-col`}
+            viewport={{ amount: 0.25 }}
           >
             <TypingText text="| The World" className="text-center" />
             <TitleText className="text-center" >
@@ -179,11 +179,11 @@ export default function Web3Page() {
         </section>
         <section id='getstarted' className={cn(styles.p, 'relative z-10')}>
           <motion.div
+            className={cn(styles.innerWidth, 'mx-auto flex flex-col gap-8 lg:flex-row')}
             variants={staggerContainer(1, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.25 }}
-            className={cn(styles.innerWidth, 'mx-auto flex flex-col gap-8 lg:flex-row')}
           >
             <motion.div
               className={cn(styles.flexCenter, 'flex-1')}
@@ -335,7 +335,7 @@ export default function Web3Page() {
               <img
                 className="h-auto min-h-[210px] w-full rounded-[40px] object-cover lg:h-[610px]"
                 src="/images/planet-09.png"
-                alt="planet-09"
+                alt="Planet 09"
               />
               <motion.div
                 className="absolute left-[-10%] top-[3%] hidden lg:block  "
@@ -350,7 +350,55 @@ export default function Web3Page() {
             </motion.div>
           </motion.div>
         </section>
-        <footer id='footer' className='grid h-40 place-content-center text-3xl text-white'>Footer</footer>
+        <motion.footer
+          className={cn(styles.px, 'relative py-8')}
+          variants={footerVariants}
+          initial="hidden"
+          whileInView="show"
+        >
+          <div className="footer-gradient" />
+          <div className={`${styles.innerWidth} mx-auto flex flex-col gap-8`}>
+            <div className="flex flex-wrap items-center justify-between gap-5">
+              <h4 className="text-[44px] font-bold text-white md:text-[64px]">
+                Enter the Metaverse
+              </h4>
+              <button type="button" className="flex h-fit items-center gap-[12px] rounded-[32px] bg-[#25618B] py-4 px-6">
+                <img
+                  src="/images/headset.svg"
+                  alt="headset"
+                  className="h-[24px] w-[24px] object-contain"
+                />
+                <span className="text-[16px] font-normal text-white">
+                  Enter Metaverse
+                </span>
+              </button>
+            </div>
+
+            <div className="flex flex-col">
+              <div className="mb-[50px] h-[2px] bg-white opacity-10" />
+
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <h4 className="text-[24px] font-extrabold text-white">
+                  METAVERUS
+                </h4>
+                <p className="text-[14px] font-normal text-white opacity-50">
+                  Copyright © {new Date().getFullYear()} Metaversus. All rights reserved.
+                </p>
+
+                <div className="flex gap-4">
+                  {SOCIALS.map((social) => (
+                    <img
+                      className="h-[24px] w-[24px] cursor-pointer object-contain"
+                      key={social.name}
+                      src={social.url}
+                      alt={social.name}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.footer>
       </div>
     </>
   )

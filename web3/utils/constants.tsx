@@ -71,3 +71,22 @@ export const NEW_FEATURES = [
       'In the latest update, your eyes are narrow, making the world more realistic than ever',
   },
 ]
+
+export const SOCIALS = [
+  {
+    name: 'twitter',
+    url: '/images/twitter.svg',
+  },
+  {
+    name: 'linkedin',
+    url: '/images/linkedin.svg',
+  },
+  {
+    name: 'instagram',
+    url: '/images/instagram.svg',
+  },
+  {
+    name: 'facebook',
+    url: '/images/facebook.svg',
+  },
+]
