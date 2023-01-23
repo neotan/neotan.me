@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import { ComponentProps } from 'react'
-import { BaseProps } from 'shared-types'
 import { motion } from 'framer-motion'
 import { cn } from '../utils/styles'
 import { fadeIn } from '../utils/motions'
@@ -15,8 +14,8 @@ export function InsightCard({ className, imgUrl, title, subtitle, index }: Insig
 
   return (
     <motion.div
-      variants={fadeIn('up', 'spring', index * 0.5, 1)}
       className={cn('flex flex-col gap-4 md:flex-row', className)}
+      variants={fadeIn('up', 'spring', index * 0.5, 1)}
     >
       <img
         className="h-[250px] w-full rounded-[32px] object-cover md:w-[270px]"

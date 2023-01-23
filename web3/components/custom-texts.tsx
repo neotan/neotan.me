@@ -1,17 +1,16 @@
-'use client';
+'use client'
 import { ComponentProps } from 'react'
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
 import { cn } from '../utils/styles'
-import { textContainer, textVariant2 } from '../utils/motions';
-
+import { textContainer, textVariant2 } from '../utils/motions'
 
 export type TypingTextProps = ComponentProps<typeof motion.p> & { text: string }
 
 export function TypingText({ text = '', className }: TypingTextProps) {
   return (
     <motion.p
-      variants={textContainer}
       className={cn('text-secondary-white text-[14px] font-normal', className)}
+      variants={textContainer}
     >
       {Array.from(text).map((letter, index) => (
         <motion.span variants={textVariant2} key={index}>

@@ -1,5 +1,5 @@
-"use client"
-import * as React from "react";
+'use client'
+import * as React from 'react'
 import { Cloudinary } from '@cloudinary/url-gen'
 import {
   AdvancedImage,
@@ -7,7 +7,7 @@ import {
   placeholder,
   responsive,
 } from '@cloudinary/react'
-import { BaseProps } from "shared-types";
+import { BaseProps } from 'shared-types'
 import { twMerge } from 'tailwind-merge'
 
 type AdvancedImageProps = React.ComponentProps<typeof AdvancedImage>

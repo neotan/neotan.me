@@ -1,6 +1,5 @@
 import { BaseProps } from 'shared-types'
-import { cn } from '../utils/styles'
-import { styles } from "../utils/styles"
+import { cn, styles } from '../utils/styles'
 
 export type StartStepsProps = BaseProps<'div'> & { number: string, text: string }
 

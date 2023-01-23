@@ -2,7 +2,6 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
-import { values } from 'ramda'
 import { motion } from 'framer-motion'
 import localFont from '@next/font/local'
 import { cn, styles } from '../utils/styles'
@@ -54,66 +53,69 @@ const eudoxusFont = localFont({
 export default function Web3Page() {
   const [activeExplorerWorldId, setActiveExplorerWorldId] = useState<WorldId>('world1')
   return (
-    <>
-      <div className={cn(eudoxusFont.className, 'bg-primary-black divide-y divide-white/5')}>
-        <motion.nav
-          className={cn(styles.px, 'relative py-8')}
-          variants={navVariants}
-          initial='hidden'
-          whileInView='show'
+    <div className={cn(eudoxusFont.className, 'bg-primary-black  overflow-hidden')}>
+      <motion.nav
+        id="navbar"
+        className={cn(styles.px, 'relative py-8')}
+        variants={navVariants}
+        initial='hidden'
+        whileInView='show'
+      >
+        <div className="gradient-01 absolute inset-0 w-1/2" />
+        <div className={cn(styles.innerWidth, 'mx-auto flex justify-between')}>
+          <SearchIcon className="h-6 w-6 stroke-white" />
+          <h2 className='text-2xl font-extrabold leading-7 text-white'>METAVERSUS</h2>
+          <MenuIcon className='h-6 w-6 fill-white stroke-white' />
+        </div>
+      </motion.nav>
+
+
+      <section id='hero' className={cn(styles.py, 'pl-6 sm:pl-16')}>
+        <motion.div
+          className={cn(styles.innerWidth, 'mx-auto flex flex-col')}
+          initial="hidden"
+          whileInView="show"
+          variants={staggerContainer(1, 1)}
+          viewport={{ amount: 0.25 }}
         >
-          <div className="gradient-01 absolute inset-0 w-1/2" />
-          <div className={cn(styles.innerWidth, 'mx-auto flex justify-between')}>
-            <SearchIcon className="h-6 w-6 stroke-white" />
-            <h2 className='text-2xl font-extrabold leading-7 text-white'>METAVERSUS</h2>
-            <MenuIcon className='h-6 w-6 fill-white stroke-white' />
+          <div className="relative z-10 flex flex-col items-center justify-center">
+
+            <motion.h1 className={styles.heroHeading} variants={textVariant(1.2)}>MATAVERSE</motion.h1>
+            <motion.div
+              className='flex items-center justify-center'
+              variants={textVariant(1)}>
+              <h1 className={styles.heroHeading}>MA</h1>
+              <div className={styles.heroDText} />
+              <h1 className={styles.heroHeading}>Ness</h1>
+            </motion.div>
           </div>
 
-        </motion.nav>
-
-        <section id='hero' className={cn(styles.py, 'pl-6 sm:pl-16')}>
           <motion.div
-            className={cn(styles.innerWidth, 'mx-auto flex flex-col')}
-            initial="hidden"
-            whileInView="show"
-            variants={staggerContainer(1, 1)}
-            viewport={{ once: false, amount: 0.25 }}
+            className="relative mt-[-12px] w-full md:mt-[-20px]"
+            variants={slideIn('right', 'tween', 0.2, 1)}
           >
-            <div className="relative z-10 flex flex-col items-center justify-center">
+            <div className="hero-gradient absolute top-[-30px] z-[0] h-[300px] w-full rounded-tl-[140px]" />
+            <img
+              className="relative z-10 h-[350px] w-full rounded-tl-[140px] object-cover sm:h-[500px]"
+              src="/images/cover.png"
+              alt="hero_cover"
+            />
 
-              <motion.h1 className={styles.heroHeading} variants={textVariant(1.2)}>MATAVERSE</motion.h1>
-              <motion.div
-                className='flex items-center justify-center'
-                variants={textVariant(1)}>
-                <h1 className={styles.heroHeading}>MA</h1>
-                <div className={styles.heroDText} />
-                <h1 className={styles.heroHeading}>Ness</h1>
-              </motion.div>
-            </div>
-
-            <motion.div
-              variants={slideIn('right', 'tween', 0.2, 1)}
-              className="relative mt-[-12px] w-full md:mt-[-20px]"
-            >
-              <div className="hero-gradient absolute top-[-30px] z-[0] h-[300px] w-full rounded-tl-[140px]" />
-              <img
-                src="/images/cover.png"
-                alt="hero_cover"
-                className="relative z-10 h-[350px] w-full rounded-tl-[140px] object-cover sm:h-[500px]"
-              />
-
-              <Link href="#explore">
-                <div className="relative z-10 mt-[-50px] flex w-full justify-end pr-[40px] sm:mt-[-70px]">
-                  <img
-                    src="/images/stamp.png"
-                    alt="stamp"
-                    className="h-[100px] w-[100px] object-contain sm:h-[155px] sm:w-[155px]"
-                  />
-                </div>
-              </Link>
-            </motion.div>
+            <Link href="#explore">
+              <div className="relative z-10 mt-[-50px] flex w-full justify-end pr-[40px] sm:mt-[-70px]">
+                <img
+                  className="h-[100px] w-[100px] object-contain sm:h-[155px] sm:w-[155px]"
+                  src="/images/stamp.png"
+                  alt="stamp"
+                />
+              </div>
+            </Link>
           </motion.div>
-        </section>
+        </motion.div>
+      </section>
+
+
+      <div className="relative">
         <section id='about' className={cn(styles.p, 'relative z-10')}>
           <div className="gradient-02 z-0" />
           <motion.div
@@ -121,7 +123,7 @@ export default function Web3Page() {
             variants={staggerContainer(1, 1)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: false, amount: 0.25 }}
+            viewport={{ amount: 0.25 }}
           >
             <TypingText text="| About Metaversus" className="text-center" />
 
@@ -152,6 +154,9 @@ export default function Web3Page() {
             />
           </motion.div>
         </section>
+
+        <div className="gradient-03 z-0" />
+
         <section id="explore" className={styles.p} >
           <motion.div
             className={cn(styles.innerWidth, 'mx-auto flex flex-col')}
@@ -177,13 +182,17 @@ export default function Web3Page() {
             </div>
           </motion.div>
         </section>
+      </div>
+
+
+      <div className="relative">
         <section id='getstarted' className={cn(styles.p, 'relative z-10')}>
           <motion.div
             className={cn(styles.innerWidth, 'mx-auto flex flex-col gap-8 lg:flex-row')}
             variants={staggerContainer(1, 1)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: false, amount: 0.25 }}
+            viewport={{ amount: 0.25 }}
           >
             <motion.div
               className={cn(styles.flexCenter, 'flex-1')}
@@ -219,6 +228,77 @@ export default function Web3Page() {
             </motion.div>
           </motion.div>
         </section>
+
+        <div className="gradient-04 z-0" />
+
+        <section id='whatsnew' className={cn(styles.p, 'relative z-10')}>
+          <motion.div
+            className={cn(styles.innerWidth, 'mx-auto flex flex-col gap-8 lg:flex-row')}
+            variants={staggerContainer(1, 1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ amount: 0.25 }}
+          >
+            <motion.div
+              className="flex flex-[0.95] flex-col justify-center"
+              variants={fadeIn('right', 'tween', 0.2, 1)}
+            >
+              <TypingText text="| Whats new?" />
+              <TitleText >What&apos;s new about Metaversus?</TitleText>
+              <div className="mt-[48px] flex flex-wrap justify-between gap-[24px]">
+                {NEW_FEATURES.map((feature) => (
+                  <NewFeatureCard key={feature.title} {...feature} />
+                ))}
+              </div>
+            </motion.div>
+            <motion.div
+              className={cn(styles.flexCenter, 'flex-1')}
+              variants={planetVariants('right')}
+            >
+              <img
+                className="h-[90%] w-[90%] object-contain"
+                src="/images/whats-new.png"
+                alt="What's New"
+              />
+            </motion.div>
+          </motion.div>
+        </section>
+      </div>
+
+
+      <section id='world' className={cn(styles.p, 'relative z-10')}>
+        <motion.div
+          className={cn(styles.innerWidth, 'mx-auto flex flex-col')}
+          variants={staggerContainer(1, 1)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ amount: 0.25 }}
+        >
+          <TypingText text="| People on the World" className="text-center" />
+          <TitleText className="text-center">
+            Track friends around you and invite them to play together in the same
+            world
+          </TitleText>
+          <motion.div
+            className="relative mt-[68px] flex h-[550px] w-full"
+            variants={fadeIn('up', 'tween', 0.3, 1)}
+          >
+            <img src="/images/map.png" alt="Map" className="h-full w-full object-cover" />
+            <div className="absolute bottom-20 right-20 h-[70px] w-[70px] rounded-full bg-[#5D6680] p-[6px]">
+              <img src="/images/people-01.png" alt="People" className="h-full w-full" />
+            </div>
+            <div className="absolute top-10 left-20 h-[70px] w-[70px] rounded-full bg-[#5D6680] p-[6px]">
+              <img src="/images/people-02.png" alt="People" className="h-full w-full" />
+            </div>
+            <div className="absolute top-1/2 left-[45%] h-[70px] w-[70px] rounded-full bg-[#5D6680] p-[6px]">
+              <img src="/images/people-03.png" alt="people" className="h-full w-full" />
+            </div>
+          </motion.div>
+        </motion.div>
+      </section>
+
+
+      <div className="relative">
         <section id='insights' className={cn(styles.p, 'relative z-10')}>
           <motion.div
             className={cn(styles.innerWidth, 'mx-auto flex flex-col')}
@@ -236,71 +316,9 @@ export default function Web3Page() {
             </div>
           </motion.div>
         </section>
-        <section id='whatsnew' className={cn(styles.p, 'relative z-10')}>
-          <section className={cn(styles.p, 'relative z-10')}>
-            <motion.div
-              className={cn(styles.innerWidth, 'mx-auto flex flex-col gap-8 lg:flex-row')}
-              variants={staggerContainer(1, 1)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ amount: 0.25 }}
-            >
-              <motion.div
-                className="flex flex-[0.95] flex-col justify-center"
-                variants={fadeIn('right', 'tween', 0.2, 1)}
-              >
-                <TypingText text="| Whats new?" />
-                <TitleText >What&apos;s new about Metaversus?</TitleText>
-                <div className="mt-[48px] flex flex-wrap justify-between gap-[24px]">
-                  {NEW_FEATURES.map((feature) => (
-                    <NewFeatureCard key={feature.title} {...feature} />
-                  ))}
-                </div>
-              </motion.div>
 
-              <motion.div
-                className={cn(styles.flexCenter, 'flex-1')}
-                variants={planetVariants('right')}
-              >
-                <img
-                  className="h-[90%] w-[90%] object-contain"
-                  src="/images/whats-new.png"
-                  alt="What's New"
-                />
-              </motion.div>
-            </motion.div>
-          </section>
-        </section>
-        <section id='world' className={cn(styles.p, 'relative z-10')}>
-          <motion.div
-            className={cn(styles.innerWidth, 'mx-auto flex flex-col')}
-            variants={staggerContainer(1, 1)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ amount: 0.25 }}
-          >
-            <TypingText text="| People on the World" className="text-center" />
-            <TitleText className="text-center">
-              Track friends around you and invite them to play together in the same
-              world
-            </TitleText>
-            <motion.div
-              className="relative mt-[68px] flex h-[550px] w-full"
-              variants={fadeIn('up', 'tween', 0.3, 1)}
-            >
-              <img src="/images/map.png" alt="Map" className="h-full w-full object-cover" />
-              <div className="absolute bottom-20 right-20 h-[70px] w-[70px] rounded-full bg-[#5D6680] p-[6px]">
-                <img src="/images/people-01.png" alt="People" className="h-full w-full" />
-              </div>
-              <div className="absolute top-10 left-20 h-[70px] w-[70px] rounded-full bg-[#5D6680] p-[6px]">
-                <img src="/images/people-02.png" alt="People" className="h-full w-full" />
-              </div>
-              <div className="absolute top-1/2 left-[45%] h-[70px] w-[70px] rounded-full bg-[#5D6680] p-[6px]">
-                <img src="/images/people-03.png" alt="people" className="h-full w-full" />
-              </div>
-            </motion.div>
-          </motion.div>
-        </section>
+        <div className="gradient-04 z-0" />
+
         <section id='feedback' className={styles.p}>
           <motion.div
             className={cn(styles.innerWidth, 'mx-auto flex flex-col gap-6 lg:flex-row')}
@@ -350,56 +368,61 @@ export default function Web3Page() {
             </motion.div>
           </motion.div>
         </section>
-        <motion.footer
-          className={cn(styles.px, 'relative py-8')}
-          variants={footerVariants}
-          initial="hidden"
-          whileInView="show"
-        >
-          <div className="footer-gradient" />
-          <div className={`${styles.innerWidth} mx-auto flex flex-col gap-8`}>
-            <div className="flex flex-wrap items-center justify-between gap-5">
-              <h4 className="text-[44px] font-bold text-white md:text-[64px]">
-                Enter the Metaverse
+      </div>
+
+
+      <motion.footer
+        id='footer'
+        className={cn(styles.px, 'relative py-8')}
+        variants={footerVariants}
+        initial="hidden"
+        whileInView="show"
+      >
+        <div className="footer-gradient" />
+        <div className={`${styles.innerWidth} mx-auto flex flex-col gap-8`}>
+          <div className="flex flex-wrap items-center justify-between gap-5">
+            <h4 className="text-[44px] font-bold text-white md:text-[64px]">
+              Enter the Metaverse
+            </h4>
+            <button type="button" className="flex h-fit items-center gap-[12px] rounded-[32px] bg-[#25618B] py-4 px-6">
+              <img
+                className="h-[24px] w-[24px] object-contain"
+                src="/images/headset.svg"
+                alt="headset"
+              />
+              <span className="text-[16px] font-normal text-white">
+                Enter Metaverse
+              </span>
+            </button>
+          </div>
+
+          <div className="flex flex-col">
+            <div className="mb-[50px] h-[2px] bg-white opacity-10" />
+
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <h4 className="text-[24px] font-extrabold text-white">
+                METAVERUS
               </h4>
-              <button type="button" className="flex h-fit items-center gap-[12px] rounded-[32px] bg-[#25618B] py-4 px-6">
-                <img
-                  src="/images/headset.svg"
-                  alt="headset"
-                  className="h-[24px] w-[24px] object-contain"
-                />
-                <span className="text-[16px] font-normal text-white">
-                  Enter Metaverse
-                </span>
-              </button>
-            </div>
+              <p className="text-[14px] font-normal text-white opacity-50">
+                Copyright © {new Date().getFullYear()} Metaversus. All rights reserved.
+              </p>
 
-            <div className="flex flex-col">
-              <div className="mb-[50px] h-[2px] bg-white opacity-10" />
-
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <h4 className="text-[24px] font-extrabold text-white">
-                  METAVERUS
-                </h4>
-                <p className="text-[14px] font-normal text-white opacity-50">
-                  Copyright © {new Date().getFullYear()} Metaversus. All rights reserved.
-                </p>
-
-                <div className="flex gap-4">
-                  {SOCIALS.map((social) => (
+              <div className="flex gap-4">
+                {SOCIALS.map((social) => (
+                  <Link key={social.name} href={social.url}>
                     <img
                       className="h-[24px] w-[24px] cursor-pointer object-contain"
                       key={social.name}
-                      src={social.url}
+                      src={social.src}
                       alt={social.name}
                     />
-                  ))}
-                </div>
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
-        </motion.footer>
-      </div>
-    </>
+        </div>
+      </motion.footer>
+    </div>
   )
 }

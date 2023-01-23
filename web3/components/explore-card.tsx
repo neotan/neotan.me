@@ -1,12 +1,10 @@
 /* eslint-disable @next/next/no-img-element */ // 'next/image' requires static size of image
-'use client';
-import { ComponentProps, Dispatch, MouseEventHandler, SetStateAction } from "react";
-import { motion } from 'framer-motion';
+'use client'
+import { ComponentProps, Dispatch, MouseEventHandler, SetStateAction } from 'react'
+import { motion } from 'framer-motion'
 import { cn, styles } from '../utils/styles'
 import { WorldId } from '../utils/constants'
 import { fadeIn } from '../utils/motions'
-
-
 
 export type ExploreCardProps = ComponentProps<typeof motion.div> & {
   id: WorldId,

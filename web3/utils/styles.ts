@@ -1,5 +1,5 @@
-import { clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { clsx } from 'clsx'
+import { twMerge } from 'tailwind-merge'
 
 export const styles = {
   innerWidth: 'w-full 2xl:max-w-[1280px]',

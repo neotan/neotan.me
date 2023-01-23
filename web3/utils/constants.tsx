@@ -74,19 +74,28 @@ export const NEW_FEATURES = [
 
 export const SOCIALS = [
   {
+    name: 'github',
+    src: '/images/github.svg',
+    url: 'https://github.com/neotan/neotan.me/tree/master/web3',
+  },
+  {
     name: 'twitter',
-    url: '/images/twitter.svg',
+    src: '/images/twitter.svg',
+    url: '#',
   },
   {
     name: 'linkedin',
-    url: '/images/linkedin.svg',
+    src: '/images/linkedin.svg',
+    url: '#',
   },
   {
     name: 'instagram',
-    url: '/images/instagram.svg',
+    src: '/images/instagram.svg',
+    url: '#',
   },
   {
     name: 'facebook',
-    url: '/images/facebook.svg',
+    src: '/images/facebook.svg',
+    url: '#',
   },
 ]
