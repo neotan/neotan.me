@@ -24,7 +24,7 @@ export const navVariants = {
       delay: 0.5,
     },
   },
-};
+}
 
 
 export function slideIn(
@@ -101,7 +101,7 @@ export const textVariant2 = {
       ease: 'easeIn',
     },
   },
-};
+}
 
 export const textContainer = {
   hidden: {
@@ -111,7 +111,7 @@ export const textContainer = {
     opacity: 1,
     transition: { staggerChildren: 0.1, delayChildren: i * 0.1 },
   }),
-};
+}
 
 export function fadeIn(
   direction: string,
@@ -152,6 +152,25 @@ export function planetVariants(direction: string) {
         type: 'spring',
         duration: 1.8,
         delay: 0.5,
+      },
+    },
+  }
+}
+
+export function zoomIn(delay: number, duration: number) {
+  return {
+    hidden: {
+      scale: 0,
+      opacity: 0,
+    },
+    show: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        type: 'tween',
+        delay,
+        duration,
+        ease: 'easeOut',
       },
     },
   }

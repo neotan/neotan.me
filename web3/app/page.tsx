@@ -7,7 +7,7 @@ import { motion } from 'framer-motion'
 import localFont from '@next/font/local'
 import { cn, styles } from '../utils/styles'
 import { EXPLORE_WORLDS, INSIGHTS, NEW_FEATURES, WorldId } from '../utils/constants'
-import { fadeIn, navVariants, planetVariants, slideIn, staggerContainer, textVariant } from '../utils/motions'
+import { fadeIn, navVariants, planetVariants, slideIn, staggerContainer, textVariant, zoomIn } from '../utils/motions'
 import { TitleText, TypingText } from '../components/custom-texts'
 import { ExploreCard } from '../components/explore-card'
 import { StartSteps } from '../components/start-steps'
@@ -280,9 +280,10 @@ export default function Web3Page() {
             viewport={{ amount: 0.25 }}
           >
             <TypingText text="| People on the World" className="text-center" />
-            <TitleText className="text-center"
-            >Track friends around you and invite them to play together in the same
-              world</TitleText>
+            <TitleText className="text-center">
+              Track friends around you and invite them to play together in the same
+              world
+            </TitleText>
             <motion.div
               className="relative mt-[68px] flex h-[550px] w-full"
               variants={fadeIn('up', 'tween', 0.3, 1)}
@@ -300,7 +301,55 @@ export default function Web3Page() {
             </motion.div>
           </motion.div>
         </section>
-        <section id='feedback' className='grid h-40 place-content-center text-3xl text-white'>Feedback</section>
+        <section id='feedback' className={styles.p}>
+          <motion.div
+            className={cn(styles.innerWidth, 'mx-auto flex flex-col gap-6 lg:flex-row')}
+            variants={staggerContainer(1, 1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ amount: 0.25 }}
+          >
+            <motion.div
+              className="gradient-05 relative flex flex-[0.5] flex-col justify-end rounded-[32px] border-[1px] border-[#6A6A6A] p-4 text-white sm:p-8 lg:max-w-[370px]"
+              variants={fadeIn('right', 'tween', 0.2, 1)}
+            >
+              <div className="feedback-gradient" />
+              <div>
+                <h4 className="text-[26px] font-bold leading-[36.32px] sm:text-[32px] sm:leading-[40.32px]">
+                  Samantha
+                </h4>
+                <p className="mt-[8px] text-[12px] font-normal leading-[16.68px] sm:text-[18px] sm:leading-[22.68px]">
+                  Founder Metaverus
+                </p>
+              </div>
+              <p className="mt-[24px] text-[18px] font-normal leading-[39.6px] sm:text-[24px] sm:leading-[45.6px]">
+                “With the development of today&apos;s technology, metaverse is very
+                useful for today&apos;s work, or can be called web 3.0. by using
+                metaverse you can use it as anything”
+              </p>
+            </motion.div>
+            <motion.div
+              className="relative flex flex-1 items-center justify-center"
+              variants={fadeIn('left', 'tween', 0.2, 1)}
+            >
+              <img
+                className="h-auto min-h-[210px] w-full rounded-[40px] object-cover lg:h-[610px]"
+                src="/images/planet-09.png"
+                alt="planet-09"
+              />
+              <motion.div
+                className="absolute left-[-10%] top-[3%] hidden lg:block  "
+                variants={zoomIn(0.4, 1)}
+              >
+                <img
+                  className="h-[155px] w-[155px] object-contain"
+                  src="/images/stamp.png"
+                  alt="Stamp"
+                />
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </section>
         <footer id='footer' className='grid h-40 place-content-center text-3xl text-white'>Footer</footer>
       </div>
     </>
