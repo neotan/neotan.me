@@ -1,0 +1,30 @@
+{
+    "name": "utils",
+    "version": "0.0.0",
+    "main": "index.ts",
+    "scripts": {
+        "lint": "eslint *.ts*",
+        "clean": "rm -rf .next next.lock node_modules yarn.lock yarn-error.log pnpm-lock.yaml"
+    },
+    "dependencies": {
+        "clsx": "^1.2.1",
+        "date-fns": "^2.29.3",
+        "framer-motion": "^8.4.2",
+        "fuse.js": "^6.6.2",
+        "ramda": "^0.28.0",
+        "react": "18.2.0",
+        "react-dom": "^18.0.10",
+        "rison": "^0.1.1",
+        "tailwind-merge": "^1.8.1"
+    },
+    "devDependencies": {
+        "@types/node": "^17.0.45",
+        "@types/ramda": "^0.28.20",
+        "@types/react": "^18.0.26",
+        "@types/react-dom": "^18.0.10",
+        "@types/rison": "^0.0.7",
+        "eslint": "^8.31.0",
+        "tsconfig": "workspace:*",
+        "typescript": "^4.9.4"
+    }
+}

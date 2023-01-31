@@ -82,9 +82,12 @@ async function getAllMdxs(mdxRootPath) {
     for (const rawMdx of rawMdxs) {
       const { filePath, mdxSource } = rawMdx
       const compiled = await compileMdx(mdxSource)
+
+      if (!compiled?.frontmatter?.published) continue
+
       result.push({
         ...compiled,
-        frontmatter: compiled?.frontmatter || {},
+        ...compiled?.frontmatter,
         slug: extractSlug(filePath),
         filePath,
         readTime: calcReadTime(mdxSource),

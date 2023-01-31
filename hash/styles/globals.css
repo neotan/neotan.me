@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply h-full;
+  }
+  body {
+    @apply h-full;
+  }
+  #__next {
+    @apply h-full;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading font-medium;
+  }
+
+  /* hide clear icon for input.type='search' */
+  input.hide-clear[type='search']::-ms-clear,
+  input.hide-clear[type='search']::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  input.hide-clear[type='search']::-webkit-search-decoration,
+  input.hide-clear[type='search']::-webkit-search-cancel-button,
+  input.hide-clear[type='search']::-webkit-search-results-button,
+  input.hide-clear[type='search']::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+  }
+}
+
+@layer components {
+  .menu :where(li) > :where(*:not(ul)) {
+    gap: 0.75rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+  }
+}
+
+@layer utilities {
+  .border-1 {
+    border-width: 1px;
+  }
+
+  .content-visible {
+    content-visibility: visible;
+  }
+  
+  .content-hidden {
+    content-visibility: hidden;
+  }
+
+  .content-auto {
+    content-visibility: auto;
+  }
+}

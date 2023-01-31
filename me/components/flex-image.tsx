@@ -12,7 +12,7 @@ import { twMerge } from 'tailwind-merge'
 
 type AdvancedImageProps = React.ComponentProps<typeof AdvancedImage>
 
-type FlexImageProps = {
+export type FlexImageProps = {
   cloudName?: string
   cldImg?: AdvancedImageProps['cldImg']
   cloudinaryImgPubId?: string

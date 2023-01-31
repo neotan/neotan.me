@@ -1,0 +1,5 @@
+{
+  "https://cdn.skypack.dev/-/hash-wasm@v4.9.0-1PX4FDpl0KOGhc6wFs5C/dist=es2019,mode=imports/optimized/hash-wasm.js": { "integrity": "sha512-BAn2lrtKcpMgadwzcu+Sv09jcQZxeUkMboY8OSa+OPEDDflHs5RZcnEpuP4mZTNi27lFqrsIUnQ+DZEjV9FFdQ==", "contentType": "application/javascript; charset=utf-8" },
+  "https://cdn.skypack.dev/hash-wasm": { "integrity": "sha512-LwsR401bcI+RhneX8WQj30h3w9TNF/bOlqIcoOGFY85TDElhdcHcXmcT4cXQNI/ZI/PeNxI2v7E+F0XwvCBHAQ==", "contentType": "application/javascript; charset=utf-8" },
+  "version": 1
+}

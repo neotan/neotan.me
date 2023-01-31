@@ -5,8 +5,23 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import localFont from '@next/font/local'
 import { cn, styles } from '../utils/styles'
-import { EXPLORE_WORLDS, INSIGHTS, NEW_FEATURES, SOCIALS, WorldId } from '../utils/constants'
-import { fadeIn, footerVariants, navVariants, planetVariants, slideIn, staggerContainer, textVariant, zoomIn } from '../utils/motions'
+import {
+  EXPLORE_WORLDS,
+  INSIGHTS,
+  NEW_FEATURES,
+  SOCIALS,
+  WorldId
+} from '../utils/constants'
+import {
+  fadeIn,
+  footerVariants,
+  navVariants,
+  planetVariants,
+  slideIn,
+  staggerContainer,
+  textVariant,
+  zoomIn
+} from '../utils/motions'
 import { TitleText, TypingText } from '../components/custom-texts'
 import { ExploreCard } from '../components/explore-card'
 import { StartSteps } from '../components/start-steps'
@@ -62,15 +77,15 @@ export default function Web3Page() {
         whileInView='show'
       >
         <div className="gradient-01 absolute inset-0 w-1/2" />
-        <div className={cn(styles.innerWidth, 'mx-auto flex justify-between')}>
+        <div className={cn(styles.innerWidth, 'mx-auto flex justify-between gap-8')}>
           <SearchIcon className="h-6 w-6 stroke-white" />
-          <h2 className='text-2xl font-extrabold leading-7 text-white'>METAVERSUS</h2>
+          <h2 className='text-[24px] font-extrabold leading-[30.24px] text-white'>METAVERSUS</h2>
           <MenuIcon className='h-6 w-6 fill-white stroke-white' />
         </div>
       </motion.nav>
 
 
-      <section id='hero' className={cn(styles.py, 'pl-6 sm:pl-16')}>
+      <section id='hero' className={cn(styles.py,)}>
         <motion.div
           className={cn(styles.innerWidth, 'mx-auto flex flex-col')}
           initial="hidden"

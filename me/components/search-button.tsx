@@ -1,29 +1,36 @@
 'use client'
-import { useState } from 'react'
+import '@reach/dialog/styles.css'
+import { ComponentPropsWithoutRef, useState } from 'react'
 import Link from 'next/link'
-import { FiSearch } from 'react-icons/fi'
-import { twMerge } from 'tailwind-merge'
-import { Input, Kbd, Modal } from 'react-daisyui'
+import { BiSearch } from 'react-icons/bi'
+import { cn } from 'utils/helpers'
+import { DialogContent, DialogOverlay } from '@reach/dialog'
 import { map, pipe, values } from 'ramda'
 import { useKey } from 'react-use'
 import { useFuse } from 'utils/hooks'
 import { formatDate } from 'utils/helpers'
-import type { BaseProps } from 'shared-types'
 import mdxData from 'public/db.json'
 import type { BlogSearchIndex, MdxDoc } from '@/types'
-import Portal from '@/components/portal'
 import { FlexImage } from './flex-image'
 
-const searchIndices = pipe(values, map(mdxToFuseIndex))(mdxData)
+
+type SearchButtonProps = ComponentPropsWithoutRef<'svg'>
+
+const searchIndices = pipe(
+  values,
+  map(mdxToFuseIndex),
+)(mdxData)
 const fuseOptions = {
   keys: ['title', 'content', 'tags'],
   includeScore: true,
   threshold: 0.6,
 }
 
-export default function SearchButton({ className }: BaseProps<'svg'>) {
+export default function SearchButton({ className }: SearchButtonProps) {
   const [visable, setVisable] = useState(false)
-  const toggleModal = () => setVisable(prev => !prev)
+  const toggleModal = () => setVisable(prev => {
+    return !prev
+  })
   useKey('/', toggleModal)
 
   const [searchTerm, setSeachTerm] = useState('')
@@ -35,48 +42,44 @@ export default function SearchButton({ className }: BaseProps<'svg'>) {
 
   return (
     <>
-      <FiSearch
+      <BiSearch
         title="Press [ / ] to open/close"
-        className={twMerge('cursor-pointer', className)}
+        className={cn('cursor-pointer', className)}
         onClick={toggleModal}
       />
-      <Portal>
-        <Modal
-          className="mt-10 overflow-y-hidden"
-          open={visable}
-          onClickBackdrop={toggleModal}
-          style={{ alignSelf: 'start' }}
-        >
-          <Modal.Header className="mb-0">
-            <Input
-              className="w-full"
-              bordered
-              autoFocus
-              type="search"
-              placeholder="Search, press [ Esc] to clear"
-              onChange={e => {
-                setSeachTerm(e?.target?.value)
-              }}
-            />
-            <label className="label">
-              <span className="label-text-alt">Found {result.length}</span>
-              <span className="label-text-alt">
-                Press{' '}
-                <Kbd className="mx-1 rounded-sm" size="xs">
-                  Esc
-                </Kbd>{' '}
-                to clear,
-                <Kbd className="mx-1 rounded-sm" size="xs">
-                  /
-                </Kbd>{' '}
-                to open/close
-              </span>
-            </label>
-          </Modal.Header>
-          <Modal.Body className="divide-y-2 divide-dashed divide-base-200">
+      <DialogOverlay
+        isOpen={visable}
+        onDismiss={toggleModal}
+        style={{ alignSelf: 'start' }}
+      >
+        <DialogContent className="modal-box">
+          <input
+            className="input w-full"
+            autoFocus
+            type="search"
+            placeholder="Search, press [ Esc] to clear"
+            onChange={e => {
+              setSeachTerm(e?.target?.value)
+            }}
+          />
+          <label className="label">
+            <span className="label-text-alt">Found {result.length}</span>
+            <span className="label-text-alt">
+              Press{' '}
+              <kbd className="kbd kbd-xs mx-1 rounded-sm">
+                Esc
+              </kbd>{' '}
+              to clear,
+              <kbd className="rounded-xs kbd kbd-xs mx-1">
+                /
+              </kbd>{' '}
+              to open/close
+            </span>
+          </label>
+          <ol className="divide-base-200 divide-dashed overflow-y-auto">
             {result?.map(({ item }) => {
               return (
-                <Link key={item.slug} href={item.url || ''} className="flex justify-between space-x-4 p-3 transition hover:bg-base-200">
+                <Link key={item.slug} href={item.url || ''} className="flex justify-between space-x-4 p-3 transition hover:bg-gray-200">
                   <FlexImage
                     className="hidden w-20 md:inline-block"
                     cloudinaryImgPubId={item.cloudinaryImgPubId}
@@ -85,9 +88,9 @@ export default function SearchButton({ className }: BaseProps<'svg'>) {
                 </Link>
               )
             })}
-          </Modal.Body>
-        </Modal>
-      </Portal>
+          </ol>
+        </DialogContent>
+      </DialogOverlay>
     </>
   )
 }
@@ -95,10 +98,15 @@ export default function SearchButton({ className }: BaseProps<'svg'>) {
 function mdxToFuseIndex({
   slug,
   content,
-  frontmatter,
-}: Pick<MdxDoc, 'slug' | 'content' | 'frontmatter'>): BlogSearchIndex {
-  const { title, date, catalog, cloudinaryImgPubId, tags, description } =
-    frontmatter
+  title,
+  date,
+  catalog,
+  cloudinaryImgPubId,
+  tags,
+  description,
+  published,
+}: Pick<MdxDoc, 'slug' | 'content' | 'title' | 'date' | 'catalog' | 'cloudinaryImgPubId' | 'tags' | 'description' | 'published'
+>): BlogSearchIndex {
 
   return {
     slug,
@@ -109,6 +117,7 @@ function mdxToFuseIndex({
     tags,
     catalog,
     description,
+    published,
     date: formatDate(date || '', 'yyyy-MM-dd'),
   }
 }

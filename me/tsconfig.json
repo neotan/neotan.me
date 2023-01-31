@@ -41,6 +41,7 @@
     "types/**/*.tsx",
     "utils/**/*.ts",
     "utils/**/*.tsx",
+    "app/blog/[slug]/layout.tsx",
   ],
   "exclude": [
     "node_modules"

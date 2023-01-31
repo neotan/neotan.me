@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { FaGithub, FaLinkedin } from 'react-icons/fa'
+import { FaGithub } from 'react-icons/fa'
 import { slice } from 'ramda'
 import { twMerge } from 'tailwind-merge'
 import type { BaseProps } from 'shared-types'
@@ -13,11 +13,12 @@ export default function Footer({ className }: BaseProps<'footer'>) {
       )}
     >
       <div className="flex space-x-4">
-        <Link href="https://github.com/neotan/neotan.me">
+        <Link
+          href="https://github.com/neotan/neotan.me/tree/master/me"
+          rel='noopener noreferrer'
+          target='_blank'
+        >
           <FaGithub className="cursor-pointer" size={24} />
-        </Link>
-        <Link href="https://www.linkedin.com/in/neotan/">
-          <FaLinkedin className="cursor-pointer" size={24} />
         </Link>
       </div>
       <div className="font-heading justify-center space-x-2 text-lg sm:flex">

@@ -5,12 +5,10 @@ export interface MdxDoc {
   filePath: string
   readTime: ReadTimeResults
   mdxSource: string
-  frontmatter: Frontmatter
   code: string
   content: string
-}
 
-export interface Frontmatter {
+  // frontmatter
   title: string
   published?: boolean
   tags?: string
@@ -22,12 +20,9 @@ export interface Frontmatter {
 
 export type BlogSearchIndex = {
   description?: string
-  cloudinaryImgPubId?: Frontmatter['cloudinaryImgPubId']
-  date?: Frontmatter['date']
-  tags?: Frontmatter['tags']
-  title: Frontmatter['title']
   url?: string
   catalog?: string
-} & Omit<MdxDoc, 'code' | 'mdxSource' | 'filePath' | 'readTime' | 'frontmatter'>
+  published?: boolean
+} & Omit<MdxDoc, 'code' | 'mdxSource' | 'filePath' | 'readTime'>
 
 

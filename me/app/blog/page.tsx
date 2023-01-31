@@ -1,39 +1,71 @@
-import { pathOr, sortBy, values } from 'ramda'
-import { formatDate } from 'utils/helpers'
-import type { MdxDoc } from '@/types'
-import ArticleCard from '@/components/article-card'
+'use client'
+import { ReactNode, useState } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+import { values } from 'ramda'
 import mdxData from '@/public/db.json'
+import { FlexImage } from '@/components/flex-image'
+import { MdxDoc } from '@/types'
+import NavTabs from '@/components/nav-tabs'
+import Bio from '@/components/bio'
+import Navbar from '@/components/navbar'
 
-type Slug = keyof typeof mdxData
+type Slug = keyof typeof mdxData;
 
-export default function Tldr() {
-  let posts = sortBy(
-    pathOr('', ['frontmatter', 'date']),
-    values(mdxData as Record<Slug, MdxDoc>)
-  )
+export default function HomeIndex() {
 
   return (
-    <main className="blog-page grid grid-cols-1 flex-wrap gap-12 p-4 sm:grid-cols-2 lg:grid-cols-3 xl:mx-20 2xl:mx-40">
-      {posts
-        .reverse()
-        .map(
-          ({
+    <>
+      <Navbar className='px-0 sm:px-10' >
+        <Link href='/'>
+          <Image
+            className='rounded-full shadow-3xl'
+            alt='Avatar'
+            src='/images/avatar-icon.png'
+            width={60}
+            height={60}
+          />
+        </Link>
+      </Navbar>
+      <Bio />
+      <NavTabs />
+      <section key='tldr' className='grid grid-cols-1 gap-6 sm:grid-cols-2'
+      >
+        {values(mdxData as Record<Slug, MdxDoc>)
+          .sort((right, left) =>
+            String(left?.date ?? '').localeCompare(String(right?.date ?? '')))
+          .map(({
             slug,
-            readTime,
-            frontmatter: { date, cloudinaryImgPubId, title },
+            title,
+            cloudinaryImgPubId = '',
+            description,
+            published
           }) => {
+            if (!published) return null
+
             return (
-              <ArticleCard
-                key={slug}
-                title={title || ''}
-                cloudinaryImgPubId={cloudinaryImgPubId}
-                readTime={readTime?.text}
-                slug={`/blog/${slug}`}
-                createdAt={formatDate(date || '', 'yyyy-MM-dd')}
-              />
+              <Link key={slug} href={`/blog/${slug}`}>
+                <div className='card h-full shadow-2xl'>
+                  <div className="card-body rounded-2xl p-4 sm:p-8">
+                    <figure className='grow'>
+                      {cloudinaryImgPubId.length > 10 // length of Cloudinary Account
+                        ? <FlexImage
+                          className='h-52 rounded-b-none object-cover'
+                          cloudinaryImgPubId={cloudinaryImgPubId} />
+                        : <div className='items-center justify-center text-7xl'>{cloudinaryImgPubId}</div>
+                      }
+                    </figure>
+                    <div className='card-actions'>
+                      <h2 className="">{title}</h2>
+                      {/* <div className="">{description}</div> */}
+                    </div>
+                  </div>
+                </div>
+              </Link>
             )
-          },
-        )}
-    </main>
+          })}
+      </section>
+    </>
   )
 }
+

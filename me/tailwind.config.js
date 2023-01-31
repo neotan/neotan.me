@@ -1,25 +1,6 @@
-/** @type {import('tailwindcss').Config} */
 const defaultTheme = require('tailwindcss/defaultTheme')
 const { mergeDeepRight } = require('ramda')
 const baseConfig = require("tailwind-config-custom/tailwind.config.js");
-
-const LIGHT_THEME_NAME_1 = 'light'
-const DARK_THEME_NAME_1 = 'dark'
-
-const LIGHT_THEME_NAME_2 = 'wireframe'
-const DARK_THEME_NAME_2 = 'black'
-
-const LIGHT_THEME_NAME_3 = 'corporate'
-const DARK_THEME_NAME_3 = 'business'
-
-const LIGHT_THEME_NAME_4 = 'lofi'
-const DARK_THEME_NAME_4 = 'dracula'
-
-const LIGHT_THEME_NAME_5 = 'autumn'
-const DARK_THEME_NAME_5 = 'forest'
-
-const LIGHT_THEME_NAME_6 = 'pastel'
-const DARK_THEME_NAME_6 = 'luxury'
 
 module.exports = mergeDeepRight(
   baseConfig,
@@ -27,38 +8,79 @@ module.exports = mergeDeepRight(
     theme: {
       extend: {
         fontFamily: {
-          heading: ['var(--mitr-font)', ...defaultTheme.fontFamily.sans],
-          code: ['var(--jbmono-font)', ...defaultTheme.fontFamily.serif],
+          code: ['"var(--font-jetbrainsmono)"', ...defaultTheme.fontFamily.mono],
         },
       }
     },
     content: [
-      "./app/**/*.{js,ts,jsx,tsx}",
-      './components/**/*.{js,ts,jsx,tsx}',
-      './icons/**/*.{js,ts,jsx,tsx}',
-      '../../packages/ui/dist/**/*.{js,ts,jsx,tsx}',
-      'node_modules/daisyui/dist/**/*.js',
-      'node_modules/react-daisyui/dist/**/*.js',
+      'app/**/*.{js,ts,jsx,tsx}',
+      'components/**/*.{js,ts,jsx,tsx}',
+      'icons/**/*.{js,ts,jsx,tsx}',
+      '../../packages/ui/dist/**/*.{js,ts,jsx,tsx}'
     ],
-    plugins: [require('@tailwindcss/typography'), require('daisyui')],
+    plugins: [
+      require('@tailwindcss/typography'),
+      require('daisyui'),
+      require('tailwind-scrollbar'),
+      require('tailwindcss-debug-screens'),
+    ],
     daisyui: {
-      styled: true,
-      darkTheme: DARK_THEME_NAME_2,
       themes: [
-        LIGHT_THEME_NAME_1,
-        DARK_THEME_NAME_1,
-        LIGHT_THEME_NAME_2,
-        DARK_THEME_NAME_2,
-        LIGHT_THEME_NAME_3,
-        DARK_THEME_NAME_3,
-        LIGHT_THEME_NAME_4,
-        DARK_THEME_NAME_4,
-        LIGHT_THEME_NAME_5,
-        DARK_THEME_NAME_5,
-        LIGHT_THEME_NAME_6,
-        DARK_THEME_NAME_6,
+        {
+          light: {
+            ...require("daisyui/src/colors/themes")["[data-theme=wireframe]"],
+            "primary": "#303040",
+            "secondary": "#97979f",
+            "base-100": "#ffffff",
+            "accent": "#6767ff",
+            "error": "#ff522f",
+            "info": "#20b8ff",
+            "font-family": 'var(--font-montserrat)',
+            // "neutral": "#97979f",
+            // "success": "#0D6839",
+            // "warning": "#BA7B0D",
+
+            "--rounded-box": "1rem", // border radius rounded-box utility class, used in card and other large boxes
+            "--rounded-btn": "0.5rem", // border radius rounded-btn utility class, used in buttons and similar element
+            "--rounded-badge": "1.9rem", // border radius rounded-badge utility class, used in badges and similar
+            "--animation-btn": "0.25s", // duration of animation when you click on button
+            "--animation-input": "0.2s", // duration of animation for inputs like checkbox, toggle, radio, etc
+            "--btn-text-case": "uppercase", // set default text transform for buttons
+            "--btn-focus-scale": "0.95", // scale transform of button when you focus on it
+            "--border-btn": "1px", // border width of buttons
+            "--tab-border": "1px", // border width of tabs
+            "--tab-radius": "0.5rem", // border radius of tabs 
+          },
+        },
+        {
+          dark: {
+            ...require("daisyui/src/colors/themes")["[data-theme=black]"],
+            "font-family": 'var(--font-montserrat)',
+            "primary": "#ffffff",
+            "secondary": "#777777",
+            "accent": "#6767ff",
+            "error": "#ff522f",
+            "info": "#20b8ff",
+
+            "--rounded-box": "1rem", // border radius rounded-box utility class, used in card and other large boxes
+            "--rounded-btn": "0.5rem", // border radius rounded-btn utility class, used in buttons and similar element
+            "--rounded-badge": "1.9rem", // border radius rounded-badge utility class, used in badges and similar
+            "--animation-btn": "0.25s", // duration of animation when you click on button
+            "--animation-input": "0.2s", // duration of animation for inputs like checkbox, toggle, radio, etc
+            "--btn-text-case": "uppercase", // set default text transform for buttons
+            "--btn-focus-scale": "0.95", // scale transform of button when you focus on it
+            "--border-btn": "1px", // border width of buttons
+            "--tab-border": "1px", // border width of tabs
+            "--tab-radius": "0.5rem", // border radius of tabs 
+          },
+        },
       ],
-    }
+      darkTheme: 'black',
+      styled: true,
+      base: true,
+      utils: true,
+      logs: true,
+      rtl: false,
+      prefix: '',
+    },
   })
-
-
