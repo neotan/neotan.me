@@ -3,16 +3,17 @@ import { ReactNode, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { values } from 'ramda'
-import mdxData from '@/public/db.json'
+import mdxData from '../../public/db.json'
 import { FlexImage } from '@/components/flex-image'
 import { MdxDoc } from '@/types'
-import NavTabs from '@/components/nav-tabs'
+import MenuTabs from '@/components/menu-tabs'
 import Bio from '@/components/bio'
 import Navbar from '@/components/navbar'
+import { MIN_CLOUDINARY_ACCOUNT_LENGTH } from '@/shared/constants'
 
 type Slug = keyof typeof mdxData;
 
-export default function HomeIndex() {
+export default function BlogIndex() {
 
   return (
     <>
@@ -28,9 +29,10 @@ export default function HomeIndex() {
         </Link>
       </Navbar>
       <Bio />
-      <NavTabs />
+      <MenuTabs />
       <section key='tldr' className='grid grid-cols-1 gap-6 sm:grid-cols-2'
       >
+
         {values(mdxData as Record<Slug, MdxDoc>)
           .sort((right, left) =>
             String(left?.date ?? '').localeCompare(String(right?.date ?? '')))
@@ -45,10 +47,10 @@ export default function HomeIndex() {
 
             return (
               <Link key={slug} href={`/blog/${slug}`}>
-                <div className='card h-full shadow-2xl'>
-                  <div className="card-body rounded-2xl p-4 sm:p-8">
+                <div className='card glassmorphism !bg-secondary/30 h-full shadow-2xl transition-transform hover:scale-105'>
+                  <div className="card-body rounded-2xl  p-4  sm:p-8">
                     <figure className='grow'>
-                      {cloudinaryImgPubId.length > 10 // length of Cloudinary Account
+                      {cloudinaryImgPubId.length > MIN_CLOUDINARY_ACCOUNT_LENGTH
                         ? <FlexImage
                           className='h-52 rounded-b-none object-cover'
                           cloudinaryImgPubId={cloudinaryImgPubId} />

@@ -14,13 +14,11 @@ import {
   SiWebassembly
 } from 'react-icons/si'
 import type { IconType } from 'react-icons'
-import mdxData from '@/public/db.json'
+import mdxData from '../public/db.json'
 import CloudinaryIcon from '@/icons/cloudinary-icon'
 import TurborepoIcon from '@/icons/turborepo-icon'
 import FramerIcon from '@/icons/framer-icon'
-import { FlexImage } from '@/components/flex-image'
-import { MdxDoc } from '@/types'
-import NavTabs from '@/components/nav-tabs'
+import MenuTabs from '@/components/menu-tabs'
 import Bio from '@/components/bio'
 import Navbar from '@/components/navbar'
 
@@ -42,8 +40,8 @@ export default function HomeIndex() {
         </Link>
       </Navbar>
       <Bio />
-      <NavTabs />
-      <section key='projects' className='flex flex-col gap-4'
+      <MenuTabs />
+      <section key='projects' className='relative flex flex-col gap-4'
       >
         {values(projects).map(({
           id,
@@ -58,7 +56,7 @@ export default function HomeIndex() {
         }: Project) => {
           if (!published) return null
           return (
-            <div key={id} className='card bg-accent/20 group h-full rounded-3xl'>
+            <div key={id} className='card glassmorphism !bg-secondary/30 group h-full rounded-3xl shadow-2xl'>
               <div className="card-body gap-8 rounded-2xl p-4 sm:p-8">
                 <Link href={homepage} target='_blank' rel="noopener noreferrer">
                   <Image
@@ -69,7 +67,7 @@ export default function HomeIndex() {
                     height={475}
                   />
                 </Link>
-                <div className='text-secondary group-hover:text-primary flex flex-col gap-3' >
+                <div className='text-primary/60 group-hover:text-primary flex flex-col gap-3' >
                   <div className="flex-wrap text-center text-lg">{description}</div>
                   <div className="flex w-full items-center justify-center gap-4 transition-transform hover:scale-125">{
                     stackIcons.map(({ Icon, name }) => (
@@ -83,42 +81,6 @@ export default function HomeIndex() {
             </div>
           )
         })}
-      </section>
-      <section key='tldr' className='grid grid-cols-1 gap-6 sm:grid-cols-2'
-      >
-        {values(mdxData as Record<Slug, MdxDoc>)
-          .sort((right, left) =>
-            String(left?.date ?? '').localeCompare(String(right?.date ?? '')))
-          .map(({
-            slug,
-            title,
-            cloudinaryImgPubId = '',
-            description,
-            published
-          }) => {
-            if (!published) return null
-
-            return (
-              <Link key={slug} href={`/blog/${slug}`}>
-                <div className='card h-full shadow-2xl'>
-                  <div className="card-body rounded-2xl p-4 sm:p-8">
-                    <figure className='grow'>
-                      {cloudinaryImgPubId.length > 10 // length of Cloudinary Account
-                        ? <FlexImage
-                          className='h-52 rounded-b-none object-cover'
-                          cloudinaryImgPubId={cloudinaryImgPubId} />
-                        : <div className='items-center justify-center text-7xl'>{cloudinaryImgPubId}</div>
-                      }
-                    </figure>
-                    <div className='card-actions'>
-                      <h2 className="">{title}</h2>
-                      {/* <div className="">{description}</div> */}
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            )
-          })}
       </section>
     </ >
   )

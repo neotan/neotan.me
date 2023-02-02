@@ -6,7 +6,7 @@ import { FaLightbulb, FaRocket } from 'react-icons/fa'
 import Link from 'next/link'
 import Tabs from '@/components/tabs'
 
-export default function NavTabs({ className, children }: ComponentPropsWithoutRef<'section'>) {
+export default function MenuTabs({ className, children }: ComponentPropsWithoutRef<'section'>) {
 
   const currentPathname = usePathname()
 

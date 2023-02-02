@@ -5,21 +5,6 @@
     "paths": {
       "@/*": [
         "*"
-      ],
-      "@/styles/*": [
-        "styles/*"
-      ],
-      "@/components/*": [
-        "components/*"
-      ],
-      "@/icons/*": [
-        "icons/*"
-      ],
-      "@/types": [
-        "types/index"
-      ],
-      "@/utils/*": [
-        "utils/*"
       ]
     },
     "plugins": [

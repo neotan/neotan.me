@@ -1,0 +1,1 @@
+export const MIN_CLOUDINARY_ACCOUNT_LENGTH = 10

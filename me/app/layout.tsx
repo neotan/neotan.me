@@ -32,7 +32,7 @@ function RootLayout({ className, children }: BaseProps<'html'>) {
 
             {children}
           </div>
-          <Footer />
+          <Footer className='mt-8 space-y-4' />
         </ThemeProvider>
       </body>
     </html >

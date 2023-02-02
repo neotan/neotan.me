@@ -11,6 +11,7 @@ import { useFuse } from 'utils/hooks'
 import { formatDate } from 'utils/helpers'
 import mdxData from 'public/db.json'
 import type { BlogSearchIndex, MdxDoc } from '@/types'
+import { MIN_CLOUDINARY_ACCOUNT_LENGTH } from '@/shared/constants'
 import { FlexImage } from './flex-image'
 
 
@@ -48,11 +49,12 @@ export default function SearchButton({ className }: SearchButtonProps) {
         onClick={toggleModal}
       />
       <DialogOverlay
+        className='backdrop-blur-sm backdrop-grayscale'
         isOpen={visable}
         onDismiss={toggleModal}
         style={{ alignSelf: 'start' }}
       >
-        <DialogContent className="modal-box">
+        <DialogContent className="modal-box !bg-base-300">
           <input
             className="input w-full"
             autoFocus
@@ -78,13 +80,24 @@ export default function SearchButton({ className }: SearchButtonProps) {
           </label>
           <ol className="divide-base-200 divide-dashed overflow-y-auto">
             {result?.map(({ item }) => {
+              const {
+                slug,
+                url = '',
+                cloudinaryImgPubId = '',
+                title,
+              } = item
+
               return (
-                <Link key={item.slug} href={item.url || ''} className="flex justify-between space-x-4 p-3 transition hover:bg-gray-200">
-                  <FlexImage
-                    className="hidden w-20 md:inline-block"
-                    cloudinaryImgPubId={item.cloudinaryImgPubId}
-                  />
-                  <div className="flex w-full flex-col">{item.title}</div>
+                <Link key={slug} href={url} className="hover:bg-base-200 flex justify-between space-x-4 p-3 transition">
+
+                  {cloudinaryImgPubId.length > MIN_CLOUDINARY_ACCOUNT_LENGTH
+                    ? <FlexImage
+                      className="hidden w-20 md:inline-block"
+                      cloudinaryImgPubId={cloudinaryImgPubId}
+                    />
+                    : <div className='flex w-24 items-center justify-center'>{cloudinaryImgPubId}</div>
+                  }
+                  <div className="flex w-full flex-col">{title}</div>
                 </Link>
               )
             })}

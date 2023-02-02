@@ -32,7 +32,7 @@ export function DarkModeSwitch({
   )
 }
 
-export type ThemeType = Record<string, { name: string }> | string
+export type ThemeType = Record<string, { name: string, [key: string]: any }> | string
 
 type DarkModeSwitchProps = BaseProps<'svg'> & {
   currentThemeName: string
