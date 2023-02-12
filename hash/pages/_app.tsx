@@ -1,10 +1,10 @@
-import * as React from 'react'
 import '../styles/globals.css'
-import Head from 'next/head'
 import { DefaultSeo } from 'next-seo'
 import { ThemeProvider } from 'next-themes'
-import { toUpper } from 'ramda'
 import { AppProps } from 'next/app'
+import Head from 'next/head'
+import { toUpper } from 'ramda'
+import * as React from 'react'
 import pkgJson from '../package.json'
 //@ts-ignore
 import { daisyui } from '../tailwind.config'

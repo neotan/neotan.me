@@ -12,7 +12,6 @@ export default function BlogSlug(
   { params }:
     DynamicRoutePageProps<{ slug: keyof typeof mdxData }>
 ) {
-  console.log(params, mdxData[params.slug], keys(mdxData))
   const {
     code,
     readTime,
@@ -24,7 +23,7 @@ export default function BlogSlug(
 
   const Component = useMemo(() => getMDXComponent(code), [code])
   return (
-    <article className="lg:prose-lg prose max-w-none">
+    <article className="lg:prose-lg prose text-primary max-w-none px-2 backdrop-blur-lg sm:px-4">
       <header>
         <h1>{title || 'Untitled'}</h1>
         {!isNilOrEmpty(tags) && (

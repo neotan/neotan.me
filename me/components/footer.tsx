@@ -1,14 +1,14 @@
 import Link from 'next/link'
-import { FaGithub } from 'react-icons/fa'
 import { slice } from 'ramda'
-import { twMerge } from 'tailwind-merge'
+import { FaGithub } from 'react-icons/fa'
 import type { BaseProps } from 'shared-types'
+import { twMerge } from 'tailwind-merge'
 
 export default function Footer({ className }: BaseProps<'footer'>) {
   return (
     <footer
       className={twMerge(
-        'flex items-center justify-between space-x-6 p-2 pb-0 opacity-30 hover:opacity-90 sm:flex-col',
+        'flex items-center justify-between space-x-6 p-2 pb-0 sm:flex-col',
         className,
       )}
     >

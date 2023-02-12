@@ -1,9 +1,9 @@
-import { ComponentPropsWithoutRef } from 'react'
-import { cn } from 'utils/helpers'
-import { usePathname } from 'next/navigation'
-import { FaLightbulb, FaRocket } from 'react-icons/fa'
-
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { ComponentPropsWithoutRef } from 'react'
+import { FaLightbulb, FaRocket } from 'react-icons/fa'
+import { cn } from 'utils/helpers'
+
 import Tabs from '@/components/tabs'
 
 export default function MenuTabs({ className, children }: ComponentPropsWithoutRef<'section'>) {
@@ -12,7 +12,7 @@ export default function MenuTabs({ className, children }: ComponentPropsWithoutR
 
   return (
 
-    <section className={cn('text-secondary flex grow flex-col items-center gap-4', className)}>
+    <section className={cn('flex grow flex-col items-center gap-4 text-secondary', className)}>
       <Tabs className='flex gap-6'>
         <Link href='/'>
           <Tabs.Tab

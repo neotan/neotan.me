@@ -1,12 +1,12 @@
 'use client'
-import * as React from 'react'
-import { Cloudinary } from '@cloudinary/url-gen'
 import {
   AdvancedImage,
   lazyload,
   placeholder,
   responsive,
 } from '@cloudinary/react'
+import { Cloudinary } from '@cloudinary/url-gen'
+import * as React from 'react'
 import { BaseProps } from 'shared-types'
 import { twMerge } from 'tailwind-merge'
 

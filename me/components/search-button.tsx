@@ -1,17 +1,17 @@
 'use client'
 import '@reach/dialog/styles.css'
-import { ComponentPropsWithoutRef, useState } from 'react'
-import Link from 'next/link'
-import { BiSearch } from 'react-icons/bi'
-import { cn } from 'utils/helpers'
 import { DialogContent, DialogOverlay } from '@reach/dialog'
+import Link from 'next/link'
 import { map, pipe, values } from 'ramda'
+import { ComponentPropsWithoutRef, useState } from 'react'
+import { BiSearch } from 'react-icons/bi'
 import { useKey } from 'react-use'
-import { useFuse } from 'utils/hooks'
+import { cn } from 'utils/helpers'
 import { formatDate } from 'utils/helpers'
-import mdxData from 'public/db.json'
-import type { BlogSearchIndex, MdxDoc } from '@/types'
+import { useFuse } from 'utils/hooks'
 import { MIN_CLOUDINARY_ACCOUNT_LENGTH } from '@/shared/constants'
+import type { BlogSearchIndex, MdxDoc } from '@/types'
+import mdxData from 'public/db.json'
 import { FlexImage } from './flex-image'
 
 
@@ -54,7 +54,7 @@ export default function SearchButton({ className }: SearchButtonProps) {
         onDismiss={toggleModal}
         style={{ alignSelf: 'start' }}
       >
-        <DialogContent className="modal-box !bg-base-300">
+        <DialogContent className="modal-box !w-[100vw] !bg-base-300">
           <input
             className="input w-full"
             autoFocus
@@ -78,7 +78,7 @@ export default function SearchButton({ className }: SearchButtonProps) {
               to open/close
             </span>
           </label>
-          <ol className="divide-base-200 divide-dashed overflow-y-auto">
+          <ol className="divide-dashed divide-red-700 overflow-y-auto">
             {result?.map(({ item }) => {
               const {
                 slug,
@@ -88,7 +88,7 @@ export default function SearchButton({ className }: SearchButtonProps) {
               } = item
 
               return (
-                <Link key={slug} href={url} className="hover:bg-base-200 flex justify-between space-x-4 p-3 transition">
+                <Link key={slug} href={url} className="flex justify-between space-x-4 p-3 transition hover:bg-base-200">
 
                   {cloudinaryImgPubId.length > MIN_CLOUDINARY_ACCOUNT_LENGTH
                     ? <FlexImage

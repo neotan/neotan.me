@@ -1,28 +1,21 @@
-import * as React from 'react'
-const { createRef, forwardRef, useCallback, useImperativeHandle, useRef, useState } = React
-
-import type { RefObject } from 'react'
-import { useDropzone } from 'react-dropzone'
-import { IHasher } from 'hash-wasm/lib/WASMInterface'
-import { IDataType } from 'hash-wasm/lib/util'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { twMerge } from 'tailwind-merge'
-import prettyBytes from 'pretty-bytes'
-import intervalToDuration from 'date-fns/intervalToDuration'
+import {
+  useAsync,
+  useKeyboardEvent,
+  useLocalStorageValue,
+} from '@react-hookz/web'
+import clsx from 'clsx'
 import formatDuration from 'date-fns/formatDuration'
+import intervalToDuration from 'date-fns/intervalToDuration'
+import purify from 'dompurify'
+import { IHasher } from 'hash-wasm/lib/WASMInterface'
 //@ts-ignore
 import * as hashAlgos from 'https://cdn.skypack.dev/hash-wasm'
-import {
-  FiCheckSquare,
-  FiCopy,
-  FiHeart,
-  FiTrash2,
-  FiZap
-} from 'react-icons/fi'
-import { ImFilesEmpty } from 'react-icons/im'
-import { BsTextLeft } from 'react-icons/bs'
-import clsx from 'clsx'
+import prettyBytes from 'pretty-bytes'
 import { includes, keys, map, objOf, pluck, toUpper, uniq, values, without } from 'ramda'
+import { createRef, forwardRef, useCallback, useImperativeHandle, useRef, useState } from 'react'
+import * as React from 'react'
+import type { RefObject } from 'react'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 import {
   Badge,
   Button,
@@ -34,15 +27,21 @@ import {
   Textarea,
   Toggle
 } from 'react-daisyui'
+import { useDropzone } from 'react-dropzone'
+import { BsTextLeft } from 'react-icons/bs'
 import {
-  useAsync,
-  useKeyboardEvent,
-  useLocalStorageValue,
-} from '@react-hookz/web'
+  FiCheckSquare,
+  FiCopy,
+  FiHeart,
+  FiTrash2,
+  FiZap
+} from 'react-icons/fi'
+import { ImFilesEmpty } from 'react-icons/im'
 import type { BaseProps } from 'shared-types'
-import { useFuse } from 'utils/hooks'
-import { formatDate, isNilOrEmpty } from 'utils/helpers'
+import { twMerge } from 'tailwind-merge'
 import { ClientRenderOnly } from 'ui'
+import { formatDate, isNilOrEmpty } from 'utils/helpers'
+import { useFuse } from 'utils/hooks'
 import Layout from '../components/layout'
 
 const APP_NAME = 'npmhub-hash'
@@ -65,7 +64,7 @@ type HasherItem = {
   createFn: string
 }
 
-const hashers = {
+const hashers: Record<string, HasherItem> = {
   adler32: { id: 'adler32', title: 'ADLER32', description: 'adler32', createFn: 'createAdler32' },
   // argon2: { id: 'argon2', title: 'ARGON2', description: 'argon2' },
   // bcrypt: { id: 'bcrypt', title: 'BCRYPT', description: 'bcrypt' },
@@ -152,7 +151,6 @@ export default function HashHome() {
   })
 
   const onDropAccepted = useCallback((acceptedFiles: File[]) => {
-    console.log({ acceptedFiles })
     setStartedAt(null)
     setEndedAt(null)
   }, [])
@@ -180,11 +178,11 @@ export default function HashHome() {
   return (
     <Layout>
       <div className="flex sm:space-x-3">
-        <aside className="text-base-content w-64 py-4">
+        <aside className="w-64 py-4 text-base-content">
           <div className="group flex items-center space-x-1">
             <Input
               ref={searchRef}
-              className="text-md font-heading w-10/12 placeholder:text-gray-500"
+              className="text-md w-10/12 font-heading placeholder:text-gray-500"
               bordered
               size='sm'
               type="search"
@@ -238,10 +236,10 @@ export default function HashHome() {
               </ClientRenderOnly>
             </Indicator>
           </div>
-          <ul className="menu scrollbar-track-base-100 scrollbar-thumb-base-300 overflow-y-auto scrollbar-thin" role='menu'>
+          <ul className="menu overflow-y-auto scrollbar-thin scrollbar-track-base-100 scrollbar-thumb-base-300" role='menu'>
             {result?.map(({ item: { id, title, description } }) => {
               return (
-                <li key={id} className="font-heading cursor-pointer" role='menuitem'>
+                <li key={id} className="cursor-pointer font-heading" role='menuitem'>
                   <label className="flex justify-between !p-2 text-lg">
                     <span>{title}</span>
                     <Checkbox
@@ -260,7 +258,7 @@ export default function HashHome() {
           </ul>
         </aside>
         <div className="flex w-full flex-col items-center space-y-4 py-4">
-          <div className='bg-base-200 w-full space-y-3 rounded p-4'>
+          <div className='w-full space-y-3 rounded bg-base-200 p-4'>
             <ClientRenderOnly
               fallback={
                 <div className="h-40 w-full animate-pulse bg-gray-500/10" />
@@ -273,13 +271,13 @@ export default function HashHome() {
                 value={selectedFormat}
                 onChange={setSelectedFormat}
               >
-                <Tabs.Tab className='font-heading bg-base-300/50 flex-1 space-x-2 !rounded-r-none border-0 text-xl' value="inputText"><BsTextLeft className='text-2xl' /><span>Text</span></Tabs.Tab>
-                <Tabs.Tab className='font-heading bg-base-300/50 flex-1 space-x-2 !rounded-l-none border-0 text-xl' value="inputFiles"><ImFilesEmpty /><span>Files</span></Tabs.Tab>
+                <Tabs.Tab className='flex-1 space-x-2 !rounded-r-none border-0 bg-base-300/50 font-heading text-xl' value="inputText"><BsTextLeft className='text-2xl' /><span>Text</span></Tabs.Tab>
+                <Tabs.Tab className='flex-1 space-x-2 !rounded-l-none border-0 bg-base-300/50 font-heading text-xl' value="inputFiles"><ImFilesEmpty /><span>Files</span></Tabs.Tab>
               </Tabs>
               <Textarea
                 key='text'
                 className={clsx(
-                  'font-code border-base-content/5 scrollbar-track-base-200 scrollbar-thumb-primary/30 scrollbar-corner-primary/50 hidden h-44 w-full overflow-y-auto scrollbar-thin hover:scrollbar',
+                  'hidden h-44 w-full overflow-y-auto border-base-content/5 font-code scrollbar-thin scrollbar-track-base-200 scrollbar-thumb-primary/30 scrollbar-corner-primary/50 hover:scrollbar',
                   { block: selectedFormat === 'inputText', 'h-96': Number(rawText?.length) > 200 },
                 )}
                 placeholder='Input text here...'
@@ -291,18 +289,18 @@ export default function HashHome() {
                 key='files'
                 {...getRootProps()}
                 className={clsx(
-                  'bordered bg-base-100 hidden h-[176px] w-full items-center justify-center',
+                  'bordered hidden h-[176px] w-full items-center justify-center bg-base-100',
                   { '!flex': selectedFormat === 'inputFiles' },
                 )}
               >
                 <input {...getInputProps()} />
                 {isDragActive
-                  ? <p className='font-heading text-base-content/50 text-lg'>Drop the files here ...</p>
+                  ? <p className='font-heading text-lg text-base-content/50'>Drop the files here ...</p>
                   : (
-                    <div className='font-heading text-base-content/50 hover:text-base-content/80 flex h-full w-full cursor-pointer flex-col items-center justify-center text-lg'>
-                      <div><span className='text-primary font-semibold'>Drag & Drop</span> some files here</div>
+                    <div className='flex h-full w-full cursor-pointer flex-col items-center justify-center font-heading text-lg text-base-content/50 hover:text-base-content/80'>
+                      <div><span className='font-semibold text-primary'>Drag & Drop</span> some files here</div>
                       <span>or</span>
-                      <div><span className='text-primary font-semibold'>Click</span> to select files</div>
+                      <div><span className='font-semibold text-primary'>Click</span> to select files</div>
                     </div>
                   )}
               </div>
@@ -333,7 +331,7 @@ export default function HashHome() {
                 >
                   <FiZap /><span>Generate</span>
                 </Button>
-                <div className='text-base-content/60 h-6 align-middle'>
+                <div className='h-6 align-middle text-base-content/60'>
                   {
                     startedAt && endedAt &&
                     `Processing Time: ${formatDuration(intervalToDuration({ start: startedAt, end: endedAt })) || 'less than 1 second'}`
@@ -344,314 +342,47 @@ export default function HashHome() {
           </ClientRenderOnly>
           <div className="flex w-full flex-col space-y-2">
             <ClientRenderOnly>
-              <HashText
-                ref={textHasherRefs.current['adler32']}
-                className={clsx('hidden', { 'flex': isSelected('inputText', 'adler32') })}
-                algoName="adler32"
-                rawData={rawText}
-              />
-              <HashFile
-                key={pluck('name', acceptedFiles).join(',') + 'adler32'}
-                ref={fileHasherRefs.current['adler32']}
-                className={clsx('hidden', { 'flex': isSelected('inputFiles', 'adler32') })}
-                algoName="adler32"
-                rawFiles={acceptedFiles}
-                onDone={setEndedAt}
-              />
+              {HASH_NAMES.map((algoName) => {
+                return (
+                  <HashText
+                    key={'inputText' + algoName}
+                    ref={textHasherRefs.current[algoName]}
+                    className={clsx('hidden', { 'flex': isSelected('inputText', algoName) })}
+                    algoName={algoName}
+                    rawData={rawText || ''}
+                    hasher={hashAlgos[algoName]}
+                  />
+                )
+              })}
+
+              {values(hashers).map(({ id, createFn, }) => {
+                return (
+                  <HashFile
+                    key={'inputFiles-' + id}
+                    ref={fileHasherRefs?.current?.[id]}
+                    className={clsx('hidden', { 'flex': isSelected('inputFiles', id) })}
+                    algoName={id}
+                    rawFiles={acceptedFiles}
+                    onDone={setEndedAt}
+                    createHasher={hashAlgos?.[createFn]}
+                  />
+                )
+              })}
+
               {/* HashText - argon2 */}
               {/* HashFile - argon2 */}
               {/* HashText - bcrypt */}
               {/* HashFile - bcrypt */}
-              <HashText
-                ref={textHasherRefs.current['blake2b']}
-                className={clsx('hidden', { 'flex': isSelected('inputText', 'blake2b') })}
-                algoName="blake2b"
-                rawData={rawText}
-              />
-              <HashFile
-                key={pluck('name', acceptedFiles).join(',') + 'blake2b'}
-                ref={fileHasherRefs.current['blake2b']}
-                className={clsx('hidden', { 'flex': isSelected('inputFiles', 'blake2b') })}
-                algoName="blake2b"
-                rawFiles={acceptedFiles}
-                onDone={setEndedAt}
-              />
-              <HashText
-                ref={textHasherRefs.current['blake2s']}
-                className={clsx('hidden', { 'flex': isSelected('inputText', 'blake2s') })}
-                algoName="blake2s"
-                rawData={rawText}
-              />
-              <HashFile
-                key={pluck('name', acceptedFiles).join(',') + 'blake2s'}
-                ref={fileHasherRefs.current['blake2s']}
-                className={clsx('hidden', { 'flex': isSelected('inputFiles', 'blake2s') })}
-                algoName="blake2s"
-                rawFiles={acceptedFiles}
-                onDone={setEndedAt}
-              />
-              <HashText
-                ref={textHasherRefs.current['blake3']}
-                className={clsx('hidden', { 'flex': isSelected('inputText', 'blake3') })}
-                algoName="blake3"
-                rawData={rawText}
-              />
-              <HashFile
-                key={pluck('name', acceptedFiles).join(',') + 'blake3'}
-                ref={fileHasherRefs.current['blake3']}
-                className={clsx('hidden', { 'flex': isSelected('inputFiles', 'blake3') })}
-                algoName="blake3"
-                rawFiles={acceptedFiles}
-                onDone={setEndedAt}
-              />
-              <HashText
-                ref={textHasherRefs.current['crc32']}
-                className={clsx('hidden', { 'flex': isSelected('inputText', 'crc32') })}
-                algoName="crc32"
-                rawData={rawText}
-              />
-              <HashFile
-                key={pluck('name', acceptedFiles).join(',') + 'crc32'}
-                ref={fileHasherRefs.current['crc32']}
-                className={clsx('hidden', { 'flex': isSelected('inputFiles', 'crc32') })}
-                algoName="crc32"
-                rawFiles={acceptedFiles}
-                onDone={setEndedAt}
-              />
-              <HashText
-                ref={textHasherRefs.current['crc32c']}
-                className={clsx('hidden', { 'flex': isSelected('inputText', 'crc32c') })}
-                algoName="crc32c"
-                rawData={rawText}
-              />
-              <HashFile
-                key={pluck('name', acceptedFiles).join(',') + 'crc32c'}
-                ref={fileHasherRefs.current['crc32c']}
-                className={clsx('hidden', { 'flex': isSelected('inputFiles', 'crc32c') })}
-                algoName="crc32c"
-                rawFiles={acceptedFiles}
-                onDone={setEndedAt}
-              />
               {/* HashText - hmac */}
               {/* HashFile - hmac */}
               {/* HashText - keccak */}
               {/* HashFile - keccak */}
-              <HashText
-                ref={textHasherRefs.current['md4']}
-                className={clsx('hidden', { 'flex': isSelected('inputText', 'md4') })}
-                algoName="md4"
-                rawData={rawText}
-              />
-              <HashFile
-                key={pluck('name', acceptedFiles).join(',') + 'md4'}
-                ref={fileHasherRefs.current['md4']}
-                className={clsx('hidden', { 'flex': isSelected('inputFiles', 'md4') })}
-                algoName="md4"
-                rawFiles={acceptedFiles}
-                onDone={setEndedAt}
-              />
-              <HashText
-                ref={textHasherRefs.current['md5']}
-                className={clsx('hidden', { 'flex': isSelected('inputText', 'md5') })}
-                algoName="md5"
-                rawData={rawText}
-              />
-              <HashFile
-                key={pluck('name', acceptedFiles).join(',') + 'md5'}
-                ref={fileHasherRefs.current['md5']}
-                className={clsx('hidden', { 'flex': isSelected('inputFiles', 'md5') })}
-                algoName="md5"
-                rawFiles={acceptedFiles}
-                onDone={setEndedAt}
-              />
               {/* HashText - pbkdf2 */}
               {/* HashText - pbkdf2 */}
               {/* HashText - ripemd160 */}
               {/* HashText - ripemd160 */}
-              <HashText
-                ref={textHasherRefs.current['ripemd160']}
-                className={clsx('hidden', { 'flex': isSelected('inputText', 'ripemd160') })}
-                algoName="ripemd160"
-                rawData={rawText}
-              />
-              <HashFile
-                key={pluck('name', acceptedFiles).join(',') + 'ripemd160'}
-                ref={fileHasherRefs.current['ripemd160']}
-                className={clsx('hidden', { 'flex': isSelected('inputFiles', 'ripemd160') })}
-                algoName="ripemd160"
-                rawFiles={acceptedFiles}
-                onDone={setEndedAt}
-              />
               {/* HashText - scrypt */}
               {/* HashText - scrypt */}
-              <HashText
-                ref={textHasherRefs.current['sha1']}
-                className={clsx('hidden', { 'flex': isSelected('inputText', 'sha1') })}
-                algoName="sha1"
-                rawData={rawText}
-              />
-              <HashFile
-                key={pluck('name', acceptedFiles).join(',') + 'sha1'}
-                ref={fileHasherRefs.current['sha1']}
-                className={clsx('hidden', { 'flex': isSelected('inputFiles', 'sha1') })}
-                algoName="sha1"
-                rawFiles={acceptedFiles}
-                onDone={setEndedAt}
-              />
-              <HashText
-                ref={textHasherRefs.current['sha224']}
-                className={clsx('hidden', { 'flex': isSelected('inputText', 'sha224') })}
-                algoName="sha224"
-                rawData={rawText}
-              />
-              <HashFile
-                key={pluck('name', acceptedFiles).join(',') + 'sha224'}
-                ref={fileHasherRefs.current['sha224']}
-                className={clsx('hidden', { 'flex': isSelected('inputFiles', 'sha224') })}
-                algoName="sha224"
-                rawFiles={acceptedFiles}
-                onDone={setEndedAt}
-              />
-              <HashText
-                ref={textHasherRefs.current['sha256']}
-                className={clsx('hidden', { 'flex': isSelected('inputText', 'sha256') })}
-                algoName="sha256"
-                rawData={rawText}
-              />
-              <HashFile
-                key={pluck('name', acceptedFiles).join(',') + 'sha256'}
-                ref={fileHasherRefs.current['sha256']}
-                className={clsx('hidden', { 'flex': isSelected('inputFiles', 'sha256') })}
-                algoName="sha256"
-                rawFiles={acceptedFiles}
-                onDone={setEndedAt}
-              />
-              <HashText
-                ref={textHasherRefs.current['sha3']}
-                className={clsx('hidden', { 'flex': isSelected('inputText', 'sha3') })}
-                algoName="sha3"
-                rawData={rawText}
-              />
-              <HashFile
-                key={pluck('name', acceptedFiles).join(',') + 'sha3'}
-                ref={fileHasherRefs.current['sha3']}
-                className={clsx('hidden', { 'flex': isSelected('inputFiles', 'sha3') })}
-                algoName="sha3"
-                rawFiles={acceptedFiles}
-                onDone={setEndedAt}
-              />
-              <HashText
-                ref={textHasherRefs.current['sha384']}
-                className={clsx('hidden', { 'flex': isSelected('inputText', 'sha384') })}
-                algoName="sha384"
-                rawData={rawText}
-              />
-              <HashFile
-                key={pluck('name', acceptedFiles).join(',') + 'sha384'}
-                ref={fileHasherRefs.current['sha384']}
-                className={clsx('hidden', { 'flex': isSelected('inputFiles', 'sha384') })}
-                algoName="sha384"
-                rawFiles={acceptedFiles}
-                onDone={setEndedAt}
-              />
-              <HashText
-                ref={textHasherRefs.current['sha512']}
-                className={clsx('hidden', { 'flex': isSelected('inputText', 'sha512') })}
-                algoName="sha512"
-                rawData={rawText}
-              />
-              <HashFile
-                key={pluck('name', acceptedFiles).join(',') + 'sha512'}
-                ref={fileHasherRefs.current['sha512']}
-                className={clsx('hidden', { 'flex': isSelected('inputFiles', 'sha512') })}
-                algoName="sha512"
-                rawFiles={acceptedFiles}
-                onDone={setEndedAt}
-              />
-              <HashText
-                ref={textHasherRefs.current['sm3']}
-                className={clsx('hidden', { 'flex': isSelected('inputText', 'sm3') })}
-                algoName="sm3"
-                rawData={rawText}
-              />
-              <HashFile
-                key={pluck('name', acceptedFiles).join(',') + 'sm3'}
-                ref={fileHasherRefs.current['sm3']}
-                className={clsx('hidden', { 'flex': isSelected('inputFiles', 'sm3') })}
-                algoName="sm3"
-                rawFiles={acceptedFiles}
-                onDone={setEndedAt}
-              />
-              <HashText
-                ref={textHasherRefs.current['whirlpool']}
-                className={clsx('hidden', { 'flex': isSelected('inputText', 'whirlpool') })}
-                algoName="whirlpool"
-                rawData={rawText}
-              />
-              <HashFile
-                key={pluck('name', acceptedFiles).join(',') + 'whirlpool'}
-                ref={fileHasherRefs.current['whirlpool']}
-                className={clsx('hidden', { 'flex': isSelected('inputFiles', 'whirlpool') })}
-                algoName="whirlpool"
-                rawFiles={acceptedFiles}
-                onDone={setEndedAt}
-              />
-              <HashText
-                ref={textHasherRefs.current['xxhash128']}
-                className={clsx('hidden', { 'flex': isSelected('inputText', 'xxhash128') })}
-                algoName="xxhash128"
-                rawData={rawText}
-              />
-              <HashFile
-                key={pluck('name', acceptedFiles).join(',') + 'xxhash128'}
-                ref={fileHasherRefs.current['xxhash128']}
-                className={clsx('hidden', { 'flex': isSelected('inputFiles', 'xxhash128') })}
-                algoName="xxhash128"
-                rawFiles={acceptedFiles}
-                onDone={setEndedAt}
-              />
-              <HashText
-                ref={textHasherRefs.current['xxhash3']}
-                className={clsx('hidden', { 'flex': isSelected('inputText', 'xxhash3') })}
-                algoName="xxhash3"
-                rawData={rawText}
-              />
-              <HashFile
-                key={pluck('name', acceptedFiles).join(',') + 'xxhash3'}
-                ref={fileHasherRefs.current['xxhash3']}
-                className={clsx('hidden', { 'flex': isSelected('inputFiles', 'xxhash3') })}
-                algoName="xxhash3"
-                rawFiles={acceptedFiles}
-                onDone={setEndedAt}
-              />
-              <HashText
-                ref={textHasherRefs.current['xxhash32']}
-                className={clsx('hidden', { 'flex': isSelected('inputText', 'xxhash32') })}
-                algoName="xxhash32"
-                rawData={rawText}
-              />
-              <HashFile
-                key={pluck('name', acceptedFiles).join(',') + 'xxhash32'}
-                ref={fileHasherRefs.current['xxhash32']}
-                className={clsx('hidden', { 'flex': isSelected('inputFiles', 'xxhash32') })}
-                algoName="xxhash32"
-                rawFiles={acceptedFiles}
-                onDone={setEndedAt}
-              />
-              <HashText
-                ref={textHasherRefs.current['xxhash64']}
-                className={clsx('hidden', { 'flex': isSelected('inputText', 'xxhash64') })}
-                algoName="xxhash64"
-                rawData={rawText}
-              />
-              <HashFile
-                key={pluck('name', acceptedFiles).join(',') + 'xxhash64'}
-                ref={fileHasherRefs.current['xxhash64']}
-                className={clsx('hidden', { 'flex': isSelected('inputFiles', 'xxhash64') })}
-                algoName="xxhash64"
-                rawFiles={acceptedFiles}
-                onDone={setEndedAt}
-              />
             </ClientRenderOnly>
           </div>
         </div>
@@ -662,18 +393,18 @@ export default function HashHome() {
 
 interface HashTextProps extends BaseProps<'div'> {
   algoName: AlgoName
-  rawData: IDataType
+  rawData: string
+  hasher: (rawData: string) => Promise<string>
 }
 
 
-
-const HashText = forwardRef(function HashText({ className, algoName, rawData }: HashTextProps, ref) {
+const HashText = forwardRef(function HashText({ className, algoName, rawData, hasher }: HashTextProps, ref) {
   const [isCopied, setCopied] = useState(false)
   const [enabled, setEnabled] = useState(true)
   const [{ status, result, error }, { execute }] = useAsync(async () => {
     return !enabled || isNilOrEmpty(rawData)
       ? Promise.resolve('')
-      : hashAlgos[algoName]?.(rawData)
+      : hasher?.(rawData)
   })
 
   useImperativeHandle(ref, () => ({
@@ -685,7 +416,7 @@ const HashText = forwardRef(function HashText({ className, algoName, rawData }: 
 
   return (
     <div className={twMerge('bg-base-200 rounded p-5 flex justify-between', className)}>
-      <label className={clsx('text-md font-heading flex w-36 gap-2',
+      <label className={clsx('text-md flex w-36 gap-2 font-heading',
         { 'text-base-content/30': !enabled })}>
         <Toggle
           color="primary"
@@ -702,11 +433,11 @@ const HashText = forwardRef(function HashText({ className, algoName, rawData }: 
       {enabled && status === 'not-executed' && null}
 
       {enabled && status === 'error' &&
-        <Placeholder className='text-md text-base-content/20 cursor-help' title={error?.message}
+        <Placeholder className='text-md cursor-help text-base-content/20' title={error?.message}
         >⚠</Placeholder>}
 
       {enabled && status === 'loading' &&
-        <Placeholder className='text-md text-base-content/20 pointer-events-none grayscale'
+        <Placeholder className='text-md pointer-events-none text-base-content/20 grayscale'
         ><span className='text-md animate-spin'>⚙</span></Placeholder>}
 
       {enabled && status === 'success' &&
@@ -730,7 +461,7 @@ const HashText = forwardRef(function HashText({ className, algoName, rawData }: 
                   ? <>
                     <span className='text-green-700'>Copied!</span>
                     <FiCheckSquare className="h-6 w-6 stroke-green-700" /></>
-                  : <FiCopy className="stroke-primary h-6 w-6 cursor-pointer" />}
+                  : <FiCopy className="h-6 w-6 cursor-pointer stroke-primary" />}
               </div>
             )}
           </div>
@@ -779,10 +510,10 @@ interface HashFileProps extends BaseProps<'div'> {
   algoName: keyof typeof hashers
   rawFiles: File[]
   onDone: Function
+  createHasher: () => Promise<IHasher>
 }
 
-const HashFile = forwardRef(function HashFile({ className, algoName, rawFiles, onDone }: HashFileProps, ref) {
-  const createHasher = hashAlgos?.[hashers[algoName]?.createFn]
+const HashFile = forwardRef(function HashFile({ className, algoName, rawFiles, onDone, createHasher }: HashFileProps, ref) {
 
   const [isCopied, setCopied] = useState(false)
   const [enabled, setEnabled] = useState(true)
@@ -808,7 +539,7 @@ const HashFile = forwardRef(function HashFile({ className, algoName, rawFiles, o
   return (
     <div className={twMerge('bg-base-200 rounded p-5 flex flex-col space-y-4', className)}>
       <div className="flex justify-between">
-        <label className={clsx('text-md font-heading flex gap-2',
+        <label className={clsx('text-md flex gap-2 font-heading',
           { 'text-base-content/30': !enabled })}>
           <Toggle
             color="primary"
@@ -840,7 +571,7 @@ const HashFile = forwardRef(function HashFile({ className, algoName, rawFiles, o
                   <span className='text-green-700'>Copied!</span>
                   <FiCheckSquare className="h-6 w-6 stroke-green-700" />
                 </>
-                : <FiCopy className="stroke-primary h-6 w-6 cursor-pointer" />}
+                : <FiCopy className="h-6 w-6 cursor-pointer stroke-primary" />}
             </div>
           </CopyToClipboard>
         )}
@@ -854,11 +585,11 @@ const HashFile = forwardRef(function HashFile({ className, algoName, rawFiles, o
               const fileName = file?.name
               const hashed = result?.[idx]
               return (
-                <li key={fileName} className='hover:bg-base-100 flex justify-between space-x-4 overflow-hidden rounded px-2 py-1'>
+                <li key={fileName} className='flex justify-between space-x-4 overflow-hidden rounded px-2 py-1 hover:bg-base-100'>
                   <div className='flex grow items-center space-x-2 overflow-hidden text-ellipsis'>
                     <span>{fileName}</span>
                     <Placeholder
-                      className='text-base-content/10 hover:text-base-content/40 cursor-pointer text-sm grayscale'
+                      className='cursor-pointer text-sm text-base-content/10 grayscale hover:text-base-content/40'
                       rootProps={
                         { title: `${fileName}\n- size: ${prettyBytes(file.size)}\n- updated: ${formatDate(file.lastModified, 'yyyy-MM-dd H:mm:ss')}` }
                       }

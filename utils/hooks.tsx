@@ -1,5 +1,5 @@
-import { useMemo } from 'react'
 import Fuse from 'fuse.js'
+import { useMemo } from 'react'
 
 export function useFuse<T>(
   list: T[],

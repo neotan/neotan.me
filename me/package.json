@@ -70,7 +70,6 @@
     "remark-slug": "^7.0.1",
     "tailwind-config-custom": "workspace:*",
     "tailwindcss": "^3.2.4",
-    "tailwindcss-debug-screens": "^2.2.1",
     "tsconfig": "workspace:*",
     "typescript": "^4.9.4"
   }

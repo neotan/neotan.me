@@ -1,5 +1,5 @@
-import * as React from 'react'
 import Document, { Head, Html, Main, NextScript } from 'next/document'
+import * as React from 'react'
 
 export default class CustomDocument extends Document {
   render() {
@@ -27,7 +27,7 @@ export default class CustomDocument extends Document {
           <link
             rel="preconnect"
             href="https://fonts.gstatic.com"
-            crossOrigin="true"
+            crossOrigin=""
           />
           <link
             href="https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap"

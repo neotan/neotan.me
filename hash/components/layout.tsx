@@ -1,9 +1,9 @@
-import * as React from 'react'
-import { ClientRenderOnly, DarkModeSwitch, ThemeType } from 'ui'
+import { useTheme } from 'next-themes'
 import { slice } from 'ramda'
+import * as React from 'react'
 import { FiMoon, FiSun } from 'react-icons/fi'
 import type { BaseProps } from 'shared-types'
-import { useTheme } from 'next-themes'
+import { ClientRenderOnly, DarkModeSwitch, ThemeType } from 'ui'
 //@ts-ignore
 import { daisyui } from '../tailwind.config'
 
@@ -12,7 +12,7 @@ export default function Layout({ children }: BaseProps<'div'>) {
   return (
     <div className="mx-auto max-w-screen-lg py-4 px-3">
       <nav className="flex justify-between">
-        <h1 className="from-primary to-secondary cursor-pointer bg-gradient-to-r bg-clip-text text-4xl font-bold text-transparent">HASH</h1>
+        <h1 className="cursor-pointer bg-gradient-to-r from-primary to-secondary bg-clip-text text-4xl font-bold text-transparent">HASH</h1>
         <ClientRenderOnly>
           <DarkModeSwitch
             className='animate-spin-short'
@@ -35,7 +35,7 @@ export default function Layout({ children }: BaseProps<'div'>) {
             '',
           )}
         </div>
-        <div className="font-heading flex flex-col items-center text-center text-lg">
+        <div className="flex flex-col items-center text-center font-heading text-lg">
           <div>{`All rights reserved © Neo Tan ${new Date().getFullYear()}`}</div>
         </div>
       </footer>

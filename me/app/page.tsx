@@ -14,7 +14,7 @@ import {
   SiWebassembly
 } from 'react-icons/si'
 import type { IconType } from 'react-icons'
-import mdxData from '../public/db.json'
+import { FaGithub, FaSlackHash } from 'react-icons/fa'
 import CloudinaryIcon from '@/icons/cloudinary-icon'
 import TurborepoIcon from '@/icons/turborepo-icon'
 import FramerIcon from '@/icons/framer-icon'
@@ -22,32 +22,31 @@ import MenuTabs from '@/components/menu-tabs'
 import Bio from '@/components/bio'
 import Navbar from '@/components/navbar'
 
-type Slug = keyof typeof mdxData;
-
 export default function HomeIndex() {
 
   return (
     <>
-      <Navbar className='px-0 sm:px-10' >
-        <Link href='/'>
+      <Navbar className='px-0 sm:px-16' >
+        <div className='relative'>
           <Image
-            className='rounded-full shadow-3xl'
+            className='h-16 w-16 rounded-full shadow-3xl transition-transform hover:scale-150'
             alt='Avatar'
-            src='/images/avatar-icon.png'
-            width={60}
-            height={60}
+            src='/images/avatar.jpg'
+            width={200}
+            height={200}
           />
-        </Link>
+        </div>
       </Navbar>
-      <Bio />
+      <Bio className='sm:px-16' />
       <MenuTabs />
-      <section key='projects' className='relative flex flex-col gap-4'
+      <section key='projects' className='xcursor-emoji-[🦝/6xl/red-500] relative flex flex-col gap-8'
       >
         {values(projects).map(({
           id,
           title,
           description,
           homepage,
+          repoUrl,
           imageSrc,
           tags,
           published,
@@ -56,23 +55,32 @@ export default function HomeIndex() {
         }: Project) => {
           if (!published) return null
           return (
-            <div key={id} className='card glassmorphism !bg-secondary/30 group h-full rounded-3xl shadow-2xl'>
-              <div className="card-body gap-8 rounded-2xl p-4 sm:p-8">
+            <div key={id} id={id} className='card group px-2 sm:px-8'>
+              <div className="invisible absolute left-0 top-0 flex flex-col gap-2 group-hover:visible">
+                <Link href={'#' + id}>
+                  <FaSlackHash className='fill-secondary hidden h-7 w-7 sm:block' />
+                </Link>
+                {repoUrl && <Link href={repoUrl}>
+                  <FaGithub className='fill-secondary hidden h-7 w-7 sm:block' />
+                </Link>}
+              </div>
+              <div />
+              <div className="card-body glassmorphism !bg-secondary/30  h-full gap-8 rounded-2xl p-4  shadow-lg shadow-black/40 sm:p-8">
                 <Link href={homepage} target='_blank' rel="noopener noreferrer">
                   <Image
-                    className={cn('rounded-3xl shadow-3xl transition-transform hover:scale-105', className)}
+                    className={cn('rounded-3xl shadow-lg transition-transform hover:scale-105', className)}
                     alt={title}
                     src={imageSrc}
-                    width={820}
+                    width={1600}
                     height={475}
                   />
                 </Link>
-                <div className='text-primary/60 group-hover:text-primary flex flex-col gap-3' >
+                <div className='text-primary/70 group-hover:text-primary flex flex-col gap-3' >
                   <div className="flex-wrap text-center text-lg">{description}</div>
-                  <div className="flex w-full items-center justify-center gap-4 transition-transform hover:scale-125">{
-                    stackIcons.map(({ Icon, name }) => (
-                      <div key={name} className="bg-secondary/20 rounded-full p-2  transition-transform hover:scale-150" title={name} >
-                        <Icon className='h-5 w-5' title={name} />
+                  <div className="flex w-full flex-wrap items-center justify-center gap-4 transition-transform hover:scale-125">{
+                    stackIcons.map(({ Icon, title }) => (
+                      <div key={title} className="bg-secondary/20 rounded-full p-2  transition-transform hover:scale-150" title={title} >
+                        <Icon className='h-5 w-5' title={title} />
                       </div>
                     ))
                   }</div>
@@ -95,7 +103,7 @@ interface Project {
   imageSrc: string
   tags?: string[]
   published?: boolean
-  stackIcons?: { Icon: IconType, name: string }[]
+  stackIcons?: { Icon: IconType, title: string }[]
   className?: string
 }
 
@@ -109,13 +117,13 @@ const projects: Record<string, Project> = {
     tags: ['web'],
     published: true,
     stackIcons: [
-      { Icon: SiAlgolia, name: 'Algolia Instant Search' },
-      { Icon: CloudinaryIcon, name: 'Cloudinary Media CDN' },
-      { Icon: TurborepoIcon, name: 'Turborepo Monorepo' },
-      { Icon: SiNextdotjs, name: 'Next.js' },
-      { Icon: SiReact, name: 'React' },
-      { Icon: SiTypescript, name: 'TypeScript' },
-      { Icon: SiTailwindcss, name: 'TailwindCSS' },
+      { Icon: SiAlgolia, title: 'Algolia Instant Search' },
+      { Icon: CloudinaryIcon, title: 'Cloudinary Media CDN' },
+      { Icon: TurborepoIcon, title: 'Turborepo Monorepo' },
+      { Icon: SiNextdotjs, title: 'Next.js' },
+      { Icon: SiReact, title: 'React' },
+      { Icon: SiTypescript, title: 'TypeScript' },
+      { Icon: SiTailwindcss, title: 'Tailwindcss' },
     ]
 
   },
@@ -124,14 +132,30 @@ const projects: Record<string, Project> = {
     title: 'Auto Restart TypeScript / ESLint Servers',
     description: <><strong className='font-semibold'>VS Code Extension:</strong> Restart TypeScript or ESLint server automatically if monitored configuration or files changed.</>,
     homepage: 'https://marketplace.visualstudio.com/items?itemName=neotan.vscode-auto-restart-typescript-eslint-servers',
+    repoUrl: 'https://github.com/neotan/vscode-auto-restart-typescript-eslint-servers',
     imageSrc: 'https://raw.githubusercontent.com/neotan/vscode-auto-restart-typescript-eslint-servers/master/images/_featured.png',
     tags: ['vscode', 'extension'],
     published: true,
     stackIcons: [
-      { Icon: SiVisualstudiocode, name: 'VS Code Extension' },
-      { Icon: SiTypescript, name: 'TypeScript' },
+      { Icon: SiVisualstudiocode, title: 'VS Code Extension' },
+      { Icon: SiTypescript, title: 'TypeScript' },
     ],
     className: 'h-60 object-cover'
+
+  },
+  'tailwind-plugin-cursor-emoji': {
+    id: 'tailwind-plugin-cursor-emoji',
+    title: 'Auto Restart TypeScript / ESLint Servers',
+    description: <><strong className='font-semibold'>Tailwindcss Plugin: </strong>Enable using emoji as cursor.</>,
+    homepage: 'https://www.npmjs.com/package/tailwind-plugin-cursor-emoji',
+    repoUrl: 'https://github.com/neotan/tailwind-plugin-cursor-emoji',
+    imageSrc: 'https://raw.githubusercontent.com/neotan/tailwind-plugin-cursor-emoji/master/images/featured.png',
+    tags: ['tailwindcss', 'plugin', 'emoji', 'cursor'],
+    published: true,
+    stackIcons: [
+      { Icon: SiTailwindcss, title: 'Tailwindcss' },
+    ],
+    className: 'h-64 object-cover'
 
   },
   hash: {
@@ -139,16 +163,17 @@ const projects: Record<string, Project> = {
     title: 'Hash',
     description: 'Generate text/file (up to 10GB) hash with WASM locally',
     homepage: 'http://hash.npmhub.net',
+    repoUrl: 'https://github.com/neotan/neotan.me/tree/master/hash',
     imageSrc: '/images/hash.png',
     tags: ['web'],
     published: true,
     stackIcons: [
-      { Icon: SiWebassembly, name: 'Webassembly' },
-      { Icon: TurborepoIcon, name: 'Turborepo Monorepo' },
-      { Icon: SiNextdotjs, name: 'Next.js' },
-      { Icon: SiReact, name: 'React' },
-      { Icon: SiTypescript, name: 'TypeScript' },
-      { Icon: SiTailwindcss, name: 'TailwindCSS' },
+      { Icon: SiWebassembly, title: 'Webassembly' },
+      { Icon: TurborepoIcon, title: 'Turborepo Monorepo' },
+      { Icon: SiNextdotjs, title: 'Next.js' },
+      { Icon: SiReact, title: 'React' },
+      { Icon: SiTypescript, title: 'TypeScript' },
+      { Icon: SiTailwindcss, title: 'Tailwindcss' },
     ]
   },
   web3: {
@@ -161,12 +186,12 @@ const projects: Record<string, Project> = {
     tags: ['web', 'animation'],
     published: true,
     stackIcons: [
-      { Icon: FramerIcon, name: 'Framer Motion Animation' },
-      { Icon: TurborepoIcon, name: 'Turborepo Monorepo' },
-      { Icon: SiNextdotjs, name: 'Next.js' },
-      { Icon: SiReact, name: 'React' },
-      { Icon: SiTypescript, name: 'TypeScript' },
-      { Icon: SiTailwindcss, name: 'TailwindCSS' },
+      { Icon: FramerIcon, title: 'Framer Motion Animation' },
+      { Icon: TurborepoIcon, title: 'Turborepo Monorepo' },
+      { Icon: SiNextdotjs, title: 'Next.js' },
+      { Icon: SiReact, title: 'React' },
+      { Icon: SiTypescript, title: 'TypeScript' },
+      { Icon: SiTailwindcss, title: 'Tailwindcss' },
     ]
   },
 }

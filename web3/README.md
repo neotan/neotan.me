@@ -22,7 +22,7 @@ but believe me, they are reasonable in the context of such scale, like:
       > Premature optimization is the root of all evil. -- Donald Knuth, 1974
 
 1. **Put classNames inline**. Because I'm leveraging the fantastic
-   [🧙‍♂️TailwindCSS 3](https://tailwindcss.com/) to style the site, and
+   [🧙‍♂️Tailwindcss 3](https://tailwindcss.com/) to style the site, and
    [✨Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
    for VS Code's AutoComplete, they only work with **inline** classNames
    perfectly so far.

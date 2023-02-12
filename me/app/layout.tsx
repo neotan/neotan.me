@@ -28,7 +28,7 @@ function RootLayout({ className, children }: BaseProps<'html'>) {
           storageKey={'neotan.me-root-theme'}
           defaultTheme='light'
         >
-          <div className='mx-auto flex max-w-4xl flex-col gap-10 px-5 py-10 sm:flex-auto sm:px-10 sm:py-8'>
+          <div className='mx-auto flex max-w-5xl flex-col gap-10 px-5 py-10 sm:flex-auto sm:px-10 sm:py-8'>
 
             {children}
           </div>

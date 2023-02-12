@@ -16,6 +16,7 @@
     "clsx": "^1.2.1",
     "daisyui": "^2.46.0",
     "date-fns": "^2.29.3",
+    "dompurify": "^2.4.3",
     "dotenv": "^16.0.3",
     "fuse.js": "^6.6.2",
     "hash-wasm": "^4.9.0",
@@ -32,9 +33,9 @@
     "react-file-utils": "^1.2.0",
     "react-icons": "^4.7.1",
     "react-use": "^17.4.0",
+    "shared-types": "workspace:*",
     "tailwind-merge": "^1.8.1",
     "tailwind-scrollbar": "^2.1.0",
-    "shared-types": "workspace:*",
     "ui": "workspace:*",
     "utils": "workspace:*"
   },

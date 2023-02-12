@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import { ComponentProps } from 'react'
 import { motion } from 'framer-motion'
-import { cn } from '../utils/styles'
+import { ComponentProps } from 'react'
 import { fadeIn } from '../utils/motions'
+import { cn } from '../utils/styles'
 
 export type InsightCardProps = ComponentProps<typeof motion.div> & {
   imgUrl: string,
@@ -27,7 +27,7 @@ export function InsightCard({ className, imgUrl, title, subtitle, index }: Insig
           <h4 className="text-[26px] font-normal text-white lg:text-[42px]">
             {title}
           </h4>
-          <p className="text-secondary-white mt-[16px] text-[14px] font-normal lg:text-[20px]">
+          <p className="mt-[16px] text-[14px] font-normal text-secondary-white lg:text-[20px]">
             {subtitle}
           </p>
         </div>
