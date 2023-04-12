@@ -13,9 +13,10 @@ function Tab({ children, className, onClick, ...restProps }: ComponentPropsWitho
   return <button
     className={
       cn('flex items-center justify-center gap-2 rounded-2xl p-4 text-lg font-bold hover:bg-accent/5', className)}
-    {...restProps}
     data-value='projects'
-    onClick={onClick}>
+    onClick={onClick}
+    {...restProps}
+  >
     {children}
   </button>
 
