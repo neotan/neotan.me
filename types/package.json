@@ -7,10 +7,16 @@
     "access": "public"
   },
   "dependencies": {
-    "@types/react": "^18.0.26",
+    "@types/node": "^18.11.18",
+    "@types/ramda": "^0.28.20",
     "@types/react-dom": "^18.0.10",
+    "@types/react": "^18.0.26",
+    "eslint-config-custom": "workspace:*",
+    "eslint": "^8.31.0",
     "instantsearch.js": "^4.49.2",
+    "react-dom": "^18.0.10",
     "react": "^18.2.0",
-    "react-dom": "^18.0.10"
+    "tsconfig": "workspace:*",
+    "typescript": "^4.9.4"
   }
 }

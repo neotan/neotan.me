@@ -1,7 +1,7 @@
-import { BaseProps } from 'shared-types'
+import { ComponentProps } from 'react'
 import { cn, styles } from '../utils/styles'
 
-export type StartStepsProps = BaseProps<'div'> & { number: string, text: string }
+export type StartStepsProps = ComponentProps<'div'> & { number: string, text: string }
 
 export function StartSteps({ className, number, text }: StartStepsProps) {
 

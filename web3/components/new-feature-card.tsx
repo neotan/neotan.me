@@ -1,17 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
-import { BaseProps } from 'shared-types'
+import { ComponentProps } from 'react'
 import { cn, styles } from '../utils/styles'
 
-export type NewFeatureCardProps = BaseProps<'div'> & {
+export type NewFeatureCardProps = ComponentProps<'div'> & {
   imgUrl: string
   title: string
   subtitle: string
 }
 
-export function NewFeatureCard({ imgUrl, title, subtitle, className, rootProps }: NewFeatureCardProps) {
+export function NewFeatureCard({ imgUrl, title, subtitle, className, ...restProps }: NewFeatureCardProps) {
 
   return (
-    <div className={cn('flex min-w-[210px] flex-1 flex-col sm:max-w-[250px]', className)} {...rootProps}>
+    <div className={cn('flex min-w-[210px] flex-1 flex-col sm:max-w-[250px]', className)} {...restProps}>
       <div
         className={cn(styles.flexCenter, 'h-[70px] w-[70px] rounded-[24px] bg-[#323F5D]')}
       >

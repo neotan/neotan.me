@@ -1,8 +1,7 @@
 'use client'
 import '@/styles/globals.css'
-import { useState } from 'react'
+import { ComponentPropsWithoutRef } from 'react'
 import { cn, isDevMode } from 'utils/helpers'
-import { BaseProps } from 'shared-types'
 import { JetBrains_Mono, Montserrat } from '@next/font/google'
 import { ThemeProvider } from 'next-themes'
 import Footer from '@/components/footer'
@@ -17,7 +16,7 @@ const jbMono = JetBrains_Mono({
   variable: '--font-jetbrainsmono',
 })
 
-function RootLayout({ className, children }: BaseProps<'html'>) {
+function RootLayout({ className, children }: ComponentPropsWithoutRef<'html'>) {
 
   return (
     <html lang="en" className={cn(montserrat.variable, jbMono.variable)}>

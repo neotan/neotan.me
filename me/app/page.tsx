@@ -18,6 +18,7 @@ import { FaGithub, FaSlackHash } from 'react-icons/fa'
 import CloudinaryIcon from '@/icons/cloudinary-icon'
 import TurborepoIcon from '@/icons/turborepo-icon'
 import FramerIcon from '@/icons/framer-icon'
+import PlasmoIcon from '@/icons/plasmo-icon'
 import MenuTabs from '@/components/menu-tabs'
 import Bio from '@/components/bio'
 import Navbar from '@/components/navbar'
@@ -58,10 +59,10 @@ export default function HomeIndex() {
             <div key={id} id={id} className='card group px-2 sm:px-8'>
               <div className="invisible absolute left-0 top-0 flex flex-col gap-2 group-hover:visible">
                 <Link href={'#' + id}>
-                  <FaSlackHash className='fill-secondary hidden h-7 w-7 sm:block' />
+                  <FaSlackHash className='fill-secondary hidden h-7 w-7 sm:block shadow-lg' />
                 </Link>
                 {repoUrl && <Link href={repoUrl}>
-                  <FaGithub className='fill-secondary hidden h-7 w-7 sm:block' />
+                  <FaGithub className='fill-secondary hidden h-7 w-7 sm:block shadow-lg' />
                 </Link>}
               </div>
               <div />
@@ -153,6 +154,24 @@ const projects: Record<string, Project> = {
     tags: ['tailwindcss', 'plugin', 'emoji', 'cursor'],
     published: true,
     stackIcons: [
+      { Icon: SiTailwindcss, title: 'Tailwindcss' },
+    ],
+    className: 'h-64 object-cover'
+
+  },
+  'github-compare-online': {
+    id: 'github-compare-online',
+    title: 'Compare Github branches, commits, tags and hashes online.',
+    description: <><strong className='font-semibold'>Chrome extension: </strong>Compare Github branches, commits, tags and hashes online.</>,
+    homepage: 'https://chrome.google.com/webstore/detail/github-compare-online/dglncilbcfbjkdpiabohoofgkfabhpab',
+    repoUrl: 'https://github.com/neotan/chrome-extension-github-compare-online',
+    imageSrc: 'https://raw.githubusercontent.com/neotan/chrome-extension-github-compare-online/master/assets/Marquee%20promo%20tile.png?token=GHSAT0AAAAAABSNFAD52UXXJQ7WEVVSMRFQZBU2W2Q',
+    tags: ['chrome-extension', 'plasmo', 'tailwindcss', 'github'],
+    published: true,
+    stackIcons: [
+      { Icon: PlasmoIcon, title: 'Plasmo' },
+      { Icon: SiReact, title: 'React' },
+      { Icon: SiTypescript, title: 'TypeScript' },
       { Icon: SiTailwindcss, title: 'Tailwindcss' },
     ],
     className: 'h-64 object-cover'

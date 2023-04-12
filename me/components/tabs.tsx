@@ -1,14 +1,14 @@
 'use client'
-import { ComponentPropsWithRef } from 'react'
+import { ComponentPropsWithoutRef } from 'react'
 import { cn } from 'utils/helpers'
 
-export default function Tabs({ children, className, ...restProps }: ComponentPropsWithRef<'div'>) {
+export default function Tabs({ children, className, ...restProps }: ComponentPropsWithoutRef<'div'>) {
   return <div className={cn('flex', className)} {...restProps}>
     {children}
   </div>
 }
 
-function Tab({ children, className, onClick, ...restProps }: ComponentPropsWithRef<'button'>) {
+function Tab({ children, className, onClick, ...restProps }: ComponentPropsWithoutRef<'button'>) {
 
   return <button
     className={

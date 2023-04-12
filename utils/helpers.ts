@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { format, formatDistance, toDate } from 'date-fns'
+import { format, formatDistance, isValid, parseISO, toDate } from 'date-fns'
 import { anyPass, isEmpty, isNil } from 'ramda'
 import rison from 'rison'
 import { twMerge } from 'tailwind-merge'
@@ -11,33 +11,6 @@ export function noop() {
 export const isBrowser = typeof window !== 'undefined'
 
 export const isDevMode = process?.env?.NODE_ENV === 'development'
-
-export const formatDate = (date: Date | number | string, dateFormat = 'yyyy-MM-dd') => {
-  if (!date) return ''
-
-  return date instanceof Date
-    ? format(toDate(date), dateFormat)
-    : format(new Date(date), dateFormat)
-}
-
-export function isNumber(num: unknown) {
-  if (typeof num === 'number') {
-    return num - num === 0
-  }
-  if (typeof num === 'string' && num.trim() !== '') {
-    return Number.isFinite ? Number.isFinite(+num) : isFinite(+num)
-  }
-  return false
-}
-
-export function formatNumber(
-  x: number | bigint | string,
-  options?: Intl.NumberFormatOptions,
-  locales: string | string[] = 'en-US',
-): string {
-  if (!isNumber(x)) return String(x)
-  return new Intl.NumberFormat(locales, options).format(Number(x))
-}
 
 export function strToObj<T>(str: string): T | null {
   if (!str) return null
@@ -56,10 +29,6 @@ export function objToStr(obj: Record<string, unknown>): string | undefined {
   } catch (error) {
     console.error(error)
   }
-}
-
-export function isNilOrEmpty(value: unknown) {
-  return anyPass([isNil, isEmpty])(value)
 }
 
 export function isNilOrEmptyOrFalsy(value: unknown) {
@@ -96,6 +65,49 @@ export function formatDistanceShort(
   )
 }
 
+export type CnParams = Parameters<typeof clsx>[0];
 export function cn(...classNames: Parameters<typeof clsx>) {
   return twMerge(clsx(classNames))
+}
+
+export function isNilOrEmpty(x: unknown) {
+  return x == null || x === '' || (isObject(x) ? Object.keys(x).length === 0 : Array.isArray(x) && x.length === 0)
+}
+
+export function isNumber(num: unknown) {
+  if (num === Infinity) return true
+
+  if (typeof num === 'number') {
+    return num - num === 0
+  }
+  if (typeof num === 'string' && num.trim() !== '') {
+    return Number.isFinite ? Number.isFinite(+num) : isFinite(+num)
+  }
+  return false
+}
+
+export function isObject(x: unknown) {
+  return Object.prototype.toString.call(x) === '[object Object]'
+}
+
+export function formatDate(date: Date | number | string, dateFormat = 'yyyy-MM-dd') {
+  if (!date || !isValid(new Date(date))) return ''
+
+  if (date instanceof Date || typeof date === 'number') {
+    // ref: https://stackoverflow.com/a/31732581/5104886
+    const adjustedDate = new Date(toDate(date).toISOString().replace(/-/g, '/').replace(/T.+/, ''))
+    return format(adjustedDate, dateFormat)
+  }
+
+  return format(parseISO(date), dateFormat)
+}
+
+export function formatNumber(
+  x: unknown,
+  options?: Intl.NumberFormatOptions,
+  locales: string | string[] = 'en-US'
+): string {
+  if (!isNumber(x)) return x as string
+
+  return new Intl.NumberFormat(locales, options).format(Number(x))
 }

@@ -1,8 +1,8 @@
 import '../styles/globals.css'
-import { BaseProps } from 'shared-types'
+import { ComponentProps } from 'react'
 import { cn } from '../utils/styles'
 
-function RootLayout({ className, children }: BaseProps<'html'>) {
+function RootLayout({ className, children }: ComponentProps<'html'>) {
   return (
     <html lang="en">
       <head />

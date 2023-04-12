@@ -1,6 +1,6 @@
+import { ComponentPropsWithoutRef } from 'react'
 import { findIndex, keys, propEq, zipWith } from 'ramda'
 import { twMerge } from 'tailwind-merge'
-import type { BaseProps } from 'shared-types'
 import { IconType } from 'react-icons'
 
 export function DarkModeSwitch({
@@ -34,7 +34,7 @@ export function DarkModeSwitch({
 
 export type ThemeType = Record<string, { name: string, [key: string]: any }> | string
 
-type DarkModeSwitchProps = BaseProps<'svg'> & {
+type DarkModeSwitchProps = ComponentPropsWithoutRef<'svg'> & {
   currentThemeName: string
   setTheme: (theme: string) => void
   presetThemes: ThemeType[]

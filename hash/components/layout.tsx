@@ -1,13 +1,12 @@
 import { useTheme } from 'next-themes'
 import { slice } from 'ramda'
-import * as React from 'react'
+import React, { ComponentPropsWithoutRef } from 'react'
 import { FiMoon, FiSun } from 'react-icons/fi'
-import type { BaseProps } from 'shared-types'
 import { ClientRenderOnly, DarkModeSwitch, ThemeType } from 'ui'
 //@ts-ignore
 import { daisyui } from '../tailwind.config'
 
-export default function Layout({ children }: BaseProps<'div'>) {
+export default function Layout({ children }: ComponentPropsWithoutRef<'div'>) {
   const { theme: currentThemeName, setTheme } = useTheme()
   return (
     <div className="mx-auto max-w-screen-lg py-4 px-3">

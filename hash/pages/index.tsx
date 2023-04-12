@@ -8,13 +8,13 @@ import formatDuration from 'date-fns/formatDuration'
 import intervalToDuration from 'date-fns/intervalToDuration'
 import purify from 'dompurify'
 import { IHasher } from 'hash-wasm/lib/WASMInterface'
-//@ts-ignore
+//@ts-ignore 
+// eslint-disable-next-line
 import * as hashAlgos from 'https://cdn.skypack.dev/hash-wasm'
 import prettyBytes from 'pretty-bytes'
 import { includes, keys, map, objOf, pluck, toUpper, uniq, values, without } from 'ramda'
 import { createRef, forwardRef, useCallback, useImperativeHandle, useRef, useState } from 'react'
-import * as React from 'react'
-import type { RefObject } from 'react'
+import React, { ComponentPropsWithoutRef, ComponentPropsWithRef, RefObject } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import {
   Badge,
@@ -37,7 +37,6 @@ import {
   FiZap
 } from 'react-icons/fi'
 import { ImFilesEmpty } from 'react-icons/im'
-import type { BaseProps } from 'shared-types'
 import { twMerge } from 'tailwind-merge'
 import { ClientRenderOnly } from 'ui'
 import { formatDate, isNilOrEmpty } from 'utils/helpers'
@@ -391,7 +390,7 @@ export default function HashHome() {
   )
 }
 
-interface HashTextProps extends BaseProps<'div'> {
+interface HashTextProps extends ComponentPropsWithoutRef<'div'> {
   algoName: AlgoName
   rawData: string
   hasher: (rawData: string) => Promise<string>
@@ -506,7 +505,7 @@ async function readFile(
 
 }
 
-interface HashFileProps extends BaseProps<'div'> {
+interface HashFileProps extends ComponentPropsWithRef<'div'> {
   algoName: keyof typeof hashers
   rawFiles: File[]
   onDone: Function
@@ -590,9 +589,7 @@ const HashFile = forwardRef(function HashFile({ className, algoName, rawFiles, o
                     <span>{fileName}</span>
                     <Placeholder
                       className='cursor-pointer text-sm text-base-content/10 grayscale hover:text-base-content/40'
-                      rootProps={
-                        { title: `${fileName}\n- size: ${prettyBytes(file.size)}\n- updated: ${formatDate(file.lastModified, 'yyyy-MM-dd H:mm:ss')}` }
-                      }
+                      title={`${fileName}\n- size: ${prettyBytes(file.size)}\n- updated: ${formatDate(file.lastModified, 'yyyy-MM-dd H:mm:ss')}`}
                     >ℹ</Placeholder>
                   </div>
                   {
@@ -618,10 +615,12 @@ const HashFile = forwardRef(function HashFile({ className, algoName, rawFiles, o
 })
 
 
-function Placeholder({ className, children, rootProps, title }: BaseProps<'div'>) {
+function Placeholder({ className, children, title, ...restProps }: ComponentPropsWithoutRef<'div'>) {
   return (
-    <div className={twMerge('rounded-md text-center text-base-content/40', className)} title={title}
-      {...rootProps}
+    <div
+      className={twMerge('rounded-md text-center text-base-content/40', className)}
+      title={title}
+      {...restProps}
     >
       {children}
     </div >

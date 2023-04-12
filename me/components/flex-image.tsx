@@ -6,8 +6,7 @@ import {
   responsive,
 } from '@cloudinary/react'
 import { Cloudinary } from '@cloudinary/url-gen'
-import * as React from 'react'
-import { BaseProps } from 'shared-types'
+import { ComponentPropsWithoutRef } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 type AdvancedImageProps = React.ComponentProps<typeof AdvancedImage>
@@ -16,7 +15,7 @@ export type FlexImageProps = {
   cloudName?: string
   cldImg?: AdvancedImageProps['cldImg']
   cloudinaryImgPubId?: string
-} & Omit<AdvancedImageProps, 'cldImg'> & BaseProps<'img'>
+} & Omit<AdvancedImageProps, 'cldImg'> & ComponentPropsWithoutRef<'img'>
 
 
 export function FlexImage(props: FlexImageProps) {

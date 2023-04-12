@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import { slice } from 'ramda'
+import { ComponentPropsWithoutRef } from 'react'
 import { FaGithub } from 'react-icons/fa'
-import type { BaseProps } from 'shared-types'
 import { twMerge } from 'tailwind-merge'
 
-export default function Footer({ className }: BaseProps<'footer'>) {
+export default function Footer({ className }: ComponentPropsWithoutRef<'footer'>) {
   return (
     <footer
       className={twMerge(
