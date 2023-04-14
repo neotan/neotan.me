@@ -15,7 +15,6 @@
     "clean": "rm -rf node_modules package-lock.json yarn.lock .temp .next .turbo pnpm-lock.yaml"
   },
   "dependencies": {
-    "@next/font": "^13.1.2",
     "clsx": "^1.2.1",
     "framer-motion": "^8.4.2",
     "next": "^13.1.2",

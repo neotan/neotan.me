@@ -29,12 +29,13 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "strictNullChecks": true
   },
   "include": [
     ".next/types/**/*.ts",
-    "app/**/*.ts",
-    "app/**/*.tsx",
+    "pages/**/*.ts",
+    "pages/**/*.tsx",
     "components*/**/*.ts",
     "components*/**/*.tsx",
     "icons/**/*.ts",
@@ -46,7 +47,7 @@
     "utils/**/*.tsx",
     "utils/motions.ts",
     "components/custom-texts.tsx",
-    "utils/styles.ts",
+    "utils/styles.ts"
   ],
   "exclude": [
     "node_modules"

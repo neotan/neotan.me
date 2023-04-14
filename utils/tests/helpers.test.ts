@@ -71,7 +71,6 @@ describe('formatNumber', () => {
 
   test('should return formatted number if number is Date object', () => {
     const input = new Date(123456789)
-    console.log(formatNumber(input) === input)
     expect(formatNumber(input)).toBe(input)
   })
 })

@@ -17,6 +17,7 @@ export default function MenuTabs({ className, children }: ComponentPropsWithoutR
         <Link href='/'>
           <Tabs.Tab
             className={cn('gap-3', { 'text-accent bg-accent/10': currentPathname === '/' })}
+            title='Check out my excellent works!'
           >
             <FaRocket /><span>Projects</span>
           </Tabs.Tab>
@@ -24,8 +25,9 @@ export default function MenuTabs({ className, children }: ComponentPropsWithoutR
         <Link href='/blog'>
           <Tabs.Tab
             className={cn('gap-3', { 'text-error bg-error/10': currentPathname === '/blog' })}
+            title='Today I Learned!'
           >
-            <FaLightbulb /><span>TLDR</span>
+            <FaLightbulb /><span>TIL</span>
           </Tabs.Tab>
         </Link>
       </Tabs>

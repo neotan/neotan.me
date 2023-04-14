@@ -3,6 +3,15 @@ import { findIndex, keys, propEq, zipWith } from 'ramda'
 import { twMerge } from 'tailwind-merge'
 import { IconType } from 'react-icons'
 
+export type ThemeType = Record<string, { name: string, [key: string]: any }> | string
+
+type DarkModeSwitchProps = ComponentPropsWithoutRef<'svg'> & {
+  currentThemeName: string
+  setTheme: (theme: string) => void
+  presetThemes: ThemeType[]
+  icons: IconType[]
+}
+
 export function DarkModeSwitch({
   className,
   presetThemes = [],
@@ -30,13 +39,4 @@ export function DarkModeSwitch({
       onClick={() => setTheme(nextThemeName)}
     />
   )
-}
-
-export type ThemeType = Record<string, { name: string, [key: string]: any }> | string
-
-type DarkModeSwitchProps = ComponentPropsWithoutRef<'svg'> & {
-  currentThemeName: string
-  setTheme: (theme: string) => void
-  presetThemes: ThemeType[]
-  icons: IconType[]
 }

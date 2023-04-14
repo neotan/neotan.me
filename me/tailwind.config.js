@@ -8,9 +8,6 @@ const baseConfig = require("tailwind-config-custom/tailwind.config.js");
 const customTwConfig = {
   theme: {
     extend: {
-      fontFamily: {
-        code: ['"var(--font-jetbrainsmono)"', ...defaultTheme.fontFamily.mono],
-      },
       animation: {
         blob: 'blob 7s infinite'
       },
@@ -32,29 +29,30 @@ const customTwConfig = {
       }
     }
   },
-  content: [
-    'app/**/*.{js,ts,jsx,tsx}',
-    'components/**/*.{js,ts,jsx,tsx}',
-    'icons/**/*.{js,ts,jsx,tsx}',
-    '../../packages/ui/dist/**/*.{js,ts,jsx,tsx}'
-  ],
   plugins: [
     require('@tailwindcss/typography'),
     require('daisyui'),
     require('tailwind-scrollbar'),
+  ],
+  content: [
+    'components/**/*.{js,ts,jsx,tsx}',
+    'icons/**/*.{js,ts,jsx,tsx}',
+    'pages/**/*.{js,ts,jsx,tsx}',
+    '../../packages/ui/dist/**/*.{js,ts,jsx,tsx}',
+    'node_modules/daisyui/dist/**/*.js'
   ],
   daisyui: {
     themes: [
       {
         light: {
           ...require("daisyui/src/colors/themes")["[data-theme=wireframe]"],
+          "font-family": 'Montserrat, sans-serif',
           "primary": "#303040",
           "secondary": "#97979f",
           "base-100": "#ffffff",
           "accent": "#6767ff",
           "error": "#ff522f",
           "info": "#20b8ff",
-          "font-family": 'var(--font-montserrat)',
           // "neutral": "#97979f",
           // "success": "#0D6839",
           // "warning": "#BA7B0D",
@@ -74,7 +72,7 @@ const customTwConfig = {
       {
         dark: {
           ...require("daisyui/src/colors/themes")["[data-theme=black]"],
-          "font-family": 'var(--font-montserrat)',
+          "font-family": 'Montserrat, sans-serif',
           "primary": "#ffffff",
           "secondary": "#777777",
           "accent": "#6767ff",

@@ -1,20 +1,13 @@
-/** @type {import('tailwindcss').Config} */
 const defaultTheme = require('tailwindcss/defaultTheme')
 const { mergeDeepRight } = require('ramda')
 const baseConfig = require("tailwind-config-custom/tailwind.config.js");
 
 /** @type {import('tailwindcss').Config} */
 const customTwConfig = {
-  content: [
-    './app/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-    './icons/**/*.{js,ts,jsx,tsx}',
-    './utils/**/*.{js,ts,jsx,tsx}'
-  ],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Eudoxus Sans', ...defaultTheme.fontFamily.sans],
+        sans: ['Sofia Sans Condensed', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         'primary-black': '#1A232E',
@@ -25,7 +18,13 @@ const customTwConfig = {
       },
     }
   },
-  plugins: []
+  plugins: [],
+  content: [
+    'pages/**/*.{js,ts,jsx,tsx}',
+    'components/**/*.{js,ts,jsx,tsx}',
+    'icons/**/*.{js,ts,jsx,tsx}',
+    'utils/**/*.{js,ts,jsx,tsx}'
+  ],
 }
 
 module.exports = mergeDeepRight(baseConfig, customTwConfig)

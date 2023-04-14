@@ -11,7 +11,8 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "strictNullChecks": true
   },
   "include": [
     ".next/types/**/*.ts",
@@ -26,7 +27,7 @@
     "types/**/*.tsx",
     "utils/**/*.ts",
     "utils/**/*.tsx",
-    "app/blog/[slug]/layout.tsx",
+    "app/blog/[slug]/layout.tsx"
   ],
   "exclude": [
     "node_modules"

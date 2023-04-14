@@ -9,10 +9,10 @@ import { useKey } from 'react-use'
 import { cn } from 'utils/helpers'
 import { formatDate } from 'utils/helpers'
 import { useFuse } from 'utils/hooks'
+import { FlexImage } from './flex-image'
 import { MIN_CLOUDINARY_ACCOUNT_LENGTH } from '@/shared/constants'
 import type { BlogSearchIndex, MdxDoc } from '@/types'
 import mdxData from 'public/db.json'
-import { FlexImage } from './flex-image'
 
 
 type SearchButtonProps = ComponentPropsWithoutRef<'svg'>

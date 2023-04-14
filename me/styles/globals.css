@@ -10,6 +10,11 @@
 @layer base {
   html {
     @apply h-full;
+    font-family: 'Montserrat', 'Noto Sans TC', sans-serif;
+  }
+
+  code, kbd, pre, samp{
+    font-family: 'JetBrains Mono',ui-monospace,'SFMono-Regular','Menlo','Monaco','Consolas','Liberation Mono','Courier New',monospace !important;
   }
 
   h1,

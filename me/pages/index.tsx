@@ -1,10 +1,10 @@
 'use client'
-import { ReactNode } from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
 import { values } from 'ramda'
-import { cn } from 'utils/helpers'
-import { SiVisualstudiocode } from 'react-icons/si'
+import React, { ReactNode } from 'react'
+import type { IconType } from 'react-icons'
+import { FaGithub, FaSlackHash } from 'react-icons/fa'
 import {
   SiAlgolia,
   SiNextdotjs,
@@ -13,34 +13,21 @@ import {
   SiTypescript,
   SiWebassembly
 } from 'react-icons/si'
-import type { IconType } from 'react-icons'
-import { FaGithub, FaSlackHash } from 'react-icons/fa'
-import CloudinaryIcon from '@/icons/cloudinary-icon'
-import TurborepoIcon from '@/icons/turborepo-icon'
-import FramerIcon from '@/icons/framer-icon'
-import PlasmoIcon from '@/icons/plasmo-icon'
-import MenuTabs from '@/components/menu-tabs'
-import Bio from '@/components/bio'
-import Navbar from '@/components/navbar'
+import { SiVisualstudiocode } from 'react-icons/si'
+import { cn } from 'utils/helpers'
+import Bio from '../components/bio'
+import DefaultLayout from '../components/default-layout'
+import CloudinaryIcon from '../icons/cloudinary-icon'
+import FramerIcon from '../icons/framer-icon'
+import PlasmoIcon from '../icons/plasmo-icon'
+import TurborepoIcon from '../icons/turborepo-icon'
 
 export default function HomeIndex() {
 
   return (
-    <>
-      <Navbar className='px-0 sm:px-16' >
-        <div className='relative'>
-          <Image
-            className='h-16 w-16 rounded-full shadow-3xl transition-transform hover:scale-150'
-            alt='Avatar'
-            src='/images/avatar.jpg'
-            width={200}
-            height={200}
-          />
-        </div>
-      </Navbar>
+    <DefaultLayout>
       <Bio className='sm:px-16' />
-      <MenuTabs />
-      <section key='projects' className='xcursor-emoji-[🦝/6xl/red-500] relative flex flex-col gap-8'
+      <main key='projects' className='xcursor-emoji-[🦝/6xl/red-500] relative flex flex-col gap-8'
       >
         {values(projects).map(({
           id,
@@ -56,17 +43,17 @@ export default function HomeIndex() {
         }: Project) => {
           if (!published) return null
           return (
-            <div key={id} id={id} className='card group px-2 sm:px-8'>
+            <div key={id} id={id} className='group card px-2 sm:px-8'>
               <div className="invisible absolute left-0 top-0 flex flex-col gap-2 group-hover:visible">
                 <Link href={'#' + id}>
-                  <FaSlackHash className='fill-secondary hidden h-7 w-7 sm:block shadow-lg' />
+                  <FaSlackHash className='hidden h-7 w-7 fill-secondary shadow-lg sm:block' />
                 </Link>
                 {repoUrl && <Link href={repoUrl}>
-                  <FaGithub className='fill-secondary hidden h-7 w-7 sm:block shadow-lg' />
+                  <FaGithub className='hidden h-7 w-7 fill-secondary shadow-lg sm:block' />
                 </Link>}
               </div>
               <div />
-              <div className="card-body glassmorphism !bg-secondary/30  h-full gap-8 rounded-2xl p-4  shadow-lg shadow-black/40 sm:p-8">
+              <div className="glassmorphism card-body h-full  gap-8 rounded-2xl !bg-secondary/30 p-4  shadow-lg shadow-black/40 sm:p-8">
                 <Link href={homepage} target='_blank' rel="noopener noreferrer">
                   <Image
                     className={cn('rounded-3xl shadow-lg transition-transform hover:scale-105', className)}
@@ -76,11 +63,11 @@ export default function HomeIndex() {
                     height={475}
                   />
                 </Link>
-                <div className='text-primary/70 group-hover:text-primary flex flex-col gap-3' >
+                <div className='flex flex-col gap-3 text-primary/70 group-hover:text-primary' >
                   <div className="flex-wrap text-center text-lg">{description}</div>
                   <div className="flex w-full flex-wrap items-center justify-center gap-4 transition-transform hover:scale-125">{
                     stackIcons.map(({ Icon, title }) => (
-                      <div key={title} className="bg-secondary/20 rounded-full p-2  transition-transform hover:scale-150" title={title} >
+                      <div key={title} className="rounded-full bg-secondary/20 p-2  transition-transform hover:scale-150" title={title} >
                         <Icon className='h-5 w-5' title={title} />
                       </div>
                     ))
@@ -90,8 +77,8 @@ export default function HomeIndex() {
             </div>
           )
         })}
-      </section>
-    </ >
+      </main>
+    </DefaultLayout>
   )
 }
 
@@ -162,10 +149,10 @@ const projects: Record<string, Project> = {
   'github-compare-online': {
     id: 'github-compare-online',
     title: 'Compare Github branches, commits, tags and hashes online.',
-    description: <><strong className='font-semibold'>Chrome extension: </strong>Compare Github branches, commits, tags and hashes online.</>,
+    description: <><strong className='font-semibold'>Chrome extension: </strong>Find and Compare GitHub commits became much easier.</>,
     homepage: 'https://chrome.google.com/webstore/detail/github-compare-online/dglncilbcfbjkdpiabohoofgkfabhpab',
     repoUrl: 'https://github.com/neotan/chrome-extension-github-compare-online',
-    imageSrc: 'https://raw.githubusercontent.com/neotan/chrome-extension-github-compare-online/master/assets/Marquee%20promo%20tile.png?token=GHSAT0AAAAAABSNFAD52UXXJQ7WEVVSMRFQZBU2W2Q',
+    imageSrc: '/images/compare-github.png',
     tags: ['chrome-extension', 'plasmo', 'tailwindcss', 'github'],
     published: true,
     stackIcons: [

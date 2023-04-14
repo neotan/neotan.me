@@ -408,7 +408,7 @@ const HashText = forwardRef(function HashText({ className, algoName, rawData, ha
 
   useImperativeHandle(ref, () => ({
     execute: () => {
-      console.log('execute()', { algoName, status, error, rawData })
+      // console.log('execute()', { algoName, status, error, rawData })
       execute()
     }
   }))
