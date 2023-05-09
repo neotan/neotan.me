@@ -12,7 +12,7 @@ import { Meta } from '../../types'
 
 export default function BlogIndex({ metas }: { metas: Meta[] }) {
   return (
-    <DefaultLayout>
+    <DefaultLayout className='h-screen'>
       <main key='til' className='flex grow flex-col'>
 
         <ol className='grid  grid-cols-1 gap-6 px-4 sm:px-8 md:grid-cols-2'>

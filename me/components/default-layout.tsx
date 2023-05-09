@@ -9,7 +9,7 @@ export type DefaultLayoutProps = { className?: string, children: ReactNode }
 export default function DefaultLayout({ className, children }: DefaultLayoutProps) {
 
   return (
-    <div className={cn('mx-auto flex h-full max-w-5xl flex-col gap-8 px-5 py-10 sm:flex-auto sm:px-10 sm:py-8', className)}
+    <div className={cn('mx-auto flex max-w-5xl flex-col gap-8 px-5 py-10 sm:flex-auto sm:px-10 sm:py-8', className)}
     >
       <Navbar className='px-0 sm:px-16' >
         <div className=''>

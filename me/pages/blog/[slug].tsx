@@ -8,7 +8,7 @@ import { deserialize } from 'superjson'
 import { formatDate, isNilOrEmpty } from 'utils/helpers'
 import Anchor from '../../components/anchor'
 import PostLayout from '../../components/post-layout'
-import { editUrl } from '../../package.json'
+import pkgJson from '../../package.json'
 import postFiles from '../../public/db.json'
 import { compileMDX } from '../../shared/mdx'
 import { MdxSource, Meta } from '../../types'
@@ -58,7 +58,7 @@ export default function BlogSlug(props: MdxPageProps) {
             }
             <time>{readTime}</time>
             <i className="grow" />
-            <Anchor newWindow href={`${editUrl}/${filePath}`}>Edit</Anchor>
+            <Anchor newWindow href={`${pkgJson.editUrl}/${filePath}`}>Edit</Anchor>
           </div>
           <Image
             src={`${imgSrc}`}
