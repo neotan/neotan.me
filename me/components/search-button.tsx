@@ -2,39 +2,35 @@
 import '@reach/dialog/styles.css'
 import { DialogContent, DialogOverlay } from '@reach/dialog'
 import Link from 'next/link'
-import { map, pipe, values } from 'ramda'
+import { pluck, values } from 'ramda'
 import { ComponentPropsWithoutRef, useState } from 'react'
 import { BiSearch } from 'react-icons/bi'
 import { useKey } from 'react-use'
+import { deserialize } from 'superjson'
 import { cn } from 'utils/helpers'
-import { formatDate } from 'utils/helpers'
 import { useFuse } from 'utils/hooks'
-import { FlexImage } from './flex-image'
-import { MIN_CLOUDINARY_ACCOUNT_LENGTH } from '@/shared/constants'
-import type { BlogSearchIndex, MdxDoc } from '@/types'
-import mdxData from 'public/db.json'
-
+import data from '../public/db.json'
+import { BlogSearchIndex, PostFile } from '../types'
 
 type SearchButtonProps = ComponentPropsWithoutRef<'svg'>
 
-const searchIndices = pipe(
-  values,
-  map(mdxToFuseIndex),
-)(mdxData)
-const fuseOptions = {
-  keys: ['title', 'content', 'tags'],
-  includeScore: true,
-  threshold: 0.6,
-}
-
 export default function SearchButton({ className }: SearchButtonProps) {
-  const [visable, setVisable] = useState(false)
-  const toggleModal = () => setVisable(prev => {
-    return !prev
-  })
+
+  const fuseOptions = {
+    keys: ['title', 'tags', 'content'],
+    includeScore: true,
+  }
+  const [visible, setVisible] = useState(false)
+  const toggleModal = () => setVisible(prev => !prev)
   useKey('/', toggleModal)
 
-  const [searchTerm, setSeachTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState('')
+
+  //@ts-ignore
+  const searchIndices: BlogSearchIndex[] = values(deserialize<Record<string, PostFile>>(data))
+    .map(({ meta, content }) => ({ ...meta, content }))
+    .filter(({ published }) => Boolean(published))
+
   const result = useFuse<BlogSearchIndex>(
     searchIndices,
     searchTerm,
@@ -50,21 +46,21 @@ export default function SearchButton({ className }: SearchButtonProps) {
       />
       <DialogOverlay
         className='backdrop-blur-sm backdrop-grayscale'
-        isOpen={visable}
+        isOpen={visible}
         onDismiss={toggleModal}
         style={{ alignSelf: 'start' }}
       >
-        <DialogContent className="modal-box !w-[100vw] !bg-base-300">
+        <DialogContent className="modal-box !w-[100vw] !bg-base-100">
           <input
-            className="input w-full"
+            className="border-1 input w-full border-base-300"
             autoFocus
             type="search"
             placeholder="Search, press [ Esc] to clear"
             onChange={e => {
-              setSeachTerm(e?.target?.value)
+              setSearchTerm(e?.target?.value)
             }}
           />
-          <label className="label">
+          <label className="label border-b-[1px]">
             <span className="label-text-alt">Found {result.length}</span>
             <span className="label-text-alt">
               Press{' '}
@@ -78,25 +74,15 @@ export default function SearchButton({ className }: SearchButtonProps) {
               to open/close
             </span>
           </label>
-          <ol className="divide-dashed divide-red-700 overflow-y-auto">
+          <ol className="divide-y-[1px] divide-dashed divide-base-300 overflow-y-auto">
             {result?.map(({ item }) => {
               const {
                 slug,
-                url = '',
-                cloudinaryImgPubId = '',
                 title,
               } = item
 
               return (
-                <Link key={slug} href={url} className="flex justify-between space-x-4 p-3 transition hover:bg-base-200">
-
-                  {cloudinaryImgPubId.length > MIN_CLOUDINARY_ACCOUNT_LENGTH
-                    ? <FlexImage
-                      className="hidden w-20 md:inline-block"
-                      cloudinaryImgPubId={cloudinaryImgPubId}
-                    />
-                    : <div className='flex w-24 items-center justify-center'>{cloudinaryImgPubId}</div>
-                  }
+                <Link key={slug} href={`/blog/${slug}`} className="flex justify-between space-x-4 p-3 transition hover:bg-base-300">
                   <div className="flex w-full flex-col">{title}</div>
                 </Link>
               )
@@ -106,31 +92,4 @@ export default function SearchButton({ className }: SearchButtonProps) {
       </DialogOverlay>
     </>
   )
-}
-
-function mdxToFuseIndex({
-  slug,
-  content,
-  title,
-  date,
-  catalog,
-  cloudinaryImgPubId,
-  tags,
-  description,
-  published,
-}: Pick<MdxDoc, 'slug' | 'content' | 'title' | 'date' | 'catalog' | 'cloudinaryImgPubId' | 'tags' | 'description' | 'published'
->): BlogSearchIndex {
-
-  return {
-    slug,
-    title,
-    content,
-    url: `/blog/${slug}`,
-    cloudinaryImgPubId,
-    tags,
-    catalog,
-    description,
-    published,
-    date: formatDate(date || '', 'yyyy-MM-dd'),
-  }
 }

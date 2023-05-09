@@ -1,7 +1,7 @@
 ---
 title: 圖解 SSL/TLS 協議
-date: 2015-04-29
-cloudinaryImgPubId: v1650763215/blog/tls-ssl
+createdAt: 2015-04-29
+imgSrc: tls-ssl.jpg
 catalog: blog
 ---
 
@@ -10,7 +10,7 @@ catalog: blog
 在構建網絡應用，特別是暴露在 internet 中的應用時，通常都會使用 SSL/TLS 協議增強
 數據傳輸的安全性，其結構如下：
 
-https://res.cloudinary.com/ntme/image/upload/v1650851437/blog/SSL-TLS-Structure_zlzpwj.png
+![SSL-TLS-Structure](SSL-TLS-Structure.png)
 
 ## 2. 握手協議 Shakehand
 
@@ -28,7 +28,7 @@ https://res.cloudinary.com/ntme/image/upload/v1650851437/blog/SSL-TLS-Structure_
 安裝了某 [CA](http://en.wikipedia.org/wiki/Certificate_authority) 的 root cert，
 且雙方的 cert 都由這個 CA 所 trust，所 issue）。
 
-https://res.cloudinary.com/ntme/image/upload/v1650849306/blog/SSL-TLS-Shakehand_qvlyfz.png
+![SSL-TLS-Shakehand](SSL-TLS-Shakehand.png)
 
 握手完成後，Client 和 Server 端就會使用應用數據協議和 TLS 記錄協議進行加密通信。
 從結果來看，握手協議完成了下列操作：
@@ -65,9 +65,7 @@ TLS 是 SSL 的繼承者，SSL3.0，之後的 TLS1.0 相當于 “SSL3.1”。
 > model equivalences, TLS/SSL is initialized at layer 5
 > ([session layer](http://en.wikipedia.org/wiki/Session_layer)) and works at
 > layer 6 (the
-> [presentation layer](http://en.wikipedia.org/wiki/Presentation_layer)).[citation
->
-> > needed]
+> [presentation layer](http://en.wikipedia.org/wiki/Presentation_layer)).[citation needed]
 
 它在會話層被初始化，然後工作在表示層。另外，不僅是 HTTP，其他應用層協議（例如
 ：FTP, SMTP 等）都可以使用 TLS，而常見的 UDP 使用的是
@@ -94,7 +92,7 @@ TLS 是 SSL 的繼承者，SSL3.0，之後的 TLS1.0 相當于 “SSL3.1”。
 禁用了 SSL 3.0，杜絕 rollback 回 SSL 3.0。如果你的浏覽器已經禁用 SSL 3.0 的話，
 浏覽只支持 SSL 3.0 的網站會看到類似的警告：
 
-https://res.cloudinary.com/ntme/image/upload/v1650851550/blog/SSL3-unsupported-warning_qokyzw.png
+![SSL3-unsupported-warning](SSL3-unsupported-warning.png)
 
 ### 4. 怎麽知道我用的浏覽器和某網站支持什麽版本的 SSL/TLS 協議？
 

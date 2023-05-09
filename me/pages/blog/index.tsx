@@ -1,59 +1,63 @@
 'use client'
-import Image from 'next/image'
 import Link from 'next/link'
 import { values } from 'ramda'
 import React from 'react'
-import Bio from '../../components/bio'
+import { FiEdit } from 'react-icons/fi'
+import { deserialize } from 'superjson'
+import { formatDate } from 'utils/helpers'
+import Anchor from '../../components/anchor'
 import DefaultLayout from '../../components/default-layout'
-import { FlexImage } from '../../components/flex-image'
-import MenuTabs from '../../components/menu-tabs'
-import Navbar from '../../components/navbar'
-import mdxData from '../../public/db.json'
-import { MIN_CLOUDINARY_ACCOUNT_LENGTH } from '../../shared/constants'
-import { MdxDoc } from '../../types'
+import postFiles from '../../public/db.json'
+import { Meta } from '../../types'
 
-type Slug = keyof typeof mdxData;
-
-export default function BlogIndex() {
-
+export default function BlogIndex({ metas }: { metas: Meta[] }) {
   return (
     <DefaultLayout>
-      <main key='til' className='grid grid-cols-1 gap-6 px-4 sm:p-8 md:grid-cols-2'
-      >
-        {values(mdxData as Record<Slug, MdxDoc>)
-          .sort((right, left) =>
-            String(left?.date ?? '').localeCompare(String(right?.date ?? '')))
-          .map(({
-            slug,
-            title,
-            cloudinaryImgPubId = '',
-            description,
-            published
-          }) => {
-            if (!published) return null
+      <main key='til' className='flex grow flex-col'>
 
-            return (
-              <Link key={slug} href={`/blog/${slug}`}>
-                <div className='glassmorphism card h-full !bg-secondary/30 shadow-lg shadow-black/40 transition-transform hover:scale-105 '>
-                  <div className="card-body rounded-2xl p-0">
-                    <figure className='grow'>
-                      {cloudinaryImgPubId.length > MIN_CLOUDINARY_ACCOUNT_LENGTH
-                        ? <FlexImage
-                          className='h-52 rounded-2xl rounded-b-none object-cover'
-                          cloudinaryImgPubId={cloudinaryImgPubId} />
-                        : <div className='items-center justify-center p-8 text-5xl sm:p-4'>{cloudinaryImgPubId}</div>
-                      }
-                    </figure>
-                    <div className='card-actions p-3 sm:p-8'>
-                      <h2 className="">{title}</h2>
+        <ol className='grid  grid-cols-1 gap-6 px-4 sm:px-8 md:grid-cols-2'>
+          {metas
+            .sort((right, left) => {
+              const rDate = right.updatedAt || right.createdAt
+              const lDate = left.updatedAt || left.createdAt
+              return lDate > rDate ? 1 : -1
+            })
+            .map((meta) => {
+              const { slug, updatedAt, createdAt } = meta
+              if (!meta.published) return null
+
+              return (
+                <Link key={slug} href={`/blog/${slug}`}>
+                  <li className='border-1 flex h-full flex-col justify-between rounded-lg !bg-base-100 p-2 shadow-md transition-transform hover:scale-105 sm:p-4 '>
+                    <div className=''>
+                      <h2 className="">{meta.title}</h2>
                     </div>
-                  </div>
-                </div>
-              </Link>
-            )
-          })}
+                    <div className='flex justify-end'>
+                      <time className='text-secondary'>{formatDate(updatedAt || createdAt)}</time>
+                    </div>
+                  </li>
+                </Link>
+              )
+            })}
+        </ol>
       </main>
+      <div className='flex justify-center p-4 sm:px-8'>
+        <Anchor
+          newWindow
+          href='https://github.com/neotan/npmhub/tree/master/apps/me/content'>
+          <FiEdit className='h-7 w-7 cursor-pointer stroke-secondary/50 hover:stroke-primary' />
+        </Anchor>
+      </div>
     </DefaultLayout>
   )
 }
 
+export async function getStaticProps({ params }) {
+  //@ts-ignore
+  const metas = values(deserialize(postFiles)).map(({ meta }) => meta)
+  return {
+    props: {
+      metas
+    }
+  }
+}

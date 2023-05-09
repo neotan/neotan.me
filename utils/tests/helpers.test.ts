@@ -36,6 +36,14 @@ describe('formatDate', () => {
     expect(formatDate(input, 'yyyy-MM-dd HH:mm')).toBe('2020-01-01 00:00')
     expect(formatDate(input, 'yyyy-MM-dd HH:mm:ss')).toBe('2020-01-01 00:00:00')
   })
+
+
+  test('2should return formatted date if date is string', () => {
+    const input = 'Jun/04/2015'
+    expect(formatDate(input)).toBe('2020-01-01')
+    expect(formatDate(input, 'yyyy-MM-dd HH:mm')).toBe('2020-01-01 00:00')
+    expect(formatDate(input, 'yyyy-MM-dd HH:mm:ss')).toBe('2020-01-01 00:00:00')
+  })
 })
 
 describe('formatNumber', () => {

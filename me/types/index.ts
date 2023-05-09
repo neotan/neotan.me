@@ -1,28 +1,26 @@
-import { ReadTimeResults } from 'reading-time'
+import { serialize } from 'next-mdx-remote/serialize'
 
-export interface MdxDoc {
-  slug: string
-  filePath: string
-  readTime: ReadTimeResults
-  mdxSource: string
-  code: string
-  content: string
+export type BlogSearchIndex = Meta & { content: string }
 
-  // frontmatter
+export type Meta = {
+  slug?: string
   title: string
-  published?: boolean
-  tags?: string
-  date?: Date | string | number
-  cloudinaryImgPubId?: string
-  catalog?: string
+  createdAt: string
+  updatedAt?: string
   description?: string
+  imgSrc?: string
+  readTime?: string
+  published?: true
+  category: 'til' | 'blog' | 'product'
+  tags: string[]
 }
 
-export type BlogSearchIndex = {
-  description?: string
-  url?: string
-  catalog?: string
-  published?: boolean
-} & Omit<MdxDoc, 'code' | 'mdxSource' | 'filePath' | 'readTime'>
+export type MdxSource = Awaited<ReturnType<typeof serialize<Record<string, unknown>, Record<string, Meta>>>>
 
-
+export type PostFile = {
+  slug?: string,
+  filePath?: string,
+  meta?: Meta
+  // source?: MdxSource,
+  content?: string,
+}

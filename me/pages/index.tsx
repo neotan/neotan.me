@@ -17,7 +17,6 @@ import { SiVisualstudiocode } from 'react-icons/si'
 import { cn } from 'utils/helpers'
 import Bio from '../components/bio'
 import DefaultLayout from '../components/default-layout'
-import CloudinaryIcon from '../icons/cloudinary-icon'
 import FramerIcon from '../icons/framer-icon'
 import PlasmoIcon from '../icons/plasmo-icon'
 import TurborepoIcon from '../icons/turborepo-icon'
@@ -27,7 +26,7 @@ export default function HomeIndex() {
   return (
     <DefaultLayout>
       <Bio className='sm:px-16' />
-      <main key='projects' className='xcursor-emoji-[🦝/6xl/red-500] relative flex flex-col gap-8'
+      <main key='projects' className='relative flex flex-col gap-8'
       >
         {values(projects).map(({
           id,
@@ -106,7 +105,6 @@ const projects: Record<string, Project> = {
     published: true,
     stackIcons: [
       { Icon: SiAlgolia, title: 'Algolia Instant Search' },
-      { Icon: CloudinaryIcon, title: 'Cloudinary Media CDN' },
       { Icon: TurborepoIcon, title: 'Turborepo Monorepo' },
       { Icon: SiNextdotjs, title: 'Next.js' },
       { Icon: SiReact, title: 'React' },

@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import React, { ReactNode } from 'react'
 import { TfiClose } from 'react-icons/tfi'
-import { cn } from '../../../packages/utils/helpers'
-import MenuTabs from '../components/menu-tabs'
+import { cn } from 'utils/helpers'
 import Footer from './footer'
+import MenuTabs from './menu-tabs'
 import Navbar from './navbar'
 
-export type NestedLayoutProps = { className?: string, children: ReactNode }
-export default function NestedLayout({ className, children }: NestedLayoutProps) {
+export type PostLayoutProps = { className?: string, children: ReactNode }
+export default function PostLayout({ className, children }: PostLayoutProps) {
 
   return (
     <div className={cn('mx-auto flex max-w-5xl flex-col gap-10 px-5 py-10 sm:flex-auto sm:px-10 sm:py-8', className)}    >

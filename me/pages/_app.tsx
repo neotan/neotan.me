@@ -1,3 +1,4 @@
+import '@code-hike/mdx/styles'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import Script from 'next/script'

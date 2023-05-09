@@ -14,14 +14,12 @@ To be completed...
 - [x] add footer
 - [x] add single post displaying
 - [x] add posts listing
-- [x] add MDX files compilation with mdx-bundler
-- [x] integrate cloudinary image service
-  - [x] migrate all images to cloudinary
+- [x] add MDX files compilation with next-mdx-remote
 - [x] add site-wide full-text search, by Fuse.js
 - [x] add site-wide animation with framer-motion
   - [x] Home page
   - [x] Dark mode toggle button
-  - [ ] Showcase page
+  - [x] Showcase page
 - [x] add code highlight
 - [ ] SEO, sitemap.xml
 

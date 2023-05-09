@@ -3,6 +3,11 @@ module.exports = {
   reactStrictMode: true,
   transpilePackages: ['utils'],
   images: {
-    domains: ['res.cloudinary.com', 'raw.githubusercontent.com'],
+    domains: [
+      'raw.githubusercontent.com',
+    ],
+  },
+  experimental: {
+    swcPlugins: [["next-superjson-plugin", {}]],
   },
 }

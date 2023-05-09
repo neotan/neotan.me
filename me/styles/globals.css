@@ -12,6 +12,9 @@
     @apply h-full;
     font-family: 'Montserrat', 'Noto Sans TC', sans-serif;
   }
+  body, #__next {
+    @apply h-full;
+  }
 
   code, kbd, pre, samp{
     font-family: 'JetBrains Mono',ui-monospace,'SFMono-Regular','Menlo','Monaco','Consolas','Liberation Mono','Courier New',monospace !important;
@@ -58,18 +61,9 @@
     content-visibility: hidden; 
   }
 
-  .animation-delay-2000 {
-    animation-delay: 2s ;
-  }
-
-  .animation-delay-4000 {
-    animation-delay: 4s ;
-  }
-
   .glassmorphism {
     @apply mask rounded-3xl bg-[#262f70]/20 backdrop-blur-2xl after:absolute after:inset-0 after:rounded-3xl after:bg-gradient-to-br after:from-white/80 after:via-white/10 after:to-white/80 after:p-px overflow-hidden
   }
-
   .mask:after {
     mask: linear-gradient(rgb(255 255 255) 0 0) content-box,
       linear-gradient(rgb(255 255 255) 0 0);
@@ -77,5 +71,15 @@
     mask-composite: exclude;
     pointer-events: none;
   }
+
+  .icon.icon-link::after {
+    @apply text-base-300;
+    content: " #";
+  }
   
+  img.emoji {
+    @apply inline-block h-5 w-5;
+    margin: 0 .05em 0 .1em;
+    vertical-align: -0.1em;
+  }
 }

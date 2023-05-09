@@ -9,12 +9,12 @@ export type DefaultLayoutProps = { className?: string, children: ReactNode }
 export default function DefaultLayout({ className, children }: DefaultLayoutProps) {
 
   return (
-    <div className={cn('mx-auto flex max-w-5xl flex-col gap-10 px-5 py-10 sm:flex-auto sm:px-10 sm:py-8', className)}
+    <div className={cn('mx-auto flex h-full max-w-5xl flex-col gap-8 px-5 py-10 sm:flex-auto sm:px-10 sm:py-8', className)}
     >
       <Navbar className='px-0 sm:px-16' >
         <div className=''>
           <Image
-            className='h-16 w-16 rounded-full shadow-3xl transition-transform hover:scale-150'
+            className='hidden h-16 w-16 rounded-full shadow-3xl transition-transform hover:scale-150 sm:block'
             alt='Avatar'
             src='/images/avatar.jpg'
             width={200}
@@ -24,7 +24,7 @@ export default function DefaultLayout({ className, children }: DefaultLayoutProp
         <MenuTabs />
       </Navbar>
       {children}
-      <Footer className='mt-8 space-y-4' />
+      <Footer className='space-y-4' />
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import type { SvgIconProps } from 'shared-types'
-export default function CloudinaryIcon({
+export default function TurborepoIcon({
   width = 32,
   height = 32,
   title,

@@ -1,6 +1,8 @@
 {
   "extends": "tsconfig/nextjs.json",
   "compilerOptions": {
+    "target": "es2020",
+    "module": "esnext",
     "baseUrl": ".",
     "paths": {
       "@/*": [
@@ -27,7 +29,9 @@
     "types/**/*.tsx",
     "utils/**/*.ts",
     "utils/**/*.tsx",
-    "app/blog/[slug]/layout.tsx"
+    "scripts/**/*.ts",
+    "scripts/compile-mdx.js",
+    "scripts/mdx.mts",
   ],
   "exclude": [
     "node_modules"
