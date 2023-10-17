@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import React from 'react'
 import { ComponentPropsWithoutRef } from 'react'
 import { FaLightbulb, FaRocket } from 'react-icons/fa'
 import { cn } from 'utils/helpers'
-
-import Tabs from '@/components/tabs'
+import Tabs from './tabs'
 
 export default function MenuTabs({ className, children }: ComponentPropsWithoutRef<'section'>) {
 
@@ -24,7 +24,7 @@ export default function MenuTabs({ className, children }: ComponentPropsWithoutR
         </Link>
         <Link href='/blog'>
           <Tabs.Tab
-            className={cn('gap-3', { 'text-error bg-error/10': currentPathname === '/blog' })}
+            className={cn('gap-3', { 'text-error bg-error/10': currentPathname.startsWith('/blog') })}
             title='Today I Learned!'
           >
             <FaLightbulb /><span>TIL</span>

@@ -10,7 +10,7 @@
   "description": "Showcases Neo's excellent works!😉",
   "scripts": {
     "build": "npm run build:mdx && next build",
-    "build:mdx": "ts-node --esm ./scripts/compile-mdx.mjs ./content",
+    "build:mdx": "node ./scripts/compile-mdx.mjs ./content",
     "dev": "next dev --port 4000",
     "dev:clean": "npm run clean && next dev",
     "dev:mdx": "chokidar ./tailwind.config.js ./content/**/*.mdx ./scripts/mdx.js -c \"npm run build:mdx\"",
@@ -21,7 +21,6 @@
   "dependencies": {
     "@agentofuser/remark-oembed": "^1.0.4",
     "@code-hike/mdx": "^0.8.2",
-    "@octokit/rest": "^19.0.7",
     "@pondorasti/remark-img-links": "^1.0.8",
     "@reach/dialog": "^0.18.0",
     "@remark-embedder/core": "^3.0.1",
@@ -75,7 +74,6 @@
     "postcss-import": "^15.1.0",
     "tailwind-config-custom": "workspace:*",
     "tailwindcss": "^3.2.4",
-    "ts-node": "^10.9.1",
     "tsconfig": "workspace:*",
     "typescript": "^4.9.4"
   }

@@ -109,7 +109,7 @@ const fuseOptions = {
 
 
 export default function HashHome() {
-  const [searchTerm, setSeachTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState('')
   const [startedAt, setStartedAt] = useState<Date | null>(null)
   const [endedAt, setEndedAt] = useState<Date | null>(null)
 
@@ -187,7 +187,7 @@ export default function HashHome() {
               type="search"
               placeholder="Hit '/' to search"
               onChange={e => {
-                setSeachTerm(e?.target?.value)
+                setSearchTerm(e?.target?.value)
               }}
             />
             <Indicator
@@ -207,7 +207,7 @@ export default function HashHome() {
 
                   const trashIcon = <FiTrash2
                     className={classes}
-                    title='Clear choosed hash algorithms'
+                    title='Clear chosen hash algorithms'
                     onClick={() => setSelectedHashNames([])}
                   />
                   const heartIcon = <FiHeart
@@ -448,7 +448,7 @@ const HashText = forwardRef(function HashText({ className, algoName, rawData, ha
           }}>
           <div className="flex w-full max-w-xl items-center space-x-2 overflow-x-hidden">
             <div className={clsx(
-              'basis-full text-ellipsis px-2 text-gray-500 overflow-x-hidden',
+              'basis-full overflow-x-hidden text-ellipsis px-2 text-gray-500',
               { 'text-base-content/30': !enabled }
             )}
             >
@@ -577,7 +577,7 @@ const HashFile = forwardRef(function HashFile({ className, algoName, rawFiles, o
       </div>
 
       {enabled && !isNilOrEmpty(rawFiles) && (
-        <ol className={'grow text-ellipsis text-gray-500 overflow-x-hidden'}
+        <ol className={'grow overflow-x-hidden text-ellipsis text-gray-500'}
         >
           {
             rawFiles?.map((file, idx) => {

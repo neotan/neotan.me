@@ -1,8 +1,8 @@
 'use client'
 import '@reach/dialog/styles.css'
 import { DialogContent, DialogOverlay } from '@reach/dialog'
-import Link from 'next/link'
-import { pluck, values } from 'ramda'
+import { useRouter } from 'next/router'
+import { values } from 'ramda'
 import { ComponentPropsWithoutRef, useState } from 'react'
 import { BiSearch } from 'react-icons/bi'
 import { useKey } from 'react-use'
@@ -15,6 +15,7 @@ import { BlogSearchIndex, PostFile } from '../types'
 type SearchButtonProps = ComponentPropsWithoutRef<'svg'>
 
 export default function SearchButton({ className }: SearchButtonProps) {
+  const router = useRouter()
 
   const fuseOptions = {
     keys: ['title', 'tags', 'content'],
@@ -82,9 +83,13 @@ export default function SearchButton({ className }: SearchButtonProps) {
               } = item
 
               return (
-                <Link key={slug} href={`/blog/${slug}`} className="flex justify-between space-x-4 p-3 transition hover:bg-base-300">
+                <li
+                  key={slug}
+                  className="flex cursor-pointer justify-between space-x-4 p-3 transition hover:bg-base-300"
+                  onClick={() => router.push(`/blog/${slug}`)}
+                >
                   <div className="flex w-full flex-col">{title}</div>
-                </Link>
+                </li>
               )
             })}
           </ol>

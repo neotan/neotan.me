@@ -43,12 +43,12 @@ export default function HomeIndex() {
           if (!published) return null
           return (
             <div key={id} id={id} className='group card px-2 sm:px-8'>
-              <div className="invisible absolute left-0 top-0 flex flex-col gap-2 group-hover:visible">
+              <div className="invisible absolute -left-2 top-0 flex flex-col gap-2 group-hover:visible">
                 <Link href={'#' + id}>
-                  <FaSlackHash className='hidden h-7 w-7 fill-secondary shadow-lg sm:block' />
+                  <FaSlackHash className='hidden h-9 w-9 rounded-full fill-secondary p-1 shadow-lg transition-transform hover:scale-125 sm:block' />
                 </Link>
                 {repoUrl && <Link href={repoUrl}>
-                  <FaGithub className='hidden h-7 w-7 fill-secondary shadow-lg sm:block' />
+                  <FaGithub className='hidden h-9 w-9 rounded-full fill-secondary p-1 shadow-lg transition-transform hover:scale-125 sm:block' />
                 </Link>}
               </div>
               <div />
@@ -62,9 +62,9 @@ export default function HomeIndex() {
                     height={475}
                   />
                 </Link>
-                <div className='flex flex-col gap-3 text-primary/70 group-hover:text-primary' >
+                <div className='flex flex-col gap-3 group-hover:text-primary' >
                   <div className="flex-wrap text-center text-lg">{description}</div>
-                  <div className="flex w-full flex-wrap items-center justify-center gap-4 transition-transform hover:scale-125">{
+                  <div className="flex w-full flex-wrap items-center justify-center gap-4 text-primary/70 transition-transform hover:scale-125">{
                     stackIcons.map(({ Icon, title }) => (
                       <div key={title} className="rounded-full bg-secondary/20 p-2  transition-transform hover:scale-150" title={title} >
                         <Icon className='h-5 w-5' title={title} />

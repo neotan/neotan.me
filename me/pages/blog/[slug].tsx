@@ -37,19 +37,19 @@ export default function BlogSlug(props: MdxPageProps) {
       <Head>
         <title>{title}</title>
       </Head>
-      <article className="prose max-w-none px-2 text-primary backdrop-blur-lg lg:prose-lg sm:px-4">
+      <article className="prose max-w-none px-2 text-primary backdrop-blur-lg sm:px-4">
         <header>
           <h1>{title}</h1>
           {!isNilOrEmpty(tags) && (
             <div className="space-x-2">
               {tags.map(tag => (
-                <div key={tag} className='badge-outline badge badge-lg'>
+                <div key={tag} className='badge badge-outline badge-lg'>
                   {tag}
                 </div>
               ))}
             </div>
           )}
-          <div className="flex items-center opacity-80">
+          <div className="flex items-center">
             {
               date && <>
                 <time>{formatDate(date)}</time>
@@ -58,7 +58,7 @@ export default function BlogSlug(props: MdxPageProps) {
             }
             <time>{readTime}</time>
             <i className="grow" />
-            <Anchor newWindow href={`${pkgJson.editUrl}/${filePath}`}>Edit</Anchor>
+            <Anchor className='opacity-0 hover:opacity-100' newWindow href={`${pkgJson.editUrl}/${filePath}`}>Edit</Anchor>
           </div>
           <Image
             src={`${imgSrc}`}

@@ -1,5 +1,5 @@
 'use client'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { values } from 'ramda'
 import React from 'react'
 import { FiEdit } from 'react-icons/fi'
@@ -11,10 +11,10 @@ import postFiles from '../../public/db.json'
 import { Meta } from '../../types'
 
 export default function BlogIndex({ metas }: { metas: Meta[] }) {
+  const router = useRouter()
   return (
     <DefaultLayout className='h-screen'>
       <main key='til' className='flex grow flex-col'>
-
         <ol className='grid  grid-cols-1 gap-6 px-4 sm:px-8 md:grid-cols-2'>
           {metas
             .sort((right, left) => {
@@ -27,16 +27,18 @@ export default function BlogIndex({ metas }: { metas: Meta[] }) {
               if (!meta.published) return null
 
               return (
-                <Link key={slug} href={`/blog/${slug}`}>
-                  <li className='border-1 flex h-full flex-col justify-between rounded-lg !bg-base-100 p-2 shadow-md transition-transform hover:scale-105 sm:p-4 '>
-                    <div className=''>
-                      <h2 className="">{meta.title}</h2>
-                    </div>
-                    <div className='flex justify-end'>
-                      <time className='text-secondary'>{formatDate(updatedAt || createdAt)}</time>
-                    </div>
-                  </li>
-                </Link>
+                <li
+                  key={slug}
+                  className='border-1 flex h-full cursor-pointer flex-col justify-between rounded-lg !bg-base-100 p-2 shadow-md transition-transform hover:scale-105 sm:p-4 '
+                  onClick={() => router.push(`/blog/${slug}`)}
+                >
+                  <div className=''>
+                    <h2 className="">{meta.title}</h2>
+                  </div>
+                  <div className='flex justify-end'>
+                    <time className='text-secondary'>{formatDate(updatedAt || createdAt)}</time>
+                  </div>
+                </li>
               )
             })}
         </ol>

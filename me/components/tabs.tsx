@@ -1,5 +1,5 @@
 'use client'
-import { ComponentPropsWithoutRef } from 'react'
+import React, { ComponentPropsWithoutRef } from 'react'
 import { cn } from 'utils/helpers'
 
 export default function Tabs({ children, className, ...restProps }: ComponentPropsWithoutRef<'div'>) {
