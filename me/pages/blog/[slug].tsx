@@ -9,6 +9,7 @@ import { formatDate, isNilOrEmpty } from 'utils/helpers'
 import Anchor from '../../components/anchor'
 import PostLayout from '../../components/post-layout'
 import pkgJson from '../../package.json'
+//@ts-ignore
 import postFiles from '../../public/db.json'
 import { compileMDX } from '../../shared/mdx'
 import { MdxSource, Meta } from '../../types'

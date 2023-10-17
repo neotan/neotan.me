@@ -7,6 +7,7 @@ import { deserialize } from 'superjson'
 import { formatDate } from 'utils/helpers'
 import Anchor from '../../components/anchor'
 import DefaultLayout from '../../components/default-layout'
+//@ts-ignore
 import postFiles from '../../public/db.json'
 import { Meta } from '../../types'
 
