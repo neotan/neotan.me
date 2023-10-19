@@ -138,8 +138,8 @@ export default function App() {
 
 ## 7. Wrap each context in a single file.
 
-✅Streamlines call sites
-✅Provides useful error if context is consumed without the provider in a parent.
+- ✅Streamlines call sites
+- ✅Provides useful error if context is consumed without the provider in a parent.
 
 ![context-in-one-file.jpg](./context-in-one-file.jpg)
 
