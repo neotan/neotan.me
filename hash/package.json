@@ -2,7 +2,7 @@
   "name": "hash",
   "version": "0.0.0",
   "private": true,
-  "homepage": "hash.npmhub.net",
+  "homepage": "hash.neotan.me",
   "scripts": {
     "dev": "next dev --port 3001",
     "dev:clean": "yarn clean && yarn dev",

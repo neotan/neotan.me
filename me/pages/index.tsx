@@ -166,7 +166,7 @@ const projects: Record<string, Project> = {
     id: 'hash',
     title: 'Hash',
     description: 'Generate text/file (up to 10GB) hash with WASM locally',
-    homepage: 'http://hash.npmhub.net',
+    homepage: 'http://hash.neotan.me',
     repoUrl: 'https://github.com/neotan/neotan.me/tree/master/hash',
     imageSrc: '/images/hash.png',
     tags: ['web'],
