@@ -48,7 +48,8 @@ export default async function Home() {
                 ?.filter(product => product.published)
                 .sort((right, left) => right.ordering - left.ordering)
                 .map((product) => {
-                  const { id,
+                  const {
+                    id,
                     title,
                     description,
                     homepage,
@@ -60,7 +61,7 @@ export default async function Home() {
                   } = product
 
                   return (
-                    <Card key={id} className={cn('hover:shadow-3xl group flex h-full flex-col overflow-hidden rounded-none border-muted-foreground/50 shadow-xl transition-transform hover:z-20 hover:scale-105', className)}>
+                    <Card key={id} className={cn('hover:shadow-3xl glassmorphism group flex h-full flex-col overflow-hidden rounded-none border-muted-foreground/50 shadow-xl transition-transform hover:z-20 hover:scale-105', className)}>
                       <CardHeader className="relative p-0">
                         <img src={imageSrc} alt={title} className={cn('h-72 w-full rounded-none object-cover object-top pb-0', imgClassName)} />
                         <div className="absolute bottom-0 flex w-full justify-between px-6 py-2 opacity-0 transition-opacity duration-500 group-hover:opacity-100">

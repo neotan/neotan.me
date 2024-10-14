@@ -73,7 +73,7 @@
 
 @layer utilities {
   .glassmorphism {
-    @apply mask rounded-3xl bg-[#262f70]/20 backdrop-blur-2xl after:absolute after:inset-0 after:rounded-3xl after:bg-gradient-to-br after:from-white/80 after:via-white/10 after:to-white/80 after:p-px overflow-hidden
+    @apply mask bg-card backdrop-blur-2xl after:absolute after:inset-0 after:rounded-none after:bg-gradient-to-br after:from-white/80 after:via-white/10 after:to-white/80 after:p-px overflow-hidden
   }
   .mask:after {
     mask: linear-gradient(rgb(255 255 255) 0 0) content-box,
