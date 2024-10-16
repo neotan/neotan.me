@@ -15,7 +15,9 @@ export default function Navbar({ className }: ComponentPropsWithRef<'nav'>) {
   return (
     <nav className={cn('flex justify-center bg-background shadow-lg', className)}>
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-0 lg:px-8">
-        <img src="/images/avatar.jpg" alt="Neo" className="hidden size-10 rounded-full md:block" />
+        <Link href="/">
+          <img src="/images/avatar.jpg" alt="Neo" className="hidden size-10 rounded-full md:block" />
+        </Link>
         <div className="items-centerspace-x-4 flex">
           <Button asChild variant={currentSection === 'products' ? 'default' : 'ghost'} onClick={() => setCurrentSection('products')}>
             <Link href="/#products" className="gap-2">
