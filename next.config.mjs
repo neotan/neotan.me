@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    urlImports: ['https://cdn.skypack.dev'],
+  },
   reactStrictMode: true,
   images: {
     domains: ['raw.githubusercontent.com'],

@@ -1,0 +1,16 @@
+/*
+ * Skypack CDN - hash-wasm@4.11.0
+ *
+ * Learn more:
+ *   📙 Package Documentation: https://www.skypack.dev/view/hash-wasm
+ *   📘 Skypack Documentation: https://www.skypack.dev/docs
+ *
+ * Pinned URL: (Optimized for Production)
+ *   ▶️ Normal: https://cdn.skypack.dev/pin/hash-wasm@v4.11.0-hiao9KxifAAe08KRm0Ex/mode=imports/optimized/hash-wasm.js
+ *   ⏩ Minified: https://cdn.skypack.dev/pin/hash-wasm@v4.11.0-hiao9KxifAAe08KRm0Ex/mode=imports,min/optimized/hash-wasm.js
+ *
+ */
+
+// Browser-Optimized Imports (Don't directly import the URLs below in your application!)
+export * from '/-/hash-wasm@v4.11.0-hiao9KxifAAe08KRm0Ex/dist=es2019,mode=imports/optimized/hash-wasm.js';
+export {default} from '/-/hash-wasm@v4.11.0-hiao9KxifAAe08KRm0Ex/dist=es2019,mode=imports/optimized/hash-wasm.js';
