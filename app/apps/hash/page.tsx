@@ -31,6 +31,7 @@ import {
   FiZap
 } from 'react-icons/fi'
 import { ImFilesEmpty } from 'react-icons/im'
+import Footer from '@/components/footer'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -138,142 +139,145 @@ export default function HashHome() {
   }
 
   return (
-    <div className=" min-h-screen bg-background pt-8">
-      <main className="container mx-auto flex gap-8 px-4 lg:max-w-6xl">
-        <aside className="bg-mutedxx w-64 border p-4">
-          <Button className="w-full" variant="outline" onClick={() => setSelectedHashNames(DEFULT_HASH_NAMES)}>
-            Reset
-          </Button>
-          <ul className="menu mt-4 overflow-y-auto scrollbar-thin" role='menu'>
-            {Object.values(hashers)?.map(({ id, title }) => {
-              return (
-                <li key={id} className="font-heading cursor-pointer" role='menuitem'>
-                  <label className="flex cursor-pointer items-center justify-between !p-2 text-lg hover:bg-card">
-                    <span>{title}</span>
-                    {mounted &&
-                      <Checkbox
-                        className="!border-primary/20"
-                        color="primary"
-                        checked={!!selectedHashNames[id]} // to make sure the checkbox is refrected the value
-                        data-value={id}
-                        onCheckedChange={(checked: boolean) => onCheckboxClick(id, checked)}
-                      />}
-                  </label>
-                </li>
-              )
-            })}
-          </ul>
-        </aside>
-        <div className="flex w-full flex-col items-center gap-6 border p-4">
-          <div className='w-full'>
-            <Tabs defaultValue="inputFiles" className="" onValueChange={(val) => setSelectedFormat(val as InputFormats)}>
-              <TabsList className="grid h-auto w-full grid-cols-2 p-2">
-                <TabsTrigger className='gap-2 p-2 data-[state="active"]:bg-primary data-[state="active"]:text-primary-foreground' value="inputText">
-                  <BsTextLeft className='size-4' /><span>Text</span>
-                </TabsTrigger>
-                <TabsTrigger className='gap-2 p-2 data-[state="active"]:bg-primary data-[state="active"]:text-primary-foreground' value="inputFiles">
-                  <ImFilesEmpty className='size-4' /><span>Files</span>
-                </TabsTrigger>
-              </TabsList>
-              <TabsContent value="inputText">
-                <Textarea
-                  key='inputText'
-                  className={cn(
-                    'font-code h-44 w-full overflow-y-auto scrollbar-thin scrollbar-thumb-primary scrollbar-corner-primary',
-                    { 'h-96': Number(rawText?.length) > 300 },
-                  )}
-                  placeholder='Input text here...'
-                  spellCheck={false}
-                  defaultValue={rawText}
-                  onChange={e => setRawText(e.target?.value)}
-                />
-              </TabsContent>
-              <TabsContent value="inputFiles">
-                <div
-                  key='inputFiles'
-                  {...getRootProps()}
-                  className={cn('bordered h-[176px] w-full items-center justify-center')}
-                >
-                  <input {...getInputProps()} />
-                  {isDragActive
-                    ? <p className='font-heading text-lg'>Drop the files here ...</p>
-                    : (
-                      <div className='font-heading flex size-full cursor-pointer flex-col items-center justify-center text-lg'>
-                        <div><span className='font-semibold text-primary'>Drag & Drop</span> some files here</div>
-                        <span>or</span>
-                        <div><span className='font-semibold text-primary'>Click</span> to select files</div>
-                      </div>
-                    )}
-                </div>
-              </TabsContent>
-            </Tabs>
-          </div>
-          {mounted && selectedFormat === 'inputText' &&
-            <Button
-              className='h-12 w-full space-x-2 text-lg'
-              color="primary"
-              disabled={isNilOrEmpty(rawText)}
-              onClick={() => Object.values(textHasherRefs.current).forEach(ref => ref.current?.execute())}
-            >
-              <FiZap /><span>Generate</span>
+    <>
+      <div className=" min-h-screen bg-background pt-8">
+        <main className="container mx-auto flex gap-8 px-4 lg:max-w-6xl">
+          <aside className="bg-mutedxx w-64 border p-4">
+            <Button className="w-full" variant="outline" onClick={() => setSelectedHashNames(DEFULT_HASH_NAMES)}>
+              Reset
             </Button>
-          }
-          {mounted && selectedFormat === 'inputFiles' &&
-            <>
+            <ul className="menu mt-4 overflow-y-auto scrollbar-thin" role='menu'>
+              {Object.values(hashers)?.map(({ id, title }) => {
+                return (
+                  <li key={id} className="font-heading cursor-pointer" role='menuitem'>
+                    <label className="flex cursor-pointer items-center justify-between !p-2 text-lg hover:bg-card">
+                      <span>{title}</span>
+                      {mounted &&
+                        <Checkbox
+                          className="!border-primary/20"
+                          color="primary"
+                          checked={!!selectedHashNames[id]} // to make sure the checkbox is refrected the value
+                          data-value={id}
+                          onCheckedChange={(checked: boolean) => onCheckboxClick(id, checked)}
+                        />}
+                    </label>
+                  </li>
+                )
+              })}
+            </ul>
+          </aside>
+          <div className="flex w-full flex-col items-center gap-6 border p-4">
+            <div className='w-full'>
+              <Tabs defaultValue="inputFiles" className="" onValueChange={(val) => setSelectedFormat(val as InputFormats)}>
+                <TabsList className="grid h-auto w-full grid-cols-2 p-2">
+                  <TabsTrigger className='gap-2 p-2 data-[state="active"]:bg-primary data-[state="active"]:text-primary-foreground' value="inputText">
+                    <BsTextLeft className='size-4' /><span>Text</span>
+                  </TabsTrigger>
+                  <TabsTrigger className='gap-2 p-2 data-[state="active"]:bg-primary data-[state="active"]:text-primary-foreground' value="inputFiles">
+                    <ImFilesEmpty className='size-4' /><span>Files</span>
+                  </TabsTrigger>
+                </TabsList>
+                <TabsContent value="inputText">
+                  <Textarea
+                    key='inputText'
+                    className={cn(
+                      'font-code h-44 w-full overflow-y-auto scrollbar-thin scrollbar-thumb-primary scrollbar-corner-primary',
+                      { 'h-96': Number(rawText?.length) > 300 },
+                    )}
+                    placeholder='Input text here...'
+                    spellCheck={false}
+                    defaultValue={rawText}
+                    onChange={e => setRawText(e.target?.value)}
+                  />
+                </TabsContent>
+                <TabsContent value="inputFiles">
+                  <div
+                    key='inputFiles'
+                    {...getRootProps()}
+                    className={cn('bordered h-[176px] w-full items-center justify-center')}
+                  >
+                    <input {...getInputProps()} />
+                    {isDragActive
+                      ? <p className='font-heading text-lg'>Drop the files here ...</p>
+                      : (
+                        <div className='font-heading flex size-full cursor-pointer flex-col items-center justify-center text-lg'>
+                          <div><span className='font-semibold text-primary'>Drag & Drop</span> some files here</div>
+                          <span>or</span>
+                          <div><span className='font-semibold text-primary'>Click</span> to select files</div>
+                        </div>
+                      )}
+                  </div>
+                </TabsContent>
+              </Tabs>
+            </div>
+            {mounted && selectedFormat === 'inputText' &&
               <Button
                 className='h-12 w-full space-x-2 text-lg'
                 color="primary"
-                disabled={isNilOrEmpty(acceptedFiles) || !!(startedAt && !endedAt)}
-                onClick={() => {
-                  setStartedAt(new Date())
-                  setEndedAt(null)
-                  Object.values(fileHasherRefs.current).forEach(ref => ref.current?.execute())
-                }}
+                disabled={isNilOrEmpty(rawText)}
+                onClick={() => Object.values(textHasherRefs.current).forEach(ref => ref.current?.execute())}
               >
                 <FiZap /><span>Generate</span>
               </Button>
-              <div className='h-6 align-middle'>
-                {
-                  startedAt && endedAt &&
-                  `Processing Time: ${formatDuration(intervalToDuration({ start: startedAt, end: endedAt })) || 'less than 1 second'}`
-                }
-              </div>
-            </>
-          }
-          <div className="flex w-full flex-col space-y-2 divide-y">
-            {mounted && selectedFormat === 'inputText'
-              && Object.values(hashers).map(({ id }) => {
-                return (
-                  <HashText
-                    key={'inputText-' + id}
-                    myref={textHasherRefs.current[id]!}
-                    className={cn('hidden', { 'grid': selectedHashNames[id] })}
-                    algoName={id}
-                    rawData={rawText || ''}
-                    hasher={hashAlgos[id]}
-                  />
-                )
-              })}
-
-            {mounted && selectedFormat === 'inputFiles'
-              && Object.values(hashers)
-                .map(({ id, hashFileFn }) => {
+            }
+            {mounted && selectedFormat === 'inputFiles' &&
+              <>
+                <Button
+                  className='h-12 w-full space-x-2 text-lg'
+                  color="primary"
+                  disabled={isNilOrEmpty(acceptedFiles) || !!(startedAt && !endedAt)}
+                  onClick={() => {
+                    setStartedAt(new Date())
+                    setEndedAt(null)
+                    Object.values(fileHasherRefs.current).forEach(ref => ref.current?.execute())
+                  }}
+                >
+                  <FiZap /><span>Generate</span>
+                </Button>
+                <div className='h-6 align-middle'>
+                  {
+                    startedAt && endedAt &&
+                    `Processing Time: ${formatDuration(intervalToDuration({ start: startedAt, end: endedAt })) || 'less than 1 second'}`
+                  }
+                </div>
+              </>
+            }
+            <div className="flex w-full flex-col space-y-2 divide-y">
+              {mounted && selectedFormat === 'inputText'
+                && Object.values(hashers).map(({ id }) => {
                   return (
-                    <HashFile
-                      key={'inputFiles-' + id}
-                      ref={fileHasherRefs?.current?.[id]}
-                      className={cn('hidden', { 'flex': selectedHashNames[id] })}
+                    <HashText
+                      key={'inputText-' + id}
+                      myref={textHasherRefs.current[id]!}
+                      className={cn('hidden', { 'grid': selectedHashNames[id] })}
                       algoName={id}
-                      rawFiles={acceptedFiles}
-                      onDone={setEndedAt}
-                      createHasher={hashAlgos?.[hashFileFn]}
+                      rawData={rawText || ''}
+                      hasher={hashAlgos[id]}
                     />
                   )
                 })}
+
+              {mounted && selectedFormat === 'inputFiles'
+                && Object.values(hashers)
+                  .map(({ id, hashFileFn }) => {
+                    return (
+                      <HashFile
+                        key={'inputFiles-' + id}
+                        ref={fileHasherRefs?.current?.[id]}
+                        className={cn('hidden', { 'flex': selectedHashNames[id] })}
+                        algoName={id}
+                        rawFiles={acceptedFiles}
+                        onDone={setEndedAt}
+                        createHasher={hashAlgos?.[hashFileFn]}
+                      />
+                    )
+                  })}
+            </div>
           </div>
-        </div>
-      </main>
-    </div >
+        </main>
+      </div >
+      <Footer />
+    </>
   )
 }
 

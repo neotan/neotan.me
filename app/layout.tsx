@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { JetBrains_Mono, Montserrat } from 'next/font/google'
-import Footer from '@/components/footer'
 import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 
@@ -32,7 +31,6 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
-        <Footer className='bg-transparent' />
       </body>
     </html>
   )
