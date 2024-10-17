@@ -4,6 +4,7 @@ import { FaCalendarDay, FaExternalLinkAlt, FaGithub, FaRegClock } from 'react-ic
 import calcReadTime from 'reading-time'
 import { blogPagesList, blogPostsList } from '@/api'
 import Bio from '@/components/bio'
+import Footer from '@/components/footer'
 import Navbar from '@/components/navbar'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -124,6 +125,7 @@ export default async function Home() {
           </section>
         </main>
       </div>
+      <Footer />
     </>
   )
 }
