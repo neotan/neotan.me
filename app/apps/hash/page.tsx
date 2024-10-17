@@ -136,11 +136,11 @@ export default function HashHome() {
   function onCheckboxClick(id: string, checked: boolean) {
     setSelectedHashNames({ ...selectedHashNames, [id]: checked })
   }
-  console.log({ rawText, s: isNilOrEmpty(rawText) })
+
   return (
     <div className=" min-h-screen bg-background pt-8">
-      <main className="container mx-auto flex gap-12 px-4 lg:max-w-6xl">
-        <aside className="w-64 bg-muted p-4">
+      <main className="container mx-auto flex gap-8 px-4 lg:max-w-6xl">
+        <aside className="bg-mutedxx w-64 border p-4">
           <Button className="w-full" variant="outline" onClick={() => setSelectedHashNames(DEFULT_HASH_NAMES)}>
             Reset
           </Button>
@@ -164,7 +164,7 @@ export default function HashHome() {
             })}
           </ul>
         </aside>
-        <div className="flex w-full flex-col items-center gap-6">
+        <div className="flex w-full flex-col items-center gap-6 border p-4">
           <div className='w-full'>
             <Tabs defaultValue="inputFiles" className="" onValueChange={(val) => setSelectedFormat(val as InputFormats)}>
               <TabsList className="grid h-auto w-full grid-cols-2 p-2">
@@ -180,7 +180,7 @@ export default function HashHome() {
                   key='inputText'
                   className={cn(
                     'font-code h-44 w-full overflow-y-auto scrollbar-thin scrollbar-thumb-primary scrollbar-corner-primary',
-                    { 'h-96': Number(rawText?.length) > 200 },
+                    { 'h-96': Number(rawText?.length) > 300 },
                   )}
                   placeholder='Input text here...'
                   spellCheck={false}
