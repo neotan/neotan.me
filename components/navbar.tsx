@@ -6,7 +6,7 @@ import { ThemeToggle } from './theme-toggle'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
-export default function Navbar({ className }: ComponentPropsWithRef<'nav'>) {
+export default function Navbar({ className, children }: ComponentPropsWithRef<'nav'>) {
   const [mounted, setMounted] = useState(false)
   const [currentSection, setCurrentSection] = useState<'products' | 'til' | null>(null)
 
@@ -34,6 +34,7 @@ export default function Navbar({ className }: ComponentPropsWithRef<'nav'>) {
           <ThemeToggle />
         )}
       </div>
+      {children}
     </nav>
   )
 }
