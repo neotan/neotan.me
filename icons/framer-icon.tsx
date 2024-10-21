@@ -1,11 +1,10 @@
 import React from 'react'
-import type { SvgIconProps } from 'shared-types'
 export default function FramerMotionIcon({
   width,
   height,
   title,
   ...restProps
-}: SvgIconProps) {
+}: { width?: number; height?: number; title?: string; className?: string }) {
   return (
     <svg stroke='currentColor' fill='currentColor' viewBox='0 0 12 18' width={width} height={height} {...restProps}>
       <title>{title}</title>

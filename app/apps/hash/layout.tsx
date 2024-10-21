@@ -1,4 +1,3 @@
-import Navbar from '@/components/navbar'
 import { ThemeProvider } from '@/components/theme-provider'
 
 export default function HashAppLayout({ children }: { children: React.ReactNode }) {

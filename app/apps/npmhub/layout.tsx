@@ -1,6 +1,6 @@
 import { Mitr } from 'next/font/google'
 import Link from 'next/link'
-import React, { ComponentProps } from 'react'
+import React from 'react'
 import Footer from '@/components/footer'
 import { ThemeProvider } from '@/components/theme-provider'
 import { cn } from '@/lib/utils'
@@ -12,13 +12,14 @@ const mitr = Mitr({
 })
 
 
-export default function NpmHubAppLayout({ children, className }: ComponentProps<'div'>) {
+export default function NpmHubAppLayout({ children }:
+  { children: React.ReactNode }) {
   return (
     <ThemeProvider
       attribute="class"
       forcedTheme="pumpkin"
     >
-      <div className={cn('h-full min-h-screen bg-background', className, mitr.className)} >
+      <div className={cn('h-full min-h-screen bg-background', mitr.className)} >
         <div className='container mx-auto flex h-full max-w-3xl flex-col gap-8'>
           <nav className="max-h-[72px] py-4">
             <Link href="/" className='mx-auto block w-fit' title='Home'>

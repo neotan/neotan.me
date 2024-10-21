@@ -1,10 +1,9 @@
-import type { SvgIconProps } from 'shared-types'
 export default function AvatarIcon({
   title,
   width,
   height,
   ...restProps
-}: SvgIconProps) {
+}: { title?: string; width?: number; height?: number; className?: string }) {
   return (
     <svg stroke='currentColor' fill='currentColor' width={width} height={height} {...restProps}>
       <title>{title}</title>

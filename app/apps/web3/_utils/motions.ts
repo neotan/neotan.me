@@ -1,4 +1,4 @@
-import { AnimationOptions, AnimationType, Transition, Variant, Variants } from 'framer-motion'
+import { ValueAnimationOptions, Variant } from 'framer-motion'
 
 type AnimationVisibility = {
   hidden: Variant,
@@ -29,7 +29,7 @@ export const navVariants = {
 
 export function slideIn(
   direction: string,
-  type: AnimationOptions<any>['type'],
+  type: ValueAnimationOptions['type'],
   delay: number,
   duration: number
 ): AnimationVisibility {
@@ -115,7 +115,7 @@ export const textContainer = {
 
 export function fadeIn(
   direction: string,
-  type: AnimationOptions<any>['type'],
+  type: ValueAnimationOptions['type'],
   delay: number,
   duration: number
 ): AnimationVisibility {

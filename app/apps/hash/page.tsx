@@ -27,7 +27,6 @@ import {
   FiCheckSquare,
   FiCopy,
   FiInfo,
-  FiRefreshCcw,
   FiZap
 } from 'react-icons/fi'
 import { ImFilesEmpty } from 'react-icons/im'

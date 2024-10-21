@@ -1,12 +1,17 @@
 import React from 'react'
-import type { SvgIconProps } from 'shared-types'
 export default function JsDelivrIcon({
   size,
   width = 20,
   height = 20,
   title,
   ...props
-}: SvgIconProps) {
+}: {
+  size?: number;
+  width?: number;
+  height?: number;
+  title?: string;
+  className?: string;
+}) {
   return (
     <svg
       width={width || size}

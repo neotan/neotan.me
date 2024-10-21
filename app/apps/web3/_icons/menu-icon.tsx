@@ -1,11 +1,10 @@
-import type { SvgIconProps } from 'shared-types'
 export default function MenuIcon({
   width = 20,
   height = 14,
   title = 'Menu',
   className,
   ...restProps
-}: SvgIconProps & { width?: number; height?: number }) {
+}: { width?: number; height?: number; title?: string; className?: string }) {
   return (
     <svg viewBox="0 0 20 14" width={width} height={height} className={className} {...restProps}>
       <title>{title}</title>

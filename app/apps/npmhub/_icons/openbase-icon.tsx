@@ -1,12 +1,17 @@
 import React from 'react'
-import type { SvgIconProps } from 'shared-types'
 export default function OpenbaseIcon({
   size,
   width = 30,
   height = 30,
   title,
   ...props
-}: SvgIconProps) {
+}: {
+  size?: number;
+  width?: number;
+  height?: number;
+  title?: string;
+  className?: string;
+}) {
   return (
     <svg
       width={width || size}

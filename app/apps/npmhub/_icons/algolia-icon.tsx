@@ -1,12 +1,12 @@
 import React from 'react'
-import type { SvgIconProps } from 'shared-types'
+
 export default function AlgoliaIcon({
   width = 77,
   height = 19,
   title,
   className,
   ...restProps
-}: SvgIconProps & { width?: number; height?: number }) {
+}: { width?: number; height?: number; title?: string; className?: string }) {
   return (
     <svg width={width} height={height} className={className} {...restProps}>
       <title>{title}</title>
