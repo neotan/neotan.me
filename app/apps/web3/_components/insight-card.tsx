@@ -37,7 +37,7 @@ export function InsightCard({ className, imgUrl, title, subtitle, index }: Insig
         >
           <img
             className="size-2/5 object-contain"
-            src="/images/arrow.svg"
+            src="/web3-images/arrow.svg"
             alt="Arrow"
           />
         </div>

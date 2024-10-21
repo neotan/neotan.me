@@ -60,6 +60,34 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+
+  .pumpkin {
+    --background: 0 0% 12%;
+    --foreground: 0 0% 82.588%;
+    --card: 0, 0%, 22%, 1;
+    --card-foreground: 0 0% 82.588%;
+    --popover: 240 5.3% 26.1%;  /* bg-zinc-700 */
+    --popover-foreground: 240 5% 90%; /* text-zinc-200 */
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 15.849 67.66% 53.922%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    /* --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%; */
+    --radius: .5rem;
+  }
 }
 
 @layer base {
@@ -83,8 +111,4 @@
     pointer-events: none;
   }
 
-  .icon.icon-link::after {
-    @apply text-zinc-300;
-    content: " #";
-  }
 }

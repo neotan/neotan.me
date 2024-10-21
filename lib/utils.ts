@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from 'clsx'
 import { format, formatDistance, isValid, type Locale, parseISO, toDate } from 'date-fns'
 import { anyPass, isEmpty, isNil } from 'ramda'
+import rison from 'rison'
 import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
@@ -90,4 +91,23 @@ export function formatNumber(
   if (!isNumber(x)) return x as string
 
   return new Intl.NumberFormat(locales, options).format(Number(x))
+}
+
+export function strToObj<T>(str: string): T | null {
+  if (!str) return null
+  try {
+    return rison.decode(str.replace(/^#/, ''))
+  } catch (error) {
+    console.error(error)
+    return null
+  }
+}
+
+export function objToStr(obj: Record<string, unknown>): string | undefined {
+  if (isNilOrEmpty(obj)) return ''
+  try {
+    return rison.encode(obj)
+  } catch (error) {
+    console.error(error)
+  }
 }

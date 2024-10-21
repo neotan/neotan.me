@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import { FaCalendarDay, FaExternalLinkAlt, FaGithub, FaRegClock } from 'react-icons/fa'
+import { FaCalendarDay, FaExternalLinkAlt, FaGithub, FaRegClock, FaStar } from 'react-icons/fa'
 import calcReadTime from 'reading-time'
 import { blogPagesList, blogPostsList } from '@/api'
 import Bio from '@/components/bio'
@@ -30,18 +30,27 @@ export default async function Home() {
   const pagesData = await blogPagesList()
   const products = Object.values(pagesData?.home?.data as { [key: string]: Product })
   const posts = Object.values(await blogPostsList({ mode: 'cors' }))
+  console.log(111, posts)
 
-  const filteredPosts = posts?.filter((post) => post.status === 'published')
+  const filteredPosts = [
+    ...posts
+      ?.filter((post) => post.featured)
+      .sort((right, left) => (left?.published_at + '').localeCompare(right?.published_at + '')),
+    ...posts
+      ?.filter((post) => !post.featured)
+      .sort((right, left) => (left?.published_at + '').localeCompare(right?.published_at + ''))
+  ].filter(post => post.status === 'published')
+
 
   return (
     <>
       <Navbar className='sticky top-0 z-50' />
       <div className="min-h-screen  bg-gradient-to-b from-secondary to-background">
-        <header className="container mx-auto hidden px-4 py-16 text-center md:block">
+        <header className="container mx-auto hidden max-w-6xl px-4 py-16 text-center md:block">
           <Bio className='sm:px-16' />
         </header>
 
-        <main className="container mx-auto space-y-16 px-4 py-8 lg:px-8">
+        <main className="container mx-auto space-y-16 px-4 pb-8 lg:px-8">
           <section id="products">
             <h2 className="mb-4 text-2xl font-bold">Products</h2>
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 2xl:grid-cols-3">
@@ -100,32 +109,35 @@ export default async function Home() {
             <h2 className="mb-4 text-2xl font-bold">Today I learned</h2>
             <ul className="grid grid-cols-1 gap-0 lg:grid-cols-3">
               {filteredPosts?.map((post) => (
-                <li key={post.id} className="rounded-lg border bg-card shadow-lg transition-transform hover:z-20 hover:scale-105 hover:shadow-2xl">
-                  <Link href={`/blog/${post.id}`} className="flex flex-col gap-4 px-4 py-6">
-                    <h2 className="text-2xl font-semibold">{post.title}</h2>
-                    <div className="flex flex-col flex-wrap gap-4 text-sm text-muted-foreground">
-                      <div>{post.author || 'Neo'}</div>
-                      <div className="flex gap-4">
-                        {post.published_at && (
-                          <span className="flex items-center gap-1">
-                            <FaCalendarDay size={14} />
-                            {new Date(post.published_at).toLocaleDateString()}
-                          </span>
-                        )}
+                <li key={post.id} className="flex flex-col gap-4 rounded-lg border bg-card px-4 py-6 shadow-lg transition-transform hover:z-20 hover:scale-105 hover:shadow-2xl">
+                  <div className="flex items-start justify-between">
+                    <Link href={`/blog/${post.id}`} className="decoration-muted-foreground underline-offset-4 hover:underline">
+                      <h2 className="text-2xl font-semibold">{post.title}</h2>
+                    </Link>
+                    {post.featured && <FaStar className='min-w-4 text-primary' />}
+                  </div>
+                  <div className="flex flex-col flex-wrap gap-4 text-sm text-muted-foreground">
+                    <div>{post.author || 'Neo'}</div>
+                    <div className="flex gap-4">
+                      {post.published_at && (
                         <span className="flex items-center gap-1">
-                          <FaRegClock size={14} />
-                          {calcReadTime(post.content || '').text}
+                          <FaCalendarDay size={14} />
+                          {new Date(post.published_at).toLocaleDateString()}
                         </span>
-                      </div>
+                      )}
+                      <span className="flex items-center gap-1">
+                        <FaRegClock size={14} />
+                        {calcReadTime(post.content || '').text}
+                      </span>
                     </div>
-                  </Link>
+                  </div>
                 </li>
               ))}
             </ul>
           </section>
         </main>
       </div>
-      <Footer />
+      <Footer className='container mx-auto' />
     </>
   )
 }

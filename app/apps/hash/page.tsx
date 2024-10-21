@@ -140,7 +140,7 @@ export default function HashHome() {
 
   return (
     <>
-      <div className=" min-h-screen bg-background pt-8">
+      <div className=" min-h-screen pt-8">
         <main className="container mx-auto flex gap-8 px-4 lg:max-w-6xl">
           <aside className="bg-mutedxx w-64 border p-4">
             <Button className="w-full" variant="outline" onClick={() => setSelectedHashNames(DEFULT_HASH_NAMES)}>

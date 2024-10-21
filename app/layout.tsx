@@ -23,14 +23,7 @@ export default function RootLayout({
         <script async src="https://cdn.splitbee.io/sb.js" />
       </head>
       <body className={`${montserrat.className} antialiased`} >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   )

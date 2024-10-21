@@ -31,3 +31,8 @@
   padding-left: 3px !important;
   padding-right: 3px !important;
 }
+
+.icon.icon-link::after {
+  @apply text-zinc-300;
+  content: " #";
+}
