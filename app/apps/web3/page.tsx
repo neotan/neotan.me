@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */ // 'next/image' requires static size of image
 'use client'
 import { motion } from 'framer-motion'
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import { useState } from 'react'
 import { TitleText, TypingText } from './_components/custom-texts'
 import { ExploreCard } from './_components/explore-card'
@@ -44,7 +44,9 @@ export default function Web3Page() {
           <div className="gradient-01 absolute inset-0 w-1/2" />
           <div className={cn(styles.innerWidth, 'mx-auto flex justify-between gap-8')}>
             <SearchIcon className="size-6 stroke-white" />
-            <h2 className='text-[24px] font-extrabold leading-[30.24px] text-white'>METAVERSUS</h2>
+            <Link href="/">
+              <h1 className='text-[24px] font-extrabold leading-[30.24px] text-white'>METAVERSUS</h1>
+            </Link>
             <MenuIcon className='size-6 fill-white stroke-white' />
           </div>
         </motion.nav>

@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import { pluck, without } from 'ramda'
 import React, { ComponentProps } from 'react'
 import { Fragment, useState } from 'react'

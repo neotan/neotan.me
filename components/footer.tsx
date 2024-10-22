@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import { ComponentPropsWithoutRef } from 'react'
 import { FaGithub } from 'react-icons/fa'
 import { cn } from '@/lib/utils'

@@ -1,6 +1,6 @@
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import React from 'react'
-import { FaCalendarDay, FaExternalLinkAlt, FaGithub, FaRegClock, FaStar } from 'react-icons/fa'
+import { FaCalendarDay, FaGithub, FaRegClock, FaStar } from 'react-icons/fa'
 import calcReadTime from 'reading-time'
 import { blogPagesList, blogPostsList } from '@/api'
 import Bio from '@/components/bio'
@@ -50,7 +50,6 @@ export default async function Home() {
                   const {
                     id,
                     title,
-                    /* --radius: 1rem; */
                     description,
                     homepage,
                     repoUrl,
@@ -74,8 +73,8 @@ export default async function Home() {
                         </div>
                       </CardHeader>
                       <CardContent className="flex grow flex-col gap-4 py-4">
-                        <CardTitle className="group relative flex items-center p-1 text-2xl">
-                          <Link href={homepage} target="_blank">{title}</Link>
+                        <CardTitle className="group relative flex w-fit items-center p-1 text-2xl">
+                          <Link href={homepage}>{title}</Link>
                           <div className="absolute bottom-0 left-0 -z-10 h-0 w-full bg-secondary p-0 group-hover:h-full group-hover:transition-all" />
                         </CardTitle>
                         <CardDescription className="text-muted-foreground">{description}</CardDescription>
@@ -94,7 +93,7 @@ export default async function Home() {
             <h2 className="mb-4 text-2xl font-bold">Today I learned</h2>
             <ul className="grid grid-cols-1 gap-0 lg:grid-cols-3">
               {posts?.map((post) => (
-                <li key={post.id} className="group flex flex-col gap-4 rounded-lg border bg-card px-4 py-6 shadow-lg transition-transform hover:z-20 hover:scale-105 hover:shadow-2xl">
+                <li key={post.id} className="group flex flex-col gap-4 border border-secondary bg-card px-4 py-6 shadow-lg transition-transform hover:z-20 hover:scale-105 hover:shadow-2xl">
                   <div className=" flex items-start justify-between">
                     <Link href={`/blog/${post.slug}`} className="relative flex p-1">
                       <h2 className="text-2xl font-semibold">{post.title}</h2>

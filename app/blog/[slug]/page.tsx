@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { Link } from 'next-view-transitions'
 import { FaCalendarDay, FaClock } from 'react-icons/fa'
 import { IoMdClose } from 'react-icons/io'
 import Markdown from 'react-markdown'

@@ -1,5 +1,5 @@
 'use client'
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import { ComponentPropsWithRef, useEffect, useState } from 'react'
 import { FaLightbulb, FaRocket } from 'react-icons/fa'
 import { ThemeToggle } from './theme-toggle'
