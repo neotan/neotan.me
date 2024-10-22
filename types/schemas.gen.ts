@@ -100,8 +100,7 @@ export const PatchedPostSchema = {
         },
         featured_image_url: {
             type: 'string',
-            format: 'uri',
-            maxLength: 200
+            maxLength: 2000
         },
         featured_image_caption: {
             type: 'string',
@@ -161,8 +160,7 @@ export const PostSchema = {
         },
         featured_image_url: {
             type: 'string',
-            format: 'uri',
-            maxLength: 200
+            maxLength: 2000
         },
         featured_image_caption: {
             type: 'string',

@@ -1,4 +1,5 @@
 import ky, { type Options } from 'ky'
+import { isDevMode } from '@/lib/utils'
 import type {
   BlogPagesCreateData,
   BlogPagesCreateError,
@@ -57,20 +58,19 @@ function arrayToObject(arr: Item[]) {
   }, {})
 }
 
-
 const client = ky.create({
-  prefixUrl: 'https://neo-blog-backend.vercel.app/api',
+  prefixUrl: isDevMode ? 'http://127.0.0.1:8888/api' : 'https://neo-blog-backend.vercel.app/api',
   hooks: {
-    afterResponse: [
-      async (_request, _options, response) => {
-        const data = await response.json()
-        const transformedData = Array.isArray(data) ? arrayToObject(data) : data
-        return new Response(JSON.stringify(transformedData), {
-          status: response.status,
-          headers: response.headers,
-        })
-      },
-    ]
+    // afterResponse: [
+    //   async (_request, _options, response) => {
+    //     const data = await response.json()
+    //     const transformedData = Array.isArray(data) ? arrayToObject(data) : data
+    //     return new Response(JSON.stringify(transformedData), {
+    //       status: response.status,
+    //       headers: response.headers,
+    //     })
+    //   },
+    // ]
   }
 })
 

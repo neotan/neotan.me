@@ -9,7 +9,7 @@ import Navbar from '@/components/navbar'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { cn } from '@/lib/utils'
+import { cn, formatDate } from '@/lib/utils'
 
 type Product = {
   id: string;
@@ -27,20 +27,9 @@ type Product = {
 }
 
 export default async function Home() {
-  const pagesData = await blogPagesList()
-  const products = Object.values(pagesData?.home?.data as { [key: string]: Product })
-  const posts = Object.values(await blogPostsList({ mode: 'cors' }))
-  console.log(111, posts)
-
-  const filteredPosts = [
-    ...posts
-      ?.filter((post) => post.featured)
-      .sort((right, left) => (left?.published_at + '').localeCompare(right?.published_at + '')),
-    ...posts
-      ?.filter((post) => !post.featured)
-      .sort((right, left) => (left?.published_at + '').localeCompare(right?.published_at + ''))
-  ].filter(post => post.status === 'published')
-
+  const pagesData = await blogPagesList({ searchParams: { slug: 'home' } })
+  const products = Object.values(pagesData?.[0]?.data as { [key: string]: Product })
+  const posts = await blogPostsList({ searchParams: { status: 'published' } })
 
   return (
     <>
@@ -108,10 +97,10 @@ export default async function Home() {
           <section id="til">
             <h2 className="mb-4 text-2xl font-bold">Today I learned</h2>
             <ul className="grid grid-cols-1 gap-0 lg:grid-cols-3">
-              {filteredPosts?.map((post) => (
+              {posts?.map((post) => (
                 <li key={post.id} className="flex flex-col gap-4 rounded-lg border bg-card px-4 py-6 shadow-lg transition-transform hover:z-20 hover:scale-105 hover:shadow-2xl">
                   <div className="flex items-start justify-between">
-                    <Link href={`/blog/${post.id}`} className="decoration-muted-foreground underline-offset-4 hover:underline">
+                    <Link href={`/blog/${post.slug}`} className="decoration-muted-foreground underline-offset-4 hover:underline">
                       <h2 className="text-2xl font-semibold">{post.title}</h2>
                     </Link>
                     {post.featured && <FaStar className='min-w-4 text-primary' />}
@@ -122,7 +111,7 @@ export default async function Home() {
                       {post.published_at && (
                         <span className="flex items-center gap-1">
                           <FaCalendarDay size={14} />
-                          {new Date(post.published_at).toLocaleDateString()}
+                          {formatDate(post.published_at)}
                         </span>
                       )}
                       <span className="flex items-center gap-1">

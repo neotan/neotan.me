@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import { FaCalendarDay, FaClock } from 'react-icons/fa'
 import { IoMdClose } from 'react-icons/io'
 import Markdown from 'react-markdown'
@@ -9,35 +10,29 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeRaw from 'rehype-raw'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
-import { blogPostsRetrieve } from '@/api'
+import { blogPostsList } from '@/api'
 import Navbar from '@/components/navbar'
-import { Button } from '@/components/ui/button'
-
-
+import { formatDate } from '@/lib/utils'
 
 export default async function BlogPostView({ params }: { params: { slug: string } }) {
-  const post = await blogPostsRetrieve(params.slug)
+  const post = (await blogPostsList({ searchParams: { slug: params.slug } }))?.[0]
 
-  function formatDate(dateString: string) {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    })
+  if (!post) {
+    notFound()
   }
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar className='sticky top-0 z-50' />
       <header className="flex justify-between bg-secondary/50 py-4 text-primary md:py-12 ">
-        <div className="container mx-auto flex max-w-3xl flex-col-reverse px-4 md:flex-row md:px-0">
+        <div className="container mx-auto flex max-w-3xl flex-col-reverse justify-between px-4 md:flex-row md:px-0">
           <div>
             <h1 className="mb-4 text-4xl font-bold md:text-4xl">{post.title}</h1>
             {post.subtitle && (
               <p className="mb-6 text-xl text-primary/80 md:text-xl">{post.subtitle}</p>
             )}
             <div className="flex items-center space-x-4">
-              <div>
+              <div className='flex flex-col gap-2'>
                 <p className="font-medium">{post.author}</p>
                 <p className="flex items-center text-sm text-primary/80">
                   <FaCalendarDay className="mr-1 size-4" />
@@ -49,11 +44,9 @@ export default async function BlogPostView({ params }: { params: { slug: string 
               </div>
             </div>
           </div>
-          <Button asChild variant="ghost" className=''>
-            <Link href="/#til">
-              <IoMdClose className="size-8 fill-muted-foreground" />
-            </Link>
-          </Button>
+          <Link href="/#til">
+            <IoMdClose className="size-8 fill-muted-foreground hover:fill-primary" />
+          </Link>
         </div>
       </header>
 

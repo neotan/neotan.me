@@ -60,6 +60,16 @@ export type Post = {
  */
 export type StatusEnum = 'draft' | 'published';
 
+export type BlogPagesListData = {
+    query?: {
+        content?: string;
+        last_updated_after?: string;
+        last_updated_before?: string;
+        slug?: string;
+        title?: string;
+    };
+};
+
 export type BlogPagesListResponse = (Array<Page>);
 
 export type BlogPagesListError = unknown;
@@ -113,6 +123,16 @@ export type BlogPagesDestroyData = {
 export type BlogPagesDestroyResponse = (void);
 
 export type BlogPagesDestroyError = unknown;
+
+export type BlogPostsListData = {
+    query?: {
+        content?: string;
+        created_at_after?: string;
+        created_at_before?: string;
+        slug?: string;
+        title?: string;
+    };
+};
 
 export type BlogPostsListResponse = (Array<Post>);
 
@@ -180,3 +200,102 @@ export type SchemaRetrieveResponse = ({
 });
 
 export type SchemaRetrieveError = unknown;
+
+export type $OpenApiTs = {
+    '/api/blog/pages/': {
+        get: {
+            req: BlogPagesListData;
+            res: {
+                '200': Array<Page>;
+            };
+        };
+        post: {
+            req: BlogPagesCreateData;
+            res: {
+                '201': Page;
+            };
+        };
+    };
+    '/api/blog/pages/{id}/': {
+        get: {
+            req: BlogPagesRetrieveData;
+            res: {
+                '200': Page;
+            };
+        };
+        put: {
+            req: BlogPagesUpdateData;
+            res: {
+                '200': Page;
+            };
+        };
+        patch: {
+            req: BlogPagesPartialUpdateData;
+            res: {
+                '200': Page;
+            };
+        };
+        delete: {
+            req: BlogPagesDestroyData;
+            res: {
+                /**
+                 * No response body
+                 */
+                '204': void;
+            };
+        };
+    };
+    '/api/blog/posts/': {
+        get: {
+            req: BlogPostsListData;
+            res: {
+                '200': Array<Post>;
+            };
+        };
+        post: {
+            req: BlogPostsCreateData;
+            res: {
+                '201': Post;
+            };
+        };
+    };
+    '/api/blog/posts/{id}/': {
+        get: {
+            req: BlogPostsRetrieveData;
+            res: {
+                '200': Post;
+            };
+        };
+        put: {
+            req: BlogPostsUpdateData;
+            res: {
+                '200': Post;
+            };
+        };
+        patch: {
+            req: BlogPostsPartialUpdateData;
+            res: {
+                '200': Post;
+            };
+        };
+        delete: {
+            req: BlogPostsDestroyData;
+            res: {
+                /**
+                 * No response body
+                 */
+                '204': void;
+            };
+        };
+    };
+    '/api/schema/': {
+        get: {
+            req: SchemaRetrieveData;
+            res: {
+                '200': {
+                    [key: string]: unknown;
+                };
+            };
+        };
+    };
+};

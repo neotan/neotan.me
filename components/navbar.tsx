@@ -30,9 +30,11 @@ export default function Navbar({ className, children }: ComponentPropsWithRef<'n
             </Link>
           </Button>
         </div>
-        {mounted && (
-          <ThemeToggle />
-        )}
+        <div>
+          {mounted && (
+            <ThemeToggle />
+          )}
+        </div>
       </div>
       {children}
     </nav>
