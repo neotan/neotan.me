@@ -15,9 +15,7 @@ const mitr = Mitr({
 export default function NpmHubAppLayout({ children }:
   { children: React.ReactNode }) {
   return (
-    <ThemeProvider
-      attribute="class"
-      forcedTheme="pumpkin"
+    <ThemeProvider forcedTheme="pumpkin"
     >
       <div className={cn('h-full min-h-screen bg-background', mitr.className)} >
         <div className='container mx-auto flex h-full max-w-3xl flex-col gap-8'>

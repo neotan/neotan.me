@@ -4,7 +4,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 export default function HashAppLayout({ children }: { children: React.ReactNode }) {
 
   return (
-    <ThemeProvider attribute="class" forcedTheme="dark" >
+    <ThemeProvider forcedTheme="dark" >
       <div className="min-h-screen bg-background">
         <nav className="flex items-center justify-center bg-background pt-4">
           <Link href="/">

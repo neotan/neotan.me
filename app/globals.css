@@ -34,7 +34,7 @@
     --chart-5: 27 87% 67%;
   }
 
-  .dark {
+  [data-theme='dark'] {
     --background: 240 3.7% 10%; /* bg-zinc-900 */
     --foreground: 240 5% 90%; /* text-zinc-200 */
     --card: 240 5.3% 26.1%;  /* bg-zinc-700 */
@@ -62,7 +62,7 @@
     /* --radius: 1rem; */
   }
 
-  .pumpkin {
+  [data-theme='pumpkin'] {
     --background: 0 0% 12%;
     --foreground: 0 0% 82.588%;
     --card: 0, 0%, 22%, 1;
