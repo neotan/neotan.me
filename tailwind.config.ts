@@ -65,7 +65,8 @@ const config: Config = {
   },
   plugins: [
     require('@tailwindcss/typography'),
-    require('tailwindcss-animate'),
+    require('tailwindcss-animated'),
+    require('tailwindcss-intersect'),
     require('tailwind-scrollbar'),
   ],
 }
