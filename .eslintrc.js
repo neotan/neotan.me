@@ -4,6 +4,7 @@ module.exports = {
     'next',
     'plugin:tailwindcss/recommended'
   ],
+  plugins: ['tailwindcss'],
   rules: {
     '@next/next/no-img-element': 'off',
     'no-unused-vars': 'off',
