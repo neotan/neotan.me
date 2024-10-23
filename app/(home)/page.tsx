@@ -34,9 +34,9 @@ export default async function Home() {
   return (
     <>
       <Navbar className='sticky top-0 z-50' />
-      <div className="from-secondary to-background min-h-screen bg-gradient-to-b">
+      <div className="min-h-screen bg-gradient-to-b from-secondary to-background">
         <header className="container mx-auto hidden max-w-6xl px-4 py-16 text-center md:block">
-          <Bio className='intersect-once intersect-half intersect:animate-fade-down intersect:opacity-100 opacity-0 sm:px-16' />
+          <Bio className='intersect-once intersect-half opacity-0 intersect:animate-fade-down intersect:opacity-100 sm:px-16' />
         </header>
 
         <main className="container mx-auto space-y-16 px-4 pb-8 lg:px-8">
@@ -60,7 +60,7 @@ export default async function Home() {
                   } = product
 
                   return (
-                    <Card key={id} className={cn('intersect-once intersect-half hover:shadow-3xl glassmorphism border-muted-foreground/50 intersect:animate-fade-up intersect:opacity-100 group flex h-full flex-col overflow-hidden rounded-none opacity-0 shadow-xl transition-transform', className)}>
+                    <Card key={id} className={cn('intersect-once intersect-half hover:shadow-3xl glassmorphism group flex h-full flex-col overflow-hidden rounded-none border-muted-foreground/50 opacity-0 shadow-xl transition-transform intersect:animate-fade-up intersect:opacity-100', className)}>
                       <CardHeader className="relative p-0">
                         <img src={imageSrc} alt={title} className={cn('h-72 w-full rounded-none object-cover object-top pb-0', imgClassName)} />
                         <div className="absolute bottom-0 flex w-full px-6 py-2 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
@@ -75,7 +75,7 @@ export default async function Home() {
                       <CardContent className="flex grow flex-col gap-4 py-4">
                         <CardTitle className="group relative flex w-fit items-center p-1 text-2xl">
                           <Link href={homepage}>{title}</Link>
-                          <div className="bg-secondary animate-duration-150 group-hover:animate-flip-up absolute bottom-0 left-0 -z-10 h-0 w-full p-0 group-hover:h-full" />
+                          <div className="absolute bottom-0 left-0 -z-10 h-0 w-full bg-secondary p-0 animate-duration-150 group-hover:h-full group-hover:animate-flip-up" />
                         </CardTitle>
                         <CardDescription className="text-muted-foreground">{description}</CardDescription>
                         <div className="flex flex-wrap gap-2">
@@ -93,15 +93,15 @@ export default async function Home() {
             <h2 className="mb-4 text-2xl font-bold">Today I learned</h2>
             <ul className="grid grid-cols-1 gap-0 lg:grid-cols-3">
               {posts?.map((post) => (
-                <li key={post.id} className="intersect-once intersect-half border-secondary bg-card intersect:animate-fade-up intersect:opacity-100 group flex flex-col gap-4 border px-4 py-6 opacity-0 shadow-lg transition-transform hover:z-20 hover:scale-105 hover:shadow-2xl">
+                <li key={post.id} className="intersect-once intersect-half group flex flex-col gap-4 border border-secondary bg-card px-4 py-6 opacity-0 shadow-lg transition-transform intersect:animate-fade-up intersect:opacity-100 hover:z-20 hover:scale-105 hover:shadow-2xl">
                   <div className=" flex items-start justify-between">
                     <Link href={`/blog/${post.slug}`} className="relative flex p-1">
                       <h2 className="text-2xl font-semibold">{post.title}</h2>
-                      <div className="bg-secondary animate-duration-150 group-hover:animate-flip-up absolute bottom-0 left-0 -z-10 h-0 w-full p-0 group-hover:h-full" />
+                      <div className="absolute bottom-0 left-0 -z-10 h-0 w-full bg-secondary p-0 animate-duration-150 group-hover:h-full group-hover:animate-flip-up" />
                     </Link>
-                    {post.featured && <FaStar className='text-primary min-w-4' />}
+                    {post.featured && <FaStar className='min-w-4 text-primary' />}
                   </div>
-                  <div className="text-muted-foreground flex flex-col flex-wrap gap-4 text-sm">
+                  <div className="flex flex-col flex-wrap gap-4 text-sm text-muted-foreground">
                     <div>{post.author || 'Neo'}</div>
                     <div className="flex gap-4">
                       {post.published_at && (

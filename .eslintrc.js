@@ -25,7 +25,7 @@ module.exports = {
       { ignoreCase: true, ignoreDeclarationSort: true }
     ],
     'tailwindcss/classnames-order': [
-      'error',
+      'warn',
       { callees: ['classnames', 'clsx', 'ctl', 'cn'] }
     ],
     'tailwindcss/no-custom-classname': 'off'
