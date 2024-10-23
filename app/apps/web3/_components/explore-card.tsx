@@ -24,7 +24,7 @@ export function ExploreCard({
 }: ExploreCardProps) {
   return (
     <motion.div
-      className={cn('duration-[0.7s] ease-out-flex relative flex h-[700px] min-w-[170px] cursor-pointer items-center justify-center transition-[flex]', activeId === id ? 'flex-[10] lg:flex-[3.5]' : 'flex-[2] lg:flex-[0.5]', className)}
+      className={cn('ease-out-flex relative flex h-[700px] min-w-[170px] cursor-pointer items-center justify-center transition-[flex] duration-[0.7s]', activeId === id ? 'flex-[10] lg:flex-[3.5]' : 'flex-[2] lg:flex-[0.5]', className)}
       variants={fadeIn('right', 'spring', index * 0.5, 0.75)}
       onClick={onClick}
     >
