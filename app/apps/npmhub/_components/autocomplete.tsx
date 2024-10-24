@@ -1,8 +1,4 @@
-import { BaseItem } from '@algolia/autocomplete-core'
-import { autocomplete, AutocompleteOptions } from '@algolia/autocomplete-js'
-import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches'
-import React from 'react'
-import {
+import React, {
   createElement,
   Fragment,
   useEffect,
@@ -10,9 +6,13 @@ import {
   useRef,
   useState,
 } from 'react'
+
+
+import { BaseItem } from '@algolia/autocomplete-core'
+import { autocomplete, AutocompleteOptions } from '@algolia/autocomplete-js'
+import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches'
 // eslint-disable-next-line react/no-deprecated
 import { render } from 'react-dom'
-
 import { usePagination, useSearchBox } from 'react-instantsearch'
 
 import '@algolia/autocomplete-theme-classic'

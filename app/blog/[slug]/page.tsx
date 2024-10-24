@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+
 import { Link } from 'next-view-transitions'
 import { FaCalendarDay, FaClock } from 'react-icons/fa'
 import { IoMdClose } from 'react-icons/io'
@@ -10,6 +11,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeRaw from 'rehype-raw'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
+
 import { blogPostsList } from '@/api'
 import Navbar from '@/components/navbar'
 import { formatDate } from '@/lib/utils'

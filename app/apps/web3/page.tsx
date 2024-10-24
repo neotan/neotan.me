@@ -1,8 +1,10 @@
 /* eslint-disable @next/next/no-img-element */ // 'next/image' requires static size of image
 'use client'
+import { useState } from 'react'
+
 import { motion } from 'framer-motion'
 import { Link } from 'next-view-transitions'
-import { useState } from 'react'
+
 import { TitleText, TypingText } from './_components/custom-texts'
 import { ExploreCard } from './_components/explore-card'
 import { InsightCard } from './_components/insight-card'

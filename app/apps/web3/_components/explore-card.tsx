@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element */ // 'next/image' requires static size of image
 'use client'
-import { motion } from 'framer-motion'
 import { ComponentProps } from 'react'
+
+import { motion } from 'framer-motion'
+
 import { WorldId } from '../_utils/constants'
 import { fadeIn } from '../_utils/motions'
 import { cn, styles } from '../_utils/styles'

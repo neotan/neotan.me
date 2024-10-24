@@ -1,7 +1,7 @@
+import React, { ComponentProps , Fragment, useState } from 'react'
+
 import { Link } from 'next-view-transitions'
 import { pluck, without } from 'ramda'
-import React, { ComponentProps } from 'react'
-import { Fragment, useState } from 'react'
 import {
   FaAngleUp,
   FaChartLine,
@@ -9,6 +9,7 @@ import {
   FaTimes,
 } from 'react-icons/fa'
 import { ReactSortable } from 'react-sortablejs'
+
 import { Badge } from '@/components/ui/badge'
 import { cn, isNilOrEmpty } from '@/lib/utils'
 

@@ -1,4 +1,5 @@
 import { Link } from 'next-view-transitions'
+
 import { ThemeProvider } from '@/components/theme-provider'
 
 export default function HashAppLayout({ children }: { children: React.ReactNode }) {

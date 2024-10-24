@@ -1,7 +1,9 @@
 'use client'
-import { useTheme } from 'next-themes'
 import * as React from 'react'
+
+import { useTheme } from 'next-themes'
 import { BiMoon, BiSun } from 'react-icons/bi'
+
 import { cn } from '@/lib/utils'
 
 

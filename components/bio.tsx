@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react'
+
 import { cn } from '@/lib/utils'
 
 export default function Bio({ className, children }: ComponentPropsWithoutRef<'section'>) {

@@ -1,10 +1,13 @@
 'use client'
-import { Link } from 'next-view-transitions'
 import { ComponentPropsWithRef, useEffect, useState } from 'react'
+
+import { Link } from 'next-view-transitions'
 import { FaLightbulb, FaRocket } from 'react-icons/fa'
-import { ThemeToggle } from './theme-toggle'
+
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+
+import { ThemeToggle } from './theme-toggle'
 
 export default function Navbar({ className, children }: ComponentPropsWithRef<'nav'>) {
   const [mounted, setMounted] = useState(false)

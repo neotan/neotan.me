@@ -1,6 +1,9 @@
-import { Mitr } from 'next/font/google'
-import { Link } from 'next-view-transitions'
 import React from 'react'
+
+import { Mitr } from 'next/font/google'
+
+import { Link } from 'next-view-transitions'
+
 import Footer from '@/components/footer'
 import { ThemeProvider } from '@/components/theme-provider'
 import { cn } from '@/lib/utils'

@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import { motion } from 'framer-motion'
 import { ComponentProps } from 'react'
+
+import { motion } from 'framer-motion'
+
 import { fadeIn } from '../_utils/motions'
 import { cn } from '../_utils/styles'
 

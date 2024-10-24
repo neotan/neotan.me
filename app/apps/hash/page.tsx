@@ -1,12 +1,5 @@
 'use client'
 
-import { useAsync, useLocalStorageValue, } from '@react-hookz/web'
-import { formatDuration } from 'date-fns/formatDuration'
-import { intervalToDuration } from 'date-fns/intervalToDuration'
-import { IHasher } from 'hash-wasm/lib/WASMInterface'
-//@ts-ignore 
-import * as hashAlgos from 'https://cdn.skypack.dev/hash-wasm'
-import prettyBytes from 'pretty-bytes'
 import React, {
   ComponentPropsWithoutRef,
   ComponentPropsWithRef,
@@ -19,9 +12,17 @@ import React, {
   useRef,
   useState
 } from 'react'
+
+import { useAsync, useLocalStorageValue, } from '@react-hookz/web'
+import { formatDuration } from 'date-fns/formatDuration'
+import { intervalToDuration } from 'date-fns/intervalToDuration'
+import { IHasher } from 'hash-wasm/lib/WASMInterface'
+// @ts-ignore
+// eslint-disable-next-line import/no-unresolved
+import * as hashAlgos from 'https://cdn.skypack.dev/hash-wasm'
+import prettyBytes from 'pretty-bytes'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { useDropzone } from 'react-dropzone'
-import type { FileWithPath } from 'react-dropzone'
 import { BsTextLeft } from 'react-icons/bs'
 import {
   FiCheckSquare,
@@ -30,6 +31,7 @@ import {
   FiZap
 } from 'react-icons/fi'
 import { ImFilesEmpty } from 'react-icons/im'
+
 import Footer from '@/components/footer'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -41,6 +43,8 @@ import {
 } from '@/components/ui/tabs'
 import { Textarea } from '@/components/ui/textarea'
 import { cn, formatDate, isNilOrEmpty } from '@/lib/utils'
+
+import type { FileWithPath } from 'react-dropzone'
 
 
 const APP_NAME = 'wasm-hash'

@@ -1,6 +1,8 @@
-import { Link } from 'next-view-transitions'
 import { ComponentPropsWithoutRef } from 'react'
+
+import { Link } from 'next-view-transitions'
 import { FaGithub } from 'react-icons/fa'
+
 import { cn } from '@/lib/utils'
 
 export default function Footer({ className, children }: ComponentPropsWithoutRef<'footer'>) {

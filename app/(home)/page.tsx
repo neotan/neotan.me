@@ -1,7 +1,9 @@
-import { Link } from 'next-view-transitions'
 import React from 'react'
+
+import { Link } from 'next-view-transitions'
 import { FaCalendarDay, FaGithub, FaRegClock, FaStar } from 'react-icons/fa'
 import calcReadTime from 'reading-time'
+
 import { blogPagesList, blogPostsList } from '@/api'
 import Bio from '@/components/bio'
 import Footer from '@/components/footer'

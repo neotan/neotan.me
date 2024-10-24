@@ -1,6 +1,8 @@
-import type { Metadata } from 'next'
 import { JetBrains_Mono, Montserrat } from 'next/font/google'
+
 import { ViewTransitions } from 'next-view-transitions'
+
+import type { Metadata } from 'next'
 import './globals.css'
 
 const montserrat = Montserrat({ subsets: ['latin'] })

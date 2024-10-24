@@ -1,18 +1,16 @@
 'use client'
+import React, { MouseEvent, useEffect, useState, ComponentProps } from 'react'
+
 import { liteClient as algoliasearch } from 'algoliasearch/lite'
 import { history } from 'instantsearch.js/es/lib/routers'
 import { RouterProps } from 'instantsearch.js/es/middlewares/createRouterMiddleware'
-import type { UiState } from 'instantsearch.js/es/types'
 import { Link } from 'next-view-transitions'
 import { includes, map, pipe, reject, toPairs, uniq, without } from 'ramda'
-import { MouseEvent, useEffect, useState } from 'react'
-import React, { ComponentProps } from 'react'
 import { AiFillGitlab } from 'react-icons/ai'
 import {
   FaBalanceScale,
   FaDownload,
   FaGithub,
-  FaHome,
   FaTag,
 } from 'react-icons/fa'
 import { ImNpm, ImTree } from 'react-icons/im'
@@ -26,6 +24,20 @@ import {
   Pagination,
 } from 'react-instantsearch'
 import { useHash } from 'react-use'
+
+import { Badge } from '@/components/ui/badge'
+import { Card } from '@/components/ui/card'
+import { Switch } from '@/components/ui/switch'
+import {
+  cn,
+  formatDistanceShort,
+  isBrowser,
+  isNilOrEmpty,
+  isNilOrEmptyOrFalsy,
+  objToStr,
+  strToObj,
+} from '@/lib/utils'
+
 import { Autocomplete } from './_components/autocomplete'
 import PkgBasket from './_components/pkg-basket'
 import AlgoliaIcon from './_icons/algolia-icon'
@@ -34,18 +46,8 @@ import JsDelivrIcon from './_icons/jsdelivr-icon'
 import OpenbaseIcon from './_icons/openbase-icon'
 import UnpkgIcon from './_icons/unpkg-icon'
 import { AlgoliaHitProps } from './_types'
-import { Badge } from '@/components/ui/badge'
-import { Card } from '@/components/ui/card'
-import { Switch } from '@/components/ui/switch'
-import { cn } from '@/lib/utils'
-import {
-  formatDistanceShort,
-  isBrowser,
-  isNilOrEmpty,
-  isNilOrEmptyOrFalsy,
-  objToStr,
-  strToObj,
-} from '@/lib/utils'
+
+import type { UiState } from 'instantsearch.js/es/types'
 
 const INDEX_NAME = process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME!
 

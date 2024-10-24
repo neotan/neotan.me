@@ -1,6 +1,8 @@
 'use client'
-import { motion } from 'framer-motion'
 import { ComponentProps } from 'react'
+
+import { motion } from 'framer-motion'
+
 import { textContainer, textVariant2 } from '../_utils/motions'
 import { cn } from '../_utils/styles'
 
