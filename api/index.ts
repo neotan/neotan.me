@@ -60,7 +60,7 @@ function arrayToObject(arr: Item[]) {
 }
 
 const client = ky.create({
-  prefixUrl: isDevMode ? 'http://127.0.0.1:8888/api' : 'https://neo-blog-backend.vercel.app/api',
+  prefixUrl: process.env.NEXT_PUBLIC_API_URL,
   hooks: {
     // afterResponse: [
     //   async (_request, _options, response) => {
