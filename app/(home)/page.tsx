@@ -12,25 +12,12 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn, formatDate } from '@/lib/utils'
+import { Page } from '@/types'
 
-type Product = {
-  id: string;
-  title: string;
-  tags: string[];
-  imageSrc: string;
-  description: string;
-  homepage: string;
-  repoUrl: string;
-  published: boolean;
-  ordering: number;
-  stackIcons: { iconName: string, title: string }[];
-  className?: string;
-  imgClassName?: string;
-}
+type Product = Page
 
 export default async function Home() {
-  const pagesData = await blogPagesList({ searchParams: { slug: 'home' } })
-  const products = Object.values(pagesData?.[0]?.data as { [key: string]: Product })
+  const products: Product[] = await blogPagesList({ searchParams: { pageName: 'home' } })
   const posts = await blogPostsList({ searchParams: { status: 'published' } })
 
   return (
@@ -47,7 +34,7 @@ export default async function Home() {
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 2xl:grid-cols-3">
               {products
                 ?.filter(product => product.published)
-                .sort((right, left) => right.ordering - left.ordering)
+                .sort((right, left) => (right.ordering || 0) - (left.ordering || 0))
                 .map((product) => {
                   const {
                     id,
@@ -56,7 +43,7 @@ export default async function Home() {
                     homepage,
                     repoUrl,
                     imageSrc,
-                    stackIcons = [],
+                    techStack = [],
                     className,
                     imgClassName,
                   } = product
@@ -76,13 +63,13 @@ export default async function Home() {
                       </CardHeader>
                       <CardContent className="flex grow flex-col gap-4 py-4">
                         <CardTitle className="group relative flex w-fit items-center p-1 text-2xl">
-                          <Link href={homepage}>{title}</Link>
+                          <Link href={homepage || '#'}>{title}</Link>
                           <div className="absolute bottom-0 left-0 -z-10 h-0 w-full bg-secondary p-0 animate-duration-150 group-hover:h-full group-hover:animate-flip-up" />
                         </CardTitle>
                         <CardDescription className="text-muted-foreground">{description}</CardDescription>
                         <div className="flex flex-wrap gap-2">
-                          {stackIcons?.map(icon => (
-                            <Badge key={icon.title} className='bg-muted text-muted-foreground hover:bg-muted'>{icon.title}</Badge>
+                          {techStack?.map(icon => (
+                            <Badge key={icon} className='bg-muted text-muted-foreground hover:bg-muted'>{icon}</Badge>
                           ))}
                         </div>
                       </CardContent>

@@ -12,7 +12,11 @@ export const PageSchema = {
             type: 'string',
             maxLength: 255
         },
-        subtitle: {
+        pageName: {
+            type: 'string',
+            maxLength: 255
+        },
+        description: {
             type: 'string',
             maxLength: 255
         },
@@ -21,7 +25,52 @@ export const PageSchema = {
             maxLength: 255,
             pattern: '^[-a-zA-Z0-9_]+$'
         },
+        repoUrl: {
+            type: 'string',
+            format: 'uri',
+            maxLength: 2000
+        },
+        homepage: {
+            type: 'string',
+            maxLength: 2000
+        },
+        imageSrc: {
+            type: 'string',
+            maxLength: 2000
+        },
+        ordering: {
+            type: 'integer',
+            maximum: 2147483647,
+            minimum: -2147483648
+        },
+        className: {
+            type: 'string',
+            maxLength: 255
+        },
+        published: {
+            type: 'boolean'
+        },
+        imgClassName: {
+            type: 'string',
+            maxLength: 255
+        },
+        techStack: {
+            type: 'array',
+            items: {
+                type: 'string',
+                maxLength: 255
+            },
+            description: 'List of technologies used'
+        },
         data: {},
+        tags: {
+            type: 'array',
+            items: {
+                type: 'string',
+                maxLength: 128
+            },
+            description: 'List of tags for this page'
+        },
         status: {
             '$ref': '#/components/schemas/StatusEnum'
         },
@@ -51,7 +100,11 @@ export const PatchedPageSchema = {
             type: 'string',
             maxLength: 255
         },
-        subtitle: {
+        pageName: {
+            type: 'string',
+            maxLength: 255
+        },
+        description: {
             type: 'string',
             maxLength: 255
         },
@@ -60,7 +113,52 @@ export const PatchedPageSchema = {
             maxLength: 255,
             pattern: '^[-a-zA-Z0-9_]+$'
         },
+        repoUrl: {
+            type: 'string',
+            format: 'uri',
+            maxLength: 2000
+        },
+        homepage: {
+            type: 'string',
+            maxLength: 2000
+        },
+        imageSrc: {
+            type: 'string',
+            maxLength: 2000
+        },
+        ordering: {
+            type: 'integer',
+            maximum: 2147483647,
+            minimum: -2147483648
+        },
+        className: {
+            type: 'string',
+            maxLength: 255
+        },
+        published: {
+            type: 'boolean'
+        },
+        imgClassName: {
+            type: 'string',
+            maxLength: 255
+        },
+        techStack: {
+            type: 'array',
+            items: {
+                type: 'string',
+                maxLength: 255
+            },
+            description: 'List of technologies used'
+        },
         data: {},
+        tags: {
+            type: 'array',
+            items: {
+                type: 'string',
+                maxLength: 128
+            },
+            description: 'List of tags for this page'
+        },
         status: {
             '$ref': '#/components/schemas/StatusEnum'
         },
@@ -133,6 +231,14 @@ export const PatchedPostSchema = {
             type: 'string',
             format: 'date-time',
             readOnly: true
+        },
+        tags: {
+            type: 'array',
+            items: {
+                type: 'string',
+                maxLength: 128
+            },
+            description: 'List of tags for this post'
         }
     }
 } as const;
@@ -193,6 +299,14 @@ export const PostSchema = {
             type: 'string',
             format: 'date-time',
             readOnly: true
+        },
+        tags: {
+            type: 'array',
+            items: {
+                type: 'string',
+                maxLength: 128
+            },
+            description: 'List of tags for this post'
         }
     },
     required: ['created_at', 'id', 'title', 'updated_at']

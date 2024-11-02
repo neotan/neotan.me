@@ -1,4 +1,5 @@
 import ky, { type Options } from 'ky'
+
 import { isDevMode } from '@/lib/utils'
 import type {
   BlogPagesCreateData,
@@ -76,7 +77,7 @@ const client = ky.create({
 
 export function blogPagesList(options: Options = {}) {
   return client.get('blog/pages/', options)
-    .json<{ [key: string]: Page }>()
+    .json<Page[]>()
 };
 
 export function blogPagesCreate(options: Options = {}) {

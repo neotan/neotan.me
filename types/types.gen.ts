@@ -3,9 +3,25 @@
 export type Page = {
     readonly id: string;
     title: string;
-    subtitle?: string;
+    pageName?: string;
+    description?: string;
     slug?: string;
+    repoUrl?: string;
+    homepage?: string;
+    imageSrc?: string;
+    ordering?: number;
+    className?: string;
+    published?: boolean;
+    imgClassName?: string;
+    /**
+     * List of technologies used
+     */
+    techStack?: Array<(string)>;
     data?: unknown;
+    /**
+     * List of tags for this page
+     */
+    tags?: Array<(string)>;
     status?: StatusEnum;
     readonly created_at: string;
     readonly updated_at: string;
@@ -14,9 +30,25 @@ export type Page = {
 export type PatchedPage = {
     readonly id?: string;
     title?: string;
-    subtitle?: string;
+    pageName?: string;
+    description?: string;
     slug?: string;
+    repoUrl?: string;
+    homepage?: string;
+    imageSrc?: string;
+    ordering?: number;
+    className?: string;
+    published?: boolean;
+    imgClassName?: string;
+    /**
+     * List of technologies used
+     */
+    techStack?: Array<(string)>;
     data?: unknown;
+    /**
+     * List of tags for this page
+     */
+    tags?: Array<(string)>;
     status?: StatusEnum;
     readonly created_at?: string;
     readonly updated_at?: string;
@@ -36,6 +68,10 @@ export type PatchedPost = {
     published_at?: (string) | null;
     readonly created_at?: string;
     readonly updated_at?: string;
+    /**
+     * List of tags for this post
+     */
+    tags?: Array<(string)>;
 };
 
 export type Post = {
@@ -52,6 +88,10 @@ export type Post = {
     published_at?: (string) | null;
     readonly created_at: string;
     readonly updated_at: string;
+    /**
+     * List of tags for this post
+     */
+    tags?: Array<(string)>;
 };
 
 /**
@@ -62,10 +102,17 @@ export type StatusEnum = 'draft' | 'published';
 
 export type BlogPagesListData = {
     query?: {
-        content?: string;
-        last_updated_after?: string;
-        last_updated_before?: string;
+        description?: string;
+        /**
+         * Which field to use when ordering the results.
+         */
+        ordering?: string;
+        pageName?: string;
+        published?: boolean;
         slug?: string;
+        status?: string;
+        tags?: string;
+        techStack?: string;
         title?: string;
     };
 };
@@ -126,10 +173,18 @@ export type BlogPagesDestroyError = unknown;
 
 export type BlogPostsListData = {
     query?: {
+        author?: string;
         content?: string;
-        created_at_after?: string;
-        created_at_before?: string;
+        featured?: boolean;
+        /**
+         * Which field to use when ordering the results.
+         */
+        ordering?: string;
+        published_at_after?: string;
+        published_at_before?: string;
         slug?: string;
+        status?: string;
+        tags?: string;
         title?: string;
     };
 };
