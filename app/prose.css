@@ -25,7 +25,7 @@
   text-decoration-line: underline;
 }
 
-.prose code {
+.prose :not(pre *) > code {
   @apply bg-muted-foreground/15 px-2 py-1 rounded-[0.4rem];
 }
 .prose :where(code):not(:where([class~='not-prose'] *))::before,
