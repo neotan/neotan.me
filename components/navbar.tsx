@@ -19,7 +19,7 @@ export default function Navbar({ className, children }: ComponentPropsWithRef<'n
     <nav className={cn('flex justify-center bg-background shadow-lg', className)}>
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-0 lg:px-8">
         <Link href="/">
-          <h1 className="hidden">Neo Tan's Tech Blog</h1>
+          <h1 className="hidden">Neo Tan&apos;s Tech Blog</h1>
           <img src="/images/avatar.jpg" alt="Neo" className="hidden size-10 rounded-full md:block" />
         </Link>
         <div className="items-centerspace-x-4 flex">

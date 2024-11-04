@@ -26,6 +26,7 @@ export const metadata: Metadata = {
     canonical: 'https://neotan.me',
   },
   openGraph: {
+    images: '/avatar.png',
     type: 'website',
     locale: 'en_CA',
     url: 'https://neotan.me',
