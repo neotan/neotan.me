@@ -31,7 +31,7 @@ export default async function Home() {
         <main className="container mx-auto space-y-16 px-4 pb-8 lg:px-8">
           <section id="products">
             <h2 className="mb-4 text-2xl font-bold">Products</h2>
-            <Card id='ai-slides' className='intersect-once intersect-half hover:shadow-3xl glassmorphism group mx-auto mb-8 grid h-full max-w-5xl grid-cols-[15rem_1fr] overflow-hidden rounded-none border-muted-foreground/50 opacity-0 shadow-xl transition-transform intersect:animate-fade-up intersect:opacity-100'>
+            <Card id='ai-slides' className='intersect-once intersect-half hover:shadow-3xl glassmorphism group mx-auto mb-8 flex h-full max-w-5xl grid-cols-[15rem_1fr] flex-col-reverse overflow-hidden rounded-none border-muted-foreground/50 opacity-0 shadow-xl transition-transform intersect:animate-fade-up intersect:opacity-100 sm:grid'>
               <CardContent className="flex grow flex-col gap-4 py-4">
                 <CardTitle className="group relative flex w-fit items-center p-1 text-2xl">
                   <Link href='https://ai-slides.neotan.me' target="_blank">AI Slides</Link> <Badge className='ml-2 rounded-2xl bg-muted text-muted-foreground'>Beta</Badge>
