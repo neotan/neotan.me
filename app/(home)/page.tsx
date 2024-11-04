@@ -31,6 +31,27 @@ export default async function Home() {
         <main className="container mx-auto space-y-16 px-4 pb-8 lg:px-8">
           <section id="products">
             <h2 className="mb-4 text-2xl font-bold">Products</h2>
+            {/* <div className='max-w-6xlxxx container mx-auto'> */}
+            <Card id='ai-slides' className='intersect-once intersect-half hover:shadow-3xl glassmorphism group mx-auto mb-8 grid h-full max-w-5xl grid-cols-[15rem_1fr] overflow-hidden rounded-none border-muted-foreground/50 opacity-0 shadow-xl transition-transform intersect:animate-fade-up intersect:opacity-100'>
+              <CardContent className="flex grow flex-col gap-4 py-4">
+                <CardTitle className="group relative flex w-fit items-center p-1 text-2xl">
+                  <Link href='https://ai-slides.neotan.me' target="_blank">AI Slides</Link> <Badge className='ml-2 rounded-2xl bg-muted text-muted-foreground'>Beta</Badge>
+                  <div className="absolute bottom-0 left-0 -z-10 h-0 w-full bg-secondary p-0 animate-duration-150 group-hover:h-full group-hover:animate-flip-up" />
+                </CardTitle>
+                <CardDescription className="text-muted-foreground">
+                  Create professional, AI-generated presentation slides instantly. AI-Slides leverages the latest AI APIs like Google Gemini, ChatGPT, and Claude to quickly transform your ideas into a polished presentation. Ideal for busy professionals, students, and anyone in need of high-quality slides on the go.
+                </CardDescription>
+                <div className="flex flex-wrap gap-2">
+                  {['Next.js', 'Tailwind CSS', 'Shadcn/UI', 'Google Gemini', 'ChatGPT', 'Claude'].map(icon => (
+                    <Badge key={icon} className='bg-muted text-muted-foreground hover:bg-muted'>{icon}</Badge>
+                  ))}
+                </div>
+              </CardContent>
+              <CardHeader className="p-0">
+                <video muted controls autoPlay src='/blog-images/ai-slides.webm' className='object-containw-full rounded-none object-contain object-top pb-0' />
+              </CardHeader>
+            </Card>
+            {/* </div> */}
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 2xl:grid-cols-3">
               {products
                 ?.filter(product => product.published)
