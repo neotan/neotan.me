@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   creator: 'Neo Tan',
   metadataBase: new URL('https://neotan.me'),
   alternates: {
-    canonical: '/',
+    canonical: 'https://neotan.me',
   },
   openGraph: {
     type: 'website',
