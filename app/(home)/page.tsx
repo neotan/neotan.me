@@ -31,7 +31,6 @@ export default async function Home() {
         <main className="container mx-auto space-y-16 px-4 pb-8 lg:px-8">
           <section id="products">
             <h2 className="mb-4 text-2xl font-bold">Products</h2>
-            {/* <div className='max-w-6xlxxx container mx-auto'> */}
             <Card id='ai-slides' className='intersect-once intersect-half hover:shadow-3xl glassmorphism group mx-auto mb-8 grid h-full max-w-5xl grid-cols-[15rem_1fr] overflow-hidden rounded-none border-muted-foreground/50 opacity-0 shadow-xl transition-transform intersect:animate-fade-up intersect:opacity-100'>
               <CardContent className="flex grow flex-col gap-4 py-4">
                 <CardTitle className="group relative flex w-fit items-center p-1 text-2xl">
@@ -51,7 +50,6 @@ export default async function Home() {
                 <video muted controls autoPlay src='/blog-images/ai-slides.webm' className='object-containw-full rounded-none object-contain object-top pb-0' />
               </CardHeader>
             </Card>
-            {/* </div> */}
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 2xl:grid-cols-3">
               {products
                 ?.filter(product => product.published)

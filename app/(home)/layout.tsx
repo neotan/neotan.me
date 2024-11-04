@@ -4,8 +4,31 @@ import type { Metadata } from 'next'
 import '@/app/globals.css'
 
 export const metadata: Metadata = {
-  title: 'Neo\'s Blog',
-  description: 'A place for me to share my thoughts and ideas',
+  title: 'Neo Tan\'s Tech Blog',
+  description: 'Full-stack engineer sharing insights on React, Next.js, TypeScript, AI, and software architecture. 18+ years of industry experience from IBM and Alibaba.',
+  keywords: [
+    'React',
+    'Next.js',
+    'TypeScript',
+    'TailwindCSS Plugins',
+    'VS Code Extensions',
+    'Chrome Extensions',
+    'AI',
+    'GenAI',
+    'LLM',
+    'Software Architecture',
+    'Full Stack Development'
+  ],
+  authors: [{ name: 'Neo Tan', url: 'https://neotan.me' }],
+  creator: 'Neo Tan',
+  openGraph: {
+    type: 'website',
+    locale: 'en_CA',
+    url: 'https://neotan.me',
+    title: 'Neo Tan\'s Tech Blog',
+    description: 'Full-stack engineer sharing insights on React, Next.js, TypeScript, AI, and software architecture.',
+    siteName: 'Neo Tan\'s Tech Blog'
+  }
 }
 
 export default function RootLayout({
