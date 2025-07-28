@@ -1,28 +1,29 @@
-My portfolio to share my thoughts, translations and products for fun.
+# Create T3 App
 
-## Todos
+This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
-- [x] setup overall theme
-  - [x] dark/light mode theming toggle
-- [x] add footer
-- [x] add single post displaying
-- [x] add posts listing
-- [ ] add site-wide animation with framer-motion
-  - [ ] Home page
-  - [ ] Showcase page
-- [x] add code highlight
-- [ ] SEO, sitemap.xml
+## What's next? How do I make an app with this?
 
-## Trade-offs
+We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
 
-As you may have seen, there is a few "Anti-patterns" code in the application,
-but believe me, they are reasonable in the context of such scale, like:
+If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
 
-1. **Put related components in a single .tsx file**. Which is following the
-   practices:
+- [Next.js](https://nextjs.org)
+- [NextAuth.js](https://next-auth.js.org)
+- [Prisma](https://prisma.io)
+- [Drizzle](https://orm.drizzle.team)
+- [Tailwind CSS](https://tailwindcss.com)
+- [tRPC](https://trpc.io)
 
-   1. [💡Colocation](https://kentcdodds.com/blog/colocation) by
-      [Kent C. Dodds](https://kentcdodds.com/about) and
-   1. [💡Optimization Principle](https://www.laws-of-software.com/laws/knuth/) by [Donald Knuth](https://en.wikipedia.org/wiki/Donald_Knuth)
-      
-      > Premature optimization is the root of all evil. -- Donald Knuth, 1974
+## Learn More
+
+To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+
+- [Documentation](https://create.t3.gg/)
+- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+
+You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+
+## How do I deploy this?
+
+Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.

@@ -1,0 +1,41 @@
+.prose h1 a,
+.prose h2 a,
+.prose h3 a,
+.prose h4 a,
+.prose h5 a,
+.prose h6 a {
+  color: inherit;
+  text-decoration-line: none;
+}
+
+.prose h1 a:hover,
+.prose h2 a:hover,
+.prose h3 a:hover,
+.prose h4 a:hover,
+.prose h5 a:hover,
+.prose h6 a:hover {
+  text-decoration-line: none;
+}
+
+.prose a {
+  color: #3182ce;
+  text-decoration-line: none;
+}
+.prose a:hover {
+  text-decoration-line: underline;
+}
+
+.prose :not(pre) > code {
+  @apply bg-muted-foreground/15 px-2 py-[2px] rounded-[0.4rem];
+}
+.prose :where(code):not(:where([class~='not-prose'] *))::before,
+.prose :where(code):not(:where([class~='not-prose'] *))::after {
+  content: none !important;
+  padding-left: 3px !important;
+  padding-right: 3px !important;
+}
+
+.icon.icon-link::after {
+  @apply text-zinc-300;
+  content: " #";
+}
