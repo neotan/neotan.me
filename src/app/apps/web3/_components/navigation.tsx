@@ -25,7 +25,6 @@ export function Navigation() {
       viewport={{ once: true, amount: 0.25 }}
     >
       <div className={cn(styles.innerWidth, styles.flexBetween)}>
-        {/* Logo */}
         <Link
           href="/"
           className="text-2xl font-bold text-white hover:text-white/80 transition-colors"
@@ -34,7 +33,6 @@ export function Navigation() {
           METAVERSUS
         </Link>
 
-        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
           {NAV_ITEMS.map((item) => (
             <Link
@@ -47,7 +45,6 @@ export function Navigation() {
           ))}
         </div>
 
-        {/* Actions */}
         <div className="flex items-center gap-4">
           <button
             className="p-2 text-white hover:text-white/80 transition-colors"
@@ -67,7 +64,6 @@ export function Navigation() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isMenuOpen && (
         <motion.div
           className="md:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-md border-t border-white/10"

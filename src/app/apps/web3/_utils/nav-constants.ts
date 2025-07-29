@@ -1,6 +1,5 @@
 import type { NavItem } from '../_types'
 
-// Navigation constants
 export const NAV_ITEMS: readonly NavItem[] = [
   { href: '#about', label: 'About' },
   { href: '#explore', label: 'Explore' },

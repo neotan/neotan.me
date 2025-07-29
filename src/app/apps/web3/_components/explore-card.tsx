@@ -3,7 +3,7 @@
 import { motion } from 'motion/react'
 import type { ComponentProps } from 'react'
 
-import { fadeIn, microInteractions } from '../_utils/animations'
+import { fadeIn, microInteractions, viewportAnimations } from '../_utils/animations'
 import { cn, styles } from '../_utils/styles'
 import type { World, WorldId } from '../_types'
 
@@ -37,7 +37,7 @@ export function ExploreCard({
       whileTap="tap"
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.25 }}
+      viewport={viewportAnimations}
       onClick={() => onCardClick(world.id)}
       role="button"
       tabIndex={0}
@@ -48,52 +48,72 @@ export function ExploreCard({
           onCardClick(world.id)
         }
       }}
+      style={{
+        willChange: 'transform',
+        transform: 'translate3d(0, 0, 0)',
+      }}
       {...props}
     >
-      {/* Background Image */}
       <img
         src={world.imgUrl}
         alt={`${world.title} world`}
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         loading="lazy"
+        style={{
+          willChange: 'transform',
+          transform: 'translate3d(0, 0, 0)',
+        }}
       />
 
-      {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
 
-      {/* Content */}
       <div className="relative h-full flex flex-col justify-end p-6">
         {isActive ? (
-          // Active State
           <motion.div
             className="space-y-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
+            style={{
+              willChange: 'transform',
+              transform: 'translate3d(0, 0, 0)',
+            }}
           >
-            {/* Icon */}
-            <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+            <motion.div
+              className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              transition={{ duration: 0.2 }}
+              style={{
+                willChange: 'transform',
+                transform: 'translate3d(0, 0, 0)',
+              }}
+            >
               <img
                 src="/web3-images/headset.svg"
                 alt=""
                 className="w-6 h-6"
               />
-            </div>
+            </motion.div>
 
-            {/* Title */}
             <h3 className="text-2xl font-bold text-white">
               {world.title}
             </h3>
 
-            {/* Description */}
             {world.description && (
               <p className="text-white/80 text-sm leading-relaxed">
                 {world.description}
               </p>
             )}
 
-            {/* CTA */}
-            <button className="inline-flex items-center gap-2 text-white/90 hover:text-white transition-colors">
+            <motion.button
+              className="inline-flex items-center gap-2 text-white/90 hover:text-white transition-colors"
+              whileHover={{ x: 5 }}
+              transition={{ duration: 0.2 }}
+              style={{
+                willChange: 'transform',
+                transform: 'translate3d(0, 0, 0)',
+              }}
+            >
               <span className="text-sm font-medium">Enter World</span>
               <svg
                 className="w-4 h-4"
@@ -108,10 +128,9 @@ export function ExploreCard({
                   d="M9 5l7 7-7 7"
                 />
               </svg>
-            </button>
+            </motion.button>
           </motion.div>
         ) : (
-          // Inactive State
           <div className="transform -rotate-90 origin-bottom-left">
             <h3 className="text-lg font-semibold text-white whitespace-nowrap">
               {world.title}
@@ -120,7 +139,6 @@ export function ExploreCard({
         )}
       </div>
 
-      {/* Hover Effect */}
       <motion.div
         className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         initial={false}

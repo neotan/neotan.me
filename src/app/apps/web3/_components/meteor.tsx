@@ -1,7 +1,16 @@
 import { motion } from "motion/react"
+import { meteorVariants } from '../_utils/animations'
 
+interface MeteorProps {
+  delay?: number
+  duration?: number
+  startX?: number
+  startY?: number
+  endX?: number
+  endY?: number
+  size?: 'small' | 'medium' | 'large'
+}
 
-// Meteor Component
 export function Meteor({
   delay = 0,
   duration = 3,
@@ -10,15 +19,7 @@ export function Meteor({
   endX = 100,
   endY = 100,
   size = 'small'
-}: {
-  delay?: number
-  duration?: number
-  startX?: number
-  startY?: number
-  endX?: number
-  endY?: number
-  size?: 'small' | 'medium' | 'large'
-}) {
+}: MeteorProps) {
   const sizeClasses = {
     small: 'w-1 h-1',
     medium: 'w-2 h-2',
@@ -27,7 +28,10 @@ export function Meteor({
 
   return (
     <motion.div
-      className="absolute pointer-events-none"
+      className="absolute pointer-events-none will-change-transform"
+      style={{
+        transform: 'translate3d(0, 0, 0)',
+      }}
       initial={{
         x: startX,
         y: startY,
@@ -45,18 +49,23 @@ export function Meteor({
         delay,
         ease: "linear",
         repeat: Infinity,
-        repeatDelay: Math.random() * 5 + 3
+        repeatDelay: 8 + Math.random() * 4,
       }}
     >
-      {/* Meteor body */}
-      <div className={`${sizeClasses[size]} bg-white rounded-full shadow-lg shadow-white/50`} />
+      <div
+        className={`${sizeClasses[size]} bg-white rounded-full shadow-lg shadow-white/50`}
+        style={{
+          willChange: 'transform',
+          transform: 'translate3d(0, 0, 0)',
+        }}
+      />
 
-      {/* Meteor trail */}
       <motion.div
         className="absolute top-0 left-0 w-8 h-1 bg-gradient-to-r from-white via-cyan-300 to-transparent rounded-full"
         style={{
           transformOrigin: 'left center',
-          transform: 'rotate(-45deg) translateX(-50%)'
+          transform: 'rotate(-45deg) translateX(-50%) translate3d(0, 0, 0)',
+          willChange: 'transform',
         }}
         initial={{ scaleX: 0, opacity: 0 }}
         animate={{ scaleX: 1, opacity: [0, 1, 0] }}

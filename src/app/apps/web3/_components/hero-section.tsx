@@ -11,7 +11,6 @@ import { FancyButton } from './fancy-button'
 export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Gradients */}
       <GradientBackground variant="primary" className="top-0 left-0" />
       <GradientBackground variant="secondary" className="bottom-0 right-0" />
 
@@ -23,7 +22,6 @@ export function HeroSection() {
           whileInView="show"
           viewport={{ once: true, amount: 0.25 }}
         >
-          {/* Main Heading */}
           <motion.div className="space-y-4" variants={textVariant(0.2)}>
             <TitleText size="xl" className="text-center">
               METAVERSE
@@ -36,14 +34,12 @@ export function HeroSection() {
             </div>
           </motion.div>
 
-          {/* Subtitle */}
           <motion.div variants={textVariant(0.4)}>
             <p className="text-white/80 text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto">
               Experience the future of digital interaction in our immersive virtual worlds
             </p>
           </motion.div>
 
-          {/* Fancy CTA Button */}
           <motion.div variants={textVariant(0.6)}>
             <FancyButton
               href="#explore"
@@ -72,16 +68,13 @@ export function HeroSection() {
           </motion.div>
         </motion.div>
 
-        {/* Hero Image */}
         <motion.div
           className="relative mt-16"
           variants={slideIn({ direction: 'up', delay: 0.8 })}
         >
           <div className="relative">
-            {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-3xl" />
 
-            {/* Main Image */}
             <img
               src="/web3-images/cover.png"
               alt="Metaverse hero cover showing virtual worlds"
@@ -89,7 +82,6 @@ export function HeroSection() {
               loading="eager"
             />
 
-            {/* Floating Elements */}
             <motion.div
               className="absolute -top-8 -right-8"
               initial={{ scale: 0, rotate: -180 }}

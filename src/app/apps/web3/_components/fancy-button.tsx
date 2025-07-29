@@ -35,7 +35,6 @@ export function FancyButton({ href, children, className = '', icon }: FancyButto
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
     >
-      {/* Button Content */}
       <Link
         href={href}
         onClick={handleClick}
@@ -47,7 +46,6 @@ export function FancyButton({ href, children, className = '', icon }: FancyButto
           ${className}
         `}
       >
-        {/* Animated Background */}
         <motion.div
           className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20 rounded-2xl"
           animate={{
@@ -56,7 +54,6 @@ export function FancyButton({ href, children, className = '', icon }: FancyButto
           transition={{ duration: 0.3 }}
         />
 
-        {/* Content */}
         <motion.span
           className="relative z-10"
           animate={{
@@ -67,7 +64,6 @@ export function FancyButton({ href, children, className = '', icon }: FancyButto
           {children}
         </motion.span>
 
-        {/* Icon with Animation */}
         {icon && (
           <motion.div
             className="relative z-10"
@@ -81,7 +77,6 @@ export function FancyButton({ href, children, className = '', icon }: FancyButto
           </motion.div>
         )}
 
-        {/* Ripple Effect */}
         <motion.div
           className="absolute inset-0 rounded-2xl bg-white/10"
           initial={{ scale: 0, opacity: 0 }}

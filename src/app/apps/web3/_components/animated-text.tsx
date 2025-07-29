@@ -3,7 +3,7 @@
 import { motion } from 'motion/react'
 import type { ComponentProps } from 'react'
 
-import { textContainer, textVariant2 } from '../_utils/animations'
+import { textContainer, textVariant2, viewportAnimations } from '../_utils/animations'
 import { cn } from '../_utils/styles'
 
 interface TypingTextProps extends ComponentProps<typeof motion.p> {
@@ -24,7 +24,11 @@ export function TypingText({
       variants={textContainer}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.25 }}
+      viewport={viewportAnimations}
+      style={{
+        willChange: 'transform',
+        transform: 'translate3d(0, 0, 0)',
+      }}
       {...props}
     >
       {Array.from(text).map((letter, index) => (
@@ -32,6 +36,10 @@ export function TypingText({
           key={index}
           variants={textVariant2}
           className="inline-block"
+          style={{
+            willChange: 'transform',
+            transform: 'translate3d(0, 0, 0)',
+          }}
         >
           {letter === ' ' ? '\u00A0' : letter}
         </motion.span>
@@ -65,7 +73,11 @@ export function TitleText({
       initial="hidden"
       variants={textVariant2}
       whileInView="show"
-      viewport={{ once: true, amount: 0.25 }}
+      viewport={viewportAnimations}
+      style={{
+        willChange: 'transform',
+        transform: 'translate3d(0, 0, 0)',
+      }}
       {...props}
     >
       {children}
@@ -85,8 +97,12 @@ export function AnimatedText({ text, className, delay = 0 }: AnimatedTextProps) 
       className={cn('inline-block', className)}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.25 }}
+      viewport={viewportAnimations}
       transition={{ delay, duration: 0.5, ease: 'easeOut' }}
+      style={{
+        willChange: 'transform',
+        transform: 'translate3d(0, 0, 0)',
+      }}
     >
       {text}
     </motion.span>

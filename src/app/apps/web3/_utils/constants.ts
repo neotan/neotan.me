@@ -110,7 +110,6 @@ export const SOCIALS: readonly SocialLink[] = [
   },
 ] as const
 
-// Performance constants
 export const ANIMATION_DELAYS = {
   NAV: 0.5,
   HERO: 0.2,
