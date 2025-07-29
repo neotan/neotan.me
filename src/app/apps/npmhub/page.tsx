@@ -416,7 +416,7 @@ function CustomHit({ hit }: AlgoliaHitProps) {
               target="_blank"
             >
               <SiRunkit
-                className={cn(externalUrlClasses)}
+                className={externalUrlClasses}
                 title="run on Runkit"
               />
             </Link>
@@ -445,7 +445,7 @@ function CustomHit({ hit }: AlgoliaHitProps) {
                 title="Open UNPKG.COM"
               >
                 <UnpkgIcon
-                  className={cn(externalUrlClasses, 'w-5, h-5')}
+                  className={`${externalUrlClasses} h-5 w-5`}
                   title="Browse on UNPKG.COM"
                 />
               </Link>
@@ -456,7 +456,7 @@ function CustomHit({ hit }: AlgoliaHitProps) {
                 title="Open CDNJS.COM"
               >
                 <CdnJsIcon
-                  className={cn(externalUrlClasses, 'h-6 w-14')}
+                  className={`${externalUrlClasses} h-6 w-14`}
                   title="Browse on CDNJS.COM"
                 />
               </Link>

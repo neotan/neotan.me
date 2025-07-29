@@ -3,7 +3,12 @@ import { ThemeProvider } from '@/components/theme-provider'
 export default function BlogPostLayout({ children }: { children: React.ReactNode }) {
 
   return (
-    <ThemeProvider defaultTheme="dark" >
+
+    <ThemeProvider
+      enableSystem
+      attribute="class"
+      defaultTheme="system"
+    >
       {children}
     </ThemeProvider>
   )

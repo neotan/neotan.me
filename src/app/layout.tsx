@@ -18,7 +18,6 @@ export default function RootLayout({
     <html suppressHydrationWarning className={`${montserrat.className}`} lang="en">
       <head>
         <script async src="https://cdn.splitbee.io/sb.js" />
-        {/* <script defer suppressHydrationWarning src="https://unpkg.com/tailwindcss-intersect@2.2.0/dist/observer.min.js" /> */}
       </head>
       <body className='antialiased' >
         {children}

@@ -8,7 +8,7 @@
 @import "./prism-duotone-light.css";
 @import "./prose.css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --font-sans: Montserrat, Montserrat Fallback, ui-sans-serif, system-ui, sans-serif,

@@ -112,10 +112,10 @@ export default function PkgBasket({
             </div>
           )}
           <FaAngleUp
-            className={cn(
-              'size-7 transform-gpu cursor-pointer text-muted-foreground duration-200',
-              { 'rotate-180': isBasketExpanded },
-            )}
+            className={`size-7 transform-gpu cursor-pointer text-muted-foreground duration-200 ${isBasketExpanded ? `
+              rotate-180
+            ` : ''}
+            `}
             title="Show/hide basket"
             onClick={() => setIsBasketExpanded(!isBasketExpanded)}
           />

@@ -35,7 +35,7 @@ export default function Web3Page() {
   const [activeExplorerWorldId, setActiveExplorerWorldId] = useState<WorldId>('world1')
   return (
     <>
-      <div className={cn('bg-primary-black overflow-hidden')}>
+      <div className='bg-primary-black overflow-hidden'>
         <motion.nav
           className={cn(styles.px, 'relative py-8')}
           id="navbar"
@@ -54,7 +54,7 @@ export default function Web3Page() {
         </motion.nav>
 
 
-        <section className={cn(styles.py,)} id='hero'>
+        <section className={styles.py} id='hero'>
           <motion.div
             className={cn(styles.innerWidth, 'mx-auto flex flex-col')}
             initial="hidden"

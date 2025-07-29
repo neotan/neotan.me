@@ -26,7 +26,7 @@ export default function Navbar({ className, children }: ComponentPropsWithRef<'n
           <h1 className="hidden">Neo Tan&apos;s Tech Blog</h1>
           <img alt="Neo" className="hidden size-10 rounded-full md:block" src="/images/avatar.jpg" />
         </Link>
-        <div className="items-centerspace-x-4 flex">
+        <div className="flex items-center space-x-4">
           <Button
             asChild
             className={`

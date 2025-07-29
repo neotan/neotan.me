@@ -46,7 +46,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ThemeProvider defaultTheme="dark" >
+    <ThemeProvider
+      enableSystem
+      attribute="class"
+      defaultTheme="system"
+    >
       {children}
     </ThemeProvider>
   )

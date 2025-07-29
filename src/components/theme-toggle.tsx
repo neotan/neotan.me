@@ -16,7 +16,7 @@ export function ThemeToggle({ className }: { className?: string }) {
 
   return (
     <Icon
-      className={cn('animate-spin-short size-7 cursor-pointer fill-primary hover:animate-spin', className)}
+      className={cn('size-8 cursor-pointer fill-primary hover:animate-spin', className)}
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
     />
 

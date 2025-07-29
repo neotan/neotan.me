@@ -12,14 +12,13 @@ import React, {
   useRef,
   useState
 } from 'react'
+import { CopyToClipboard } from 'react-copy-to-clipboard-ts'
 
 import { useAsync, useLocalStorageValue, } from '@react-hookz/web'
 import { formatDuration } from 'date-fns/formatDuration'
 import { intervalToDuration } from 'date-fns/intervalToDuration'
 import { type IHasher } from 'hash-wasm/lib/WASMInterface'
-// @ts-ignore
-
-import * as hashAlgos from 'https://cdn.skypack.dev/hash-wasm'
+import * as hashAlgos from 'hash-wasm'
 import prettyBytes from 'pretty-bytes'
 import { useDropzone } from 'react-dropzone'
 import { BsTextLeft } from 'react-icons/bs'
@@ -208,7 +207,7 @@ export default function HashHome() {
                   <div
                     key='inputFiles'
                     {...getRootProps()}
-                    className={cn('bordered h-[176px] w-full items-center justify-center')}
+                    className='bordered h-[176px] w-full items-center justify-center'
                   >
                     <input {...getInputProps()} />
                     {isDragActive

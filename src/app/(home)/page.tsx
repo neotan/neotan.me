@@ -49,7 +49,7 @@ export default async function Home() {
               return (
                 <Card key={slug} className={`
                   group mx-auto mb-8 flex h-full max-w-5xl grid-cols-[15rem_1fr] flex-col-reverse
-                  overflow-hidden rounded-none border-muted-foreground/50 opacity-0 shadow-xl
+                  overflow-hidden rounded-none border-muted-foreground/50 py-0 opacity-0 shadow-xl
                   transition-transform
                   sm:grid
                   intersect:opacity-100
@@ -89,7 +89,7 @@ export default async function Home() {
                     {coverImage?.url &&
                       <Image
                         alt={title ?? ''}
-                        className={cn('h-72 w-full rounded-none object-cover object-center pb-0')}
+                        className='h-72 w-full rounded-none object-cover object-center pb-0'
                         height={288}
                         src={coverImage?.url}
                         width={1000}
@@ -121,40 +121,30 @@ export default async function Home() {
                   } = product
 
                   return (
-                    <Card key={slug} className={cn(`
-                      flex h-full flex-col overflow-hidden rounded-none border-muted-foreground/50
-                      shadow-xl transition-transform
-                    `)}>
+                    <Card key={slug} className={`
+                      group flex h-full flex-col gap-0 overflow-hidden rounded-none
+                      border-muted-foreground/50 py-0 shadow-xl transition-transform hover:scale-105
+                      `}>
                       <CardHeader className="relative p-0">
-                        {coverImage?.url && <Image
-                          alt={title ?? ''}
-                          className={cn('h-72 w-full rounded-none object-cover object-top pb-0')}
-                          height={1000}
-                          src={coverImage?.url}
-                          width={1000}
-                        />}
-                        <div className={`
-                          absolute bottom-0 flex w-full px-6 py-2 opacity-0 transition-opacity
-                          duration-500
-                          in-hover:opacity-100
-                        `}>
-                          {repositoryLink && <Button asChild variant="outline">
-                            <Link href={repositoryLink} target="_blank">
-                              <FaGithub className="mr-2 size-4" />
-                              Code
-                            </Link>
-                          </Button>}
-                        </div>
+                        <Link href={link ?? '#'} target="_blank">
+                          {coverImage?.url &&
+                            <Image
+                              alt={title ?? ''}
+                              className='h-72 w-full rounded-none object-cover object-top pb-0'
+                              height={1000}
+                              src={coverImage?.url}
+                              width={1000}
+                            />}
+                        </Link>
                       </CardHeader>
                       <CardContent className="flex grow flex-col gap-4 py-4">
-                        <CardTitle
-                          className={'group relative flex w-fit items-center p-1 text-2xl'}
-                        >
-                          <Link href={link ?? '#'}>{title}</Link>
-                          <div className={`
-                            absolute bottom-0 left-0 -z-10 h-0 w-full bg-secondary p-0
-                            group-hover:h-full
-                          `} />
+                        <CardTitle className={'relative flex w-full items-start justify-between p-0 text-2xl'} >
+                          <h3 className='text-2xl'>{title}</h3>
+                          {repositoryLink && <Button asChild size="icon" variant="ghost">
+                            <Link href={repositoryLink} target="_blank">
+                              <FaGithub className="size-4" />
+                            </Link>
+                          </Button>}
                         </CardTitle>
                         <CardDescription className="text-muted-foreground">
                           {description}
@@ -162,9 +152,9 @@ export default async function Home() {
                         <div className="flex flex-wrap gap-2">
                           {tags?.map(icon => (
                             <Badge key={icon} className={`
-                              bg-muted text-muted-foreground
-                              hover:bg-muted
-                            `}>{icon}</Badge>
+                                bg-muted text-muted-foreground
+                                hover:bg-muted
+                              `}>{icon}</Badge>
                           ))}
                         </div>
                       </CardContent>
@@ -196,13 +186,6 @@ export default async function Home() {
                   </div>
                   <div className="grow" />
                   <div className={'flex flex-col flex-wrap gap-4 text-sm text-muted-foreground'}>
-                    <div className="flex items-center gap-2">
-                      <div>{post.author?.name}</div>
-                      <Avatar>
-                        <AvatarImage src={post.author?.avatar?.url ?? ''} />
-                        <AvatarFallback>{post.author?.name?.charAt(0)}</AvatarFallback>
-                      </Avatar>
-                    </div>
                     <div className="flex gap-4">
                       {post.publishedDate && (
                         <span className="flex items-center gap-1">
@@ -214,6 +197,8 @@ export default async function Home() {
                         <FaRegClock size={14} />
                         {calcReadTime(post.content ?? '').text}
                       </span>
+                      <span className="grow" />
+                      <span>{post.author?.name}</span>
                     </div>
                   </div>
                 </li>
