@@ -47,7 +47,7 @@ export default tseslint.config(
       '@stylistic/indent': ['error', 2],
       '@stylistic/quotes': ['warn', 'single'],
       '@stylistic/jsx-self-closing-comp': ['warn'],
-      '@stylistic/max-len': ['error', {
+      '@stylistic/max-len': ['warn', {
         code: 100,
         ignoreUrls: true,
         ignoreComments: true

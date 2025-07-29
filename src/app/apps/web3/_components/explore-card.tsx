@@ -60,10 +60,10 @@ export function ExploreCard({
                 src="/web3-images/headset.svg"
               />
             </div>
-            <p className={'text-[16px] leading-[20.16px] font-normal text-white uppercase'}>
+            <p className='text-[16px] leading-[20.16px] font-normal text-white uppercase'>
               Enter Metaverse
             </p>
-            <h2 className={'mt-[24px] text-[24px] font-semibold text-white sm:text-[32px]'}>
+            <h2 className='mt-[24px] text-[24px] font-semibold text-white sm:text-[32px]'>
               {title}
             </h2>
           </div>

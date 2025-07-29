@@ -13,7 +13,7 @@ export function StartSteps({ className, number, text }: StartStepsProps) {
           {number}
         </p>
       </div>
-      <p className={'ml-[30px] flex-1 text-[18px] leading-[32.4px] font-normal text-[#B0B0B0]'}>
+      <p className='ml-[30px] flex-1 text-[18px] leading-[32.4px] font-normal text-[#B0B0B0]'>
         {text}
       </p>
     </div>

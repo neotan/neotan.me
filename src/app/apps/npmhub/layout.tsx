@@ -4,10 +4,9 @@ import { Mitr } from 'next/font/google'
 
 import Link from 'next/link'
 
-import Footer from '@/components/footer'
 import { ThemeProvider } from '@/components/theme-provider'
 import { cn } from '@/lib/utils'
-import './styles.css'
+// import './styles.css' // TODO: remove this if the theme is working
 
 const mitr = Mitr({
   subsets: ['latin'],
@@ -18,7 +17,7 @@ const mitr = Mitr({
 export default function NpmHubAppLayout({ children }:
 { children: React.ReactNode }) {
   return (
-    <ThemeProvider forcedTheme="pumpkin"
+    <ThemeProvider attribute="class" forcedTheme="pumpkin"
     >
       <div className={cn('h-full min-h-screen bg-background', mitr.className)} >
         <div className='container mx-auto flex h-full max-w-3xl flex-col gap-8'>
@@ -31,7 +30,6 @@ export default function NpmHubAppLayout({ children }:
             </Link>
           </nav>
           {children}
-          <Footer className='mx-auto text-zinc-700' />
         </div>
       </div>
     </ThemeProvider>

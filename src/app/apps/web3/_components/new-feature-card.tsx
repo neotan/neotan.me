@@ -18,10 +18,10 @@ export function NewFeatureCard({ imgUrl, title, subtitle, className, ...restProp
       >
         <img alt="icon" className="size-1/2 object-contain" src={imgUrl} />
       </div>
-      <h1 className={'mt-[26px] text-[24px] leading-[30.24px] font-bold text-white'}>
+      <h1 className='mt-[26px] text-[24px] leading-[30.24px] font-bold text-white'>
         Title {title}
       </h1>
-      <p className={'mt-[16px] flex-1 text-[18px] leading-[32.4px] font-normal text-[#B0B0B0]'}>
+      <p className='mt-[16px] flex-1 text-[18px] leading-[32.4px] font-normal text-[#B0B0B0]'>
         {subtitle}
       </p>
     </div>

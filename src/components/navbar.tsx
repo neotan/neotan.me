@@ -17,11 +17,7 @@ export default function Navbar({ className, children }: ComponentPropsWithRef<'n
 
   return (
     <nav className={cn('flex justify-center bg-background shadow-lg', className)}>
-      <div className={`
-        container mx-auto flex h-16 items-center justify-between px-4
-        md:px-0
-        lg:px-8
-      `}>
+      <div className='container mx-auto flex h-16 items-center justify-between px-4 md:px-0 lg:px-8'>
         <Link href="/">
           <h1 className="hidden">Neo Tan&apos;s Tech Blog</h1>
           <img alt="Neo" className="hidden size-10 rounded-full md:block" src="/images/avatar.jpg" />
@@ -29,12 +25,7 @@ export default function Navbar({ className, children }: ComponentPropsWithRef<'n
         <div className="flex items-center space-x-4">
           <Button
             asChild
-            className={`
-              intersect-once
-              intersect:animate-fade-right
-              w-32 opacity-0
-              intersect:opacity-100
-            `}
+            className='w-32 opacity-0'
             variant={currentSection === 'products' ? 'default' : 'ghost'}
             onClick={() => setCurrentSection('products')}
           >
@@ -44,12 +35,7 @@ export default function Navbar({ className, children }: ComponentPropsWithRef<'n
           </Button>
           <Button
             asChild
-            className={`
-              intersect-once
-              intersect:animate-fade-left
-              w-32 opacity-0
-              intersect:opacity-100
-            `}
+            className='w-32 opacity-0'
             variant={currentSection === 'til' ? 'default' : 'ghost'}
             onClick={() => setCurrentSection('til')}
           >

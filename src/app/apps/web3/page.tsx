@@ -47,7 +47,7 @@ export default function Web3Page() {
           <div className={cn(styles.innerWidth, 'mx-auto flex justify-between gap-8')}>
             <SearchIcon className="size-6 stroke-white" />
             <Link href="/">
-              <h1 className={'text-[24px] leading-[30.24px] font-extrabold text-white'}>METAVERSUS</h1>
+              <h1 className='text-[24px] leading-[30.24px] font-extrabold text-white'>METAVERSUS</h1>
             </Link>
             <MenuIcon className='size-6 fill-white stroke-white' />
           </div>
@@ -62,7 +62,7 @@ export default function Web3Page() {
             viewport={{ amount: 0.25 }}
             whileInView="show"
           >
-            <div className={'relative z-10 flex flex-col items-center justify-center'}>
+            <div className='relative z-10 flex flex-col items-center justify-center'>
 
               <motion.h1 className={styles.heroHeading} variants={textVariant(1.2)}>MATAVERSE</motion.h1>
               <motion.div
@@ -164,7 +164,7 @@ export default function Web3Page() {
               <TitleText className="text-center" >
                 Choose the world you want <br className="hidden md:block" /> to explore
               </TitleText>
-              <div className={'mt-[50px] flex min-h-[70vh] flex-col gap-5 lg:flex-row'}>
+              <div className='mt-[50px] flex min-h-[70vh] flex-col gap-5 lg:flex-row'>
                 {EXPLORE_WORLDS.map((world, index) => (
                   <ExploreCard
                     key={world.id}
@@ -207,7 +207,7 @@ export default function Web3Page() {
                 <TitleText >
                   Get started with just a few clicks
                 </TitleText>
-                <div className={'mt-[31px] flex max-w-[370px] flex-col gap-[24px]'}>
+                <div className='mt-[31px] flex max-w-[370px] flex-col gap-[24px]'>
                   {[
                     'Find a world that suits you and you want to enter',
                     'Enter the world by reading basmalah to be safe',
@@ -240,7 +240,7 @@ export default function Web3Page() {
               >
                 <TypingText text="| Whats new?" />
                 <TitleText >What&apos;s new about Metaversus?</TitleText>
-                <div className={'mt-[48px] flex flex-wrap justify-between gap-[24px]'}>
+                <div className='mt-[48px] flex flex-wrap justify-between gap-[24px]'>
                   {NEW_FEATURES.map((feature) => (
                     <NewFeatureCard key={feature.title} {...feature} />
                   ))}
@@ -367,7 +367,7 @@ export default function Web3Page() {
               >
                 <img
                   alt="Planet 09"
-                  className={'h-auto min-h-[210px] w-full rounded-[40px] object-cover lg:h-[610px]'}
+                  className='h-auto min-h-[210px] w-full rounded-[40px] object-cover lg:h-[610px]'
                   src="/web3-images/planet-09.png"
                 />
                 <motion.div

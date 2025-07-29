@@ -3,9 +3,9 @@ import * as React from 'react'
 
 import { useTheme } from 'next-themes'
 import { BiMoon, BiSun } from 'react-icons/bi'
+import { Flame } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-
 
 export function ThemeToggle({ className }: { className?: string }) {
   const { theme, setTheme } = useTheme()

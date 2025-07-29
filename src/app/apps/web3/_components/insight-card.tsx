@@ -29,7 +29,7 @@ export function InsightCard({ className, imgUrl, title, subtitle, index }: Insig
           <h4 className="text-[26px] font-normal text-white lg:text-[42px]">
             {title}
           </h4>
-          <p className={'text-secondary-white mt-[16px] text-[14px] font-normal lg:text-[20px]'}>
+          <p className='text-secondary-white mt-[16px] text-[14px] font-normal lg:text-[20px]'>
             {subtitle}
           </p>
         </div>

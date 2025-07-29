@@ -30,7 +30,7 @@ export default async function BlogPostView(props: Params) {
   return (
     <div className="min-h-screen bg-background">
       <Navbar className='sticky top-0 z-50' />
-      <header className={'flex justify-between bg-secondary/50 py-4 text-primary md:py-12'}>
+      <header className='flex justify-between bg-secondary/50 py-4 text-primary md:py-12'>
         <div className={`
           container mx-auto flex max-w-3xl flex-col-reverse justify-between px-4
           md:flex-row md:px-0
@@ -51,13 +51,13 @@ export default async function BlogPostView(props: Params) {
             </div>
           </div>
           <Link href="/#til">
-            <IoMdClose className={'size-8 fill-muted-foreground hover:fill-primary'} />
+            <IoMdClose className='size-8 fill-muted-foreground hover:fill-primary' />
           </Link>
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-12">
-        <article className={'mx-auto prose max-w-3xl prose-zinc dark:prose-invert'}>
+        <article className='mx-auto prose max-w-3xl prose-zinc dark:prose-invert'>
           {post.coverImage?.url && (
             <figure className="mb-8">
               <Image

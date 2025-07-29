@@ -341,7 +341,7 @@ function HashText({ className, algoName, rawData, hasher, myref }: HashTextProps
             setCopied(true)
             setTimeout(() => { setCopied(false) }, 3000)
           }}>
-          <div className={'flex w-full items-center justify-between space-x-2 overflow-x-hidden'}>
+          <div className='flex w-full items-center justify-between space-x-2 overflow-x-hidden'>
             <div className='overflow-x-hidden px-2 text-ellipsis text-gray-500'>
               {result}
             </div>
@@ -459,7 +459,7 @@ const HashFile = forwardRef(function HashFile({ className, algoName, rawFiles, o
                 <li key={fileName} className={`
                   grid grid-cols-[2fr_1fr] space-x-4 overflow-hidden px-2 py-1
                 `}>
-                  <div className={'flex grow items-center space-x-2 overflow-hidden text-ellipsis'}>
+                  <div className='flex grow items-center space-x-2 overflow-hidden text-ellipsis'>
                     <span>{fileName}</span>
                     <div
                       className='cursor-pointer text-sm grayscale'

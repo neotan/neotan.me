@@ -27,7 +27,6 @@ import { useHash } from 'react-use'
 
 import { Badge } from '@/components/ui/badge'
 import { Card } from '@/components/ui/card'
-import { Switch } from '@/components/ui/switch'
 import {
   cn,
   formatDistanceShort,
@@ -107,7 +106,7 @@ const routing = {
   },
 }
 
-const externalUrlClasses = 'h-6 w-6 cursor-pointer fill-accent'
+const externalUrlClasses = 'h-5 w-5 cursor-pointer fill-muted-foreground hover:fill-foreground transition-colors'
 
 type HashConfig = {
   hl?: boolean,
@@ -123,19 +122,14 @@ export default function NpmHubApp() {
   const [hash, setHash] = isBrowser ? useHash() : ['', () => { }]
   const hashCfg = strToObj<HashConfig>(hash) || {}
   const selectedPkgNames: string[] = hashCfg?.b || []
-  const enableHighlight = hashCfg?.hl
-
-  function toggleHighlight(checked: boolean) {
-    setHash(objToHash({ ...hashCfg, hl: checked }))
-  }
 
   function setSelectedPkgNames(pkgNames: string[]) {
     setHash(objToHash({ ...hashCfg, b: pkgNames }))
   }
 
   return (
-    <div suppressHydrationWarning className="mx-auto w-full flex-1 px-4">
-      <main className="flex flex-col">
+    <div suppressHydrationWarning className="mx-auto w-full flex-1 px-4 py-6">
+      <main className="mx-auto flex max-w-4xl flex-col">
         <InstantSearch
           indexName={INDEX_NAME}
           routing={routing as unknown as RouterProps<UiState, UiState>}
@@ -147,64 +141,52 @@ export default function NpmHubApp() {
         >
           <Autocomplete
             openOnFocus
-            className="input-bordered rounded-md border-zinc-300"
+            className="input-bordered rounded-lg border-border bg-card/50 backdrop-blur-sm"
             classNames={{
-              form: '!rounded-md focus-within:!border-secondary !shadow-sm',
-              inputWrapperPrefix: 'stroke-secondary',
+              form: '!rounded-lg focus-within:!border-primary/50 !shadow-lg !shadow-primary/5',
+              inputWrapperPrefix: 'stroke-muted-foreground',
               submitButton: 'cursor-default [&>svg]:stroke-muted-foreground [&>svg]:fill-muted-foreground',
-
             }}
             detachedMediaQuery="none"
-            placeholder="Search NPM packages"
+            placeholder="Search NPM packages..."
           />
-          <div className="flex items-center space-x-2 py-3 text-zinc-500">
-            <label className="flex cursor-pointer items-center space-x-2">
-              <Switch
-                checked={!!enableHighlight}
-                onCheckedChange={toggleHighlight}
-              />
-              <span>Highlight matches</span>
-            </label>
-
-            <div className="grow" />
-            <div className="hidden sm:block">Real-time search by</div>
+          <div className="flex items-center justify-end space-x-2 py-4 text-muted-foreground">
+            <div className="hidden text-sm sm:block">Real-time search by</div>
             <Link href="https://www.algolia.com/" target="_blank">
-              <AlgoliaIcon className="fill-zinc-500" />
+              <AlgoliaIcon className="fill-muted-foreground transition-colors hover:fill-foreground" />
             </Link>
           </div>
           {hasQuery ? (
             <>
               <Hits
-                className="relative mt-2 rounded-md rounded-xs"
                 classNames={{
-                  list: 'space-y-4',
+                  list: 'space-y-6',
                 }}
                 hitComponent={CustomHit}
               />
               <Pagination
-                className="my-4 flex justify-center"
+                className="my-8 flex justify-center"
                 classNames={{
-                  list: 'flex',
-                  item: ' hover:bg-secondary',
-                  selectedItem: 'bg-primary/20 rounded-md',
-                  link: 'px-3 py-1 block',
+                  list: 'flex gap-2',
+                  item: 'hover:bg-secondary/50 rounded-md transition-colors',
+                  selectedItem: 'bg-primary/10 text-primary rounded-md',
+                  link: 'px-4 py-2 block',
                 }}
               />
             </>
           ) : (
             <div className={`
-              font-heading text-opacity-50 flex grow flex-col items-center justify-center space-y-6
-              text-center text-[clamp(1.1rem,4vw,1.5rem)] text-zinc-500
+              font-heading flex grow flex-col items-center justify-center space-y-8 py-16
+              text-center text-[clamp(1.2rem,4vw,1.8rem)] text-muted-foreground
             `}>
-              <div>🔍</div>
-              <div>
-                <span className="font-semibold">Search</span>
-                <span> and </span>
-                <span className="font-semibold">Compare</span>
-                <span> NPM packages </span>
-              </div>
-              <div className="text-[clamp(1rem,2vw,1.3rem)]">
-                for the best-fits for your projects
+              <div className="text-6xl">🔍</div>
+              <div className="space-y-2">
+                <div className="font-semibold text-foreground">
+                  Search and Compare NPM packages
+                </div>
+                <div className="text-[clamp(1rem,2vw,1.2rem)] text-muted-foreground">
+                  Find the best packages for your projects
+                </div>
               </div>
             </div>
           )}
@@ -222,7 +204,6 @@ function CustomHit({ hit }: AlgoliaHitProps) {
   const [hash, setHash] = useHash()
   const hashCfg = strToObj<HashConfig>(hash) || {}
   const isSelectedPkgName = includes(hit.name, hashCfg.b || [])
-  const enableHighlight = hashCfg.hl
   function onRemoveFromBasketClick(e: MouseEvent<HTMLHeadingElement>) {
     const pkgName = e?.currentTarget?.dataset?.pkgName
     const selectedPkgNames = hashCfg?.b || []
@@ -249,218 +230,245 @@ function CustomHit({ hit }: AlgoliaHitProps) {
     <Card
       className={cn(
         `
-          flex flex-col space-y-4 rounded-md border-none p-4 font-light shadow-lg
-          sm:space-y-6 sm:p-8
+          group relative overflow-hidden rounded-xl border-border/50 bg-card/50 p-6 shadow-sm
+          backdrop-blur-sm transition-all duration-200
         `,
-        { 'no-highlight': !enableHighlight },
+        {
+          'bg-primary/5 ring-2 ring-primary/20': isSelectedPkgName,
+        }
       )}
     >
-      <div className="flex flex-row flex-wrap items-center gap-2">
-        <h2
-          className={cn(
-            `
-              flex cursor-pointer items-center space-x-2 rounded-md px-2 py-1 text-lg font-normal
-              text-accent
-              sm:w-auto
-              md:text-2xl
-            `,
-            {
-              'line-through': hit.isDeprecated,
-              'bg-background': isSelectedPkgName,
-            },
-          )}
-          data-pkg-name={hit.name}
-          title={cn({
-            'Remove from basket': isSelectedPkgName,
-            'Put into basket for comparison': !isSelectedPkgName,
-            '[ DEPLICATED PACKAGE! ]': hit.isDeprecated,
-          })}
-          onClick={
-            isSelectedPkgName ? onRemoveFromBasketClick : onAddToBasketClick
-          }
+      {/* Header Section */}
+      <div className={`
+        flex flex-col space-y-4
+        sm:flex-row sm:items-start sm:justify-between sm:space-y-0
+      `}>
+        <div
+          className="flex-1 space-y-3"
         >
-          <Highlight
-            attribute="name"
-            className="break-all"
-            hit={hit}
-          />
-        </h2>
-        <div className="grow basis-full sm:basis-0" />
-        <div className="flex items-center space-x-2">
-          {hit.types?.ts && (
-            <SiTypescript className="size-5" title="Built with TypeScript" />
+          <h2
+            className={cn(
+              `
+                flex cursor-pointer items-center space-x-3 text-xl font-semibold text-foreground
+                transition-colors
+                hover:text-accent
+                sm:text-2xl
+              `,
+              {
+                'line-through opacity-60': hit.isDeprecated,
+                'text-accent': isSelectedPkgName,
+              },
+            )}
+            data-pkg-name={hit.name}
+            title={cn({
+              'Remove from basket': isSelectedPkgName,
+              'Add to basket for comparison': !isSelectedPkgName,
+              '[ DEPRECATED PACKAGE! ]': hit.isDeprecated,
+            })}
+            onClick={isSelectedPkgName ? onRemoveFromBasketClick : onAddToBasketClick}
+
+          >
+            <Highlight
+              attribute="name"
+              classNames={{
+                highlighted: 'bg-primary/20 text-inherit font-bold',
+              }}
+              hit={hit}
+            />
+            {hit.types?.ts && (
+              <SiTypescript className="size-5 text-blue-500" title="Built with TypeScript" />
+            )}
+          </h2>
+
+          {/* Description */}
+          <div
+            className="leading-relaxed text-muted-foreground"
+            data-pkg-name={hit.name}
+            title={hit.description}
+          >
+            <Highlight
+              attribute="description"
+              classNames={{
+                highlighted: 'bg-primary/10 text-primary font-medium',
+              }}
+              hit={hit}
+            />
+          </div>
+        </div>
+
+        {/* Stats Section */}
+        <div className="flex flex-wrap items-center gap-3 sm:flex-col sm:items-end">
+          {hit.downloadsLast30Days && (
+            <Badge
+              className="gap-1.5 text-xs"
+              title="Downloads in last 30d"
+              variant="secondary"
+            >
+              <FaDownload className="size-3" />
+              <span>{hit.humanDownloadsLast30Days}</span>
+            </Badge>
           )}
           {!isNilOrEmpty(hit.dependencies) && (
             <Badge
-              className={'gap-2 bg-secondary text-sm font-thin text-foreground hover:bg-secondary'}
+              className="gap-1.5 text-xs"
               title={`Dependencies:\n\n${toPairs(hit.dependencies)
                 .map(([name, ver], i) => ` ${i + 1}.  ${name}    ${ver} `)
                 .join('\n')}`}
+              variant="secondary"
             >
-              <ImTree />
+              <ImTree className="size-3" />
               <span>{toPairs(hit.dependencies).length}</span>
-            </Badge>
-          )}
-
-          {hit.downloadsLast30Days && (
-            <Badge className={`
-              gap-2 bg-secondary text-sm font-thin text-foreground
-              hover:bg-secondary
-            `} title="Downloads in last 30d">
-              <FaDownload />
-              <span>{hit.humanDownloadsLast30Days}</span>
             </Badge>
           )}
         </div>
       </div>
 
-      <div className="flex flex-col space-y-6">
-        <div className="flex flex-wrap items-center gap-2">
-          {hit.owner?.avatar && (
-            <Link className='flex items-center gap-2' href={hit.homepage || '#'} target="_blank" title='Homepage'>
-              <img
-                alt={hit.owner?.name}
-                height="20"
-                src={hit.owner?.avatar}
-                width="20"
-              />
-              <div>{hit.owner?.name}</div>
-            </Link>
-          )}
-          <div className="basis-full sm:basis-0" />
-          {hit.version && (
-            <Link
-              href={`https://www.npmjs.com/package/${hit.name}?activeTab=versions`}
-              target="_blank"
-              title="Latest version. Click for all versions"
-            >
-              <Badge className={`
-                gap-2 bg-secondary text-sm font-thin text-foreground
-                hover:bg-secondary
-              `}>
-                <FaTag />
-                <div>{hit.version} </div>
-                <Dot />
-                <div className="truncate">
-                  {hit.versions?.[hit.version] && formatDistanceShort(
-                    new Date(hit.versions?.[hit.version]!),
-                    new Date(),
-                    { addSuffix: true },
-                  )}
-                </div>
-              </Badge>
-            </Link>
-          )}
-          {hit.license && (
-            <Badge className={`
-              gap-2 bg-secondary text-sm font-thin text-foreground
-              hover:bg-secondary
-            `} title={hit.license}>
-              <FaBalanceScale />
-              <div className="max-w-28 truncate">
-                {hit.license}
-              </div>
-            </Badge>
-          )}
-        </div>
-        <div className="opacity-80" title={hit.description}>
-          <Highlight attribute="description" hit={hit} />
-        </div>
-        {!isNilOrEmpty(hit.keywords) && (
-          <div className="flex flex-wrap items-center gap-2 opacity-80">
-            {pipe(
-              uniq<string>,
-              map(keyword => (
-                <Link key={keyword} href={`/apps/npmhub?q=${keyword}`}>
-                  <Badge key={keyword} className={`
-                    gap-2 bg-secondary text-sm font-thin text-foreground
-                    hover:bg-secondary
-                  `}>
-                    {keyword}
-                  </Badge>
-                </Link>
-              )),
-            )(hit.keywords!)}
+      {/* Metadata Section */}
+      <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+        {hit.owner?.avatar && (
+          <Link
+            className='flex items-center gap-2 transition-colors hover:text-foreground'
+            href={hit.homepage || '#'}
+            target="_blank"
+            title='Homepage'
+          >
+            <img
+              alt={hit.owner?.name}
+              className="rounded-full"
+              height="20"
+              src={hit.owner?.avatar}
+              width="20"
+            />
+            <span className="font-medium">{hit.owner?.name}</span>
+          </Link>
+        )}
+
+        {hit.version && (
+          <Link
+            className="flex items-center gap-1.5 transition-colors hover:text-foreground"
+            href={`https://www.npmjs.com/package/${hit.name}?activeTab=versions`}
+            target="_blank"
+            title="Latest version. Click for all versions"
+          >
+            <FaTag className="size-3" />
+            <span className="font-medium">{hit.version}</span>
+            <Dot />
+            <span className="text-xs">
+              {hit.versions?.[hit.version] && formatDistanceShort(
+                new Date(hit.versions?.[hit.version]!),
+                new Date(),
+                { addSuffix: true },
+              )}
+            </span>
+          </Link>
+        )}
+
+        {hit.license && (
+          <div className="flex items-center gap-1.5" title={hit.license}>
+            <FaBalanceScale className="size-3" />
+            <span className="max-w-28 truncate font-medium">
+              {hit.license}
+            </span>
           </div>
         )}
-        <div className="flex flex-wrap items-center">
-          <div className="flex space-x-2">
-            <Link
-              href={`https://www.npmjs.com/package/${hit.name}`}
-              target="_blank"
-            >
-              <ImNpm className={externalUrlClasses} title="on NPM" />
-            </Link>
-            {(() => {
-              const { Icon, title } =
-                repoIcons[hit.repository?.host!] || { Icon: FaGithub, title: 'Github' }
+      </div>
 
-              return (
-                <Link href={hit.repository?.url || '#'} target="_blank">
-                  <Icon className={externalUrlClasses} title={`on ${title}`} />
-                </Link>
-              )
-            })()}
+      {/* Keywords Section */}
+      {!isNilOrEmpty(hit.keywords) && (
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          {pipe(
+            uniq<string>,
+            map(keyword => (
+              <Link key={keyword} href={`/apps/npmhub?q=${keyword}`}>
+                <Badge
+                  className="text-xs transition-colors hover:bg-secondary/50"
+                  variant="outline"
+                >
+                  {keyword}
+                </Badge>
+              </Link>
+            )),
+          )(hit.keywords!)}
+        </div>
+      )}
+
+      {/* Action Buttons Section - Keeping as requested */}
+      <div className="mt-6 flex flex-wrap items-center justify-between">
+        <div className="flex space-x-3">
+          <Link
+            href={`https://www.npmjs.com/package/${hit.name}`}
+            target="_blank"
+          >
+            <ImNpm className={externalUrlClasses} title="on NPM" />
+          </Link>
+          {(() => {
+            const { Icon, title } =
+              repoIcons[hit.repository?.host!] || { Icon: FaGithub, title: 'Github' }
+
+            return (
+              <Link href={hit.repository?.url || '#'} target="_blank">
+                <Icon className={externalUrlClasses} title={`on ${title}`} />
+              </Link>
+            )
+          })()}
+          <Link
+            href={`https://openbase.com/js/${hit.name}`}
+            target="_blank"
+          >
+            <OpenbaseIcon
+              className={externalUrlClasses}
+              title="on Openbase"
+            />
+          </Link>
+          <Link
+            className="group"
+            href={`https://npm.runkit.com/${hit.name}`}
+            target="_blank"
+          >
+            <SiRunkit
+              className={externalUrlClasses}
+              title="run on Runkit"
+            />
+          </Link>
+        </div>
+        <div className="flex space-x-8">
+          <div className="flex items-center space-x-1">
+            <h3 className='mr-2 hidden text-xl font-semibold text-primary-foreground sm:block'>
+              CDN:
+            </h3>
             <Link
-              href={`https://openbase.com/js/${hit.name}`}
+              className="flex items-center justify-center py-1"
+              href={`https://www.jsdelivr.com/package/npm/${hit.name}`}
               target="_blank"
+              title="Open jsDelivr.com"
             >
-              <OpenbaseIcon
+              <JsDelivrIcon
                 className={externalUrlClasses}
-                title="on Openbase"
+                title="Browse on JSDELIVR.COM"
               />
             </Link>
             <Link
-              className="group"
-              href={`https://npm.runkit.com/${hit.name}`}
+              className="flex items-center justify-center py-1"
+              href={`https://unpkg.com/browse/${hit.name}/`}
               target="_blank"
+              title="Open UNPKG.COM"
             >
-              <SiRunkit
-                className={externalUrlClasses}
-                title="run on Runkit"
+              <UnpkgIcon
+                className={`${externalUrlClasses} h-5 w-5`}
+                title="Browse on UNPKG.COM"
               />
             </Link>
-          </div>
-          <div className="grow" />
-          <div className="flex space-x-8">
-            <div className="flex items-center space-x-1">
-              <h3 className={'mr-2 hidden text-xl font-semibold text-primary-foreground sm:block'}>
-                CDN:
-              </h3>
-              <Link
-                className="flex items-center justify-center py-1"
-                href={`https://www.jsdelivr.com/package/npm/${hit.name}`}
-                target="_blank"
-                title="Open jsDelivr.com"
-              >
-                <JsDelivrIcon
-                  className={externalUrlClasses}
-                  title="Browse on JSDELIVR.COM"
-                />
-              </Link>
-              <Link
-                className="flex items-center justify-center py-1"
-                href={`https://unpkg.com/browse/${hit.name}/`}
-                target="_blank"
-                title="Open UNPKG.COM"
-              >
-                <UnpkgIcon
-                  className={`${externalUrlClasses} h-5 w-5`}
-                  title="Browse on UNPKG.COM"
-                />
-              </Link>
-              <Link
-                className="flex items-center justify-center py-1"
-                href={`https://cdnjs.com/libraries/${hit.name}/`}
-                target="_blank"
-                title="Open CDNJS.COM"
-              >
-                <CdnJsIcon
-                  className={`${externalUrlClasses} h-6 w-14`}
-                  title="Browse on CDNJS.COM"
-                />
-              </Link>
-            </div>
+            <Link
+              className="flex items-center justify-center py-1"
+              href={`https://cdnjs.com/libraries/${hit.name}/`}
+              target="_blank"
+              title="Open CDNJS.COM"
+            >
+              <CdnJsIcon
+                className={`${externalUrlClasses} h-6 w-14`}
+                title="Browse on CDNJS.COM"
+              />
+            </Link>
           </div>
         </div>
       </div>

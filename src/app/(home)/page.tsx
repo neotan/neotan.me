@@ -24,9 +24,9 @@ export default async function Home() {
   return (
     <>
       <Navbar className='sticky top-0 z-50' />
-      <div className={'min-h-screen bg-gradient-to-b from-secondary to-background'}>
-        <header className={'container mx-auto hidden max-w-6xl px-4 py-16 text-center md:block'}>
-          <Bio className={'opacity-0 sm:px-16 intersect:opacity-100'} />
+      <div className='min-h-screen bg-gradient-to-b from-secondary to-background'>
+        <header className='container mx-auto hidden max-w-6xl px-4 py-16 text-center md:block'>
+          <Bio className='sm:px-16' />
         </header>
 
         <main className="container mx-auto space-y-16 px-4 pb-8 lg:px-8">
@@ -49,13 +49,12 @@ export default async function Home() {
               return (
                 <Card key={slug} className={`
                   group mx-auto mb-8 flex h-full max-w-5xl grid-cols-[15rem_1fr] flex-col-reverse
-                  overflow-hidden rounded-none border-muted-foreground/50 py-0 opacity-0 shadow-xl
+                  overflow-hidden rounded-none border-muted-foreground/50 py-0 shadow-xl
                   transition-transform
                   sm:grid
-                  intersect:opacity-100
                 `} id='ai-slides'>
                   <CardContent className="flex grow flex-col gap-4 py-4">
-                    <CardTitle className={'group relative flex w-fit items-center p-1 text-2xl'}>
+                    <CardTitle className='group relative flex w-fit items-center p-1 text-2xl'>
                       {link && <Link href={link ?? '#'} target="_blank">{title}</Link>}
                       {version && <Badge className={`
                         ml-2 rounded-2xl bg-muted text-muted-foreground
@@ -72,7 +71,7 @@ export default async function Home() {
                       {tags?.map(icon => (
                         <Badge
                           key={icon}
-                          className={'bg-muted text-muted-foreground hover:bg-muted'}
+                          className='bg-muted text-muted-foreground hover:bg-muted'
                         >{icon}
                         </Badge>
                       ))}
@@ -95,9 +94,13 @@ export default async function Home() {
                         width={1000}
                       />}
                     {coverVideo?.url &&
-                      <video autoPlay controls muted className={`
-                        w-full rounded-none object-contain object-top pb-0
-                      `} src={coverVideo?.url} />
+                      <video
+                        autoPlay
+                        controls
+                        muted
+                        className='w-full rounded-none object-contain object-top pb-0'
+                        src={coverVideo?.url}
+                      />
                     }
                   </CardHeader>
                 </Card>
@@ -105,7 +108,7 @@ export default async function Home() {
             })}
 
             {/* Regular products */}
-            <div className={'grid grid-cols-1 gap-8 lg:grid-cols-2 2xl:grid-cols-3'}>
+            <div className='grid grid-cols-1 gap-8 lg:grid-cols-3'>
               {regularProducts
                 .map((product) => {
                   if (!product) return null
@@ -123,8 +126,9 @@ export default async function Home() {
                   return (
                     <Card key={slug} className={`
                       group flex h-full flex-col gap-0 overflow-hidden rounded-none
-                      border-muted-foreground/50 py-0 shadow-xl transition-transform hover:scale-105
-                      `}>
+                      border-muted-foreground/50 py-0 shadow-xl transition-transform
+                      hover:scale-105
+                    `}>
                       <CardHeader className="relative p-0">
                         <Link href={link ?? '#'} target="_blank">
                           {coverImage?.url &&
@@ -138,7 +142,9 @@ export default async function Home() {
                         </Link>
                       </CardHeader>
                       <CardContent className="flex grow flex-col gap-4 py-4">
-                        <CardTitle className={'relative flex w-full items-start justify-between p-0 text-2xl'} >
+                        <CardTitle className={`
+                          relative flex w-full items-start justify-between p-0 text-2xl
+                        `} >
                           <h3 className='text-2xl'>{title}</h3>
                           {repositoryLink && <Button asChild size="icon" variant="ghost">
                             <Link href={repositoryLink} target="_blank">
@@ -152,9 +158,9 @@ export default async function Home() {
                         <div className="flex flex-wrap gap-2">
                           {tags?.map(icon => (
                             <Badge key={icon} className={`
-                                bg-muted text-muted-foreground
-                                hover:bg-muted
-                              `}>{icon}</Badge>
+                              bg-muted text-muted-foreground
+                              hover:bg-muted
+                            `}>{icon}</Badge>
                           ))}
                         </div>
                       </CardContent>
@@ -169,10 +175,9 @@ export default async function Home() {
             <ul className="grid grid-cols-1 gap-0 lg:grid-cols-3">
               {posts?.map((post) => (
                 <li key={post.slug} className={`
-                  group flex flex-col gap-4 border border-secondary bg-card px-4 py-6 opacity-0
-                  shadow-lg transition-transform
+                  group flex flex-col gap-4 border border-secondary bg-card px-4 py-6 shadow-lg
+                  transition-transform
                   hover:z-20 hover:scale-105 hover:shadow-2xl
-                  intersect:opacity-100
                 `}>
                   <div className="flex items-start justify-between">
                     <Link className="relative flex p-1" href={`/blog/${post.slug}`}>
@@ -185,7 +190,7 @@ export default async function Home() {
                     {post.featured && <FaStar className='min-w-4 text-primary' />}
                   </div>
                   <div className="grow" />
-                  <div className={'flex flex-col flex-wrap gap-4 text-sm text-muted-foreground'}>
+                  <div className='flex flex-col flex-wrap gap-4 text-sm text-muted-foreground'>
                     <div className="flex gap-4">
                       {post.publishedDate && (
                         <span className="flex items-center gap-1">
