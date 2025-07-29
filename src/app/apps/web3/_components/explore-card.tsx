@@ -1,74 +1,130 @@
-/* eslint-disable @next/next/no-img-element */ // 'next/image' requires static size of image
 'use client'
-import { type ComponentProps } from 'react'
 
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
+import type { ComponentProps } from 'react'
 
-import { type WorldId } from '../_utils/constants'
-import { fadeIn } from '../_utils/motions'
+import { fadeIn, microInteractions } from '../_utils/animations'
 import { cn, styles } from '../_utils/styles'
+import type { World, WorldId } from '../_types'
 
-export type ExploreCardProps = ComponentProps<typeof motion.div> & {
-  id: WorldId,
-  imgUrl: string,
-  index: number,
-  activeId: string,
+interface ExploreCardProps extends ComponentProps<typeof motion.div> {
+  world: World
+  index: number
+  activeId: WorldId | null
+  onCardClick: (id: WorldId) => void
 }
 
 export function ExploreCard({
-  id,
-  imgUrl,
-  title,
+  world,
   index,
   activeId,
+  onCardClick,
   className,
-  onClick
+  ...props
 }: ExploreCardProps) {
+  const isActive = activeId === world.id
+
   return (
     <motion.div
-      className={cn(`
-        ease-out-flex relative flex h-[700px] min-w-[170px] cursor-pointer items-center
-        justify-center transition-[flex] duration-[0.7s]
-      `, activeId === id ? 'flex-[10] lg:flex-[3.5]' : 'flex-[2] lg:flex-[0.5]', className)}
-      variants={fadeIn('right', 'spring', index * 0.5, 0.75)}
-      onClick={onClick}
+      className={cn(
+        'relative group cursor-pointer overflow-hidden rounded-2xl',
+        'transition-all duration-500 ease-out',
+        isActive ? 'flex-[3]' : 'flex-[1]',
+        className
+      )}
+      variants={fadeIn({ direction: 'up', delay: index * 0.1 })}
+      whileHover="hover"
+      whileTap="tap"
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.25 }}
+      onClick={() => onCardClick(world.id)}
+      role="button"
+      tabIndex={0}
+      aria-label={`Explore ${world.title} world`}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          onCardClick(world.id)
+        }
+      }}
+      {...props}
     >
+      {/* Background Image */}
       <img
-        alt="/web3-images/planet-04"
-        className="absolute size-full rounded-[24px] object-cover"
-        src={imgUrl}
+        src={world.imgUrl}
+        alt={`${world.title} world`}
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        loading="lazy"
       />
-      {
-        activeId !== id ? (
-          <h3 className={`
-            absolute z-0 text-[18px] font-semibold text-white
-            sm:text-[26px]
-            lg:bottom-20 lg:origin-[0,0] lg:-rotate-90
-          `}>
-            {title}
-          </h3>
-        ) : (
-          <div className={`
-            absolute bottom-0 flex w-full flex-col justify-start rounded-b-[24px] bg-black/50 p-8
-          `}>
-            <div
-              className={cn('glassmorphism mb-[16px] h-[60px] w-[60px] rounded-[24px]', styles.flexCenter)}
-            >
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+
+      {/* Content */}
+      <div className="relative h-full flex flex-col justify-end p-6">
+        {isActive ? (
+          // Active State
+          <motion.div
+            className="space-y-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+          >
+            {/* Icon */}
+            <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
               <img
-                alt="headset"
-                className="size-1/2 object-contain"
                 src="/web3-images/headset.svg"
+                alt=""
+                className="w-6 h-6"
               />
             </div>
-            <p className='text-[16px] leading-[20.16px] font-normal text-white uppercase'>
-              Enter Metaverse
-            </p>
-            <h2 className='mt-[24px] text-[24px] font-semibold text-white sm:text-[32px]'>
-              {title}
-            </h2>
+
+            {/* Title */}
+            <h3 className="text-2xl font-bold text-white">
+              {world.title}
+            </h3>
+
+            {/* Description */}
+            {world.description && (
+              <p className="text-white/80 text-sm leading-relaxed">
+                {world.description}
+              </p>
+            )}
+
+            {/* CTA */}
+            <button className="inline-flex items-center gap-2 text-white/90 hover:text-white transition-colors">
+              <span className="text-sm font-medium">Enter World</span>
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+          </motion.div>
+        ) : (
+          // Inactive State
+          <div className="transform -rotate-90 origin-bottom-left">
+            <h3 className="text-lg font-semibold text-white whitespace-nowrap">
+              {world.title}
+            </h3>
           </div>
-        )
-      }
-    </motion.div >
+        )}
+      </div>
+
+      {/* Hover Effect */}
+      <motion.div
+        className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        initial={false}
+      />
+    </motion.div>
   )
-}
+} 

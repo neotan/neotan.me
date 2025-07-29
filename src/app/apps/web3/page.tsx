@@ -1,446 +1,477 @@
-/* eslint-disable @next/next/no-img-element */ // 'next/image' requires static size of image
 'use client'
+
 import { useState } from 'react'
+import { motion } from 'motion/react'
 
-import { motion } from 'framer-motion'
-import Link from 'next/link'
-
-import { TitleText, TypingText } from './_components/custom-texts'
+import { Navigation } from './_components/navigation'
+import { HeroSection } from './_components/hero-section'
+import { SectionWrapper } from './_components/section-wrapper'
+import { TypingText, TitleText } from './_components/animated-text'
 import { ExploreCard } from './_components/explore-card'
-import { InsightCard } from './_components/insight-card'
-import { NewFeatureCard } from './_components/new-feature-card'
-import { StartSteps } from './_components/start-steps'
-import MenuIcon from './_icons/menu-icon'
-import SearchIcon from './_icons/search-icon'
-import {
-  EXPLORE_WORLDS,
-  INSIGHTS,
-  NEW_FEATURES,
-  SOCIALS,
-  type WorldId
-} from './_utils/constants'
-import {
-  fadeIn,
-  footerVariants,
-  navVariants,
-  planetVariants,
-  slideIn,
-  staggerContainer,
-  textVariant,
-  zoomIn
-} from './_utils/motions'
-import { cn, styles } from './_utils/styles'
+import { GradientBackground } from './_components/gradient-background'
+import { EXPLORE_WORLDS, INSIGHTS, NEW_FEATURES, SOCIALS } from './_utils/constants'
+import { staggerList, listItem, fadeInUp } from './_utils/animations'
+import type { WorldId } from './_types'
+import { Meteor } from './_components/metior'
+
 
 export default function Web3Page() {
-  const [activeExplorerWorldId, setActiveExplorerWorldId] = useState<WorldId>('world1')
+  const [activeWorldId, setActiveWorldId] = useState<WorldId | null>('world1')
+
   return (
-    <>
-      <div className='bg-primary-black overflow-hidden'>
-        <motion.nav
-          className={cn(styles.px, 'relative py-8')}
-          id="navbar"
-          initial='hidden'
-          variants={navVariants}
-          whileInView='show'
-        >
-          <div className="gradient-01 absolute inset-0 w-1/2" />
-          <div className={cn(styles.innerWidth, 'mx-auto flex justify-between gap-8')}>
-            <SearchIcon className="size-6 stroke-white" />
-            <Link href="/">
-              <h1 className='text-[24px] leading-[30.24px] font-extrabold text-white'>METAVERSUS</h1>
-            </Link>
-            <MenuIcon className='size-6 fill-white stroke-white' />
-          </div>
-        </motion.nav>
+    <div className="min-h-screen bg-black text-white overflow-hidden relative">
+      {/* Background Gradients for Depth */}
+      <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-black to-slate-900" />
+      <div className="fixed top-0 left-0 w-full h-full bg-gradient-to-br from-indigo-500/5 via-purple-500/3 to-blue-500/5" />
 
+      {/* Navigation */}
+      <Navigation />
 
-        <section className={styles.py} id='hero'>
-          <motion.div
-            className={cn(styles.innerWidth, 'mx-auto flex flex-col')}
-            initial="hidden"
-            variants={staggerContainer(1, 1)}
-            viewport={{ amount: 0.25 }}
-            whileInView="show"
-          >
-            <div className='relative z-10 flex flex-col items-center justify-center'>
+      {/* Hero Section */}
+      <HeroSection />
 
-              <motion.h1 className={styles.heroHeading} variants={textVariant(1.2)}>MATAVERSE</motion.h1>
-              <motion.div
-                className='flex items-center justify-center'
-                variants={textVariant(1)}>
-                <h1 className={styles.heroHeading}>MA</h1>
-                <div className={styles.heroDText} />
-                <h1 className={styles.heroHeading}>Ness</h1>
-              </motion.div>
-            </div>
+      {/* About Section */}
+      <SectionWrapper id="about" className="relative overflow-hidden">
+        <GradientBackground variant="cool" className="top-0 right-0" />
+        <GradientBackground variant="primary" className="bottom-0 left-0 opacity-10" />
 
-            <motion.div
-              className="relative mt-[-12px] w-full md:mt-[-20px]"
-              variants={slideIn('right', 'tween', 0.2, 1)}
-            >
-              <div className={`
-                hero-gradient absolute top-[-30px] z-0 h-[300px] w-full rounded-tl-[140px]
-              `} />
-              <img
-                alt="hero_cover"
-                className={`
-                  relative z-10 h-[350px] w-full rounded-tl-[140px] object-cover
-                  sm:h-[500px]
-                `}
-                src="/web3-images/cover.png"
-              />
+        {/* Meteors - Flying from both sides to center */}
+        <Meteor delay={0} duration={3} startX={-50} startY={30} endX={50} endY={70} size="small" />
+        <Meteor delay={1.5} duration={2.8} startX={120} startY={50} endX={60} endY={90} size="medium" />
+        <Meteor delay={3} duration={3.2} startX={-40} startY={80} endX={40} endY={120} size="small" />
+        <Meteor delay={4.5} duration={2.5} startX={110} startY={100} endX={70} endY={140} size="large" />
 
-              <Link href="#explore">
-                <div className={`
-                  relative z-10 mt-[-50px] flex w-full justify-end pr-[40px]
-                  sm:mt-[-70px]
-                `}>
-                  <img
-                    alt="stamp"
-                    className="size-[100px] object-contain sm:size-[155px]"
-                    src="/web3-images/stamp.png"
-                  />
-                </div>
-              </Link>
-            </motion.div>
-          </motion.div>
-        </section>
+        <div className="text-center space-y-8">
+          <TypingText text="| About Metaversus" className="text-center" />
 
+          <TitleText size="lg" className="text-center">
+            Discover the{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
+              Future
+            </span>{' '}
+            of Digital Reality
+          </TitleText>
 
-        <div className="relative">
-          <section className={cn(styles.p, 'relative z-10')} id='about'>
-            <div className="gradient-02 z-0" />
-            <motion.div
-              className={cn(styles.innerWidth, styles.flexCenter, 'mx-auto flex-col')}
-              initial="hidden"
-              variants={staggerContainer(1, 1)}
-              viewport={{ amount: 0.25 }}
-              whileInView="show"
-            >
-              <TypingText className="text-center" text="| About Metaversus" />
-
-              <motion.p
-                className={`
-                  text-secondary-white mt-[8px] text-center text-[20px] font-normal
-                  sm:text-[32px]
-                `}
-                variants={fadeIn('up', 'tween', 0.2, 1)}
-              >
-                <span className="font-extrabold text-white">Metaverse</span> is a new
-                thing in the future, where you can enjoy the virtual world by feeling
-                like it&apos;s really real, you can feel what you feel in this metaverse
-                world, because this is really the{' '}
-                <span className="font-extrabold text-white">
-                  madness of the metaverse
-                </span>{' '}
-                of today, using only{' '}
-                <span className="font-extrabold text-white">VR</span> devices you can
-                easily explore the metaverse world you want, turn your dreams into
-                reality. Let&apos;s{' '}
-                <span className="font-extrabold text-white">explore</span> the madness
-                of the metaverse by scrolling down
-              </motion.p>
-
-              <motion.img
-                alt="Arrow down"
-                className="mt-[28px] h-[28px] w-[18px] object-contain"
-                src="/web3-images/arrow-down.svg"
-                variants={fadeIn('up', 'tween', 0.3, 1)}
-              />
-            </motion.div>
-          </section>
-
-          <div className="gradient-03 z-0" />
-
-          <section className={styles.p} id="explore" >
-            <motion.div
-              className={cn(styles.innerWidth, 'mx-auto flex flex-col')}
-              initial="hidden"
-              variants={staggerContainer(1, 1)}
-              viewport={{ amount: 0.25 }}
-              whileInView="show"
-            >
-              <TypingText className="text-center" text="| The World" />
-              <TitleText className="text-center" >
-                Choose the world you want <br className="hidden md:block" /> to explore
-              </TitleText>
-              <div className='mt-[50px] flex min-h-[70vh] flex-col gap-5 lg:flex-row'>
-                {EXPLORE_WORLDS.map((world, index) => (
-                  <ExploreCard
-                    key={world.id}
-                    {...world}
-                    activeId={activeExplorerWorldId}
-                    index={index}
-                    onClick={() => setActiveExplorerWorldId(world.id)}
-                  />
-                ))}
-              </div>
-            </motion.div>
-          </section>
+          <p className="text-white/70 text-lg sm:text-xl max-w-4xl mx-auto leading-relaxed">
+            <span className="font-semibold text-white">Metaverse</span> represents the next evolution
+            of digital interaction, where virtual and physical worlds converge. Experience immersive
+            environments that feel incredibly real, powered by cutting-edge{' '}
+            <span className="font-semibold text-white">VR technology</span>.
+            Transform your dreams into reality and explore infinite possibilities in our{' '}
+            <span className="font-semibold text-white">metaverse worlds</span>.
+          </p>
         </div>
+      </SectionWrapper>
 
+      {/* Explore Section */}
+      <SectionWrapper id="explore" className="relative">
+        <GradientBackground variant="primary" className="bottom-0 left-0" />
+        <GradientBackground variant="secondary" className="top-0 right-0 opacity-15" />
 
-        <div className="relative">
-          <section className={cn(styles.p, 'relative z-10')} id='getstarted'>
-            <motion.div
-              className={cn(styles.innerWidth, 'mx-auto flex flex-col gap-8 lg:flex-row')}
-              initial="hidden"
-              variants={staggerContainer(1, 1)}
-              viewport={{ amount: 0.25 }}
-              whileInView="show"
-            >
-              <motion.div
-                className={cn(styles.flexCenter, 'flex-1')}
-                variants={planetVariants('left')}
-              >
-                <img
-                  alt="Get Started"
-                  className="size-[90%] object-contain"
-                  src="/web3-images/get-started.png"
-                />
-              </motion.div>
-              <motion.div
-                className="flex flex-[0.75] flex-col justify-center"
-                variants={fadeIn('left', 'tween', 0.2, 1)}
-              >
-                <TypingText text="| How Metaversus Works" />
-                <TitleText >
-                  Get started with just a few clicks
-                </TitleText>
-                <div className='mt-[31px] flex max-w-[370px] flex-col gap-[24px]'>
-                  {[
-                    'Find a world that suits you and you want to enter',
-                    'Enter the world by reading basmalah to be safe',
-                    'No need to beat around the bush, just stay on the gas and have fun',
-                  ].map((feature, index) => (
-                    <StartSteps
-                      key={feature}
-                      number={String(index + 1).padStart(2, '0')}
-                      text={feature}
-                    />
-                  ))}
-                </div>
-              </motion.div>
-            </motion.div>
-          </section>
-
-          <div className="gradient-04 z-0" />
-
-          <section className={cn(styles.p, 'relative z-10')} id='whatsnew'>
-            <motion.div
-              className={cn(styles.innerWidth, 'mx-auto flex flex-col gap-8 lg:flex-row')}
-              initial="hidden"
-              variants={staggerContainer(1, 1)}
-              viewport={{ amount: 0.25 }}
-              whileInView="show"
-            >
-              <motion.div
-                className="flex flex-[0.95] flex-col justify-center"
-                variants={fadeIn('right', 'tween', 0.2, 1)}
-              >
-                <TypingText text="| Whats new?" />
-                <TitleText >What&apos;s new about Metaversus?</TitleText>
-                <div className='mt-[48px] flex flex-wrap justify-between gap-[24px]'>
-                  {NEW_FEATURES.map((feature) => (
-                    <NewFeatureCard key={feature.title} {...feature} />
-                  ))}
-                </div>
-              </motion.div>
-              <motion.div
-                className={cn(styles.flexCenter, 'flex-1')}
-                variants={planetVariants('right')}
-              >
-                <img
-                  alt="What's New"
-                  className="size-[90%] object-contain"
-                  src="/web3-images/whats-new.png"
-                />
-              </motion.div>
-            </motion.div>
-          </section>
-        </div>
-
-
-        <section className={cn(styles.p, 'relative z-10')} id='world'>
-          <motion.div
-            className={cn(styles.innerWidth, 'mx-auto flex flex-col')}
-            initial="hidden"
-            variants={staggerContainer(1, 1)}
-            viewport={{ amount: 0.25 }}
-            whileInView="show"
-          >
-            <TypingText className="text-center" text="| People on the World" />
-            <TitleText className="text-center">
-              Track friends around you and invite them to play together in the same
-              world
+        <div className="space-y-12">
+          <div className="text-center space-y-4">
+            <TypingText text="| The World" className="text-center" />
+            <TitleText size="lg" className="text-center">
+              Choose the world you want <br className="hidden md:block" /> to explore
             </TitleText>
+          </div>
+
+          <div className="flex gap-4 h-[600px] lg:h-[700px]">
+            {EXPLORE_WORLDS.map((world, index) => (
+              <ExploreCard
+                key={world.id}
+                world={world}
+                index={index}
+                activeId={activeWorldId}
+                onCardClick={setActiveWorldId}
+              />
+            ))}
+          </div>
+        </div>
+      </SectionWrapper>
+
+      {/* Get Started Section */}
+      <SectionWrapper id="getstarted" className="relative overflow-hidden">
+        <GradientBackground variant="neutral" className="top-0 right-0" />
+        <GradientBackground variant="cool" className="bottom-0 left-0 opacity-10" />
+
+        {/* Meteors - Flying from right to left */}
+        <Meteor delay={0} duration={2.5} startX={1120} startY={30} endX={-30} endY={100} size="small" />
+        <Meteor delay={1.5} duration={3} startX={1110} startY={60} endX={-20} endY={130} size="medium" />
+        <Meteor delay={3} duration={2} startX={1100} startY={40} endX={-40} endY={110} size="small" />
+        <Meteor delay={4.5} duration={2.8} startX={1130} startY={80} endX={-50} endY={150} size="large" />
+
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Text Content - Flying from Left */}
+          <motion.div
+            className="space-y-8"
+            initial={{ opacity: 0, x: -100, rotateY: -15 }}
+            whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{
+              duration: 0.8,
+              ease: "easeOut",
+              delay: 0.2
+            }}
+          >
             <motion.div
-              className="relative mt-[68px] flex h-[550px] w-full"
-              variants={fadeIn('up', 'tween', 0.3, 1)}
+              className="space-y-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <img alt="Map" className="size-full object-cover" src="/web3-images/map.png" />
-              <div className={`
-                absolute right-20 bottom-20 size-[70px] rounded-full bg-[#5D6680] p-[6px]
-              `}>
-                <img alt="People" className="size-full" src="/web3-images/people-01.png" />
-              </div>
-              <div className={`
-                absolute top-10 left-20 size-[70px] rounded-full bg-[#5D6680] p-[6px]
-              `}>
-                <img alt="People" className="size-full" src="/web3-images/people-02.png" />
-              </div>
-              <div className={`
-                absolute top-1/2 left-[45%] size-[70px] rounded-full bg-[#5D6680] p-[6px]
-              `}>
-                <img alt="people" className="size-full" src="/web3-images/people-03.png" />
-              </div>
+              <TypingText text="| How Metaversus Works" />
+              <TitleText size="lg">
+                Get started with just a few clicks
+              </TitleText>
+            </motion.div>
+
+            <motion.div
+              className="space-y-6"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              {[
+                'Find a world that suits you and you want to enter',
+                'Enter the world by reading basmalah to be safe',
+                'No need to beat around the bush, just stay on the gas and have fun',
+              ].map((step, index) => (
+                <motion.div
+                  key={index}
+                  className="flex items-start gap-4"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+                >
+                  <motion.div
+                    className="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {String(index + 1).padStart(2, '0')}
+                  </motion.div>
+                  <p className="text-white/80 leading-relaxed">{step}</p>
+                </motion.div>
+              ))}
             </motion.div>
           </motion.div>
-        </section>
 
-
-        <div className="relative">
-          <section className={cn(styles.p, 'relative z-10')} id='insights'>
-            <motion.div
-              className={cn(styles.innerWidth, 'mx-auto flex flex-col')}
-              initial="hidden"
-              variants={staggerContainer(1, 1)}
-              viewport={{ amount: 0.25 }}
-              whileInView="show"
-            >
-              <TypingText className="text-center" text="| Insight" />
-              <TitleText className="text-center" >Insight about metaverse</TitleText>
-              <div className="mt-[50px] flex flex-col gap-[30px]">
-                {INSIGHTS.map((item, index) => (
-                  <InsightCard key={`insight-${index}`} {...item} index={index + 1} />
-                ))}
-              </div>
-            </motion.div>
-          </section>
-
-          <div className="gradient-04 z-0" />
-
-          <section className={styles.p} id='feedback'>
-            <motion.div
-              className={cn(styles.innerWidth, 'mx-auto flex flex-col gap-6 lg:flex-row')}
-              initial="hidden"
-              variants={staggerContainer(1, 1)}
-              viewport={{ amount: 0.25 }}
-              whileInView="show"
-            >
-              <motion.div
-                className={`
-                  gradient-05 relative flex flex-[0.5] flex-col justify-end rounded-[32px] border
-                  border-[#6A6A6A] p-4 text-white
-                  sm:p-8
-                  lg:max-w-[370px]
-                `}
-                variants={fadeIn('right', 'tween', 0.2, 1)}
-              >
-                <div className="feedback-gradient" />
-                <div>
-                  <h4 className={`
-                    text-[26px] leading-[36.32px] font-bold
-                    sm:text-[32px] sm:leading-[40.32px]
-                  `}>
-                    Samantha
-                  </h4>
-                  <p className={`
-                    mt-[8px] text-[12px] leading-[16.68px] font-normal
-                    sm:text-[18px] sm:leading-[22.68px]
-                  `}>
-                    Founder Metaverus
-                  </p>
-                </div>
-                <p className={`
-                  mt-[24px] text-[18px] leading-[39.6px] font-normal
-                  sm:text-[24px] sm:leading-[45.6px]
-                `}>
-                  “With the development of today&apos;s technology, metaverse is very
-                  useful for today&apos;s work, or can be called web 3.0. by using
-                  metaverse you can use it as anything”
-                </p>
-              </motion.div>
-              <motion.div
-                className="relative flex flex-1 items-center justify-center"
-                variants={fadeIn('left', 'tween', 0.2, 1)}
-              >
-                <img
-                  alt="Planet 09"
-                  className='h-auto min-h-[210px] w-full rounded-[40px] object-cover lg:h-[610px]'
-                  src="/web3-images/planet-09.png"
-                />
-                <motion.div
-                  className="absolute top-[3%] left-[-10%] hidden lg:block"
-                  variants={zoomIn(0.4, 1)}
-                >
-                  <img
-                    alt="Stamp"
-                    className="size-[155px] object-contain"
-                    src="/web3-images/stamp.png"
-                  />
-                </motion.div>
-              </motion.div>
-            </motion.div>
-          </section>
+          {/* Planet Image - Flying from Right */}
+          <motion.div
+            className="flex justify-center"
+            initial={{ opacity: 0, x: 100, rotateY: 15, scale: 0.8 }}
+            whileInView={{ opacity: 1, x: 0, rotateY: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{
+              duration: 1,
+              ease: "easeOut",
+              delay: 0.3
+            }}
+          >
+            <motion.img
+              src="/web3-images/get-started.png"
+              alt="Get started with Metaversus"
+              className="w-full max-w-md object-contain"
+              loading="lazy"
+              whileHover={{
+                scale: 1.05,
+                rotateY: 5,
+                filter: "brightness(1.1)"
+              }}
+              transition={{ duration: 0.3 }}
+            />
+          </motion.div>
         </div>
+      </SectionWrapper>
 
+      {/* What's New Section */}
+      <SectionWrapper id="whatsnew" className="relative overflow-hidden">
+        <GradientBackground variant="dark" className="bottom-0 left-0" />
+        <GradientBackground variant="accent" className="top-0 right-0 opacity-10" />
 
-        <motion.footer
-          className={cn(styles.px, 'relative py-8')}
-          id='footer'
-          initial="hidden"
-          variants={footerVariants}
-          whileInView="show"
-        >
-          <div className="footer-gradient" />
-          <div className={`${styles.innerWidth} mx-auto flex flex-col gap-8`}>
-            <div className="flex flex-wrap items-center justify-between gap-5">
-              <h4 className="text-[44px] font-bold text-white md:text-[64px]">
-                Enter the Metaverse
-              </h4>
-              <button className={`
-                flex h-fit items-center gap-[12px] rounded-[32px] bg-[#25618B] px-6 py-4
-              `} type="button">
-                <img
-                  alt="headset"
-                  className="size-[24px] object-contain"
-                  src="/web3-images/headset.svg"
-                />
-                <span className="text-[16px] font-normal text-white">
-                  Enter Metaverse
-                </span>
-              </button>
+        {/* Meteors */}
+        <Meteor delay={0.5} duration={2.8} startX={-40} startY={30} endX={110} endY={90} size="medium" />
+        <Meteor delay={2} duration={2.2} startX={-50} startY={70} endX={120} endY={130} size="small" />
+        <Meteor delay={3.5} duration={3.2} startX={-30} startY={50} endX={100} endY={110} size="large" />
+        <Meteor delay={5} duration={2.5} startX={-60} startY={90} endX={130} endY={150} size="small" />
+
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Planet Image - Flying from Left */}
+          <motion.div
+            className="flex justify-center"
+            initial={{ opacity: 0, x: -100, rotateY: -15, scale: 0.8 }}
+            whileInView={{ opacity: 1, x: 0, rotateY: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{
+              duration: 1,
+              ease: "easeOut",
+              delay: 0.2
+            }}
+          >
+            <motion.img
+              src="/web3-images/whats-new.png"
+              alt="What's new in Metaversus"
+              className="w-full max-w-md object-contain"
+              loading="lazy"
+              whileHover={{
+                scale: 1.05,
+                rotateY: -5,
+                filter: "brightness(1.1)"
+              }}
+              transition={{ duration: 0.3 }}
+            />
+          </motion.div>
+
+          {/* Text Content - Flying from Right */}
+          <motion.div
+            className="space-y-8"
+            initial={{ opacity: 0, x: 100, rotateY: 15 }}
+            whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{
+              duration: 0.8,
+              ease: "easeOut",
+              delay: 0.3
+            }}
+          >
+            <motion.div
+              className="space-y-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
+              <TypingText text="| What's new?" />
+              <TitleText size="lg">
+                What's new about Metaversus?
+              </TitleText>
+            </motion.div>
+
+            <motion.div
+              className="grid sm:grid-cols-2 gap-6"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+            >
+              {NEW_FEATURES.map((feature, index) => (
+                <motion.div
+                  key={feature.title}
+                  className="p-6 rounded-2xl glass-light border border-white/10 group"
+                  initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
+                  whileHover={{
+                    scale: 1.02,
+                    y: -5,
+                    boxShadow: "0 20px 40px rgba(99, 102, 241, 0.2)"
+                  }}
+                >
+                  <motion.div
+                    className="w-12 h-12 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center mb-4"
+                    whileHover={{ scale: 1.1, rotate: 10 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <img src={feature.imgUrl} alt="" className="w-6 h-6" />
+                  </motion.div>
+                  <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
+                  <p className="text-white/70 text-sm leading-relaxed">{feature.subtitle}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
+        </div>
+      </SectionWrapper>
+
+      {/* World Section */}
+      <SectionWrapper id="world" className="relative">
+        <GradientBackground variant="primary" className="top-0 right-0" />
+        <GradientBackground variant="secondary" className="bottom-0 left-0 opacity-10" />
+
+        <div className="space-y-12">
+          <div className="text-center space-y-4">
+            <TypingText text="| People on the World" className="text-center" />
+            <TitleText size="lg" className="text-center">
+              Track friends around you and invite them to play together in the same world
+            </TitleText>
+          </div>
+
+          <div className="relative">
+            <img
+              src="/web3-images/map.png"
+              alt="World map showing user locations"
+              className="w-full h-[400px] sm:h-[500px] object-cover rounded-2xl"
+              loading="lazy"
+            />
+
+            {/* User Avatars */}
+            <div className="absolute top-10 left-20 w-16 h-16 rounded-full glass-light p-1">
+              <img src="/web3-images/people-01.png" alt="User avatar" className="w-full h-full rounded-full" />
             </div>
+            <div className="absolute bottom-20 right-20 w-16 h-16 rounded-full glass-light p-1">
+              <img src="/web3-images/people-02.png" alt="User avatar" className="w-full h-full rounded-full" />
+            </div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full glass-light p-1">
+              <img src="/web3-images/people-03.png" alt="User avatar" className="w-full h-full rounded-full" />
+            </div>
+          </div>
+        </div>
+      </SectionWrapper>
 
-            <div className="flex flex-col">
-              <div className="mb-[50px] h-[2px] bg-white opacity-10" />
+      {/* Insights Section */}
+      <SectionWrapper id="insights" className="relative">
+        <GradientBackground variant="accent" className="bottom-0 left-0" />
+        <GradientBackground variant="cool" className="top-0 right-0 opacity-10" />
 
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <h4 className="text-[24px] font-extrabold text-white">
-                  METAVERUS
-                </h4>
-                <p className="text-[14px] font-normal text-white opacity-50">
-                  Copyright © {new Date().getFullYear()} Metaversus. All rights reserved.
-                </p>
+        <div className="space-y-12">
+          <div className="text-center space-y-4">
+            <TypingText text="| Insight" className="text-center" />
+            <TitleText size="lg" className="text-center">
+              Insight about metaverse
+            </TitleText>
+          </div>
 
-                <div className="flex gap-4">
-                  {SOCIALS.map((social) => (
-                    <Link key={social.name} href={social.url}>
-                      <img
-                        key={social.name}
-                        alt={social.name}
-                        className="size-[24px] cursor-pointer object-contain"
-                        src={social.src}
-                      />
-                    </Link>
-                  ))}
+          <motion.div
+            className="space-y-8"
+            variants={staggerList}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.25 }}
+          >
+            {INSIGHTS.map((insight, index) => (
+              <motion.div
+                key={insight.title}
+                className="grid lg:grid-cols-2 gap-8 items-center"
+                variants={fadeInUp}
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold">
+                      {String(index + 1).padStart(2, '0')}
+                    </div>
+                    <span className="text-white/60 text-sm">5 min read</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white">{insight.title}</h3>
+                  <p className="text-white/70 leading-relaxed">{insight.subtitle}</p>
                 </div>
+
+                <div className="flex justify-center">
+                  <img
+                    src={insight.imgUrl}
+                    alt={insight.title}
+                    className="w-full max-w-sm object-contain"
+                    loading="lazy"
+                  />
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </SectionWrapper>
+
+      {/* Footer */}
+      <footer className="relative py-16 px-4 sm:px-6 lg:px-8">
+        <GradientBackground variant="primary" className="top-0 left-0" />
+        <GradientBackground variant="secondary" className="bottom-0 right-0 opacity-10" />
+
+        <div className={cn('max-w-7xl mx-auto space-y-12')}>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white">
+              Enter the Metaverse
+            </h2>
+            <motion.button
+              className="group hover:cursor-pointer relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl font-medium transition-all duration-300 shadow-glow hover:shadow-glow-hover overflow-hidden"
+              whileHover={{
+                scale: 1.05,
+                y: -2
+              }}
+              whileTap={{ scale: 0.98 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              {/* Animated background overlay */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 1 }}
+              />
+
+              {/* Glow effect */}
+              <motion.div
+                className="absolute inset-0 rounded-2xl bg-gradient-to-r from-indigo-400/20 to-purple-400/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                animate={{
+                  scale: [1, 1.1, 1],
+                  opacity: [0, 0.5, 0]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+
+              {/* Content */}
+              <div className="relative z-10 flex items-center gap-3">
+                <motion.img
+                  src="/web3-images/headset.svg"
+                  alt=""
+                  className="w-6 h-6 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110"
+                  whileHover={{ rotate: 12, scale: 1.1 }}
+                />
+                <motion.span
+                  className="text-white font-semibold"
+                  whileHover={{ x: 2 }}
+                >
+                  Enter Metaverse
+                </motion.span>
+              </div>
+
+              {/* Ripple effect on click */}
+              <motion.div
+                className="absolute inset-0 rounded-2xl bg-white/20"
+                initial={{ scale: 0, opacity: 0 }}
+                whileTap={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.2 }}
+              />
+            </motion.button>
+          </div>
+
+          <div className="border-t border-white/10 pt-8">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+              <h3 className="text-2xl font-bold text-white">METAVERSUS</h3>
+              <p className="text-white/60 text-sm">
+                Copyright © {new Date().getFullYear()} Metaversus. All rights reserved.
+              </p>
+              <div className="flex gap-4">
+                {SOCIALS.map((social) => (
+                  <a
+                    key={social.name}
+                    href={social.url}
+                    className="w-10 h-10 rounded-full glass-light flex items-center justify-center hover:bg-white/20 transition-colors"
+                    aria-label={`Visit our ${social.name}`}
+                  >
+                    <img
+                      src={social.src}
+                      alt={social.name}
+                      className="w-5 h-5"
+                    />
+                  </a>
+                ))}
               </div>
             </div>
           </div>
-        </motion.footer>
-      </div>
-    </>
+        </div>
+      </footer>
+    </div>
   )
+}
+
+function cn(...classes: (string | undefined)[]) {
+  return classes.filter(Boolean).join(' ')
 }

@@ -31,7 +31,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
-    "framer-motion": "^11.11.8",
+    "motion": "^12.23.11",
     "hash-wasm": "^4.12.0",
     "instantsearch.js": "^4.75.1",
     "ky": "^1.7.2",
