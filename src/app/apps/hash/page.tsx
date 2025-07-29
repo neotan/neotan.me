@@ -12,14 +12,15 @@ import React, {
   useRef,
   useState
 } from 'react'
-import { CopyToClipboard } from 'react-copy-to-clipboard-ts'
+
 
 import { useAsync, useLocalStorageValue, } from '@react-hookz/web'
 import { formatDuration } from 'date-fns/formatDuration'
 import { intervalToDuration } from 'date-fns/intervalToDuration'
-import { type IHasher } from 'hash-wasm/lib/WASMInterface'
 import * as hashAlgos from 'hash-wasm'
+import { type IHasher } from 'hash-wasm/lib/WASMInterface'
 import prettyBytes from 'pretty-bytes'
+import { CopyToClipboard } from 'react-copy-to-clipboard-ts'
 import { useDropzone } from 'react-dropzone'
 import { BsTextLeft } from 'react-icons/bs'
 import {

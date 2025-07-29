@@ -1,16 +1,16 @@
+import Image from 'next/image'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-import Link from 'next/link'
 import { FaCalendarDay, FaClock } from 'react-icons/fa'
 import { IoMdClose } from 'react-icons/io'
 import calcReadTime from 'reading-time'
 
-import markdownToHtml from '@/lib/markdown'
-
-import { getPostAndMorePosts } from '@/lib/remote-api'
 import Navbar from '@/components/navbar'
+import markdownToHtml from '@/lib/markdown'
+import { getPostAndMorePosts } from '@/lib/remote-api'
 import { formatDate } from '@/lib/utils'
-import Image from 'next/image'
+
 
 
 type Params = {

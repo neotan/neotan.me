@@ -1,10 +1,11 @@
 'use client'
 import React, { type MouseEvent, useEffect, useState, type ComponentProps } from 'react'
 
+import Link from 'next/link'
+
 import { liteClient as algoliasearch } from 'algoliasearch/lite'
 import { history } from 'instantsearch.js/es/lib/routers'
 import { type RouterProps } from 'instantsearch.js/es/middlewares/createRouterMiddleware'
-import Link from 'next/link'
 import { includes, map, pipe, reject, toPairs, uniq, without } from 'ramda'
 import { AiFillGitlab } from 'react-icons/ai'
 import {

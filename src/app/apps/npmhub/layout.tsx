@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { Mitr } from 'next/font/google'
-
 import Link from 'next/link'
 
 import { ThemeProvider } from '@/components/theme-provider'

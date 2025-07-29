@@ -2,6 +2,7 @@
 import { type ComponentPropsWithRef, useEffect, useState } from 'react'
 
 import Link from 'next/link'
+
 import { FaLightbulb, FaRocket } from 'react-icons/fa'
 
 import { Button } from '@/components/ui/button'

@@ -2,6 +2,7 @@ import { FlatCompat } from '@eslint/eslintrc'
 import tseslint from 'typescript-eslint'
 import stylistic from '@stylistic/eslint-plugin'
 import eslintPluginBetterTailwindcss from 'eslint-plugin-better-tailwindcss'
+import importPlugin from 'eslint-plugin-import' // Uncomment after installing eslint-plugin-import
 
 const compat = new FlatCompat({
   baseDirectory: import.meta.dirname,
@@ -22,6 +23,7 @@ export default tseslint.config(
     plugins: {
       '@stylistic': stylistic,
       'better-tailwindcss': eslintPluginBetterTailwindcss,
+      import: importPlugin, // Uncomment after installing eslint-plugin-import
     },
     rules: {
       '@typescript-eslint/array-type': 'off',
@@ -41,6 +43,45 @@ export default tseslint.config(
       ],
       // TODO: turn it on when we find better types generator
       '@typescript-eslint/no-unsafe-assignment': 'off',
+
+      // Import order rule
+      'import/order': [
+        'error',
+        {
+          groups: [
+            'builtin',
+            'external',
+            'internal',
+            ['parent', 'sibling'],
+            'index',
+            'object',
+            'type',
+          ],
+          'newlines-between': 'always',
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+          },
+          pathGroups: [
+            {
+              pattern: 'react',
+              group: 'builtin',
+              position: 'before',
+            },
+            {
+              pattern: 'next/**',
+              group: 'builtin',
+              position: 'after',
+            },
+            {
+              pattern: '@/**',
+              group: 'internal',
+              position: 'after',
+            },
+          ],
+          pathGroupsExcludedImportTypes: ['react', 'next'],
+        },
+      ],
 
       // Stylistic
       '@stylistic/semi': ['error', 'never'],

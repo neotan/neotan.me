@@ -1,4 +1,5 @@
 import { type Variant } from 'motion/react'
+
 import type { AnimationProps } from '../_types'
 
 export const navVariants = {

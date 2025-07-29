@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'motion/react'
+
 import type { GradientBackgroundProps } from '../_types'
 
 const gradientVariants = {
@@ -19,9 +20,9 @@ export function GradientBackground({
 }: GradientBackgroundProps) {
   return (
     <motion.div
+      animate={{ opacity: opacity }}
       className={`absolute inset-0 ${gradientVariants[variant]} blur-[120px] ${className}`}
       initial={{ opacity: 0 }}
-      animate={{ opacity: opacity }}
       transition={{ duration: 1.5, ease: 'easeOut' }}
     />
   )

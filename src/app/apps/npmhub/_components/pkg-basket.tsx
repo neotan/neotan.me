@@ -1,6 +1,7 @@
 import React, { type ComponentProps, Fragment, useState } from 'react'
 
 import Link from 'next/link'
+
 import { pluck, without } from 'ramda'
 import {
   FaAngleUp,

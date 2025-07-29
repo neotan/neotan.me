@@ -1,6 +1,7 @@
 import { type ComponentPropsWithoutRef } from 'react'
 
 import Link from 'next/link'
+
 import { FaGithub } from 'react-icons/fa'
 
 import { cn } from '@/lib/utils'

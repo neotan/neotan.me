@@ -1,7 +1,8 @@
 'use client'
 
-import { motion } from 'motion/react'
 import type { ComponentProps } from 'react'
+
+import { motion } from 'motion/react'
 
 import { textContainer, textVariant2, viewportAnimations } from '../_utils/animations'
 import { cn } from '../_utils/styles'
@@ -20,26 +21,26 @@ export function TypingText({
 }: TypingTextProps) {
   return (
     <motion.p
-      className={cn('text-white/70 text-sm font-medium sm:text-base', className)}
-      variants={textContainer}
+      className={cn('text-sm font-medium text-white/70 sm:text-base', className)}
       initial="hidden"
-      whileInView="show"
-      viewport={viewportAnimations}
       style={{
         willChange: 'transform',
         transform: 'translate3d(0, 0, 0)',
       }}
+      variants={textContainer}
+      viewport={viewportAnimations}
+      whileInView="show"
       {...props}
     >
       {Array.from(text).map((letter, index) => (
         <motion.span
           key={index}
-          variants={textVariant2}
           className="inline-block"
           style={{
             willChange: 'transform',
             transform: 'translate3d(0, 0, 0)',
           }}
+          variants={textVariant2}
         >
           {letter === ' ' ? '\u00A0' : letter}
         </motion.span>
@@ -69,15 +70,15 @@ export function TitleText({
 }: TitleTextProps) {
   return (
     <motion.h2
-      className={cn('text-white leading-tight', titleSizes[size], className)}
+      className={cn('leading-tight text-white', titleSizes[size], className)}
       initial="hidden"
-      variants={textVariant2}
-      whileInView="show"
-      viewport={viewportAnimations}
       style={{
         willChange: 'transform',
         transform: 'translate3d(0, 0, 0)',
       }}
+      variants={textVariant2}
+      viewport={viewportAnimations}
+      whileInView="show"
       {...props}
     >
       {children}
@@ -96,13 +97,13 @@ export function AnimatedText({ text, className, delay = 0 }: AnimatedTextProps) 
     <motion.span
       className={cn('inline-block', className)}
       initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={viewportAnimations}
-      transition={{ delay, duration: 0.5, ease: 'easeOut' }}
       style={{
         willChange: 'transform',
         transform: 'translate3d(0, 0, 0)',
       }}
+      transition={{ delay, duration: 0.5, ease: 'easeOut' }}
+      viewport={viewportAnimations}
+      whileInView={{ opacity: 1, y: 0 }}
     >
       {text}
     </motion.span>

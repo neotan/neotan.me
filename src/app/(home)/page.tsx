@@ -1,19 +1,20 @@
 import React from 'react'
 
+import Image from 'next/image'
 import Link from 'next/link'
+
 import { FaCalendarDay, FaGithub, FaRegClock, FaStar } from 'react-icons/fa'
 import calcReadTime from 'reading-time'
 
 import Bio from '@/components/bio'
 import Footer from '@/components/footer'
 import Navbar from '@/components/navbar'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { getAllPosts, getAllProducts } from '@/lib/remote-api'
 import { cn, formatDate } from '@/lib/utils'
-import Image from 'next/image'
 
 export default async function Home() {
   const products = await getAllProducts()

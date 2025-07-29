@@ -1,10 +1,12 @@
 'use client'
 
-import { motion } from 'motion/react'
 import type { ComponentProps } from 'react'
+
+import { motion } from 'motion/react'
 
 import { staggerContainer } from '../_utils/animations'
 import { cn, styles } from '../_utils/styles'
+
 import type { SectionProps } from '../_types'
 
 interface SectionWrapperProps extends SectionProps {
@@ -21,12 +23,12 @@ export function SectionWrapper({
 }: SectionWrapperProps) {
   return (
     <motion.section
-      id={id}
       className={cn(styles.section, className)}
+      id={id}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.25 }}
       variants={staggerContainer(animationDelay, 0.1)}
+      viewport={{ once: true, amount: 0.25 }}
+      whileInView="show"
     >
       <div className={styles.innerWidth}>
         {children}
@@ -41,7 +43,7 @@ export function SectionWrapperAlt({
   children,
 }: SectionProps) {
   return (
-    <section id={id} className={cn(styles.section, className)}>
+    <section className={cn(styles.section, className)} id={id}>
       <div className={styles.innerWidth}>
         {children}
       </div>
