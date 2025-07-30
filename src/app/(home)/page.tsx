@@ -146,7 +146,9 @@ export default async function Home() {
                         <CardTitle className={`
                           relative flex w-full items-start justify-between p-0 text-2xl
                         `} >
-                          <h3 className='text-2xl'>{title}</h3>
+                          <Link href={link ?? '#'} target="_blank">
+                            <h3 className='text-2xl'>{title}</h3>
+                          </Link>
                           {repositoryLink && <Button asChild size="icon" variant="ghost">
                             <Link href={repositoryLink} target="_blank">
                               <FaGithub className="size-4" />
