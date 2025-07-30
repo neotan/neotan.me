@@ -11,8 +11,7 @@ import React, {
 import { type BaseItem } from '@algolia/autocomplete-core'
 import { autocomplete, type AutocompleteOptions } from '@algolia/autocomplete-js'
 import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches'
-// eslint-disable-next-line react/no-deprecated
-import { render } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { usePagination, useSearchBox } from 'react-instantsearch'
 
 import '@algolia/autocomplete-theme-classic'
@@ -86,8 +85,10 @@ export function Autocomplete({
       renderer: {
         createElement,
         Fragment,
-        // @ts-ignore
-        render,
+        render(vnode: React.ReactNode, container: Element | Document | ShadowRoot | DocumentFragment) {
+          const root = createRoot(container as Element)
+          root.render(vnode)
+        },
       },
     })
 

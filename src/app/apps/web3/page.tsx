@@ -18,9 +18,6 @@ import { EXPLORE_WORLDS, INSIGHTS, NEW_FEATURES, SOCIALS } from './_utils/consta
 
 import type { WorldId } from './_types'
 
-
-
-
 export default function Web3Page() {
   const [activeWorldId, setActiveWorldId] = useState<WorldId | null>('world1')
 
@@ -312,7 +309,7 @@ export default function Web3Page() {
             >
               <TypingText text="| What's new?" />
               <TitleText size="lg">
-                What's new about Metaversus?
+                What&apos;s new about Metaversus?
               </TitleText>
             </motion.div>
 

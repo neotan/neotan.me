@@ -18,7 +18,7 @@ import { useAsync } from '@react-hookz/web'
 import { useDebounce } from '@uidotdev/usehooks'
 import { formatDuration } from 'date-fns/formatDuration'
 import { intervalToDuration } from 'date-fns/intervalToDuration'
-import * as hashAlgos from 'hash-wasm'
+import * as hashWasm from 'hash-wasm'
 import { type IHasher } from 'hash-wasm/lib/WASMInterface'
 import prettyBytes from 'pretty-bytes'
 import { CopyToClipboard } from 'react-copy-to-clipboard-ts'
@@ -49,7 +49,6 @@ import { Textarea } from '@/components/ui/textarea'
 import { cn, formatDate, isNilOrEmpty } from '@/lib/utils'
 
 import type { FileWithPath } from 'react-dropzone'
-
 
 const DEFAULT_HASH_NAMES: Record<string, boolean> = {
   crc32: true,
@@ -88,6 +87,15 @@ const HashingAlgos: Record<string, {
 } as const
 
 type AlgoName = keyof typeof HashingAlgos
+
+type HashAlgorithms = Record<AlgoName, (data: string) => Promise<string>>
+
+type HashCreators = {
+  [K in keyof typeof HashingAlgos as typeof HashingAlgos[K]['hashFileFn']]: () => Promise<IHasher>
+}
+
+const hashAlgos = hashWasm as unknown as HashAlgorithms
+const hashCreators = hashWasm as unknown as HashCreators
 
 const HASH_NAMES = Object.keys(HashingAlgos)
 
@@ -288,12 +296,9 @@ export default function HashHome() {
                           key="inputText"
                           className={cn(
                             `
-                              min-h-32 border-purple-200/50 bg-white/50 transition-all
+                              min-h-32 border-purple-200/50 bg-white/50 font-mono text-sm
+                              transition-all
                               focus:border-purple-400 focus:ring-purple-400/20
-                            `,
-                            `
-                              scrollbar-thin scrollbar-track-purple-50 scrollbar-thumb-purple-200
-                              font-mono text-sm
                             `,
                             { 'min-h-48': Number(rawText?.length) > 300 }
                           )}
@@ -306,13 +311,12 @@ export default function HashHome() {
                           <div className="text-xs text-muted-foreground">
                             Characters: {rawText?.length ?? 0}
                           </div>
-                          <Button className={`
-                            h-6 cursor-pointer border-purple-200/50 text-xs
-                            hover:border-purple-300 hover:bg-purple-50
-                          `}
-                            size="sm"
-                            variant="outline"
-                            onClick={() => setRawText('')}
+                          <Button
+                            className={`
+                              h-6 cursor-pointer border-purple-200/50 text-xs
+                              hover:border-purple-300 hover:bg-purple-50
+                            `}
+                            size="sm" variant="outline" onClick={() => setRawText('')}
                           >
                             <FiRotateCcw className="mr-1 size-3" />
                             Clear Text
@@ -327,7 +331,8 @@ export default function HashHome() {
                         `}
                         disabled={isNilOrEmpty(debouncedRawText)}
                         id='generate-hash-values-for-text'
-                        onClick={() => Object.values(textHasherRefs.current).forEach(ref => ref.current?.execute())}
+                        onClick={() => Object.values(textHasherRefs.current)
+                          .forEach(ref => void ref.current?.execute())}
                       >
                         <FiZap className="mr-2 size-5 group-hover:animate-pulse" />
                         Generate Hash Values
@@ -366,7 +371,9 @@ export default function HashHome() {
                                 <span className="text-purple-600">Click to upload</span> or drag files here
                               </p>
                               <p className="text-sm text-muted-foreground">
-                                Supports all file types for hash generation, handles files up to <span className=" font-semibold text-purple-600">10GB</span>!
+                                Supports all file types for hash generation, handles files up to <span className={`
+                                  font-semibold text-purple-600
+                                `}>10GB</span>!
                               </p>
                             </div>
                           )}
@@ -404,7 +411,7 @@ export default function HashHome() {
                           onClick={() => {
                             setStartedAt(new Date())
                             setEndedAt(null)
-                            Object.values(fileHasherRefs.current).forEach(ref => ref.current?.execute())
+                            Object.values(fileHasherRefs.current).forEach(ref => void ref.current?.execute())
                           }}
                         >
                           <FiZap className="mr-2 size-5 group-hover:animate-pulse" />
@@ -413,11 +420,12 @@ export default function HashHome() {
 
                         {startedAt && endedAt && (
                           <div className={`
-                            flex w-full items-center justify-center gap-2 rounded-lg border border-green-200 bg-green-50 p-3 text-center
+                            flex w-full items-center justify-center gap-2 rounded-lg border
+                            border-green-200 bg-green-50 p-3 text-center
                           `}>
                             <FiCheckSquare className="size-4 text-green-600" />
                             <span className="text-sm font-medium text-green-700">
-                              Processing completed in {formatDuration(intervalToDuration({ start: startedAt, end: endedAt })) || 'less than 1 second'}
+                              Processing completed in {formatDuration(intervalToDuration({ start: startedAt, end: endedAt })) ?? 'less than 1 second'}
                             </span>
                           </div>
                         )}
@@ -449,9 +457,9 @@ export default function HashHome() {
                             key={'inputText-' + id}
                             algoName={id}
                             className={cn('hidden', { 'block': selectedHashNames[id] })}
-                            hasher={(hashAlgos as any)[id]}
+                            hasher={hashAlgos[id]!}
                             myref={textHasherRefs.current[id]!}
-                            rawData={debouncedRawText || ''}
+                            rawData={debouncedRawText ?? ''}
                           />
                         )
                       })}
@@ -465,7 +473,7 @@ export default function HashHome() {
                               ref={fileHasherRefs?.current?.[id]}
                               algoName={id}
                               className={cn('hidden', { 'block': selectedHashNames[id] })}
-                              createHasher={(hashAlgos as any)?.[hashFileFn]}
+                              createHasher={hashCreators[hashFileFn]!}
                               rawFiles={acceptedFiles}
                               onDone={setEndedAt}
                             />
@@ -507,7 +515,7 @@ function HashText({ className, algoName, rawData, hasher, myref }: HashTextProps
   })
 
   useImperativeHandle(myref, () => ({
-    execute: () => execute().then(() => { })
+    execute: () => execute().then(() => console.log('executed'))
   }))
 
   const handleCopy = () => {
@@ -583,7 +591,7 @@ function HashText({ className, algoName, rawData, hasher, myref }: HashTextProps
               <span className="font-medium">Error occurred</span>
             </div>
             <p className="mt-1 text-sm text-red-600" title={error?.message}>
-              {error?.message || 'Unknown error'}
+              {error?.message ?? 'Unknown error'}
             </p>
           </div>
         )}
@@ -606,7 +614,7 @@ function HashText({ className, algoName, rawData, hasher, myref }: HashTextProps
 }
 const CHUNK_SIZE = 64 * 1024 * 1024
 
-function hashChunk(chunk: any, hasher: IHasher) {
+function hashChunk(chunk: Blob, hasher: IHasher) {
   const fileReader = new FileReader()
   return new Promise<void>((resolve, reject) => {
     fileReader.onload = (e) => {
@@ -642,7 +650,7 @@ async function readFile(
 interface HashFileProps extends ComponentPropsWithRef<'div'> {
   algoName: keyof typeof HashingAlgos
   rawFiles: readonly FileWithPath[]
-  onDone: Function
+  onDone: (date: Date) => void
   createHasher: () => Promise<IHasher>
 }
 
@@ -663,7 +671,7 @@ const HashFile = forwardRef(function HashFile({ className, algoName, rawFiles, o
 
   useImperativeHandle(ref, () => ({
     execute: () => {
-      execute()
+      void execute()
     }
   }))
 
@@ -674,7 +682,7 @@ const HashFile = forwardRef(function HashFile({ className, algoName, rawFiles, o
 
   const copyText = rawFiles?.map((file, idx) =>
     `[${algoName?.toUpperCase()}]-[${file?.name}]: ${result?.[idx]}`
-  ).join('\n') || ''
+  ).join('\n') ?? ''
 
   return (
     <div className={cn('space-y-3', className)}>
@@ -744,7 +752,7 @@ const HashFile = forwardRef(function HashFile({ className, algoName, rawFiles, o
               <span className="font-medium">Processing failed</span>
             </div>
             <p className="mt-1 text-sm text-red-600">
-              {error?.message || 'Unknown error occurred during file processing'}
+              {error?.message ?? 'Unknown error occurred during file processing'}
             </p>
           </div>
         )}
@@ -815,7 +823,7 @@ const HashFile = forwardRef(function HashFile({ className, algoName, rawFiles, o
                               Modified: {formatDate(file.lastModified, 'yyyy-MM-dd H:mm:ss')}
                             </div>
                             <div className="text-xs text-muted-foreground">
-                              Hash length: {hashed?.length || 0} characters
+                              Hash length: {hashed?.length ?? 0} characters
                             </div>
                           </div>
                         </div>

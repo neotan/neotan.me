@@ -57,8 +57,7 @@ const algoliaClient = algoliasearch(
 )
 const searchClient = {
   ...algoliaClient,
-  //@ts-ignore
-  search(requests) {
+  search(requests: Array<{ params: { query?: string } }>) {
     if (
       requests.every(
         ({ params }: { params: { query?: string } }) => !params.query,
@@ -66,7 +65,6 @@ const searchClient = {
     ) {
       return Promise.resolve({
         results: requests.map(() => ({
-          //@ts-ignore
           hits: [],
           nbHits: 0,
           nbPages: 0,
@@ -76,7 +74,7 @@ const searchClient = {
       })
     }
 
-    return algoliaClient.search(requests)
+    return algoliaClient.search(requests as Parameters<typeof algoliaClient.search>[0])
   },
 }
 
@@ -121,8 +119,8 @@ export default function NpmHubApp() {
   const [hasQuery, setHasQuery] = useState(false)
   //eslint-disable-next-line
   const [hash, setHash] = isBrowser ? useHash() : ['', () => { }]
-  const hashCfg = strToObj<HashConfig>(hash) || {}
-  const selectedPkgNames: string[] = hashCfg?.b || []
+  const hashCfg = strToObj<HashConfig>(hash) ?? {}
+  const selectedPkgNames: string[] = hashCfg?.b ?? []
 
   function setSelectedPkgNames(pkgNames: string[]) {
     setHash(objToHash({ ...hashCfg, b: pkgNames }))
@@ -203,11 +201,11 @@ export default function NpmHubApp() {
 
 function CustomHit({ hit }: AlgoliaHitProps) {
   const [hash, setHash] = useHash()
-  const hashCfg = strToObj<HashConfig>(hash) || {}
-  const isSelectedPkgName = includes(hit.name, hashCfg.b || [])
+  const hashCfg = strToObj<HashConfig>(hash) ?? {}
+  const isSelectedPkgName = includes(hit.name, hashCfg.b ?? [])
   function onRemoveFromBasketClick(e: MouseEvent<HTMLHeadingElement>) {
     const pkgName = e?.currentTarget?.dataset?.pkgName
-    const selectedPkgNames = hashCfg?.b || []
+    const selectedPkgNames = hashCfg?.b ?? []
     setHash(
       objToHash({
         ...hashCfg,
@@ -218,7 +216,7 @@ function CustomHit({ hit }: AlgoliaHitProps) {
 
   function onAddToBasketClick(e: MouseEvent<HTMLHeadingElement>) {
     const pkgName = e?.currentTarget?.dataset?.pkgName
-    const selectedPkgNames = hashCfg?.b || []
+    const selectedPkgNames = hashCfg?.b ?? []
     setHash(
       objToHash({
         ...hashCfg,
@@ -329,7 +327,7 @@ function CustomHit({ hit }: AlgoliaHitProps) {
         {hit.owner?.avatar && (
           <Link
             className='flex items-center gap-2 transition-colors hover:text-foreground'
-            href={hit.homepage || '#'}
+            href={hit.homepage ?? '#'}
             target="_blank"
             title='Homepage'
           >
@@ -355,11 +353,14 @@ function CustomHit({ hit }: AlgoliaHitProps) {
             <span className="font-medium">{hit.version}</span>
             <Dot />
             <span className="text-xs">
-              {hit.versions?.[hit.version] && formatDistanceShort(
-                new Date(hit.versions?.[hit.version]!),
-                new Date(),
-                { addSuffix: true },
-              )}
+              {(() => {
+                const versionDate = hit.versions?.[hit.version]
+                return versionDate && formatDistanceShort(
+                  new Date(versionDate),
+                  new Date(),
+                  { addSuffix: true },
+                )
+              })()}
             </span>
           </Link>
         )}
@@ -404,10 +405,10 @@ function CustomHit({ hit }: AlgoliaHitProps) {
           </Link>
           {(() => {
             const { Icon, title } =
-              repoIcons[hit.repository?.host!] || { Icon: FaGithub, title: 'Github' }
+              repoIcons[hit.repository?.host ?? ''] ?? { Icon: FaGithub, title: 'Github' }
 
             return (
-              <Link href={hit.repository?.url || '#'} target="_blank">
+              <Link href={hit.repository?.url ?? '#'} target="_blank">
                 <Icon className={externalUrlClasses} title={`on ${title}`} />
               </Link>
             )
@@ -484,5 +485,5 @@ function Dot({ className }: ComponentProps<'span'>) {
 }
 
 function objToHash(obj: Record<string, unknown> = {}): string {
-  return pipe(reject(isNilOrEmptyOrFalsy), objToStr)(obj) || ''
+  return pipe(reject(isNilOrEmptyOrFalsy), objToStr)(obj) ?? ''
 }

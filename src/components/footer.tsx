@@ -29,8 +29,8 @@ export default function Footer({ className, children }: ComponentPropsWithoutRef
       {children}
       <div className="hidden text-xs text-transparent sm:flex">
         <span>Build:</span>
-        {(process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA ||
-          process.env.VERCEL_GIT_COMMIT_SHA ||
+        {(process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA ??
+          process.env.VERCEL_GIT_COMMIT_SHA ??
           '').slice(0, 6)
         }
       </div>
