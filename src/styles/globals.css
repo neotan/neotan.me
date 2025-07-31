@@ -1,8 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "./prism-duotone-light.css";
+@import "./prism-vsc-dark-plus.css";
 @import "./prose.css";
 @plugin "@tailwindcss/typography";
+
 
 @custom-variant dark (&:where(.dark, .dark *));
 
