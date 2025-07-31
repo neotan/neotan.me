@@ -333,7 +333,7 @@ export default async function Home() {
                     'border border-border/50 bg-card/50 backdrop-blur-sm',
                     'rounded-2xl shadow-md hover:shadow-xl',
                     'transition-all duration-500 ease-out',
-                    'hover:scale-[1.02] hover:bg-card/80 glassmorphism'
+                    'hover:scale-[1.02] hover:bg-card/80'
                   )}
                 >
                   <CardContent className="flex h-full flex-col gap-4 p-6">

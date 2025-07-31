@@ -163,18 +163,6 @@
 }
 
 @layer utilities {
-  /* .mask:after {
-    mask: linear-gradient(rgb(255 255 255) 0 0) content-box,
-    linear-gradient(rgb(255 255 255) 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-  }
-  
-  .glassmorphism {
-    @apply mask bg-card backdrop-blur-2xl after:absolute after:inset-0 after:rounded-none after:bg-gradient-to-br after:from-white/80 after:via-white/10 after:to-white/80 after:p-px overflow-hidden
-  } */
-
   .fancy-underline {
     @apply relative;
   }
