@@ -24,7 +24,7 @@ next-env.d.ts
 # misc
 .DS_Store
 *.pem
-contentful-export-config.json
+*:Zone.Identifier
 
 # debug
 npm-debug.log*
