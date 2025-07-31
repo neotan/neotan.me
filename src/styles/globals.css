@@ -162,8 +162,8 @@
   }
 }
 
-/* @layer utilities {
-  .mask:after {
+@layer utilities {
+  /* .mask:after {
     mask: linear-gradient(rgb(255 255 255) 0 0) content-box,
     linear-gradient(rgb(255 255 255) 0 0);
     -webkit-mask-composite: xor;
@@ -173,5 +173,43 @@
   
   .glassmorphism {
     @apply mask bg-card backdrop-blur-2xl after:absolute after:inset-0 after:rounded-none after:bg-gradient-to-br after:from-white/80 after:via-white/10 after:to-white/80 after:p-px overflow-hidden
+  } */
+
+  .fancy-underline {
+    @apply relative;
   }
-} */
+  
+  .fancy-underline::before {
+    content: '';
+    @apply absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-primary to-primary/60 transition-all duration-500 ease-out;
+  }
+  
+  .fancy-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 h-[2px] w-0 bg-primary/20 blur-sm transition-all duration-500 ease-out;
+  }
+  
+  .fancy-underline:hover::before {
+    @apply w-full;
+  }
+  
+  .fancy-underline:hover::after {
+    @apply w-full;
+    transition-delay: 75ms;
+  }
+
+  
+  .link-ripple {
+    @apply relative overflow-hidden;
+  }
+  
+  .link-ripple::before {
+    content: '';
+    @apply absolute top-1/2 left-1/2 w-0 h-0 bg-primary/10 transition-all duration-600 ease-out -translate-x-1/2 -translate-y-1/2;
+  }
+  
+  .link-ripple:hover::before {
+    @apply w-[200%] h-[200%];
+  }
+
+}

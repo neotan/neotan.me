@@ -1,8 +1,8 @@
 import { FlatCompat } from '@eslint/eslintrc'
-import tseslint from 'typescript-eslint'
 import stylistic from '@stylistic/eslint-plugin'
-import eslintPluginBetterTailwindcss from 'eslint-plugin-better-tailwindcss'
-import importPlugin from 'eslint-plugin-import' // Uncomment after installing eslint-plugin-import
+import betterTailwindcss from 'eslint-plugin-better-tailwindcss'
+import importPlugin from 'eslint-plugin-import'
+import tseslint from 'typescript-eslint'
 
 const compat = new FlatCompat({
   baseDirectory: import.meta.dirname,
@@ -22,8 +22,8 @@ export default tseslint.config(
     ],
     plugins: {
       '@stylistic': stylistic,
-      'better-tailwindcss': eslintPluginBetterTailwindcss,
-      import: importPlugin, // Uncomment after installing eslint-plugin-import
+      'better-tailwindcss': betterTailwindcss,
+      import: importPlugin,
     },
     rules: {
       '@typescript-eslint/array-type': 'off',
@@ -100,7 +100,7 @@ export default tseslint.config(
       }],
 
       // Better Tailwind CSS
-      ...eslintPluginBetterTailwindcss.configs['recommended-warn']?.rules,
+      ...betterTailwindcss.configs['recommended-warn']?.rules,
       'better-tailwindcss/enforce-consistent-class-order': ['warn', { order: 'official' }],
       'better-tailwindcss/enforce-consistent-line-wrapping': ['warn', {
         group: 'newLine',

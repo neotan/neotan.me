@@ -27,7 +27,6 @@ import { BsTextLeft } from 'react-icons/bs'
 import {
   FiCheckSquare,
   FiCopy,
-  FiInfo,
   FiZap,
   FiRotateCcw,
   FiHash
@@ -127,7 +126,6 @@ export default function HashHome() {
   }, [])
   const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
     useDropzone({ onDropAccepted })
-  console.log(1111111, isNilOrEmpty(acceptedFiles), acceptedFiles)
 
   function onCheckboxClick(id: string, checked: boolean) {
     setSelectedHashNames({ ...selectedHashNames, [id]: checked })

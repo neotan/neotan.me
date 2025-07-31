@@ -229,7 +229,7 @@ function CustomHit({ hit }: AlgoliaHitProps) {
     <Card
       className={cn(
         `
-          group relative overflow-hidden rounded-xl border-border/50 bg-card/50 p-6 shadow-sm
+          group relative gap-6 overflow-hidden rounded-xl border-border/50 bg-card/50 p-6 shadow-sm
           backdrop-blur-sm transition-all duration-200
         `,
         {
@@ -323,7 +323,7 @@ function CustomHit({ hit }: AlgoliaHitProps) {
       </div>
 
       {/* Metadata Section */}
-      <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+      <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
         {hit.owner?.avatar && (
           <Link
             className='flex items-center gap-2 transition-colors hover:text-foreground'
@@ -377,7 +377,7 @@ function CustomHit({ hit }: AlgoliaHitProps) {
 
       {/* Keywords Section */}
       {!isNilOrEmpty(hit.keywords) && (
-        <div className="mt-4 flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {pipe(
             uniq<string>,
             map(keyword => (
@@ -395,7 +395,7 @@ function CustomHit({ hit }: AlgoliaHitProps) {
       )}
 
       {/* Action Buttons Section - Keeping as requested */}
-      <div className="mt-6 flex flex-wrap items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between">
         <div className="flex space-x-3">
           <Link
             href={`https://www.npmjs.com/package/${hit.name}`}

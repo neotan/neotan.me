@@ -4,8 +4,8 @@ import type { ComponentProps } from 'react'
 
 import { motion } from 'motion/react'
 
-import { fadeIn, microInteractions, viewportAnimations } from '../_utils/animations'
-import { cn, styles } from '../_utils/styles'
+import { fadeIn, viewportAnimations } from '../_utils/animations'
+import { cn } from '../_utils/styles'
 
 import type { World, WorldId } from '../_types'
 
