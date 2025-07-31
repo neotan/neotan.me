@@ -14,6 +14,14 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(['development', 'test', 'production'])
       .default('development'),
+
+    // Contentful environment variables
+    CONTENTFUL_GRAPHQL_URL: z.string().url(),
+    CONTENTFUL_SPACE_ID: z.string(),
+    CONTENTFUL_ENVIRONMENT: z.string().default('master'),
+    CONTENTFUL_DELIVERY_ACCESS_TOKEN: z.string(),
+    CONTENTFUL_PREVIEW_ACCESS_TOKEN: z.string(),
+    CONTENTFUL_MANAGEMENT_API_ACCESS_TOKEN: z.string(),
   },
 
   /**
@@ -22,7 +30,11 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
-    // NEXT_PUBLIC_CLIENTVAR: z.string(),
+    // Algolia search configuration
+    NEXT_PUBLIC_ALGOLIA_APP_ID: z.string(),
+    NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY: z.string(),
+    NEXT_PUBLIC_ALGOLIA_INDEX_NAME: z.string(),
+    NEXT_PUBLIC_ALGOLIA_ANALYTIC_TAGS: z.string(),
   },
 
   /**
@@ -32,7 +44,20 @@ export const env = createEnv({
   runtimeEnv: {
     AUTH_SECRET: process.env.AUTH_SECRET,
     NODE_ENV: process.env.NODE_ENV,
-    // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
+
+    // Contentful variables
+    CONTENTFUL_GRAPHQL_URL: process.env.CONTENTFUL_GRAPHQL_URL,
+    CONTENTFUL_SPACE_ID: process.env.CONTENTFUL_SPACE_ID,
+    CONTENTFUL_ENVIRONMENT: process.env.CONTENTFUL_ENVIRONMENT,
+    CONTENTFUL_DELIVERY_ACCESS_TOKEN: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN,
+    CONTENTFUL_PREVIEW_ACCESS_TOKEN: process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN,
+    CONTENTFUL_MANAGEMENT_API_ACCESS_TOKEN: process.env.CONTENTFUL_MANAGEMENT_API_ACCESS_TOKEN,
+
+    // Algolia variables
+    NEXT_PUBLIC_ALGOLIA_APP_ID: process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
+    NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY: process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY,
+    NEXT_PUBLIC_ALGOLIA_INDEX_NAME: process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME,
+    NEXT_PUBLIC_ALGOLIA_ANALYTIC_TAGS: process.env.NEXT_PUBLIC_ALGOLIA_ANALYTIC_TAGS,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

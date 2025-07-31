@@ -13,7 +13,8 @@
     "typecheck": "tsc --noEmit",
     "lint": "npm run codegen && next lint --fix",
     "codegen": "graphql-codegen --config codegen.ts",
-    "backup": "node contentful-export.cjs"
+    "contentful:export": "node contentful-export.cjs",
+    "contentful:import": "node contentful-import.cjs"
   },
   "dependencies": {
     "@algolia/autocomplete-js": "^1.19.2",

@@ -53,7 +53,7 @@ async function fetchGraphQL<T>(query: string): Promise<T> {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+        Authorization: `Bearer ${process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN}`,
       },
       body: JSON.stringify({ query }),
     },
