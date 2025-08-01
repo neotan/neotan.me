@@ -23,17 +23,17 @@ export default async function Home() {
 
   return (
     <>
-      <Navbar className='sticky top-0 z-50 bg-background/80 backdrop-blur-xl' />
+      <Navbar className={`
+        sticky top-0 z-50 border-b border-border/20 bg-background/90 backdrop-blur-xl
+      `} />
 
-      {/* Enhanced gradient background with more sophistication */}
       <div className={`
-        relative min-h-screen overflow-hidden bg-gradient-to-br from-background via-secondary/30
+        relative min-h-screen overflow-hidden bg-gradient-to-br from-background via-secondary/20
         to-background
       `}>
-        {/* Subtle background pattern */}
         <div className={`
           absolute inset-0
-          bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.05),transparent_90%),radial-gradient(circle_at_80%_80%,rgba(120,119,198,0.05),transparent_50%)]
+          bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.08),transparent_80%),radial-gradient(circle_at_80%_80%,rgba(120,119,198,0.08),transparent_40%)]
         `} />
 
         <header className={`
@@ -44,7 +44,6 @@ export default async function Home() {
         </header>
 
         <main className="relative z-10 container mx-auto space-y-24 px-6 pb-12 lg:px-8">
-          {/* Products Section with enhanced header */}
           <section className="space-y-12" id="products">
             <div className="space-y-4 text-center">
               <div className="inline-flex items-center gap-3">
@@ -61,7 +60,6 @@ export default async function Home() {
               </p>
             </div>
 
-            {/* Featured products with premium design */}
             <div className="space-y-12">
               {featuredProducts?.map(({
                 slug,
@@ -77,10 +75,10 @@ export default async function Home() {
                 return (
                   <Card key={slug} className={cn(
                     'group mx-auto max-w-6xl overflow-hidden',
-                    'border border-border/50 bg-card/50 backdrop-blur-sm',
+                    'border-2 border-border/80 bg-card/80 backdrop-blur-sm',
                     'rounded-2xl shadow-lg hover:shadow-2xl',
                     'transition-all duration-500 ease-out',
-                    'hover:scale-[1.02] hover:bg-card/80',
+                    'hover:scale-[1.02] hover:border-border hover:bg-card/95',
                     'grid grid-cols-1 gap-0 lg:grid-cols-[2fr_3fr]'
                   )}>
                     <CardContent className="flex flex-col justify-center gap-6 p-8 lg:p-12">
@@ -103,7 +101,8 @@ export default async function Home() {
                           )}
                           {version && (
                             <Badge className={`
-                              rounded-xl border-primary/20 bg-primary/10 px-3 py-1 text-primary
+                              rounded-xl border-primary/30 bg-primary/15 px-3 py-1 font-medium
+                              text-primary
                             `}>
                               {version}
                             </Badge>
@@ -136,8 +135,8 @@ export default async function Home() {
                           <Button
                             asChild
                             className={`
-                              link-ripple-bg rounded-xl border-border/50
-                              hover:border-primary/50 hover:bg-primary/5
+                              link-ripple-bg rounded-xl border-2 border-border/80
+                              hover:border-primary/60 hover:bg-primary/10
                             `}
                             size="sm"
                             variant="outline"
@@ -154,7 +153,10 @@ export default async function Home() {
                         {link && (
                           <Button
                             asChild
-                            className="link-ripple rounded-xl bg-primary hover:bg-primary/90"
+                            className={`
+                              link-ripple rounded-xl bg-primary shadow-md
+                              hover:bg-primary/90
+                            `}
                             size="sm"
                           >
                             <Link className="relative z-10" href={link} target="_blank">
@@ -201,7 +203,6 @@ export default async function Home() {
               })}
             </div>
 
-            {/* Regular products with modern grid */}
             {regularProducts && regularProducts.length > 0 && (
               <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
                 {regularProducts.map((product) => {
@@ -222,10 +223,10 @@ export default async function Home() {
                       key={slug}
                       className={cn(
                         'group h-full overflow-hidden',
-                        'border border-border/50 bg-card/50 backdrop-blur-sm',
+                        'border-2 border-border/70 bg-card/85 backdrop-blur-sm',
                         'rounded-2xl shadow-md hover:shadow-xl',
                         'transition-all duration-500 ease-out',
-                        'gap-0 py-0 hover:scale-[1.03] hover:bg-card/80'
+                        'gap-0 py-0 hover:scale-[1.03] hover:border-border hover:bg-card/95'
                       )}
                     >
                       <CardHeader className="relative overflow-hidden p-0">
@@ -243,7 +244,7 @@ export default async function Home() {
                                 width={400}
                               />
                               <div className={`
-                                absolute inset-0 bg-gradient-to-t from-black/40 via-transparent
+                                absolute inset-0 bg-gradient-to-t from-black/50 via-transparent
                                 to-transparent opacity-0 transition-opacity duration-500
                                 group-hover:opacity-100
                               `} />
@@ -266,7 +267,10 @@ export default async function Home() {
                           {repositoryLink && (
                             <Button
                               asChild
-                              className="link-ripple-bg shrink-0 rounded-xl hover:bg-secondary/80"
+                              className={`
+                                link-ripple-bg shrink-0 rounded-xl border border-border/50
+                                hover:bg-secondary/80
+                              `}
                               size="icon"
                               variant="ghost"
                             >
@@ -289,8 +293,8 @@ export default async function Home() {
                             <Badge
                               key={tag}
                               className={`
-                                rounded-lg bg-secondary/50 px-2 py-1 text-xs
-                                text-secondary-foreground transition-colors
+                                rounded-lg bg-secondary/50 px-3 py-1 text-secondary-foreground
+                                transition-colors
                                 hover:bg-secondary/80
                               `}
                               variant="secondary"
@@ -307,7 +311,6 @@ export default async function Home() {
             )}
           </section>
 
-          {/* Today I Learned Section with enhanced design */}
           <section className="space-y-12" id="til">
             <div className="space-y-4 text-center">
               <div className="inline-flex items-center gap-3">
@@ -330,10 +333,10 @@ export default async function Home() {
                   key={post.slug}
                   className={cn(
                     'group h-full',
-                    'border border-border/50 bg-card/50 backdrop-blur-sm',
+                    'border-2 border-border/70 bg-card/85 backdrop-blur-sm',
                     'rounded-2xl shadow-md hover:shadow-xl',
                     'transition-all duration-500 ease-out',
-                    'hover:scale-[1.02] hover:bg-card/80'
+                    'hover:scale-[1.02] hover:border-border hover:bg-card/95'
                   )}
                 >
                   <CardContent className="flex h-full flex-col gap-4 p-6">
@@ -385,7 +388,7 @@ export default async function Home() {
       </div>
 
       <Footer className={`
-        container mx-auto border-t border-border/50 bg-background/80 backdrop-blur-xl
+        container mx-auto border-t-2 border-border/60 bg-background/90 backdrop-blur-xl
       `} />
     </>
   )
