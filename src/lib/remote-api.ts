@@ -1,3 +1,4 @@
+import { env } from '@/env'
 import { type PageBlogPost, type Product } from '@/types/contentful-schema'
 
 const POST_GRAPHQL_FIELDS = `
@@ -48,12 +49,12 @@ type ProductsResponse = { data: { productCollection: { items: Product[] } } }
 
 async function fetchGraphQL<T>(query: string): Promise<T> {
   const response = await fetch(
-    `${process.env.CONTENTFUL_GRAPHQL_URL}/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/${process.env.CONTENTFUL_ENVIRONMENT}`,
+    `${env.CONTENTFUL_GRAPHQL_URL}/spaces/${env.CONTENTFUL_SPACE_ID}/environments/${env.CONTENTFUL_ENVIRONMENT}`,
     {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN}`,
+        Authorization: `Bearer ${env.CONTENTFUL_DELIVERY_ACCESS_TOKEN}`,
       },
       body: JSON.stringify({ query }),
     },

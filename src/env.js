@@ -7,6 +7,7 @@ export const env = createEnv({
    * isn't built with invalid env vars.
    */
   server: {
+    VERCEL_GIT_COMMIT_SHA: z.string().optional(),
     AUTH_SECRET:
       process.env.NODE_ENV === 'production'
         ? z.string()
@@ -30,6 +31,8 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
+    NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA: z.string().optional(),
+
     // Algolia search configuration
     NEXT_PUBLIC_ALGOLIA_APP_ID: z.string(),
     NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY: z.string(),

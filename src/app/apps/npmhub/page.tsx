@@ -28,6 +28,7 @@ import { useHash } from 'react-use'
 
 import { Badge } from '@/components/ui/badge'
 import { Card } from '@/components/ui/card'
+import { env } from '@/env'
 import {
   cn,
   formatDistanceShort,
@@ -49,11 +50,11 @@ import { type AlgoliaHitProps } from './_types'
 
 import type { UiState } from 'instantsearch.js/es/types'
 
-const INDEX_NAME = process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME!
+const INDEX_NAME = env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME
 
 const algoliaClient = algoliasearch(
-  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!,
-  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY!,
+  env.NEXT_PUBLIC_ALGOLIA_APP_ID,
+  env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY,
 )
 const searchClient = {
   ...algoliaClient,

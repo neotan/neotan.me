@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import { FaGithub } from 'react-icons/fa'
 
+import { env } from '@/env'
 import { cn } from '@/lib/utils'
 
 export default function Footer({ className, children }: ComponentPropsWithoutRef<'footer'>) {
@@ -29,8 +30,8 @@ export default function Footer({ className, children }: ComponentPropsWithoutRef
       {children}
       <div className="hidden text-xs text-transparent sm:flex">
         <span>Build:</span>
-        {(process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA ??
-          process.env.VERCEL_GIT_COMMIT_SHA ??
+        {(env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA ??
+          env.VERCEL_GIT_COMMIT_SHA ??
           '').slice(0, 6)
         }
       </div>
