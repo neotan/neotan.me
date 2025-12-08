@@ -2,6 +2,7 @@ import '@/styles/globals.css'
 
 import { Montserrat } from 'next/font/google'
 
+import { Analytics } from '@vercel/analytics/next'
 import { type Metadata } from 'next'
 
 const montserrat = Montserrat({ subsets: ['latin'] })
@@ -17,11 +18,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html suppressHydrationWarning className={`${montserrat.className}`} lang="en">
-      <head>
-        <script async src="https://cdn.splitbee.io/sb.js" />
-      </head>
       <body className='antialiased' >
         {children}
+        <Analytics />
       </body>
     </html>
   )
