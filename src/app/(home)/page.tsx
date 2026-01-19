@@ -23,23 +23,12 @@ export default async function Home() {
 
   return (
     <>
-      <Navbar className={`
-        sticky top-0 z-50 border-b border-border/20 bg-background/90 backdrop-blur-xl
-      `} />
+      <Navbar className='sticky top-0 z-50 border-b border-border/20 bg-background/90 backdrop-blur-xl' />
 
-      <div className={`
-        relative min-h-screen overflow-hidden bg-gradient-to-br from-background via-secondary/20
-        to-background
-      `}>
-        <div className={`
-          absolute inset-0
-          bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.08),transparent_80%),radial-gradient(circle_at_80%_80%,rgba(120,119,198,0.08),transparent_40%)]
-        `} />
+      <div className='relative min-h-screen overflow-hidden bg-gradient-to-br from-background via-secondary/20 to-background'>
+        <div className='absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.08),transparent_80%),radial-gradient(circle_at_80%_80%,rgba(120,119,198,0.08),transparent_40%)]' />
 
-        <header className={`
-          relative z-10 container mx-auto hidden max-w-7xl px-6 py-20 text-center
-          md:block
-        `}>
+        <header className='relative z-10 container mx-auto hidden max-w-7xl px-6 py-20 text-center md:block'>
           <Bio className='sm:px-20' />
         </header>
 
