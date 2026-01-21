@@ -31,7 +31,7 @@ export function ThemeToggle({ className }: { className?: string }) {
   const cycleTheme = () => {
     const currentIndex = themeOrder.indexOf(currentTheme)
     const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % themeOrder.length
-    const nextTheme = themeOrder[nextIndex] ?? 'light'
+    const nextTheme = themeOrder[nextIndex] ?? 'neverhack'
     setTheme(nextTheme)
   }
 

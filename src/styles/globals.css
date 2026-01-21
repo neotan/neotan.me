@@ -5,8 +5,8 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* Roobert is the primary brand font from NEVERHACK design system */
-  --font-sans: Roobert, 'Open Sans', Montserrat, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  
+  --font-sans: Montserrat, Montserrat Fallback, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 @theme inline {
