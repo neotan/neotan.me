@@ -5,9 +5,8 @@ export default function BlogPostLayout({ children }: { children: React.ReactNode
   return (
 
     <ThemeProvider
-      enableSystem
       attribute="class"
-      defaultTheme="system"
+      forcedTheme="neverhack"
     >
       {children}
     </ThemeProvider>

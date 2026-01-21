@@ -48,7 +48,7 @@ export default function RootLayout({
   return (
     <ThemeProvider
       attribute="class"
-      defaultTheme="neverhack"
+      forcedTheme="neverhack"
     >
       {children}
     </ThemeProvider>

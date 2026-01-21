@@ -6,7 +6,7 @@ import type { ThemeProviderProps } from 'next-themes'
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   return <NextThemesProvider
-    themes={['neverhack', 'light', 'dark', 'pumpkin']}
+    themes={['neverhack', 'pumpkin', 'light', 'dark']}
     {...props}
   >
     {children}
