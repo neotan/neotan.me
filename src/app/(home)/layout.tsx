@@ -49,7 +49,7 @@ export default function RootLayout({
     <ThemeProvider
       enableSystem
       attribute="class"
-      defaultTheme="system"
+      defaultTheme="neverhack"
     >
       {children}
     </ThemeProvider>

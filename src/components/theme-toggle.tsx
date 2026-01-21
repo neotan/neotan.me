@@ -3,21 +3,48 @@ import * as React from 'react'
 
 import { useTheme } from 'next-themes'
 import { BiMoon, BiSun } from 'react-icons/bi'
+import { GiPumpkin } from 'react-icons/gi'
+import { HiOutlineSparkles } from 'react-icons/hi'
 
 import { cn } from '@/lib/utils'
 
+const themeIcons = {
+  light: BiSun,
+  dark: BiMoon,
+  pumpkin: GiPumpkin,
+  neverhack: HiOutlineSparkles,
+} as const
+
+const themeOrder = ['light', 'dark', 'pumpkin', 'neverhack'] as const
+
 export function ThemeToggle({ className }: { className?: string }) {
   const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = React.useState(false)
 
-  const Icon = theme === 'dark'
-    ? BiMoon
-    : BiSun
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const currentTheme = (theme ?? 'light') as keyof typeof themeIcons
+  const Icon = themeIcons[currentTheme] ?? BiSun
+
+  const cycleTheme = () => {
+    const currentIndex = themeOrder.indexOf(currentTheme)
+    const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % themeOrder.length
+    const nextTheme = themeOrder[nextIndex] ?? 'light'
+    setTheme(nextTheme)
+  }
+
+  // Prevent hydration mismatch
+  if (!mounted) {
+    return <div className={cn('size-8', className)} />
+  }
 
   return (
     <Icon
       className={cn('size-8 cursor-pointer fill-primary hover:animate-spin', className)}
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      title={`Current theme: ${currentTheme}. Click to cycle themes.`}
+      onClick={cycleTheme}
     />
-
   )
 }

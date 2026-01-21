@@ -133,10 +133,7 @@ export default function HashHome() {
 
   return (
     <>
-      <div className={`
-        min-h-screen bg-gradient-to-br from-purple-50/50 to-pink-50/50
-        dark:from-purple-950/20 dark:to-pink-950/20
-      `}>
+      <div className={'min-h-screen'}>
         {/* Header */}
         <div className="border-b border-purple-200/50 bg-white/80 shadow-sm backdrop-blur-sm">
           <div className="container mx-auto px-4 py-6 lg:max-w-6xl">
