@@ -23,7 +23,7 @@ export default function Navbar({ className, children }: ComponentPropsWithRef<'n
       className
     )}>
       <div className={cn(
-        'container mx-auto flex h-16 items-center justify-between',
+        'container mx-auto flex h-16 max-w-6xl items-center justify-between',
         'px-4 md:px-6 lg:px-8'
       )}>
         {/* Logo */}
@@ -89,9 +89,6 @@ export default function Navbar({ className, children }: ComponentPropsWithRef<'n
             </Link>
           </Button>
         </div>
-
-        {/* Right side - could add social links or other elements */}
-        <div className="w-10" />
       </div>
       {children}
     </nav>
