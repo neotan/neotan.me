@@ -25,7 +25,7 @@ export function ThemeToggle({ className }: { className?: string }) {
     setMounted(true)
   }, [])
 
-  const currentTheme = (theme ?? 'light') as keyof typeof themeIcons
+  const currentTheme = (theme ?? 'neverhack') as keyof typeof themeIcons
   const Icon = themeIcons[currentTheme] ?? BiSun
 
   const cycleTheme = () => {
